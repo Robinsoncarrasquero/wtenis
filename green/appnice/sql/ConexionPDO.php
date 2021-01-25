@@ -29,8 +29,7 @@ public function conectar()
         $dbname = "dbname";
         error_reporting(0);
     }
-    
-         
+             
     $port="3306";
     try {
         $cnn =new PDO("mysql:host=$servername;dbname=$dbname;port=3306", $username, $password,

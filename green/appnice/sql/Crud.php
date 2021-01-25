@@ -248,10 +248,6 @@ class Crud {
 
 
             }
-//             echo '<pre>';
-//                var_dump($this->roww[0]["nombres"]);
-//                var_dump($this->roww[0]["cedula"]);
-//                echo '</pre>';
 
             $nombre_atleta=trim($this->roww[0]["nombres"]);
             $apellido_atleta=trim($this->roww[0]["apellidos"]);
