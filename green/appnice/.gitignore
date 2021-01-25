@@ -3,5 +3,5 @@ FILE_RANKING/
 uploadFotos/perfil/
 uploadFotos/portal/
 MYSQL/
-slq/
+sql/
 conexion.php
