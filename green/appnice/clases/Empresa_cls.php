@@ -13,7 +13,7 @@
  */
 class Empresa   {
     //put your code here
-   
+    
     private $estado;
     private $asociacion;
     private $nombre;
@@ -35,6 +35,7 @@ class Empresa   {
     private $rif;
     private $entidad;
     private $dominio;
+    private $email_envio;
     private $cartaFederativa;
     private $id_asociacion;
     private $dirty;
@@ -67,6 +68,7 @@ class Empresa   {
         $this->entidad="";
         $this->cartaFederativa='';
         $this->id_asociacion=0;
+        $this->email_envio=" ";
         $this->dirty=FALSE;
         $this->SQLresultado_exitoso=FALSE;
     }
@@ -225,7 +227,13 @@ class Empresa   {
         return $this->id_asociacion;
     }
     
-    
+    public function getEmail_Envio(){
+        return $this->email_envio;
+    }
+    public function setEmail_Envio($value){
+        $this->email_envio=$value;
+    }
+
     public function Operacion_Exitosa() {
        return $this->SQLresultado_exitoso;
     }
@@ -270,6 +278,7 @@ class Empresa   {
             $SQL->bindParam(':dominio', $this->dominio);
             $SQL->bindParam(':entidad', $this->entidad);
             $SQL->bindParam(':cartafederativa', $this->cartaFederativa);
+            $SQL->bindParam(':email_envio', $this->email_envio);
      
             $SQL->execute();
             $this->id = $conn->lastInsertId();
@@ -301,7 +310,8 @@ class Empresa   {
                 . 'telefonos = :xtelefonos, twitter = :xtwitter, colorjumbotron=:xcolorjumbotron, '
                 . 'bgcolorjumbotron=:xbgcolorjumbotron,colorNavbar=:xcolorNavbar, fotos=:xfotos, '
                     . 'constancia=:xconstancia,banco=:xbanco,cuenta=:xcuenta,url=:xurl,rif=:xrif,'
-                    . 'dominio=:xdominio,entidad=:xentidad,cartafederativa=:xcartafederativa';
+                    . 'dominio=:xdominio,entidad=:xentidad,cartafederativa=:xcartafederativa,'
+                    .'email_envio=:email_envio';
             
             $stmt = $conn->prepare('UPDATE ' . self::TABLA . $SQL. ' WHERE empresa_id= :xid');
             $stmt->bindParam(':xid', $this->id);
@@ -323,7 +333,8 @@ class Empresa   {
             $stmt->bindParam(':xdominio', $this->dominio);
             $stmt->bindParam(':xentidad', $this->entidad);
             $stmt->bindParam(':xcartafederativa', $this->cartaFederativa);
-         
+            $stmt->bindParam(':email_envio', $this->email_envio);
+            
             $stmt->execute();
 
             //echo "New records created successfully";
@@ -375,37 +386,8 @@ class Empresa   {
        $SQL->bindParam(':edo', $estado);
        $SQL->execute();
        $record = $SQL->fetch();
-       if($record){
-            
-            $this->estado=$record['estado'];
-            $this->asociacion=$record['asociacion'];
-            $this->nombre= $record['nombre'];
-            $this->descripcion= $record['descripcion'];
-            $this->email=$record['email'];
-            $this->direccion=$record['direccion'];
-            $this->telefonos=$record['telefonos'];
-            $this->twitter=$record['twitter'];
-            $this->colorJumbotron=$record['colorjumbotron'];
-            $this->bgcolorJumbotron=$record['bgcolorjumbotron'];
-            $this->colorNavbar=$record['colorNavbar'];
-            $this->fotos=$record['fotos'];
-            $this->constancia=$record['constancia'];
-            $this->banco=$record['banco'];
-            $this->cuenta=$record['cuenta'];
-            $this->url=$record['url'];
-            $this->rif=$record['rif'];
-            $this->dominio=$record['dominio'];
-            $this->entidad=$record['entidad'];
-            $this->cartaFederativa=$record['cartafederativa'];
-            $this->id_asociacion=$record['idasociacion'];
-            
-            $this->id=$record['empresa_id'];
-            $this->mensaje='Record Found successfully ';
-            $this->SQLresultado_exitoso=TRUE;
-       } else {
-             $this->SQLresultado_exitoso=FALSE;
-             $this->mensaje='Record Not Found..';
-       }
+       $this->record($record);
+       
        $model=NULL;
        
     }
@@ -418,8 +400,12 @@ class Empresa   {
        $SQL->bindParam(':entidad', $entidad);
        $SQL->execute();
        $record = $SQL->fetch();
-       if($record){
-            
+       $this->Record($record);
+       $model=null;
+    }
+
+    function record($record){
+        if($record){
             $this->estado=$record['estado'];
             $this->asociacion=$record['asociacion'];
             $this->nombre= $record['nombre'];
@@ -440,6 +426,7 @@ class Empresa   {
             $this->dominio=$record['dominio'];
             $this->entidad=$record['entidad'];
             $this->id_asociacion=$record['idasociacion'];
+            $this->email_envio=$record['email_envio'];
             $this->id=$record['empresa_id'];
             $this->mensaje='Record Found successfully ';
             $this->SQLresultado_exitoso=TRUE;
@@ -447,11 +434,9 @@ class Empresa   {
              $this->SQLresultado_exitoso=FALSE;
              $this->mensaje='Record Not Found..';
        }
-       $model=NULL;
-       
     }
     
-     public function Find($empresa_id) {
+    public function Find($empresa_id) {
        
        $model = new Conexion;
        $conexion=$model->conectar();
@@ -459,36 +444,7 @@ class Empresa   {
        $SQL->bindParam(':empresa_id', $empresa_id);
        $SQL->execute();
        $record = $SQL->fetch();
-       if($record){
-            
-            $this->estado=$record['estado'];
-            $this->asociacion=$record['asociacion'];
-            $this->nombre= $record['nombre'];
-            $this->descripcion= $record['descripcion'];
-            $this->email=$record['email'];
-            $this->direccion=$record['direccion'];
-            $this->telefonos=$record['telefonos'];
-            $this->twitter=$record['twitter'];
-            $this->colorJumbotron=$record['colorjumbotron'];
-            $this->bgcolorJumbotron=$record['bgcolorjumbotron'];
-            $this->colorNavbar=$record['colorNavbar'];
-            $this->fotos=$record['fotos'];
-            $this->constancia=$record['constancia'];
-            $this->banco=$record['banco'];
-            $this->cuenta=$record['cuenta'];
-            $this->url=$record['url'];
-            $this->rif=$record['rif'];
-            $this->dominio=$record['dominio'];
-            $this->entidad=$record['entidad'];
-            $this->cartaFederativa=$record['cartafederativa'];
-            $this->id_asociacion=$record['idasociacion'];
-            $this->id=$record['empresa_id'];
-            $this->mensaje='Record Found successfully ';
-            $this->SQLresultado_exitoso=TRUE;
-       } else {
-             $this->SQLresultado_exitoso=FALSE;
-             $this->mensaje='Record Not Found..';
-       }
+       $this->record($record);
        $model=NULL;
        
     }
@@ -686,9 +642,6 @@ class Empresa   {
         return $this->dirty;
        
     }
-    
-      
-    
     
 }
                

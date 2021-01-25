@@ -4,11 +4,11 @@ require_once 'conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena'];
+    $usuario = addslashes($_POST['usuario']);
+    $contrasena = addslashes($_POST['contrasena']);
     $conn =  mysql_connect($servername, $username, $password);
     $result=mysql_select_db($dbname,$conn);
-    
+    var_dump($contrasena);
   
     if (!$result) {
        echo "2"; //Not avalaible

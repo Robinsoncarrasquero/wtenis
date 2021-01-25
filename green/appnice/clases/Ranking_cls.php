@@ -370,7 +370,8 @@ class Ranking   {
         $conn = null;
        
     }
-       
+   
+     //Devuelve el ultimo ranking de un jugador 
      public function Find($atleta_id,$categoria) {
        
        $model = new Conexion;
@@ -381,7 +382,7 @@ class Ranking   {
        $SQL->execute();
        $record = $SQL->fetch();
        if($record){
-            record();
+            $this->record($record);
             $this->SQLresultado_exitoso=TRUE;
             $this->mensaje='Record found successfully';
        } else {
@@ -403,7 +404,7 @@ class Ranking   {
        $SQL->execute();
        $record = $SQL->fetch();
        if($record){
-            record();
+            $this->record($record);
             $this->SQLresultado_exitoso=TRUE;
             $this->mensaje='Record found successfully';
        } else {
@@ -413,41 +414,9 @@ class Ranking   {
        $conn=NULL;
        
     }
-    
+            
     //Cargar Propiedades
-    function record(){
-            $this->atleta_id= $record['atleta_id'];
-            $this->categoria= $record['categoria'];
-            $this->rknacional=$record['rknacional'];
-            $this->rkregional=$record['rkregional'];
-            $this->rkestadal=$record['rkestadal'];
-            $this->fecha_ranking=$record['fecha_ranking'];
-            $this->rkcosat=$record['rkcosat'];
-            $this->fecha_ranking_cosat=$record['fecha_ranking_cosat'];
-            $this->rkitf=$record['rkitf'];
-            $this->fecha_ranking_itf=$record['fecha_ranking_itf'];
-            $this->rkcotec=$record['rkcotec'];
-            $this->fecha_ranking_cotec=$record['fecha_ranking_cotec'];
-            $this->rkint=$record['rkint'];
-            $this->fecha_ranking_int=$record['fecha_ranking_int'];
-            $this->puntos=$record['puntos'];
-            $this->penalidad=$record['penalidad'];
-            $this->disciplinad=$record['disciplina'];
-            $this->rank_id=$record['rank_id'];
-            $this->id=$record['ranking_id'];
-    }
-    
-    public function Fetch($id) {
-       
-       $model = new Conexion;
-       $conn=$model->conectar();
-       $SQL = $conn->prepare("SELECT * FROM " . self::TABLA . " WHERE ranking_id = :id");
-       $SQL->bindParam(':id', $id);
-       
-       $SQL->execute();
-       $record = $SQL->fetch();
-       if($record){
-            $this->SQLresultado_exitoso=TRUE;
+   private function record($record){
             $this->atleta_id= $record['atleta_id'];
             $this->categoria= $record['categoria'];
             $this->rknacional=$record['rknacional'];
@@ -467,7 +436,22 @@ class Ranking   {
             $this->disciplina=$record['disciplina'];
             $this->rank_id=$record['rank_id'];
             $this->id=$record['ranking_id'];
-           
+   }
+    
+    public function Fetch($id) {
+       
+       $model = new Conexion;
+       $conn=$model->conectar();
+       $SQL = $conn->prepare("SELECT * FROM " . self::TABLA . " WHERE ranking_id = :id");
+       $SQL->bindParam(':id', $id);
+       
+       $SQL->execute();
+       $record = $SQL->fetch();
+       if($record){
+            $this->record($record);
+            
+            $this->SQLresultado_exitoso=TRUE;
+            
             $this->mensaje='Record found successfully';
        } else {
              $this->SQLresultado_exitoso=FALSE;

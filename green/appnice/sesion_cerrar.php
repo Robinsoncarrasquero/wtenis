@@ -12,6 +12,9 @@ unset($_SESSION['logueado']);
 unset($_SESSION['deshabilitado']);
 unset($_SESSION['afiliado']);
 unset($_SESSION['empresa_id']);
+unset($_SESSION['inscripcion']);
+unset($_SESSION['renovacion']);
+
 //remove all session variables
 // remove all session variables
 

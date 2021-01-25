@@ -38,6 +38,7 @@ foreach ($rsFileRank as $datatmp)
     $linea .= "<td>".$datatmp['categoria']."</td>";
     $linea .= "<td>".$datatmp['sexo']."</td>";
     $linea .= "<td>".$datatmp['fecha_modificacion']."</td>";
+    //$linea .= "<td>".$datatmp['migraccion']."</td>";
     if ($datatmp['procesado']) {
         $linea .= "<td><a class='delete-record glyphicon glyphicon-trash' href='#' data-id='del$rowid'></a>ok</td>";
  

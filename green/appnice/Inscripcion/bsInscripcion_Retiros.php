@@ -58,7 +58,7 @@ echo '<div class="container-fluid">';
     echo '<br>';
     echo '<div class="col-xs-12">';
     echo '<hr>';
-    echo '<h2>Retiros</h2>';
+    echo '<h4>Retiros</h4>';
     echo '<h6 class="titulo-name" >Bienvenido :'.$_SESSION['nombre'].'</h6>';
     echo '</div>'; 
 

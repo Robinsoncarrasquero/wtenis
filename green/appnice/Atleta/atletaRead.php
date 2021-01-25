@@ -115,7 +115,7 @@ else
         <th>Fecha Nacimiento</th>
         <th>Telefono</th>
         <th>Asociacion</th>
-        <th>Federacion</th>
+        <th>Asociaciones</th>
         <th>Ficha</th>
         <?php 
         if ( $_SESSION['niveluser']>9){

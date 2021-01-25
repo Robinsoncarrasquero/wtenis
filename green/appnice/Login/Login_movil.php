@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $detect = new Mobile_Detect(); //redireccionar a versión móvil si nos visitan desde un móvil o tablet
 
     if ($detect->isMobile() || $detect->isTablet()) { 
-       //header("Location: http://www.fvtenis.web.ve/mobile"); ?>
+       //header("Location: http://www.MyTenis.web.ve/mobile"); ?>
        
          
         <div class="linkayuda">

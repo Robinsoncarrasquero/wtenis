@@ -1,6 +1,6 @@
 <?php
 
-//Los estados de Venezuela para el manejo del nombre de un eatado
+//Los estados de Portugal para el manejo del nombre de un eatado
 //de Forma completa y describir en cartas y tros documentos
 function fun_Estado($estado_str){
     

@@ -66,7 +66,7 @@ if (!$objAfiliado->Operacion_Exitosa()){
 
 
 //Aqui identificamos a que operacion estamos realizando
-//Formalizar la Federacion y Asociaciones(formalizar)
+//Formalizar la Asociaciones y Asociaciones(formalizar)
 //o Contratando el servicio web
 $objAfiliaciones = $objAfiliado;
 if ($chkOperacion) {
@@ -113,14 +113,14 @@ if ($objAfiliaciones->Operacion_Exitosa()) {
 
         $p_ya_consumido_fed=66.66;
     }
-    //Formalizacion ante la Federacion
+    //Formalizacion ante la Asociaciones
     if ($objAfiliaciones->getPagado()>0) {
         //echo "<td name='pagado' id='p$rowid' class='glyphicon glyphicon-thumbs-up' ></td>";
 
         $p_ya_consumido_fed=100;
     }
     
-    //Federacion
+    //Asociaciones
 //    $str_federacion =
 //         '<td id="federacion">
 //        <div id="fed">
@@ -153,7 +153,7 @@ if ($objAfiliaciones->Operacion_Exitosa()) {
 
         $p_ya_consumido_fed = 66.67;
     }
-    //Formalizacion ante la Federacion
+    //Formalizacion ante la Asociaciones
     if ($objAfiliaciones->getPagado() > 0) {
         //echo "<td name='pagado' id='p$rowid' class='glyphicon glyphicon-thumbs-up' ></td>";
         $progresbar_3 = "progress-bar progress-bar-success progress-bar-striped";

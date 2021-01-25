@@ -224,7 +224,7 @@ echo '<div class="col-xs-12 col-sm-8">
            $progresbar_2="progress-bar progress-bar-success progress-bar-striped";
            $p_ya_consumido_fed=66.67;
         }
-        //Formalizacion ante la Federacion
+        //Formalizacion ante la Asociaciones
         if ($objAfiliado->getPagado()>0) {
             //echo "<td name='pagado' id='p$rowid' class='glyphicon glyphicon-thumbs-up' ></td>";
            $progresbar_3="progress-bar progress-bar-success progress-bar-striped";
@@ -301,7 +301,7 @@ echo '<div class="col-xs-12 col-sm-8">
          Usted puede cambiar su Fichaje a una nueva Asociacion durante esta Afiliacion.
          Podrá realizar otro cambio de Ficha en un lapso de 6 meses en caso que lo haya gestionado
          durante esta Afiliacion y deberá solicitarlo ante la Asociacion a la que pertenece para que
-         gestione su cambio de Fichaje ante esta Federacion.</h5>';
+         gestione su cambio de Fichaje ante esta Asociaciones.</h5>';
      
     
     

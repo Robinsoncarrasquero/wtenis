@@ -4,10 +4,7 @@ include 'extensions/Mobile-Detect.php';
 require_once 'conexion.php';
 require_once 'clases/Html_cls.php';
 
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -70,7 +67,7 @@ require_once 'clases/Html_cls.php';
 <!-- Content Section -->
 <div class="container">
     <div class="col-xs-12 ">
-        <a href="<?php echo $_SESSION['home']?>"   ><img  src="images/logo/fvtlogo.png" class="img-responsive pull-left"></img></a>
+        <a href="<?php echo $_SESSION['home']?>"   ><img  src="images/logo/fvtlogo.png"  class="img-responsive pull-left"></img></a>
     </div>
      <div class="col-xs-12 ">
          <br>
@@ -189,38 +186,26 @@ $(document).ready(function (){
 
                          $("#error").fadeIn(1000, function(){
                              $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; Clave o Usuario Invalido!</div>');
-
                              $("#btn-submit").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp;  Entrar');
-
                          });
-
                      }
                      else if(data==0)
                      {
-
                          $("#btn-submit").html('<img src="images/btn-ajax-loader.gif" /> &nbsp; Logueando...');
-                          var href='sesion_usuario.php';
+                         var href='sesion_usuario.php';
                          location.href = href;
-
-
                      }
                       else 
                      {
-                          $("#error").fadeIn(1000, function(){
-                         $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; Servicio no disponible,Intente mas tarde..</div>');
-
-                         $("#btn-submit").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp;  Entrar');
-                     });
-
-
+                        $("#error").fadeIn(1000, function(){
+                             $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; Servicio no disponible,Intente mas tarde..</div>');
+                            $("#btn-submit").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp;  Entrar');
+                        });
                      }
 
                  }
              });
              return false;
-
-
-
         };
     };
         

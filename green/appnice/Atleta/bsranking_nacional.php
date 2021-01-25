@@ -14,7 +14,7 @@ require_once '../clases/Funciones_cls.php';
 //print_r($_SESSION['empresa_id']);
 
 if (!isset($_SESSION['asociacion'])){
-    header("location:http://fvtenis.com.ve");
+    header("location:http://mytenis");
 }
 ?>
 

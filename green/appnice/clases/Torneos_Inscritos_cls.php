@@ -1,3 +1,4 @@
+
 <?php
 
 
@@ -19,6 +20,9 @@ class TorneosInscritos   {
     private $dobles;
     private $penalidad;
     private $condicion;
+    private $codigo;
+    private $modalidad;
+    private $entidad;
     private $dirty;
     private $mensaje;
     private $SQLresultado_exitoso;
@@ -26,8 +30,9 @@ class TorneosInscritos   {
     private $fields;
     private $fields_count;
     public function __construct() {
+        $this->id=0;
         $this->torneo_id=0;
-        $this->atleta_id= 0;
+        $this->atleta_id=0;
         
         $this->estatus='';
         $this->categoria='';
@@ -40,6 +45,9 @@ class TorneosInscritos   {
         $this->singles=0;
         $this->penalidad=0;
         $this->condicion=0;
+        $this->codigo='';
+        $this->modalidad='';
+        $this->entidad ='';
         $this->dirty=FALSE;
         $this->SQLresultado_exitoso=FALSE;
     }
@@ -92,7 +100,9 @@ class TorneosInscritos   {
     public function setFechaRanking($value) {
        $this->fecha_ranking=$value;
     }
-    
+    public function getFechaRegistro() {
+        return $this->fecha_registro;
+    }
     
     public function getPagado() {
        return $this->pagado;
@@ -126,6 +136,24 @@ class TorneosInscritos   {
     public function setCondicion($value) {
        $this->condicion=$value;
     }
+    public function getCodigo() {
+        return $this->codigo;
+    }
+    public function setCodigo($value) {
+        $this->codigo=$value;
+    }
+    public function getModalidad() {
+        return $this->modalidad;
+    }
+    public function setModalidad($value) {
+        $this->modalidad=$value;
+    }
+    public function getEntidad() {
+        return $this->entidad;
+    }
+    public function setEntidad($value) {
+        $this->entidad=$value;
+    }
     public function Operacion_Exitosa() {
        return $this->SQLresultado_exitoso;
     }
@@ -139,8 +167,10 @@ class TorneosInscritos   {
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-            $campos='(torneo_id,atleta_id, estatus,categoria,rknacional,fecha_ranking,pagado,singles,penalidad,dobles,sexo,condicion)';
-            $valores='(:torneo_id,:atleta_id,:estatus,:categoria,:rknacional,:fecha_ranking,:pagado,:singles,:penalidad,:dobles,:sexo,:condicion)';
+            $campos='(torneo_id, atleta_id, estatus, categoria, rknacional,fecha_ranking,pagado,
+            singles,penalidad,dobles,sexo,condicion,codigo,modalidad,entidad)';
+            $valores='(:torneo_id, :atleta_id, :estatus, :categoria, :rknacional, :fecha_ranking, :pagado,
+            :singles, :penalidad, :dobles, :sexo, :condicion, :codigo, :modalidad, :entidad)';
             
             $SQL = $conn->prepare('INSERT INTO ' .self::TABLA. $campos. ' VALUES '. $valores);
             $SQL->bindParam(':torneo_id', $this->torneo_id);
@@ -155,6 +185,9 @@ class TorneosInscritos   {
             $SQL->bindParam(':dobles', $this->dobles);
             $SQL->bindParam(':sexo', $this->sexo);
             $SQL->bindParam(':condicion', $this->condicion);
+            $SQL->bindParam(':codigo', $this->codigo);
+            $SQL->bindParam(':modalidad', $this->modalidad);
+            $SQL->bindParam(':entidad', $this->entidad);
         
             $SQL->execute();
             $this->id = $conn->lastInsertId();
@@ -187,7 +220,7 @@ class TorneosInscritos   {
                     . 'categoria = :xcategoria, rknacional = :xrknacional, fecha_ranking = :xfecha_ranking,'
                     . ' pagado = :xpagado,'
                     . 'singles = :xsingles, penalidad = :xpenalidad, dobles = :xdobles,sexo = :xsexo, '
-                    . 'condicion = :xcondicion';
+                    . 'condicion = :xcondicion,codigo = :xcodigo, modalidad=:xmodalidad, entidad=:xentidad';
 
 
             $stmt = $conn->prepare('UPDATE ' . self::TABLA . $SQLstr. ' WHERE torneoinscrito_id= :id');
@@ -205,6 +238,9 @@ class TorneosInscritos   {
             $stmt->bindParam(':xdobles', $this->dobles);
             $stmt->bindParam(':xsexo', $this->sexo);
             $stmt->bindParam(':xcondicion', $this->condicion);
+            $stmt->bindParam(':xcodigo', $this->codigo);
+            $stmt->bindParam(':xmodalidad', $this->modalidad);
+            $stmt->bindParam(':xentidad', $this->entidad);
             $stmt->execute();
 
             //echo "New records created successfully";
@@ -230,7 +266,7 @@ class TorneosInscritos   {
             $conn = $objConn->conectar();
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $SQL = $conexion->prepare('DELETE FROM ' . self::TABLA . ' WHERE torneoinscrito_id= :id');
+            $SQL = $conn->prepare('DELETE FROM ' . self::TABLA . ' WHERE torneoinscrito_id= :id');
             $SQL->bindParam(':id', $id);
             $SQL->execute();
         
@@ -273,6 +309,9 @@ class TorneosInscritos   {
             $this->condicion=$record['condicion'];
             $this->id=$record['torneoinscrito_id'];
             $this->fecha_registro=$record['fecha_registro'];
+            $this->codigo=$record['codigo'];
+            $this->modalidad=$record['modalidad'];
+            $this->entidad=$record['entidad'];
             $this->mensaje='Record found successfully';
        } else {
              $this->SQLresultado_exitoso=FALSE;
@@ -295,7 +334,7 @@ class TorneosInscritos   {
             $record['atleta_id'], $record['categoria'],$record['estatus'],
             $record['fecha_registro'],$record['rknacional'],$record['fecha_ranking'],
             $record['pagado'],$record['singles'],$record['dobles'],$record['penalidad'],
-            $record['sexo'],$record['condicion']);
+            $record['sexo'],$record['condicion'],$record['codigo'],$record['modalidad'],$record['entidad']);
           
        } else {
              $this->SQLresultado_exitoso=FALSE;
@@ -312,7 +351,7 @@ class TorneosInscritos   {
        $conn=$model->conectar();
        $SQL = $conn->prepare($prepare);
        $SQL->execute();
-       $registros = $SQL->fetchall();
+       $registros = $SQL->fetch();
        
        if ($SQL->rowCount()==0)
         {
@@ -341,6 +380,46 @@ class TorneosInscritos   {
         
         return $registros;
     }
+
+    //Devuelve torneos inscritos de un atleta
+    public static function TorneosByAtletaId($torneo_id,$atleta_id) {
+       
+        $prepare = 'SELECT * FROM ' . self::TABLA 
+        . ' WHERE torneo_id = '.$torneo_id
+        .' && atleta_id = '.$atleta_id
+        .' ORDER BY fecha_registro desc';
+        
+        $model = new Conexion;
+        $conn=$model->conectar();
+        $SQL = $conn->prepare($prepare);
+        $SQL->execute();
+        $registro = $SQL->fetch();
+        
+        if ($SQL->rowCount()==0)
+         {
+             $SQLresultado_exitoso=FALSE;
+             $errorCode= $conn->errorCode();
+             $errorInfo=$conn->errorInfo();
+             $mensaje="ERROR No se encontraron registros..".$errorInfo ;
+             switch ($errorCode) 
+             {
+                 case 00000:
+                     $mensaje="ERROR Numero" .$errorCode;
+                     break;
+                 default:
+                     $mensaje="ERROR No se encontraron registros..".$errorInfo ;
+                     break;
+             }
+                   
+         }else{
+             $mensaje='Records Found successfully';
+             $SQLresultado_exitoso=TRUE;
+         }
+  
+         $conn=NULL;
+         
+         return $registro;
+     }
     
     private function record($record) {
         
@@ -358,6 +437,9 @@ class TorneosInscritos   {
             $this->penalidad=$record['penalidad'];
             $this->sexo=$record['sexo'];
             $this->condicion=$record['condicion'];
+            $this->codigo=$record['codigo'];
+            $this->modalidad=$record['nmodalidad'];
+            $this->entidad=$record['entidad'];
             $this->id=$record['torneoinscrito_id'];
             $this->fecha_registro=$record['fecha_registro'];
             $this->mensaje='Record found successfully';
@@ -457,6 +539,8 @@ class TorneosInscritos   {
             $SQL->execute();
             $mensaje='Record update successfully';
             $SQLresultado_exitoso=TRUE;
+            $objConn = NULL;$conn=null;
+            
         }
         catch(PDOException $e)
         {

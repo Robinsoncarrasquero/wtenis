@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'clases/Noticias_cls.php';
 require_once "clases/Empresa_cls.php";
 require_once "clases/Torneos_cls.php";
@@ -9,6 +8,10 @@ require_once 'clases/Torneos_Inscritos_cls.php';
 require_once 'sql/ConexionPDO.php';
 require_once 'funciones/Imagenes_cls.php';
 require_once 'clases/Encriptar_cls.php';
+
+if ($_SERVER['REQUEST_METHOD']=='GET'){
+    die();
+}
 
 $empresa_id =$_POST['emp'];
 $mes=$_POST['mes'];
@@ -58,6 +61,12 @@ switch ($status_filtro) {
             $fecha_cierre=$row['fechacierre'];
             $fecha_retiro=$row['fecharetiros'];
             $fecha_inicio=$row['fecha_inicio_torneo'];
+            $ffecha_cierre=date_format(date_create($row['fechacierre']),'d-M H:i');
+            $ffecha_retiro=date_format(date_create($row['fecharetiros']),'d-M H:i');
+            $ffecha_inicio=date_format(date_create($row['fecha_inicio_torneo']),'d-M H:i');
+            $ffecha_fin=date_format(date_create($row['fecha_fin_torneo']),'d-M  H:i');
+            $sfecha_ini=date_format(date_create($row['fecha_inicio_torneo']),'d-M-y');
+            $sfecha_fin=date_format(date_create($row['fecha_fin_torneo']),'d-M-y');
             if ($status_filtro==$estatus){
                $strData="";
                 switch ($row['condicion']) {
@@ -149,9 +158,9 @@ switch ($status_filtro) {
                 $strDataEntidad = '<td data-toggle="tooltip" data-placement="bottom" title="Entidad">'. $row['entidad'].'</td>';
                 $strDataFechas= "<td data-toggle='tooltip' data-placement='auto' title='Fechas del Torneo'>"
                 . ""
-                . "<p class='xfechacierre'>Cierre: $fecha_cierre</p>"
-                . "<p class='xfecharetiro'>Retiro: $fecha_retiro</p>"
-                . "<p class='xfechainicio'>Inicio: $fecha_inicio</p>"
+                . "<p class='xfechacierre'>Cierre: $ffecha_cierre</p>"
+                . "<p class='xfecharetiro'>Retiro: $ffecha_retiro</p>"
+                . "<p class='xfechainicio'>Inicio: $ffecha_inicio</p>"
                 . ""
                 . "</td>";
                 /* fecha de torneo
@@ -244,8 +253,11 @@ switch ($status_filtro) {
                         
                     </table>
                     
+                    <div class="panel-body text text-center" >'.$sfecha_ini.' al '.$sfecha_fin.'</div>
+                    
                     <div class="panel-body text text-center '.$text_alert.'">'.'<a '.$href.'><h4>'.$estatus.'</h4></a></div>
-                </div>
+                    
+                    </div>
                 </div>'
                 ;
 

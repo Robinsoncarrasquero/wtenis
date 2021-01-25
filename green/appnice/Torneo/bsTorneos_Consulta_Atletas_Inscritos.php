@@ -30,18 +30,17 @@ $chkpagado=0;
 if ($codigo_torneo!=null)
 { 
     $codigo_torneo=strtoupper($codigo_torneo);
-    $codigo_torneo=mysql_real_escape_string($codigo_torneo);
+    $codigo_torneo=mysqli_real_escape_string($conn,$codigo_torneo);
     $categoria=  strtoupper($categoria);
-    $categoria=mysql_real_escape_string($categoria);
+    $categoria=mysqli_real_escape_string($conn,$categoria);
     $sexo=  strtoupper($sexo);
-    $sexo=mysql_real_escape_string($sexo);
-    $estatus=mysql_real_escape_string($estatus);
+    $sexo=mysqli_real_escape_string($conn,$sexo);
+    $estatus=mysqli_real_escape_string($conn,$estatus);
     
     //Obtenemos los registros desde MySQL
     //Ahora procedemos a extraer los registros de nuestra base de datos, 
     //en este caso solo obtenemos el nombre, dirección y telefono de la tabla empresa de nuestra base de datos.
-    $conexion = mysql_connect($servername, $username, $password);
-    mysql_select_db($dbname,$conexion);
+    mysqli_select_db($conn,$dbname);
     //mysql_query('SET NAMES "utf8"');
     //mysqli_query($conexion, 'SET NAMES "utf8"');
     //$codigo_torneo = mysql1_real_escape_string($conexion, $codigo_torneo);
@@ -50,9 +49,9 @@ if ($codigo_torneo!=null)
     $categoria = trim($categoria);
     $codigo_torneo = trim($codigo_torneo);
     $sql = "SELECT torneo.categoria as categoria,torneo.tipo as grado,torneo.numero as numero,torneo.entidad as entidad,torneo.ano as ano,tipo_torneo,nombre as nombre_torneo FROM torneo where codigo='".$codigo_torneo."'";
-    $result = mysql_query($sql, $conexion) or die(mysql_error());
-    mysql_query('SET NAMES "utf8"');
-    $record = mysql_fetch_assoc($result);
+    $result = mysqli_query($conn,$sql) or die(mysqli_error($conn));
+    mysqli_query($conn,'SET NAMES "utf8"');
+    $record = mysqli_fetch_assoc($result);
     $nombre_torneo=$record['nombre_torneo'];
     
     
@@ -87,9 +86,9 @@ if ($codigo_torneo!=null)
     
     $queEmp.=" ORDER BY Categoria_Sexo,elranking";
     
-    $resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
-    mysql_query('SET NAMES "utf8"');
-    $totEmp = mysql_num_rows($resEmp);
+    $resEmp = mysqli_query($conn,$queEmp) or die(mysqli_error($conn));
+    mysqli_query($conn,'SET NAMES "utf8"');
+    $totEmp = mysqli_num_rows($resEmp);
      
      switch ($sexo){
         case "F":
@@ -245,7 +244,7 @@ if ($codigo_torneo!=null)
             $ano_afiliacion=date("Y");
            
            
-            while($datatmp = mysql_fetch_assoc($resEmp)) {
+            while($datatmp = mysqli_fetch_assoc($resEmp)) {
                 
                 $atleta_id=$datatmp['atleta_id'];
                 $fecha_fin_torneo=$datatmp['fecha_fin_torneo'];

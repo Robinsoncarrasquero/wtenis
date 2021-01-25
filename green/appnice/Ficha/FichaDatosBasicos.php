@@ -57,17 +57,18 @@ if ($ObjAtleta->edad()<19){
     $hidden_datos_representante="hidden";
 }
 //Obtenemos los datos de la empresa o asociacion del atleta
+//para verificar si puede ver la clave del afiliado de la asociacion
 $objEmpresa = new Empresa();
 $objEmpresa->Fetch($ObjAtleta->getEstado());
-
-//Obtenemos la afiliacion vigente
-$objAfiliacion = new Afiliacion();
-$objAfiliacion->Fetch($objEmpresa->get_Empresa_id());
-$afiliacion_id = $objAfiliacion->get_ID();
+if ($_SESSION['niveluser']>=99 || ($_SESSION['niveluser']>=9 && $objEmpresa->get_Empresa_id()==$_SESSION['empresa_id'])){
+    $puedeverclave=true;
+}else{
+    $puedeverclave=false;
+}
 
 //Obtenemos la afiliacion del atleta del ano para que pueda afiliar y aceptar la afiliacion
 $objAfiliado = new Afiliaciones();
-$objAfiliado->Fetch($objAfiliacion->get_ID(), $ObjAtleta->getID());
+$objAfiliado->Find_Afiliacion_Atleta($ObjAtleta->getID(),date("Y"));
 
 $deshabilitado = $objAfiliado->getPagado() > 0 ? FALSE : TRUE;
 if ($_SESSION['niveluser']==9 && $deshabilitado){
@@ -76,7 +77,6 @@ if ($_SESSION['niveluser']==9 && $deshabilitado){
     $hidden_btn_regresar=" ";
     $hidden_btn_guardar=" ";
 }
-
 
 $objAfiliaciones = new Afiliaciones();
 $objAfiliaciones->Atleta($atleta_id);//Se busca la ultima afiliacion registrada 
@@ -334,7 +334,7 @@ if ($indice >= 0) {
                     
                     <?php
                     
-                    if ($_SESSION['niveluser']>=9){
+                    if ($puedeverclave){
                         echo '<div class="form-group col-xs-12">';
                         echo ' <label for="txt-clave">Clave</label>';
                         echo ' <input type="text" class="form-control" lenght="100" id="txt_clave" name="txt_clave" value="'.$ObjAtleta->getContrasena().'" >';

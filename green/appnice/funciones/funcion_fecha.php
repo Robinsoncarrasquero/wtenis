@@ -217,8 +217,7 @@ function Categoria_Grado_Torneo($anodeNacimiento,$array_ranking_categoria ,$grad
     }elseif ($edad >8  && $edad <11){
         //CATEGORIA PV 9 Y 10
         $cat_juego="PV,12B";
-        if ((array_search("12",$array_ranking_categoria)>0 || array_search("12B",$array_ranking_categoria)>0)
-            && $ranking_natural<=5 && $grado_torneo=="G4"){
+        if (array_search("12",$array_ranking_categoria)>0 && $ranking_natural>0 && $ranking_natural<=5){
             $cat_juego = "PV,12B,12";
         }    
         

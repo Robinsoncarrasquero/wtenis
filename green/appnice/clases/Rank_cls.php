@@ -326,7 +326,8 @@ class Rank {
         
         $SQL->execute();
         $records = $SQL->fetchAll();
-        $conn=NULL;
+        unset($model);
+        unset($conn);
         return $records;
        
     }

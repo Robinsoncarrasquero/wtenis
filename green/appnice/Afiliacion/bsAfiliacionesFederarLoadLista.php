@@ -24,7 +24,7 @@ $str_head=
                 <th>Apellidos</th>
 
                 <th>Fecha.Nac.</th>
-                <th>Federacion</th>
+                <th>Asociaciones</th>
                 <th>Asociacion</th>
                 <!-- <th>Web</th> -->
                

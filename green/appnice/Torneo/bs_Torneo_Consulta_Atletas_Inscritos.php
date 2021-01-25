@@ -4,6 +4,7 @@ require_once '../conexion.php';
 require_once '../funciones/funcion_excepciones.php';
 require_once '../clases/Encriptar_cls.php';
 
+
  if(isset($_SESSION['logueado']) and $_SESSION['logueado']){
     $logueado=true;
  }else{
@@ -18,8 +19,8 @@ require_once '../clases/Encriptar_cls.php';
 // Le indicamos a PHP que necesitamos una salida UTF-8 hacia el navegador
 //mb_http_output('UTF-8');
 
-header('Content-Type: text/html; charset=utf-8');
-
+//header('Content-Type: text/html; charset=utf-8');
+error_reporting(1);
 
 $codigo_torneo=(isset($_GET['t'])) ? Encrypter::decrypt($_GET['t']) : null;
 $categoria=(isset($_GET['categoria'])) ? $_GET['categoria'] : null;
@@ -27,6 +28,7 @@ $sexo=(isset($_GET['sexo'])) ? $_GET['sexo'] : null;
 $estatus=(isset($_GET['estatus'])) ? $_GET['estatus'] : null; // Inscrito o Retirado
 $chk="checked";
 $chkpagado=0;
+
 if ($codigo_torneo!=null)
 { 
     $codigo_torneo=strtoupper($codigo_torneo);

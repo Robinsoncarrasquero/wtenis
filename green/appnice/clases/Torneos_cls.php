@@ -486,6 +486,7 @@ class Torneo {
         $conn = NULL;
     }
     
+    
     public function RecordById($id) {
        $model = new Conexion;
        $conn=$model->conectar();
@@ -542,9 +543,7 @@ class Torneo {
                     $prepare = 'SELECT * FROM ' . self::TABLA . ' WHERE empresa_id=' . $Empresa_id . ' '
                             . 'ORDER BY fecha_inicio_torneo asc';
                 }
-               
                 
-                 
             }
         } else {
             //Es utilizada solo para visualizar todos los torneos sin especificar la empresa
@@ -556,7 +555,6 @@ class Torneo {
                             . 'AND YEAR(fecha_inicio_torneo)>= YEAR(now()) '
                             . 'AND MONTH(fecha_inicio_torneo)=' . $Mes . '  '
                             . 'ORDER BY fecha_inicio_torneo asc';
-                    
                 } else {
                     $prepare = 'SELECT * FROM ' . self::TABLA . ' WHERE estatus="A" '
                             . 'AND YEAR(fecha_inicio_torneo)>= YEAR(now()) '
@@ -601,16 +599,6 @@ class Torneo {
             $this->mensaje='Records Found successfully';
             $this->SQLresultado_exitoso=TRUE;
         }
-        
-
-
-
-//        while ($record = $consulta->fetch())
-//        {
-//           $this->rows[]=$record;
-//          
-//           
-//        }
         $conn = NULL;
 
         return $registros;
@@ -670,8 +658,6 @@ class Torneo {
             }
         }
         
-        
-        
         $SQL = $conn->prepare($prepare);
         $SQL->execute();
         $registros = $SQL->fetchall();
@@ -704,7 +690,7 @@ class Torneo {
         return $torneos_open;
     }
     
-    //Metodo para habilitar los torneos a estatus abiertos segun una fecha y el grado 
+    //Metodo que devurlve la fecha de inicio de un torneo 
     public static function Fecha_Apertura_Calendario($fecha_cierre,$grado) {
         $date_new = date_create($fecha_cierre); // fecha cierre de la bd
         
@@ -757,6 +743,14 @@ class Torneo {
         //echo date_format($date_hoy,"Y-m-d H:i:s");
         return date_timestamp_get($date_hoy);
     }
+
+    public static function fecha_string($fecha_unix)
+    {
+        $fecha=date_create();
+        date_timestamp_set($fecha, $fecha_unix);
+        return date_format($fecha, 'Y-m-d H:i:s');
+        
+    }
     
     //Esta funcion nos devuelve la fecha actual del servidor en formato
     //de numero para comparacion de fecha
@@ -780,26 +774,28 @@ class Torneo {
     
     //Funcion que devuelve el estatus de un torneo
     public static function Estatus_Torneo($fechacierre,$fechainicio,$grado,$condicion) {
-        if (Torneo::Fecha_Apertura_Calendario($fechacierre, $grado) <= Torneo::Fecha_Hoy() && Torneo::Fecha_Create($fechacierre) > Torneo::Fecha_Hoy()) {
+        if (Torneo::Fecha_Apertura_Calendario($fechacierre, $grado) <= Torneo::Fecha_Hoy() 
+            && Torneo::Fecha_Create($fechacierre) > Torneo::Fecha_Hoy()) {
 
-            $estatus = "Open";
+            $estatus = "Abierto";
         } else {
             if (Torneo::Fecha_Apertura_Calendario($fechacierre, $grado) > Torneo::Fecha_Hoy()) {
 
-                $estatus = "Next";
+                $estatus = "Proximo";
             } else {
 
                 //Aqui mantenemos la fecha entre dos intervalos para el running
                 //Cuando comienza y terminael torneo
-                if (Torneo::Fecha_Fin_Torneo($fechainicio) >= Torneo::Fecha_Hoy() && Fecha_ini_Torneo($fechainicio, $grado) < Torneo::Fecha_Hoy()) {
+                if (Torneo::Fecha_Fin_Torneo($fechainicio) >= Torneo::Fecha_Hoy()
+                    && Fecha_ini_Torneo($fechainicio, $grado) < Torneo::Fecha_Hoy()) {
 
-                    $estatus = "Running";
+                    $estatus = "Accion";
                 } else {
                     if (Torneo::Fecha_Fin_Torneo($fechainicio) < Torneo::Fecha_Hoy()) {
 
-                        $estatus = "End";
+                        $estatus = "Finalizado";
                     } else {
-                        $estatus = "Closed";
+                        $estatus = "Cerrado";
                     }
                 }
             }
@@ -827,41 +823,38 @@ class Torneo {
     //Determina segun el estatus el tipo de iconos y colores para armar el table row
     public static function Estatus_Torneo_Color($estatus,$href){
          switch ($estatus) {
-            case 'Open':
+            case 'Abierto':
                 $array[]= '<tr class="success"  >  ';
                 $array[]= '<td><a target="" href="'.$href.'" class="glyphicon glyphicon-hourglass"></a></td>';
                 $array[]= '<td>'.$estatus.'</td>';
                  
                 break;
 
-            case 'Closed':
+            case 'Cerrado':
                 $array[]= '<tr class=" " >';
                 $array[]= '<td><p class="glyphicon glyphicon-remove-sign "></p></td>';
                 $array[]= '<td>'.$estatus.'</td>';
                 break;
-            case 'Next':
+            case 'Proximo':
                $array[]= '<tr class=" " >';
                $array[]= '<td><p class="glyphicon glyphicon-eye-open"></p></td>';
                $array[]= '<td>'.$estatus.'</td>';
                 break;
-             case 'Running':
+             case 'Accion':
                 $array[]= '<tr class="warning " >';
                 //echo '<td ><p class="glyphicon glyphicon-cog"></p></td>';
                 $array[]= '<td><p class="glyphicon glyphicon-flag"></p></td>';
                 $array[]= '<td>'.$estatus.'</td>';
-                break;
              case 'Suspendido':
                 $array[]= '<tr class="danger " >';
                 //echo '<td ><p class="glyphicon glyphicon-cog"></p></td>';
                 $array[]= '<td><p class="glyphicon glyphicon-flag"></p></td>';
                 $array[]= '<td>'.$estatus.'</td>';
-                break;
              case 'Diferido':
                 $array[]= '<tr class="info " >';
                 //echo '<td ><p class="glyphicon glyphicon-cog"></p></td>';
                 $array[]= '<td><p class="glyphicon glyphicon-flag"></p></td>';
                 $array[]= '<td>'.$estatus.'</td>';
-                break;
              case 'Cancelado':
                 $array[]= '<tr class="danger " >';
                 //echo '<td ><p class="glyphicon glyphicon-cog"></p></td>';
@@ -892,7 +885,7 @@ class Torneo {
                 $array[]= '<td>'.$estatus.'</td>';
                  
                 break;
-            case 'Open':
+            case 'Abierto':
                 $array[]= '<tr class=" "  >  ';
                 $array[]= '<td><a target=""  class="glyphicon glyphicon-hourglass"></a></td>';
                 $array[]= '<td>'.$estatus.'</td>';
@@ -915,6 +908,7 @@ class Torneo {
         return $array;
     }
 
+   
     public function load_fields_table() {
 
         $model = new Conexion;
@@ -963,5 +957,179 @@ class Torneo {
 
         return $this->dirty;
     }
+    
+    //Devuelve los torneos activos para retiros
+    public static function Torneos_Retiro() {
+        $model = new Conexion;
+        $conn = $model->conectar();
+        $prepare = 'SELECT * FROM ' . self::TABLA . ' WHERE estatus="A" '
+                . 'AND YEAR(fechacierre)= YEAR(now()) '
+                . 'AND MONTH(fechacierre)=MONTH(now()) '
+                . 'AND fechacierre <now() '
+                . 'AND fecharetiros>now() ';
+        $SQL = $conn->prepare($prepare);
+        $SQL->execute();
+        $registros = $SQL->fetchall();
+        if ($SQL->rowCount() == 0) {
+            $SQLresultado_exitoso = FALSE;
+            $errorCode = $conn->errorCode();
+            $errorInfo = $conn->errorInfo();
+            $mensaje = "ERROR No se encontraron registros.." . $errorInfo;
+            switch ($errorCode) {
+                case 00000:
+                    $mensaje = "ERROR Numero" . $errorCode;
+                    break;
+                default:
+                    $mensaje = "ERROR No se encontraron registros.." . $errorInfo;
+                    break;
+            }
+        }else {
 
+            $mensaje='Records Found successfully';
+            $SQLresultado_exitoso=TRUE;
+        }
+        $conn = NULL;
+
+        return $registros;
+    }
+
+    //Torneos que esta Open
+    public static function Torneos_Open() {
+        $model = new Conexion;
+        $conn = $model->conectar();
+        $diasParaOpen = self::DiasParaOpen("");
+       
+        $prepare = ' ' 
+        . ' SELECT * FROM ' . self::TABLA . ' '
+        . ' WHERE YEAR(fechacierre)= YEAR(now()) '
+        . ' && fechacierre>=now() '
+        //.'  && DATE_SUB(fechacierre, INTERVAL '.$diasParaOpen.' DAY)< now() AND fechacierre > now() '
+        . ' && estatus="A" '
+        . ' && condicion="C" '
+        . ' ORDER BY empresa_id,fechacierre asc';
+    
+        
+        $SQL = $conn->prepare($prepare);
+        $SQL->execute();
+        $registros = $SQL->fetchall();
+        
+        if ($SQL->rowCount() == 0) {
+            $SQLresultado_exitoso = FALSE;
+            $errorCode = $conn->errorCode();
+            $errorInfo = $conn->errorInfo();
+            $mensaje = "ERROR No se encontraron registros.." . $errorInfo;
+            switch ($errorCode) {
+                case 00000:
+                    $mensaje = "ERROR Numero" . $errorCode;
+                    break;
+                default:
+                    $mensaje = "ERROR No se encontraron registros.." . $errorInfo;
+                    break;
+            }
+        }else {
+
+            $mensaje='Records Found successfully';
+            $SQLresultado_exitoso=TRUE;
+        }
+        $conn = NULL;
+    
+
+        return $registros;
+    }
+
+    //Intervalo entre una fecha dada y la actual
+    public static function diff_fecha($fecha_hasta){
+        $date1=date_create();
+        $date2=date_create($fecha_hasta);
+        $diff=date_diff($date1,$date2);
+        return $diff;
+    }
+    //Intervalo entre dos fecha dadas en timestamp unix    
+    public static function horas_entre_fechas($fecha_desde,$fecha_hasta){
+        $fecha_hoy= date_timestamp_get(date_create($fecha_desde));
+        $fecha_des= date_timestamp_get(date_create($fecha_hasta));
+        return ($fecha_des - $fecha_hoy);
+    }
+    //Retorna el formato del Intervalo de una fecha resultado diff 
+    public static function intervalo_fecha($interval, $type){
+        switch($type){
+            case 'years':
+                return $interval->format('%Y');
+                break;
+            case 'months':
+                $years = $interval->format('%Y');
+                $months = 0;
+                if($years){
+                    $months += $years*12;
+                }
+                $months += $interval->format('%m');
+                return $months;
+                break;
+            case 'days':
+                return $interval->format('%a');
+                break;
+            case 'hours':
+                $days = $interval->format('%a');
+                $hours = 0;
+                if($days){
+                    $hours += 24 * $days;
+                }
+                $hours += $interval->format('%H');
+                return $hours;
+                break;
+            case 'minutes':
+                $days = $interval->format('%a');
+                $minutes = 0;
+                if($days){
+                    $minutes += 24 * 60 * $days;
+                }
+                $hours = $interval->format('%H');
+                if($hours){
+                    $minutes += 60 * $hours;
+                }
+                $minutes += $interval->format('%i');
+                return $minutes;
+                break;
+            case 'seconds':
+                $days = $interval->format('%a');
+                $seconds = 0;
+                if($days){
+                    $seconds += 24 * 60 * 60 * $days;
+                }
+                $hours = $interval->format('%H');
+                if($hours){
+                    $seconds += 60 * 60 * $hours;
+                }
+                $minutes = $interval->format('%i');
+                if($minutes){
+                    $seconds += 60 * $minutes;
+                }
+                $seconds += $interval->format('%s');
+                return $seconds;
+                break;
+            case 'milliseconds':
+                $days = $interval->format('%a');
+                $seconds = 0;
+                if($days){
+                    $seconds += 24 * 60 * 60 * $days;
+                }
+                $hours = $interval->format('%H');
+                if($hours){
+                    $seconds += 60 * 60 * $hours;
+                }
+                $minutes = $interval->format('%i');
+                if($minutes){
+                    $seconds += 60 * $minutes;
+                }
+                $seconds += $interval->format('%s');
+                $milliseconds = $seconds * 1000;
+                return $milliseconds;
+                break;
+            default:
+                return NULL;
+        }
+    }
+
+
+    
 }

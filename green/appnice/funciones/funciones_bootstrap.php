@@ -186,7 +186,7 @@ $html_str=
                            <a target="" href="http://www.bk2usa.com/"> <img   src="'.$_SESSION['url_logo'].'/logopatrocinio1.png" class="img-responsive push-left"></img></a>
                         </div>
                         <div class="col-xs-4 ">
-                           <a target="" href="http://fvtenis.com.ve"> <img src="images/logo/fvtlogo.png" class="img-responsive pull-right"></img></a>
+                           <a target="" href="http://mytenis"> <img src="images/logo/fvtlogo.png" class="img-responsive pull-right"></img></a>
                         </div>';
                 }else{
                   
@@ -196,12 +196,12 @@ $html_str=
                             <a target="" href=""> <img src="'.$_SESSION['url_logo'].'/logo.png" class="img-responsive push-left"></img></a>
                         </div>
                         <div class="col-xs-6 ">
-                            <a target="" href="http://fvtenis.com.ve"> <img src="images/logo/fvtlogo.png" class="img-responsive pull-right"></img></a>
+                            <a target="" href="http://mytenis"> <img src="images/logo/fvtlogo.png" class="img-responsive pull-right"></img></a>
                         </div>';
                     }else{
                         $html_str .='
                         <div class="col-xs-6 ">
-                            <a target="" href="http://fvtenis.com.ve"> <img src="images/logo/fvtlogo.png" class="img-responsive"></img></a>
+                            <a target="" href="http://mytenis"> <img src="images/logo/fvtlogo.png" class="img-responsive"></img></a>
                         </div>';
                     }
               }
@@ -392,7 +392,7 @@ return $HTML_str;
 function Twitter($userTwitter) {
    
     if ($userTwitter==''){
-        $userTwitter="@fvtenis";
+        $userTwitter="@MyTenis";
     }
     $HTML_str='
         <div> 
@@ -482,7 +482,7 @@ $html_str=
                   
                 $html_str .='
                 <div class="col-xs-2 ">
-                    <a target="" href="http://fvtenis.com.ve"> <img src="images/logo/fvtlogo.png" class="img-responsive push-right"></img></a>
+                    <a target="" href="http://mytenis"> <img src="images/logo/fvtlogo.png" class="img-responsive push-right"></img></a>
                 </div>
                 <div class="col-xs-offset-1 col-xs-7 ">
                     <a target="" href=""> <img   src="'.$_SESSION['url_logo'].'/logopatrocinio1.png"  class="img-responsive  "></img></a>
@@ -499,7 +499,7 @@ $html_str=
                         $html_str .='
                          
                         <div class="col-xs-3 ">
-                             <a target="" href="http://fvtenis.com.ve"> <img src="images/logo/fvtlogo.png" class="img-responsive push-left"></img></a>
+                             <a target="" href="http://mytenis"> <img src="images/logo/fvtlogo.png" class="img-responsive push-left"></img></a>
                         </div>
                         <div class="col-xs-offset-7 col-xs-2 ">
                             <a target="" href=""> <img src="'.$_SESSION['url_logo'].'/logo.png" class="img-responsive pull-right"></img></a>
@@ -507,7 +507,7 @@ $html_str=
                      }else{
                          $html_str .='
                          <div class="col-xs-3">
-                            <a target="" href="http://fvtenis.com.ve"> <img src="images/logo/fvtlogo.png" class="img-responsive"></img></a>
+                            <a target="" href="http://mytenis"> <img src="images/logo/fvtlogo.png" class="img-responsive"></img></a>
                          </div>';
                      }
               }
@@ -623,7 +623,7 @@ $HTML_str='
 //Twiiter
 function TTTwitter($userTwitter) {
     if ($userTwitter==''){
-        $userTwitter="@fvtenis";
+        $userTwitter="@MyTenis";
     }
     $HTML_str='
         <div class="text text-center" > 

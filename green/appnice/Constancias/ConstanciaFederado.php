@@ -24,14 +24,14 @@ if ($_SESSION['deshabilitado']){
 }
 
 // Notificar todos los errores excepto E_NOTICE
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 // Le decimos a PHP que usaremos cadenas UTF-8 hasta el final del script
 //mb_internal_encoding('UTF-8');
 
 // Le indicamos a PHP que necesitamos una salida UTF-8 hacia el navegador
 //mb_http_output('UTF-8');  
 
-error_reporting(1);
+//error_reporting(1);
 
 
 
@@ -45,21 +45,20 @@ $objAfiliado = new Afiliaciones();
 $objAfiliado->Find_Afiliacion_Atleta($atleta_id,$ano_afiliacion);
 $disciplina=$objAfiliado->getModalidad();
 
-   
 //Buscamos el jugador
 $objAtleta = new Atleta();
 $objAtleta->Fetch($atleta_id);
 $categoria=$objAtleta->Categoria_Natural(date("Y"));
 $sexo=$objAtleta->getSexo();
-$objRank = new Rank();
 
-$rsLastRanking=$objRank->Find_Last_Ranking($disciplina,$categoria, $sexo);
-$rknacional=0;
-if ($rsLastRanking){
-    $rank_id=$rsLastRanking["id"];
+$rsLastRanking=Rank::Find_Last_Ranking($disciplina,$categoria, $sexo);
+$rknacional=0;  
+if ($rsLastRanking['id']){
+   // var_dump($rsLastRanking['id']);
     $objRanking = new Ranking();
-    $objRanking->Find_Ranking_By_Fecha($atleta_id, $rank_id);
+    $objRanking->Find_Ranking_By_Fecha($objAtleta->getID(), $rsLastRanking["id"]);
     $rknacional=$objRanking->getRknacional();
+    //var_dump($objRanking);
 }
 $ranking= ($rknacional>0 ?  $rknacional : 'S/R');
 
@@ -165,7 +164,7 @@ $dompdf = NULL;
             iframe{
                 width: 100%;
             }
-                    // Use as-is
+                    
 
 
         </style>

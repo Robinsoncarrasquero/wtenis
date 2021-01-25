@@ -22,9 +22,11 @@ header('Content-Type: text/html; charset=utf-8');
 
 $strTable =
 '
-            <table class="table table-condensed table-responsive">
+
+
+            <table class="table table-condensed  table-striped  table-responsive">
                 <thead >
-                    <tr class="table-head ">
+                    <tr class="small italic table-head">
                         <th>#</th>
                         <th>Competencias</th>
                         <th>Puntos</th>
@@ -50,28 +52,28 @@ $strTable =
                     {
                         $nr ++;
                         if($objRankingDetalleCodigo->getTipo()!='TT'){
-                            $strTable .= '<tr>';  
+                            $strTable .= '<tr class=" small italic">';  
                         }else{
-                            $strTable .= '<tr class="text text-danger">';
+                            $strTable .= '<tr class=" small italic text text-danger">';
                         }
                         $strTable .= '<td >' . $nr . '</td>';
                         if($objRankingDetalleCodigo->getTipo()!='TT'){
-                            $strTable .= '<td class="text text-capitalize">' . strtolower($objRankingDetalleCodigo->getDescripcion()) . '</td>';
+                            $strTable .= '<td class="small italic text text-capitalize">' . strtolower($objRankingDetalleCodigo->getDescripcion()) . '</td>';
                         }else{
-                            $strTable .= '<td >' . strtoupper($objRankingDetalleCodigo->getDescripcion()) . '</td>';
+                            $strTable .= '<td class="small italic text text-capitalize" >' . strtolower($objRankingDetalleCodigo->getDescripcion()) . '</td>';
                         }    
-                        $strTable .= '<td >' . $row['puntos'] . '</td>';
+                        $strTable .= '<td class="small " >' . $row['puntos'] . '</td>';
                         
-                        $strTable .= '<td >' . $objRankingDetalleCodigo->getBase()/100 . '</td>';
+                        $strTable .= '<td class="small ">' . $objRankingDetalleCodigo->getBase()/100 . '</td>';
                         
-                        $strTable .= '<td>' . $row['puntos']*$objRankingDetalleCodigo->getBase()/100 . '</td>';
+                        $strTable .= '<td class="small ">' . $row['puntos']*$objRankingDetalleCodigo->getBase()/100 . '</td>';
                         if (array_key_exists($objRankingDetalleCodigo->getTipo(), $arrayincluyeOtros) ){
-                           $strTable .= '<td><span class="glyphicon glyphicon-asterisk"></span>'. '</td>';
+                           $strTable .= '<td class="small"><span class="glyphicon glyphicon-asterisk"></span>'. '</td>';
                         }elseif (array_key_exists($row['codigo'],$arrayRankingPrimeros6)){
                             if (strrpos($row['codigo'], "S")){
-                                $strTable .= '<td><span class="glyphicon glyphicon-ok"></span>'. '</td>';
+                                $strTable .= '<td class="small"><span class="glyphicon glyphicon-ok"></span>'. '</td>';
                             }else{
-                                $strTable .= '<td><span class="glyphicon glyphicon-ok-circle"></span>'. '</td>';
+                                $strTable .= '<td class="small"><span class="glyphicon glyphicon-ok-circle"></span>'. '</td>';
                             }
                         }else{
                             $strTable .="<td></td> ";
@@ -87,9 +89,9 @@ $strTable.=
         </div>';
 
 if ($nr>0){
-    $jsondata = array("Success" => True, "html"=>$strTable,"Puntos"=>$objRanking->getPuntos(),"Nombre"=>$objAtleta->getNombreCompleto(),"Sexo"=>$objAtleta->getSexo());   
+    $jsondata = array("Success" => True, "html"=>$strTable,"Puntos"=>$objRanking->getPuntos(),"Nombre"=>$objAtleta->getNombreCorto(),"Sexo"=>$objAtleta->getSexo());   
 } else {    
-    $jsondata = array("Success" => False, "html"=>"No hay datos registrados","Puntos"=>0,"Nombre"=>$objAtleta->getNombreCompleto());
+    $jsondata = array("Success" => False, "html"=>"No hay datos registrados","Puntos"=>0,"Nombre"=>$objAtleta->getNombreCorto());
 }
 header('Content-type: application/json; charset=utf-8');
 echo json_encode($jsondata, JSON_FORCE_OBJECT);

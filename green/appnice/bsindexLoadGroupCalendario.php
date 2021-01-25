@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once 'clases/Noticias_cls.php';
 require_once "clases/Empresa_cls.php";
 require_once "clases/Torneos_cls.php";
@@ -10,8 +10,13 @@ require_once 'sql/ConexionPDO.php';
 require_once 'funciones/Imagenes_cls.php';
 require_once 'clases/Encriptar_cls.php';
 
+if ($_SERVER['REQUEST_METHOD']=='GET'){
+    die();
+}
+
 $empresa_id =$_POST['emp'];
 $mes=$_POST['mes'];
+$mes=0;
 $status_filtro=$_POST['status'];
 //sleep(1);
 $mes_en_letras= fun_Mes_Literal($mes);
@@ -31,9 +36,12 @@ switch ($status_filtro) {
         $objTorneo = new Torneo();
         //$rsColeccion_Torneos=$objTorneo->ReadAll($empresa_id,TRUE,$mes);
         $rsColeccion_Torneos=$objTorneo->ReadAll(0,TRUE,$mes);
+        $rsColeccion_Torneos=$objTorneo->ReadAll(0,TRUE,$mes);
+        
         foreach ($rsColeccion_Torneos as $row) {
 
-            if (Torneo::Fecha_Apertura_Calendario($row['fechacierre'],$row['tipo']) <= Torneo::Fecha_Hoy() && Torneo::Fecha_Create($row['fechacierre']) > Torneo::Fecha_Hoy()) {
+            if (Torneo::Fecha_Apertura_Calendario($row['fechacierre'],$row['tipo']) <= Torneo::Fecha_Hoy() 
+                && Torneo::Fecha_Create($row['fechacierre']) > Torneo::Fecha_Hoy()) {
                     $estatus="Open";
             } else {
                 if (Torneo::Fecha_Apertura_Calendario($row['fechacierre'],$row['tipo']) > Torneo::Fecha_Hoy()) {
@@ -58,6 +66,13 @@ switch ($status_filtro) {
             $fecha_cierre=$row['fechacierre'];
             $fecha_retiro=$row['fecharetiros'];
             $fecha_inicio=$row['fecha_inicio_torneo'];
+            $ffecha_cierre=date_format(date_create($row['fechacierre']),'d-M H:i');
+            $ffecha_retiro=date_format(date_create($row['fecharetiros']),'d-M H:i');
+            $ffecha_inicio=date_format(date_create($row['fecha_inicio_torneo']),'d-M H:i');
+            $ffecha_fin=date_format(date_create($row['fecha_fin_torneo']),'d-M  H:i');
+            $sfecha_ini=date_format(date_create($row['fecha_inicio_torneo']),'d-M-y');
+            $sfecha_fin=date_format(date_create($row['fecha_fin_torneo']),'d-M-y');
+
             if ($status_filtro==$estatus){
                $strData="";
                 switch ($row['condicion']) {
@@ -149,9 +164,9 @@ switch ($status_filtro) {
                 $strDataEntidad = '<td data-toggle="tooltip" data-placement="bottom" title="Entidad">'. $row['entidad'].'</td>';
                 $strDataFechas= "<td data-toggle='tooltip' data-placement='auto' title='Fechas del Torneo'>"
                 . ""
-                . "<p class='xfechacierre'>Cierre: $fecha_cierre</p>"
-                . "<p class='xfecharetiro'>Retiro: $fecha_retiro</p>"
-                . "<p class='xfechainicio'>Inicio: $fecha_inicio</p>"
+                . "<p class='xfechacierre'>Cierre: $ffecha_cierre</p>"
+                . "<p class='xfecharetiro'>Retiro: $ffecha_retiro</p>"
+                . "<p class='xfechainicio'>Inicio: $ffecha_inicio</p>"
                 . ""
                 . "</td>";
                 /* fecha de torneo
@@ -219,11 +234,12 @@ switch ($status_filtro) {
                 $strCard='
                 <br>
                 <div class="circulo">
-                <div class="panel panel-default bg-imagen-panel">
+                <div class="panel panel-default bbg-imagen-panel">
                 <!-- Default panel contents -->
-                    <div class="panel-body text-center copa">@'.$strNumero.'-'.$strGrado.'-('.$row['categoria'].')-'.$strDataEntidad.'</div>
+                    <div class="panel-body text-center ccopa"><strong>@'.$strNumero.'-'.$strGrado.'-('.$row['categoria'].')-'.$strDataEntidad.'</strong></div>
                     <!--<div class="panel-body text-center copa">CATEGORIA: '.$row['categoria'].' GRADO: '.$strGrado.' ENTIDAD: '.$strDataEntidad." NUMERO: ".$strNumero.'</div>
                     <div class="panel-body "><a '.$href.'><h4>'.$copa.'<h4></a></div> -->
+                    <div class="panel-body text text-center ccopa" ><mark>'.$sfecha_ini.'</mark> Al <mark>'.$sfecha_fin.'</mark></div>
                     
                     <!-- Table -->
                     <table class="table  ">
@@ -247,8 +263,7 @@ switch ($status_filtro) {
                       .'</tr>
                         
                     </table>
-                    
-                    <div class="panel-body text text-center '.$text_alert.'">'.'<a '.$href.'><h4>'.$estatus.'</h4></a></div>
+                    <div class="panel-body text text-center  '.$text_alert.'">'.'<a '.$href.'><h4>'.$estatus.'</h4></a></div>
                 </div>
                 </div>'
                 ;
@@ -261,7 +276,7 @@ switch ($status_filtro) {
     }
 
 if ($strDataHTML==''){
-    $jsondata= array("Success"=>FALSE,"Mensaje"=>"<p id='info-torneo' >No hay Informacion para el Estatus ==> $status_filtro en el Mes ==> $mes_en_letras </p>",HTML=>"");   
+    $jsondata= array("Success"=>FALSE,"Mensaje"=>"<p id='info-torneo' >No hay Informacion para el Estatus $status_filtro en el Mes  $mes_en_letras </p>",HTML=>"");   
 }else{
     $jsondata= array("Success"=>TRUE,"Mensaje"=>"Informacion disponible",HTML=>$HTMLDATA);
 }

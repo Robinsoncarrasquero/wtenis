@@ -110,10 +110,11 @@ class Atleta   {
         return $this->apellidos.", ".$this->nombres;
     }
      public function getNombreCorto(){
-        $arrayNombre=explode(" ",$this->apellidos." ".$this->nombres);
-        $Nombre1=$arrayNombre[2];
-        $Apellido1=$arrayNombre[0];
-        return (ucwords($Apellido1).",".  ucwords($Nombre1));
+        $arrayNom=explode(" ",$this->nombres);
+        $arrayApe=explode(" ",$this->apellidos);
+        $Nombre1=$arrayNom[0];
+        $Apellido1=$arrayApe[0];
+        return ( substr(ucwords($Apellido1),0,1).", ". ucwords($Nombre1));
     }
     
     
@@ -417,7 +418,7 @@ class Atleta   {
             $SQL->bindParam(':xsexo', $this->sexo);
             $SQL->bindParam(':xemail', $this->email);
             $SQL->bindParam(':xbiografia', $this->biografia);
-            $SQL->bindParam(':xcontrasena', $this->cedula);
+            $SQL->bindParam(':xcontrasena', $this->contrasena);
             $SQL->bindParam(':xnacionalidad_id', $this->nacionalidad_id);
             $SQL->bindParam(':xestado_id', $this->estado_id);
             $SQL->bindParam(':xestado', $this->estado);
@@ -680,11 +681,11 @@ class Atleta   {
        $model = new Conexion;
        $conn=$model->conectar();
        if ($id>0){
-           $SQL = $conexion->prepare("SELECT * FROM " . self::TABLA . ' WHERE atleta_id = :id');
+           $SQL = $conn->prepare("SELECT * FROM " . self::TABLA . ' WHERE atleta_id = :id');
            $SQL->bindParam(':id', $id);
        }elseif ($cedula>0){
            $prepare = "SELECT * FROM " . self::TABLA . ' WHERE cedula = :cedula';
-           $SQL = $conexion->prepare("SELECT * FROM " . self::TABLA . ' WHERE cedula = :cedula');
+           $SQL = $conn->prepare("SELECT * FROM " . self::TABLA . ' WHERE cedula = :cedula');
            $SQL->bindParam(':cedula', $cedula);
        }
       

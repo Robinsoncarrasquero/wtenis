@@ -1,7 +1,5 @@
 <?php
 require_once 'funcion_fecha.php';
-require_once '../conexion.php';
-
 /* 
  * Utilizamos esta funcion para hacer el envion de correo de cualquier moovimiento tales 
  * como Inscripcion, eliminacion de inscripcion, retiros.
@@ -11,7 +9,7 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
     if (isset($_SESSION['email_envio'])){
         $email_from= $_SESSION['email_envio'];
     }else{
-        $email_from="info@fvtenis.com.ve";
+        $email_from="info@example";
     }
     $fileTemplate="Template_Torneo_Notificacion.html";
     switch ($tipodeoperacion){
@@ -127,15 +125,14 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
         
         //Reemplazamos los parametros con los valores del Template
         $body = html_template($campos, $valores, $file_template);
-        
         //Enviamos el Correo
         {
-            $nombre_remitente='fvtenis.com.ve';
+            $nombre_remitente='mytenis';
             $to = $email; //"robinson.carrasquero@gmail.com";
             $subject = "$movimiento al torneo:($codigo_torneo)";
             
             if ($atleta_id==487){ // Prueba de usuario
-                $from = "From: fvtenis.com.ve<info@fvtenis.com.ve>"
+                $from = "From: mytenis<info@example>"
                     . "\r\n" ."BCC:atenismiranda@gmail.com";
             }else{
                 $from = "From: $nombre_remitente<".$email_from.">" 
@@ -159,7 +156,7 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     if (isset($_SESSION['email_envio'])){
         $email_from= $_SESSION['email_envio'];
     }else{
-        $email_from="info@fvtenis.com.ve";
+        $email_from="info@example";
     }
     
     //Datos del atleta
@@ -168,7 +165,7 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
             . "FROM atleta "
             . "WHERE cedula=$cedulax";
     
-    $result=mysql_query($sql);
+    $result=mysqli_query($sql);
     $row = mysql_fetch_array($result);
     $atleta_id=$row['atleta_id'];
     $nombre_atleta=trim($row["nombres"]);
@@ -363,27 +360,35 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     $strMensaje="Estimado(a) atleta($estado) $nombre_atleta,$apellido_atleta, le notificamos que $notificacion "
                 . "$notificacion2\r\n";
     //Obtenemos el template html
-    $file_Template= file_get_contents("../Email_Template/".$fileTemplate);
-       
+    $file_dir=__DIR__."/../Email_Template/".$fileTemplate; 
+    $file_Template= file_get_contents($file_dir);
     //Creamos los parametros para sustituir en la plantilla
     $campos=['@@OPERACION','@@SOLICITUD','@@CEDULA','@@NOMBRES','@@APELLIDOS','@@FECHANACIMIENTO','@@SEXO',
-        '@@ASOCIACION','@@CATEGORIANATURAL','@@CODIGO','@@NOMBRE_TORNEO','@@ENTIDAD','@@GRADO','@@CATEGORIA','@@FECHACIERRE','@@FECHARETIRO','@@FECHAINICIO',
-        '@@DISCIPLINA','@@TELEFONOS','@@BANCO','@@CUENTA','@@RIF','@@BENEFICIARIO','@@EMAIL_PAGO'];
+        '@@ASOCIACION','@@CATEGORIANATURAL',
+        '@@DISCIPLINA','@@TELEFONOS','@@BANCO','@@CUENTA','@@RIF','@@BENEFICIARIO',
+        '@@EMAIL_PAGO'];
 
    $valores=[$asunto,$strMensaje,$cedula,$nombre_atleta,$apellido_atleta,$fechanacimiento,$sexo,
-       $estado,$categoria_natural,$codigo_torneo,$nombre_torneo,$entidad_torneo,$grado,$categoria,$fechacierre,
-       $fecharetiro,$fechainicio,$disciplina,$telefonos_empresa,$banco_empresa,$cuenta_empresa_empresa,$rif_empresa,$nombre_empresa,$email_empresa];
+       $estado,$categoria_natural,
+       $disciplina,$telefonos_empresa,$banco_empresa,$cuenta_empresa,$rif_empresa,$nombre_empresa,
+       $email_empresa];
     
     //Reemplazamos los valores de la platilla 
     $body = html_template($campos, $valores, $file_Template);
+    // $DIR=__DIR__;
+    // $FILE=__FILE__;
+    // $DROOT=$_SERVER['DOCUMENT_ROOT'];        
+    // $jsondata = array("Success" => TRUE, "msg"=>$FILE ."FILE ".$DROOT . "DROOT ". $DIR. " DIR ","html"=>json_encode($body, JSON_FORCE_OBJECT));
+    // header('Content-type: application/json; charset=utf-8');
+    // echo json_encode($jsondata, JSON_FORCE_OBJECT);
     
-    $nombre_remitente='fvtenis.com.ve';
+    $nombre_remitente='mytenis';
     //Enviamos Correo
     {
         $to = $email; //"robinson.carrasquero@gmail.com";
         $subject = $asunto;
         if ($atleta_id == 487) { // Prueba de usuario
-            $from = "From: fvtenis.com.ve<info@fvtenis.com.ve>"
+            $from = "From: mytenis<info@example>"
                     . "\r\n" . "BCC:atenismiranda@gmail.com";
         } else {
             $from = "From: $nombre_remitente<" . $email_from . ">"

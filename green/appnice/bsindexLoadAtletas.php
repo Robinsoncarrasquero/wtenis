@@ -6,7 +6,9 @@ require_once 'clases/Atletas_cls.php';
 
 require_once 'sql/ConexionPDO.php';
 
-
+if ($_SERVER['REQUEST_METHOD']=='GET'){
+    die();
+}
 
 
 $strTable =

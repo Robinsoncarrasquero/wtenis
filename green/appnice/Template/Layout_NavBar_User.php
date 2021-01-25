@@ -80,21 +80,20 @@ echo "<header>";
                     </li>
                 </ul>';
           
-                echo '
-                <ul class="nav navbar-nav navbar-right">';
-                echo ' 
-                    <li class="dropdown">';
-                        if (isset($_SESSION['logueado']) and $_SESSION['logueado']){
-                           echo ' <li><a href="../sesion_cerrar.php"><span class="glyphicon glyphicon-log-out"></span>Cerrar</a></li>';
-                        }else{
-                            echo '<li><a  href="../Login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
-                        }
-                echo '
-                    </li>
-                </ul>';
                        
             }
-          
+            echo '
+            <ul class="nav navbar-nav navbar-right">';
+            echo ' 
+                <li class="dropdown">';
+                    if (isset($_SESSION['logueado']) and $_SESSION['logueado']){
+                       echo ' <li><a href="../sesion_cerrar.php"><span class="glyphicon glyphicon-log-out"></span>Cerrar</a></li>';
+                    }else{
+                        echo '<li><a  href="../Login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+                    }
+            echo '
+                </li>
+            </ul>';
          
         echo '
         </div>

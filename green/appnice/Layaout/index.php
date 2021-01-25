@@ -101,7 +101,7 @@
   <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
     <img class="mr-3" src="./app/images/logo/fvtbs48x48.jpg" alt="" width="48" height="48">
     <div class="lh-100">
-      <h6 class="mb-0 text-white lh-100">FVTenis</h6>
+      <h6 class="mb-0 text-white lh-100">MyTenis</h6>
       <small>Since 1949</small>
     </div>
   </div>

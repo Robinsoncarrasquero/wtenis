@@ -25,7 +25,8 @@ if (isset($_GET['s1'])){
     $_SESSION['asociacion']=$sn; // ASOCIACION 
 
 }
-
+//header('Location: Login.php');
+    
 $objEmpresa = new Empresa();
 $objEmpresa->Fetch($_SESSION['asociacion']);
 $_SESSION['empresa_id']=$objEmpresa->get_Empresa_id();
@@ -111,15 +112,13 @@ foreach ($array_meses as $valor_mes){
     }
     
 }
-echo HTML_SET::html_head("Federacion Venezolana de Tenis",'Sitio web para Inscripciones onLine de Torneos de Tenis de Campo y Tenis de Playa' );
+echo HTML_SET::html_head("Asociaciones",
+'Sitio  Web Oficial para Afiliaciones e Inscripciones onLine de Torneos de Tenis de Campo, Tenis de Playa y Tenis Adaptado' );
 echo HTML_SET::style_content();
 echo HTML_SET::html_body_open();
 
 ?>
 
-   
-
- 
 <!-- Header -->
 <header>
     
@@ -132,7 +131,8 @@ echo HTML_SET::html_body_open();
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <a class="navbar-brand" href="#"><?PHP echo $objEmpresa->getAsociacion() ?></a>
+            <!-- <a class="navbar-brand" href="#"><?PHP echo $objEmpresa->getAsociacion() ?></a> -->
+            <a class="navbar-brand" href="#"><img src="<?php echo 'images/logo/logo.png"' ?> width='70px'class="img-responsive"></img></a>
         </div>
         <div id="navbartenis" class="collapse navbar-collapse">
           <ul class="nav navbar-nav ">
@@ -144,6 +144,7 @@ echo HTML_SET::html_body_open();
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >Ranking<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li id="ranking1"><a href="ARankingNacional/RankingByDate.php">Ranking Fecha</a></li>
+                    <li class="divider"></li>
                     <li id="ranking2"><a href="ARankingNacional/RankingByJugador.php">Ranking Individual</a></li>
                 </ul>
             </li>
@@ -235,10 +236,10 @@ echo HTML_SET::html_body_open();
 
 	<div class="social">
 		<ul>
-			<li><a href="http://www.facebook.com/fvtenis" target="_blank" class="icon-facebook"></a></li>
-			<li><a href="http://www.twitter.com/fvtenis" target="_blank" class="icon-twitter"></a></li>
+			<li><a href="http://www.facebook.com/MyTenis" target="_blank" class="icon-facebook"></a></li>
+			<li><a href="http://www.twitter.com/MyTenis" target="_blank" class="icon-twitter"></a></li>
 			
-			<li><a href="http://www.instagram.com/fvtenis" target="_blank" class="icon-instagram"></a></li>
+			<li><a href="http://www.instagram.com/MyTenis" target="_blank" class="icon-instagram"></a></li>
 			<li><a href="mailto:<?php echo $objEmpresa->getEmail()?>" class="icon-mail"></a></li>
 		</ul>
 	</div>
@@ -263,23 +264,23 @@ echo (JJJumbotron($objEmpresa->getNombre(), $objEmpresa->getDescripcion()));
         
             <div id="Carrusel-Portal" class="carousel slide" data-ride="carousel" data-interval="2000" data-pause="hover">
                 <?php
-                fotos_portal_v3();
+        //        fotos_portal_v3();
                 //fotos_portal2();
 
                 ?>
         
-               <a class="left carousel-control" href="#Carrusel-Portal" role="button" data-slide="prev">
-		  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-		  <span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#Carrusel-Portal" role="button" data-slide="next">
-		  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-		  <span class="sr-only">Next</span>
-		</a>
+                <a class="left carousel-control" href="#Carrusel-Portal" role="button" data-slide="prev">
+    		        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	    	        <span class="sr-only">Previous</span>
+		        </a>
+		        <a class="right carousel-control" href="#Carrusel-Portal" role="button" data-slide="next">
+		            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		            <span class="sr-only">Next</span>
+	    	    </a>
             </div>
+            <hr>
             <!-- Renovacion de Afiliacion -->
            <?php 
-           echo '<hr>';
             if (isset($_SESSION['logueado']) && $_SESSION['logueado']){
                 $empresa_id=$_SESSION['empresa_id'];
                 $atleta_id=$_SESSION['atleta_id'];
@@ -309,13 +310,12 @@ echo (JJJumbotron($objEmpresa->getNombre(), $objEmpresa->getDescripcion()));
                      <h5  id="titulo-renovacion" class="alert-danger"><a href ="#">Ya puedes solicitar la Renovacion de Afiliacion 2019, Haciendo Click en este Enlace</a></h5>
                     </div>';
             }
-            echo '<hr>';
             //Calendario
            ?>
-           
-            <h5 id="calendario" class="calendario-titulo">CALENDARIO</h5>
-           
-            <ul class="row nav nav-pills nav-pills-meses tab-calendario "> 
+           <hr>
+           <h5 id="calendario" class="calendario-titulo">Torneos</h5>
+           <hr>
+             <ul class="row nav nav-pills nav-pills-meses tab-calendario "> 
                 <li role="presentation"><a href="#" role="tab" data-toggle="tab"   class="edit-record" id="1" data-id="<?PHP echo $objEmpresa->get_Empresa_id()?>">Ene<b class="badge"><?PHP echo $bage1 ?></b></a></li>
                 <li role="presentation"><a href="#"  role="tab" data-toggle="tab"  class="edit-record" id="2">Feb<span class="badge"><?PHP echo $bage2 ?></span></a></li>
                 <li role="presentation"><a href="#"  role="tab" data-toggle="tab"  class="edit-record" id="3">Mar<span class="badge"><?PHP echo $bage3 ?></span></a></li>
@@ -329,8 +329,8 @@ echo (JJJumbotron($objEmpresa->getNombre(), $objEmpresa->getDescripcion()));
                 <li role="presentation"><a href="#"  role="tab" data-toggle="tab" class="edit-record" id="11">Nov<span class="badge"><?PHP echo $bage11 ?></span></a></li>
                 <li role="presentation"><a href="#"  role="tab" data-toggle="tab" class="edit-record" id="12">Dic<span class="badge"><?PHP echo $bage12 ?></span></a></li>
              </ul>
-                         
-             <div class="calendario ">
+            
+             <div class="calendario "> 
              </div>
             <hr></hr>
             <div class="tabular row col-sm-12 tab-status">
@@ -520,7 +520,6 @@ $(document).ready(function(){
     
     emp=$(".edit-record").attr('data-id');
     $('.nav-pills-meses li').eq(mes-1).addClass("active");  
-   
     //$(this).addClass("active");
     var loadTorneo = function(e) {
         if (e) {
@@ -530,7 +529,7 @@ $(document).ready(function(){
         }
     };
     $('.edit-record').click(loadTorneo);
-    loadTorneo(); // disparar
+    //loadTorneo(); // disparar
  
   
    $(window).on("load", ocultar);
@@ -545,9 +544,10 @@ $(document).ready(function(){
 
     function loadtab(status){
         
+        
         $('#div_tab'+status).html('');
         $('#div_tab'+status).addClass('loader');
-        $.post("bsLoadTorneos.php",
+        $.post("bsindexLoadGroupCalendario.php",
         {emp:emp,mes: mes,status:status}, 
         function(data){
             $('#div_tab'+status).removeClass('loader');
@@ -556,7 +556,7 @@ $(document).ready(function(){
                
             }else{
                 $('#div_tab'+status).html(data.Mensaje);
-                
+                 
             }
             
         });

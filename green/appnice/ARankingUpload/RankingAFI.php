@@ -321,6 +321,7 @@ $(document).ready(function() {
             $('#list').addClass('loader');
             $.ajax({
             method: "POST",
+            //url: "RankingAFI_Procesar.php", 
             url: "RankingAFI_Procesar.php", 
             data: { fecha_rk:fecha_rk,categoria:categoria,disciplina:disciplina,sexo:sexo}
             })

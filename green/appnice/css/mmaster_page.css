@@ -1,0 +1,36 @@
+.apuntar{
+    background-color:gold;
+    
+}
+
+.borrar{
+    background-color:gold;
+}
+
+.activo-glyphicon {
+   
+    background: gold;
+   
+    padding: 4px 4px; 
+
+}
+
+.inactivo-glyphicon {
+    padding: 4px 4px; 
+    
+}
+#avatar{
+    width: 50%;
+    
+}
+
+
+
+      
+
+tr[class~="tttable-head"] {
+   background-color:#DF0101 !important;
+   color:#FFFFFF !important;         
+    
+}
+

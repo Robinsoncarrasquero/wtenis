@@ -64,12 +64,12 @@ function rkjunior($rsFileRank,&$jdata){
         $files_procesar= array($file_excel);
         $fechark=$rk_record['fecha']; // FECHA DE RANKING
         $rank_id=$rk_record['id']; // FECHA DE RANKING
-        if (!$rk_record['procesado']){
+        if (file_exists($file_excel) && !$rk_record['procesado'] ){
             Ranking::DeleteCategoriaByRank_id($rank_id);
         }
         
         foreach ($files_procesar as $file_name){      
-            if (file_exists($file_name) && !$rk_record[procesado] ){
+            if (file_exists($file_name) && !$rk_record['procesado'] ){
                 
 
                 //Abrimos el libro en excel para procesar cada estado
@@ -210,11 +210,10 @@ function rkjunior($rsFileRank,&$jdata){
                         $ObjAtleta = new Atleta();
                         $ObjAtleta->Fetch(0, $cedula);
                         if ($ObjAtleta->Operacion_Exitosa()) {
-                            $atleta_id = $ObjAtleta->getID();
-                            //$ObjAtleta->setFechaNacimiento($fechan);
-                            $ObjAtleta->setEstado($estado);
-                            //$ObjAtleta->setSexo($sexo);
-                            $ObjAtleta->Update();
+                            // $ObjAtleta->setFechaNacimiento($fechan);
+                            // $ObjAtleta->setEstado($estado);
+                            // $ObjAtleta->setSexo($sexo);
+                            // $ObjAtleta->Update();
                         } else {
                             $ObjAtleta->setApellidos($ape);
                             $ObjAtleta->setNombres($nom);
@@ -224,7 +223,6 @@ function rkjunior($rsFileRank,&$jdata){
                             $ObjAtleta->setEstado($estado);
                             $ObjAtleta->setNacionalidadID(1);
                             $ObjAtleta->create();
-                            $atleta_id = $ObjAtleta->getID();
                         }
 
                         if ($ObjAtleta->getID()>0){
@@ -299,12 +297,14 @@ function rkpacpv($rsFileRank,&$jdata) {
         $files_procesar= array($file_excel);
         $fechark=$rk_record['fecha']; // FECHA DE RANKING
         $rank_id=$rk_record['id']; // FECHA DE RANKING
-        if (!$rk_record['procesado']){
+        if (file_exists($file_excel) && !$rk_record['procesado'])
+        {
             Ranking::DeleteCategoriaByRank_id($rank_id);
         }
         
         foreach ($files_procesar as $file_name){      
-            if (file_exists($file_name) && !$rk_record[procesado] ){
+            if (file_exists($file_name)  && !$rk_record['procesado'] )
+            {
                          //Abrimos el libro en excel para procesar cada estado
                 $sheet = NULL;$objPHPExcel=NULL;
                 $inputFileType=NULL;$objReader=NULL;
@@ -354,32 +354,32 @@ function rkpacpv($rsFileRank,&$jdata) {
                     RankingDetalle::ranking_detalle("6G2D",$sheet->getCell("AH" . $rowx)->getValue(), $array_data);
                     
                     //G3
-                    RankingDetalle::ranking_detalle("1G3S",$sheet->getCell("AI" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("1G3D",$sheet->getCell("AK" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("2G3S",$sheet->getCell("AM" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("2G3D",$sheet->getCell("AN" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("3G3S",$sheet->getCell("AO" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("3G3D",$sheet->getCell("AP" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("4G3S",$sheet->getCell("AR" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("4G3D",$sheet->getCell("AU" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("1G3S",$sheet->getCell("AI" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("1G3D",$sheet->getCell("AK" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("2G3S",$sheet->getCell("AM" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("2G3D",$sheet->getCell("AN" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("3G3S",$sheet->getCell("AO" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("3G3D",$sheet->getCell("AP" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("4G3S",$sheet->getCell("AR" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("4G3D",$sheet->getCell("AU" . $rowx)->getValue(), $array_data);
                     
                     
                     //G4
-                    RankingDetalle::ranking_detalle("1G4S",$sheet->getCell("AW" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("1G4D",$sheet->getCell("AZ" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("2G4S",$sheet->getCell("BB" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("2G4D",$sheet->getCell("BD" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("3G4S",$sheet->getCell("BF" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("3G4D",$sheet->getCell("BG" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("4G4S",$sheet->getCell("BH" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("4G4D",$sheet->getCell("BK" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("5G4S",$sheet->getCell("BN" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("5G4D",$sheet->getCell("BQ" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("6G4S",$sheet->getCell("BR" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("1G4S",$sheet->getCell("AW" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("1G4D",$sheet->getCell("AZ" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("2G4S",$sheet->getCell("BB" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("2G4D",$sheet->getCell("BD" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("3G4S",$sheet->getCell("BF" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("3G4D",$sheet->getCell("BG" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("4G4S",$sheet->getCell("BH" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("4G4D",$sheet->getCell("BK" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("5G4S",$sheet->getCell("BN" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("5G4D",$sheet->getCell("BQ" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("6G4S",$sheet->getCell("BR" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("6G4D",$sheet->getCell("BU" . $rowx)->getValue(), $array_data);
                     
                     //Nacional por equipo
-                    RankingDetalle::ranking_detalle("NE",$sheet->getCell("BW" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("NE",$sheet->getCell("BW" . $rowx)->getValue(), $array_data);
                     
                     //Master
                     RankingDetalle::ranking_detalle("IMS",$sheet->getCell("BY" . $rowx)->getValue(), $array_data);
@@ -412,12 +412,10 @@ function rkpacpv($rsFileRank,&$jdata) {
                         $ObjAtleta = new Atleta();
                         $ObjAtleta->Fetch(0, $cedula);
                         if ($ObjAtleta->Operacion_Exitosa()) {
-                            $atleta_id = $ObjAtleta->getID();
-                            $ObjAtleta->setFechaNacimiento($fechan);
-                            $ObjAtleta->setEstado($estado);
-                            $ObjAtleta->setSexo($sexo);
-                            $ObjAtleta->Update();
-
+                            //$ObjAtleta->setFechaNacimiento($fechan);
+                            //$ObjAtleta->setEstado($estado);
+                            //$ObjAtleta->setSexo($sexo);
+                            //$ObjAtleta->Update();
                         } else {
                             $ObjAtleta->setApellidos($ape);
                             $ObjAtleta->setNombres($nom);
@@ -427,8 +425,6 @@ function rkpacpv($rsFileRank,&$jdata) {
                             $ObjAtleta->setEstado($estado);
                             $ObjAtleta->setNacionalidadID(1);
                             $ObjAtleta->create();
-                            $atleta_id = $ObjAtleta->getID();
-
                         }
 
                         if ($ObjAtleta->getID()>0){
@@ -496,12 +492,14 @@ function rkpacpn($rsFileRank,&$jdata) {
         $files_procesar= array($file_excel);
         $fechark=$rk_record['fecha']; // FECHA DE RANKING
         $rank_id=$rk_record['id']; // FECHA DE RANKING
-        if (!$rk_record['procesado']){
+        //if (!$rk_record['procesado'])
+        if (file_exists($file_excel) && !$rk_record['procesado'] ){
+          
             Ranking::DeleteCategoriaByRank_id($rank_id);
         }
         
         foreach ($files_procesar as $file_name){      
-            if (file_exists($file_name) && !$rk_record[procesado] ){
+            if (file_exists($file_name) && !$rk_record['procesado'] ){
                          //Abrimos el libro en excel para procesar cada estado
                 $sheet = NULL;$objPHPExcel=NULL;
                 $inputFileType=NULL;$objReader=NULL;
@@ -516,6 +514,7 @@ function rkpacpn($rsFileRank,&$jdata) {
 
                 for ($row = 2; $row <= $highestRow; $row++) {
                     $rowx=$row-1;
+                    
                     $rkn = trim($sheet->getCell("B" . $row)->getValue());
                     $rkr = $sheet->getCell("E" . $row)->getValue();
                     $rke = $sheet->getCell("F" . $row)->getValue();
@@ -537,12 +536,12 @@ function rkpacpn($rsFileRank,&$jdata) {
     //                RankingDetalle::ranking_detalle("ATPWTA",$sheet->getCell("CV" . $row)->getValue(), $array_data);
     //                RankingDetalle::ranking_detalle("TPI",$sheet->getCell("CY" . $row)->getValue(), $array_data);
                     //G2 Nacionales
-                    RankingDetalle::ranking_detalle("1G2S",$sheet->getCell("R" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("1G2S",$sheet->getCell("R" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("1G2D",$sheet->getCell("T" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("2G2S",$sheet->getCell("W" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("2G2D",$sheet->getCell("Z" . $rowx)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("3G2S",$sheet->getCell("AD" . $rowx)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("3G2D",$sheet->getCell("AF" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("3G2S",$sheet->getCell("AD" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("3G2D",$sheet->getCell("AF" . $row)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("4G2S",$sheet->getCell("AH" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("4G2D",$sheet->getCell("AJ" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("5G2S",$sheet->getCell("AL" . $rowx)->getValue(), $array_data);
@@ -552,9 +551,9 @@ function rkpacpn($rsFileRank,&$jdata) {
                     
                     //G3
                     RankingDetalle::ranking_detalle("1G3S",$sheet->getCell("AS" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("1G3D",$sheet->getCell("AT" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("2G3S",$sheet->getCell("AM" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("2G3D",$sheet->getCell("AN" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("1G3D",$sheet->getCell("AT" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("2G3S",$sheet->getCell("AV" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("2G3D",$sheet->getCell("AY" . $row)->getValue(), $array_data);
                     //RankingDetalle::ranking_detalle("3G3S",$sheet->getCell("AV" . $row)->getValue(), $array_data);
                     //RankingDetalle::ranking_detalle("3G3D",$sheet->getCell("AY" . $row)->getValue(), $array_data);
                     //RankingDetalle::ranking_detalle("4G3S",$sheet->getCell("AZ" . $row)->getValue(), $array_data);
@@ -562,17 +561,17 @@ function rkpacpn($rsFileRank,&$jdata) {
                     
                     
                     //G4
-                    RankingDetalle::ranking_detalle("1G4S",$sheet->getCell("AZ" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("1G4D",$sheet->getCell("BC" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("1G4S",$sheet->getCell("AZ" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("1G4D",$sheet->getCell("BC" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("2G4S",$sheet->getCell("BE" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("2G4D",$sheet->getCell("BF" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("3G4S",$sheet->getCell("BH" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("3G4D",$sheet->getCell("BJ" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("4G4S",$sheet->getCell("BL" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("4G4D",$sheet->getCell("BN" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("5G4S",$sheet->getCell("BO" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("2G4D",$sheet->getCell("BF" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("3G4S",$sheet->getCell("BH" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("3G4D",$sheet->getCell("BJ" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("4G4S",$sheet->getCell("BL" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("4G4D",$sheet->getCell("BN" . $rowx)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("5G4S",$sheet->getCell("BO" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("5G4D",$sheet->getCell("BQ" . $row)->getValue(), $array_data);
-                    RankingDetalle::ranking_detalle("6G4S",$sheet->getCell("BT" . $row)->getValue(), $array_data);
+                    RankingDetalle::ranking_detalle("6G4S",$sheet->getCell("BT" . $rowx)->getValue(), $array_data);
                     RankingDetalle::ranking_detalle("6G4D",$sheet->getCell("BW" . $rowx)->getValue(), $array_data);
                     
                     //Nacional por equipo
@@ -609,12 +608,10 @@ function rkpacpn($rsFileRank,&$jdata) {
                         $ObjAtleta = new Atleta();
                         $ObjAtleta->Fetch(0, $cedula);
                         if ($ObjAtleta->Operacion_Exitosa()) {
-                            $atleta_id = $ObjAtleta->getID();
-                            $ObjAtleta->setFechaNacimiento($fechan);
-                            $ObjAtleta->setEstado($estado);
-                            $ObjAtleta->setSexo($sexo);
-                            $ObjAtleta->Update();
-
+                            // $ObjAtleta->setFechaNacimiento($fechan);
+                            // $ObjAtleta->setEstado($estado);
+                            // $ObjAtleta->setSexo($sexo);
+                            // $ObjAtleta->Update();
                         } else {
                             $ObjAtleta->setApellidos($ape);
                             $ObjAtleta->setNombres($nom);
@@ -624,7 +621,6 @@ function rkpacpn($rsFileRank,&$jdata) {
                             $ObjAtleta->setEstado($estado);
                             $ObjAtleta->setNacionalidadID(1);
                             $ObjAtleta->create();
-                            $atleta_id = $ObjAtleta->getID();
 
                         }
 

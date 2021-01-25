@@ -1,20 +1,25 @@
 <?php
+
+use RedBeanPHP\Util\Dump;
+
 session_start();
 require_once 'conexion.php';
 require_once 'funciones/funciones.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena'];
-    $conn =  mysqli_connect($servername, $username, $password);
+    $usuario = addslashes($_POST['usuario']);
+    $contrasena = addslashes($_POST['contrasena']);
+
+    $conn = mysqli_connect ($servername, $username, $password);
     $result=mysqli_select_db($dbname,$conn);
+    
     if (!$result) {
        echo "2"; //Not avalaible
        die('No pudo conectarse: ' . mysqli_error($conn));
     }
     $usuario=  mysqli_real_escape_string($conn,$usuario);
 
-    $sql = "SELECT atleta_id,estado,cedula,contrasena,nombres,apellidos,niveluser,email,clave_default FROM atleta WHERE cedula='".$usuario."' && bloqueado=0";
+    $sql = "SELECT atleta_id,estado,sexo,cedula,contrasena,nombres,apellidos,niveluser,email,clave_default FROM atleta WHERE cedula='".$usuario."' && bloqueado=0";
     $result = mysqli_query($conn,$sql);
     
    if (mysqli_num_rows($result)){
@@ -25,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $atleta_id=$record["atleta_id"];
         $nombres= trim($record["nombres"]);
         $apellidos= trim($record["apellidos"]);
+        $sexo=$record["sexo"];
         $niveluser= $record["niveluser"];
         $email=$record["email"];
         $estado= $record["estado"];
@@ -48,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['nombre'] = $nombres;
             $_SESSION['Apellido'] = $apellidos;
             $_SESSION['cedula'] = $cedula;
+            $_SESSION['sexo'] = $sexo;
             $_SESSION['pwdpwd'] = $contrasena;
             $_SESSION['atleta_id'] = $atleta_id;
             $_SESSION['niveluser'] = $niveluser;
@@ -67,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['afiliado'] = 0;
             $sql = "SELECT colorNavbar,colorjumbotron,bgcolorjumbotron,url,estado,empresa_id,nombre,email,email_envio from empresa WHERE estado='$estado'";
             $result2=mysqli_query($conn,$sql);
-            $record = mysqli_fetch_assoc($conn,$result2);
+            $record = mysqli_fetch_assoc($result2);
             //Chequeamos si esta afiliado
             $_SESSION['home'] = 'bsindex.php?s1='.strtolower($_SESSION['asociacion']);
             $_SESSION['empresa_id'] = 0;
@@ -101,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Determinamos Afiliacion activa del periodo
             $sql = "SELECT afiliacion_id FROM afiliacion WHERE fecha_desde<=now() && fecha_hasta>=now() && empresa_id=". $_SESSION['empresa_id'];
             $result = mysqli_query($conn,$sql);
-            $rsAfiliacion = mysqli_fetch_array($conn,$result);
+            $rsAfiliacion = mysqli_fetch_array($result);
             $afiliacion_id=$rsAfiliacion['afiliacion_id'];
             
             //Determinamos que el afiliado haya formalizado su pago
@@ -111,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql = "SELECT pagado,aceptado,afiliaciones_id FROM afiliaciones WHERE  atleta_id=$atleta_id && ano=".$ano_afiliacion;
            
             $result = mysqli_query($conn,$sql);
-            $rsAfiliados = mysqli_fetch_array($conn,$result);
+            $rsAfiliados = mysqli_fetch_array($result);
             
             if ($rsAfiliados['pagado'] > 0) {
                 $_SESSION['deshabilitado'] = FALSE; //Habilitado para imprimir o enviar correo
@@ -126,29 +133,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $myip= getRealIP(); // ip desde donde el usuario ve la pagina
             //Auditoria de visitas
             $sql="INSERT INTO visitas(usuario,nombre,atleta_id,ip) VALUES('".$usuario."','".$nombres."',$atleta_id,'".$myip."')";
-//            echo "<pre>";
-//            echo var_dump($_SESSION['SWEB']);
-//            echo "<pre>";
-//            
-//            echo "<pre>";
-//            echo var_dump($_SESSION['deshabilitado']);
-//            echo "<pre>";
-//            
-//            echo '<script>';
-//            echo 'console.log('.$_SESSION['SWEB'].')';
-//            echo '</script>';
-
             $result=mysqli_query($conn,$sql);
-            if (!$result) {
-                //echo "Error insertado record: " .$conn_error();
-            }
             //Contamos cuantos afiliados tenemos para determinar un minimo de afiliados para permitir 
             $result=mysqli_query($conn,"SELECT count(*) as total FROM afiliaciones   WHERE formalizacion>0 && afiliacion_id=$afiliacion_id");
-            $rsTotal = mysqli_fetch_array($conn,$result);
+            $rsTotal = mysqli_fetch_array($result);
             $formalizadas= $rsTotal['total'];
 
             $result=mysqli_query($conn,"SELECT count(*) as total FROM afiliaciones   WHERE pagado>0 && afiliacion_id=$afiliacion_id");
-            $rsTotal = mysqli_fetch_array($conn,$result);
+            $rsTotal = mysqli_fetch_array($result);
             $pagados= $rsTotal['total'];
 
             $_SESSION['total']=$rsTotal['total']*0.5;

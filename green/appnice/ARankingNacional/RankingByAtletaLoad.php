@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once '../conexion.php';
 require_once '../clases/Atleta_cls.php';
 require_once '../sql/ConexionPDO.php';
 require_once '../clases/Funciones_cls.php';

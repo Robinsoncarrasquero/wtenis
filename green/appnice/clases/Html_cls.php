@@ -63,7 +63,7 @@ class HTML_SET {
     }
     //Abre tag body
     public static function html_body_open(){
-        echo '<body>';
+        echo '<body {padding-bottom:70px;}';
         print_r("\n");
     }
     //Cierra tag Body

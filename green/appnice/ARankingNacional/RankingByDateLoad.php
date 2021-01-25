@@ -54,7 +54,7 @@ $objPaginacion->setTotal_Registros($querycount);
 $records=$objPaginacion->SelectRecords($Select);
 
 $strTableHead =
-'
+'   
                     <div class="table">
                         <table class="table">
                             
@@ -131,7 +131,7 @@ $strTableFooter=
                         </table>
             </div>
                     
-                
+               
             
         ';
 $lineaOut .= $strTableHead.$linea.$strTableFooter;

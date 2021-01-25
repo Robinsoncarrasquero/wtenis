@@ -10,20 +10,20 @@ require_once 'clases/Encriptar_cls.php';
      header('Location: sesion_inicio.php');
     exit;
  }
-if ( $_SESSION['niveluser']>=0){
+$_SESSION['datos_completos']=TRUE;
+if ( $_SESSION['niveluser']==0){
 //    if ($_SESSION['niveluser']==0 && $_SESSION['clave_default']  ==NULL &&  $_SESSION['email']==NULL){
 //       header('Location: Perfil/PerfilModal.php');
 //       exit;
 //    }
     if ($_SESSION['email']==NULL){
-       header('Location: Perfil/bsChangeEmail.php');
+       header('Location: Perfil/ChangeEmail.php');
        exit;
     }
-    if ($_SESSION['clave_default']  ==NULL){
-       header('Location: Perfil/bsChangeKey.php');
+    if ($_SESSION['clave_default']==NULL){
+       header('Location: Perfil/ChangeKey.php');
        exit;
     }
-    $_SESSION['datos_completos']=TRUE;
     //Actualizamos los datos del afiliado
     if ($_SESSION['niveluser']==0){
         $atleta_id=  htmlspecialchars($_SESSION['atleta_id']);
@@ -38,13 +38,18 @@ if ( $_SESSION['niveluser']>=0){
                     || $objAtleta->getDireccion()==NULL){
                     $_SESSION['datos_completos']=FALSE;
                    
-                    header('Location: Ficha/FichaDatosBasicos.php');
+                    header('Location: Ficha/FichaDatosBasicos2.php');
                     exit;
                 }  
             }
         }  
         //Si viene de link de inscripciones
-    }  
+    }
+    if ( $_SESSION['niveluser']==0){
+      header('Location: MisTorneos/MisTorneos.php');
+      exit;
+    }
+ 
 }
 $urlHome=$_SESSION['home'];
 
@@ -73,7 +78,7 @@ $urlHome=$_SESSION['home'];
         }
         nav.navbar {
            background-color:    #000;
-           // background-color: <?php echo $_SESSION['bgcolor_navbar']?>;
+           /* background-color: <?php //echo $_SESSION['bgcolor_navbar']?>; */
         }
         .jumbotron{
            background-color:<?php echo $_SESSION['bgcolor_jumbotron']?>;
@@ -83,8 +88,7 @@ $urlHome=$_SESSION['home'];
             width: 100%;
         }
         
-        #navbar-brand {
-        }
+        
         alert.alert-server {
             margin-bottom: 0;
             border-radius: 0;

@@ -49,11 +49,15 @@ require_once '../clases/Rank_cls.php';
             background-color:azure; */
             position: relative;
         }
+        table{
+            font-size: 10px;
+        }
         #header{
             margin:0;
             
             
         }
+        
         .loader{
 
             background-image: url("../images/ajax-loader.gif");
@@ -90,18 +94,19 @@ require_once '../clases/Rank_cls.php';
         #key {
             
             position: relative;
-            //top:450px;
-            z-index: 1;
+            /* //top:450px; */
+            z-index:1;
             
         }
         #suggestions {
             box-shadow: 2px 2px 8px 0 rgba(0,0,0,.2);
             height: auto;
             position: relative;
-            //top:5px;
+            /* top:5px; */
             z-index:2;
             width: 206px;
             left:50px;
+            
         }
  
         #suggestions .suggest-element {
@@ -125,10 +130,18 @@ require_once '../clases/Rank_cls.php';
         }
         
         #key{
-          color:#080808;
+          color: #080808;
           font-size:small ;
-          border:2px solid #E7814A;
+          border:1px solid ;
         }
+        .txtsearch{
+          color:darkslategrey ;
+          font-size:20px ;
+          font-family:'Times New Roman', serif 'Courier New';
+          padding: 5px 5px;
+          
+        }
+        
     </style>
       
 
@@ -161,10 +174,13 @@ require_once '../clases/Rank_cls.php';
             ?>
             <div class="col-xs-12 ">
                 <h3 class="text text-center" >Ranking Individual</h3>
+                <hr>
             </div>      
-        
-            <div class="col-xs-12 ">
-                <input type="text" id="key" name="key"   placeholder="Apellido " class="form-control"/>
+            <div class="col-xs-12  col-sm-6 col-sm-offset-3">
+                <p class="txtsearch text text-center bg-success" >Introduzca el Apellido del Jugador que desea Consultar</p>
+            </div>      
+            <div class="col-xs-12  col-sm-6 col-sm-offset-3">
+                <input type="text" id="key" name="key"   placeholder="Martinez" class="form-control  glyphicon glyphicon-search"/>
               
             </div>
             
@@ -181,15 +197,16 @@ require_once '../clases/Rank_cls.php';
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <div class="col-xs-12 ">
-                    <div class="col-xs-3">
-                        <img class="img-responsive" src="../images/logo/fvtlogo.png" ></img>
-                    </div>
                     
-                    <div class="col-xs-offset-4 col-xs-4">
-                        <img  id="avatar"  src="../uploadFotos/perfil/female.jpg" ></img>
+                    <div class="col-xs-6">
+                        <img id="avatar"  src="../uploadFotos/perfil/female.jpg" ></img>
+                    </div>
+                    <div class="col-xs-offset-2 col-xs-4">
+                        <img class="img-responsive"   src="../images/logo/fvtlogo.png" ></img>
                     </div>
                 
                 </div>
+                
                     
                 
                 <div class="col-xs-10">
@@ -202,7 +219,7 @@ require_once '../clases/Rank_cls.php';
     
               </div>
               
-              <div id="detail">
+              <div  id="detail">
                   
               </div>
               

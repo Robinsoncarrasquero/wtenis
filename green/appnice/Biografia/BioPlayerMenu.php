@@ -98,7 +98,7 @@ foreach ($rsHistorico as $dataRow){
             </div>
              <div class="form-group col-xs-12 col-md-6 ">
                     <label for="nacion">Nacionalidad:</label>
-                    <input disabled type="text" class="form-control" id="nacion"    value="Venezuela">
+                    <input disabled type="text" class="form-control" id="nacion"    value="Portugal">
             </div>
             <div class="form-group col-xs-12 col-md-6 ">
                     <label for="fechanac">Fecha Nacimiento:</label>

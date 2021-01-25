@@ -55,6 +55,9 @@ if (!isset($_SESSION['asociacion'])){
             position: relative;
            
         }
+        table{
+            font-size: 10px;
+        }
         #header{
             margin:0;
             
@@ -178,13 +181,13 @@ if (!isset($_SESSION['asociacion'])){
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <div class="col-xs-12 ">
-                    <div class="col-xs-3">
+                    
+                    <div class="col-xs-6">
+                        <img id="avatar"  src="../uploadFotos/perfil/female.jpg" ></img>
+                    </div>
+                    <div class="col-xs-offset-2 col-xs-4">
                         <img class="img-responsive"   src="../images/logo/fvtlogo.png" ></img>
                     </div>
-                    
-                    <div class="col-xs-offset-4 col-xs-4">
-                        <img id="avatar"  src="../uploadFotos/perfil/female.jpg" ></img>
-                 </div>
                 
                 </div>
                     

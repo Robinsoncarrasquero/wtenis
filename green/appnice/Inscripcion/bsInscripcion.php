@@ -11,6 +11,7 @@ require_once '../clases/Afiliaciones_cls.php';
 require_once '../clases/Atleta_cls.php';
 require_once '../clases/Empresa_cls.php';
 require_once '../clases/Bootstrap2_cls.php';
+require_once '../clases/Funciones_cls.sphp';
 
 
 if (!isset($_SESSION['logueado']) || !isset($_SESSION['niveluser'])) {
@@ -37,18 +38,10 @@ if ($_SESSION['niveluser'] == 1) {
 $objAtleta = new Atleta();
 $objAtleta->Find($atleta_id);
 
-//Obtenemos los datos de la empresa o asociacion del atleta
-$objEmpresa = new Empresa();
-$objEmpresa->Fetch($objAtleta->getEstado());
-
-//Obtenemos la afiliacion vigente
-$objAfiliacion = new Afiliacion();
-$objAfiliacion->Fetch($objEmpresa->get_Empresa_id());
-$afiliacion_id = $objAfiliacion->get_ID();
 
 //Obtenemos la afiliacion del atleta del ano para que pueda afiliar y aceptar la afiliacion
 $objAfiliado = new Afiliaciones();
-$objAfiliado->Fetch($objAfiliacion->get_ID(), $objAtleta->getID());
+$objAfiliado->Find_Afiliacion_Atleta($objAtleta->getID(),date("Y"));
 
 $deshabilitado = $objAfiliado->getPagado() > 0 ? FALSE : TRUE;
 
@@ -75,7 +68,7 @@ header('Content-Type: text/html; charset=utf-8');
         
         thead {
 
-            font-size: 14px;
+            font-size: 10px;
 
         }
 
@@ -112,32 +105,33 @@ header('Content-Type: text/html; charset=utf-8');
     
 
         .glyphicon  {
-            font-size: 16px;
-            margin-bottom: 2px;
+            /* font-size: 12px;
+            margin-bottom: 2px; */
             color: #f4511e;
         }
-        td  {
+        /* td  {
             font-size: 12px;
-            
+        
+        }
+         */
 
-        }
-        .fechas  {
+        /* .fechas  {
             font-size: 12px;
-            position: relative;
-            
-        }
+            position: relative; 
+        } 
+        */
  
-.container-fluid {
+/* .container-fluid {
   position: relative;
   padding-left: 2px;
   margin-bottom: 1px;
   cursor: pointer;
-  font-size: 18px;
-  /* -webkit-user-select: none;
+  font-size: 12px;
+  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; */
-}
+  user-select: none;
+} */
 
 
  /* Create a custom checkbox */
@@ -169,13 +163,13 @@ header('Content-Type: text/html; charset=utf-8');
     echo '<div class="container-fluid">';
 
     //Menu de usuario
-    include_once '../Template/Layout_NavBar_User.php';
+    require '../Template/Layout_NavBar_User.php';
 
     //Presentar un Usuario
     echo '<br>';
     echo '<div class="col-xs-12">';
     echo '<hr>';
-    echo '<h2>Inscripciones</h2>';
+    echo '<h4>Inscripciones</h4>';
     echo '<h6 class="titulo-name" >Bienvenido :' . $_SESSION['nombre'] . '</h6>';
     echo '</div>'; //Container    
 
@@ -188,11 +182,10 @@ header('Content-Type: text/html; charset=utf-8');
         <table class="table">
                  <thead>
                 <tr class="table-head" >
-                <th>St</th>
+                <th>Status</th>
                 <th>Ent</th>
-                
                 <th>Grado</th>
-                <th> Categoria</th>
+                <th>Cat</th>
                 <th>Mod.</th>
                 <th>Accion</th>
                 <th>Fecha</th>
@@ -203,20 +196,21 @@ header('Content-Type: text/html; charset=utf-8');
                                            
  ';
     echo $strhead;
-    $consulta_mysql = "SELECT * FROM atleta WHERE cedula='" . $cedulaid . "'";
+    $consulta_mysql = "SELECT * FROM atleta WHERE cedula='" . $cedulaid . "' ";
     //$result_atleta = $conn>query($consulta_mysql); mysqli
     //while($fila = $result_atleta->fetch_assoc()) mysqli
-    $result_atleta = mysql_query($consulta_mysql);
+    $result_atleta = mysqli_query($conn,$consulta_mysql);
     $nrtorneos = 0; //Cuenta los torneos disponible para el usuario
-    while ($fila = mysql_fetch_assoc($result_atleta)) {
+    
+    while ($fila = mysqli_fetch_assoc($result_atleta)) {
         $atleta_id = $fila["atleta_id"];
+
         $cedula = $fila["cedula"];
         $nombre = $fila["nombres"];
         $apellido = $fila["apellidos"];
         $fechan = $fila["fecha_nacimiento"];
         $mi_ano_Nacimiento = anodeFecha($fechan); // ANO DE NACIMIENTO
         $atleta_estado = $fila["estado"]; // Asociacion o Entidad Federal
-
         if (($_SESSION['niveluser'] == 1)) {
             //$consulta_mysql2 = "SELECT * FROM torneo WHERE  estatus='A' and  ADDDATE(fechacierre, INTERVAL 5 DAY)>= Now()  order by fechacierre";
             $consulta_mysql2 = "SELECT * FROM torneo WHERE  estatus='A'
@@ -237,10 +231,10 @@ header('Content-Type: text/html; charset=utf-8');
                 . " order by fechacierre,empresa_id";
         }
 
-        $result_torneo = mysql_query($consulta_mysql2);
+        $result_torneo = mysqli_query($conn,$consulta_mysql2);
         $record_encontrados = 0;
-        while ($filator = mysql_fetch_assoc($result_torneo)) {
-
+        while ($filator = mysqli_fetch_assoc($result_torneo)) {
+            
             $torneo_id = $filator["torneo_id"];
             $codigo_torneo = $filator["codigo"];
             $codigo_unico = $filator["codigo_unico"];
@@ -252,7 +246,7 @@ header('Content-Type: text/html; charset=utf-8');
             $entidad = $filator["entidad"];
             $numero = $filator["numero"];
             $fechadecierre = $filator["fechacierre"]; //fecha que se presenta en la pantalla
-
+            
             $fecha_inicio_torneo = $filator["fecha_inicio_torneo"]; //fecha que se presenta en la pantalla
 
             $fecha_retiros = $filator["fecharetiros"]; //fecha que se presenta en la pantalla
@@ -285,8 +279,8 @@ header('Content-Type: text/html; charset=utf-8');
                 $sqlrk = "SELECT rknacional,fecha_ranking FROM ranking  "
                     . "WHERE atleta_id=$atleta_id AND categoria='" . $rk_categoria . "'"
                     . " ORDER BY fecha_ranking DESC LIMIT 1";
-                $result_rkn = mysql_query($sqlrk);
-                $recordRanking = mysql_fetch_array($result_rkn);
+                $result_rkn = mysqli_query($conn,$sqlrk);
+                $recordRanking = mysqli_fetch_array($result_rkn);
                 if ($recordRanking) {
                     $rkn = $recordRanking["rknacional"];
                 } else {
@@ -304,8 +298,8 @@ header('Content-Type: text/html; charset=utf-8');
             $sqlrk = "SELECT rknacional,fecha_ranking FROM ranking  "
                 . "WHERE atleta_id=$atleta_id AND categoria='" . $la_categoria_natural . "'"
                 . " ORDER BY fecha_ranking DESC LIMIT 1";
-            $result_rkn = mysql_query($sqlrk);
-            $recordRanking = mysql_fetch_array($result_rkn);
+            $result_rkn = mysqli_query($conn,$sqlrk);
+            $recordRanking = mysqli_fetch_array($result_rkn);
             if ($recordRanking) {
                 $rkn = $recordRanking["rknacional"];
             } else {
@@ -370,24 +364,23 @@ header('Content-Type: text/html; charset=utf-8');
                 //ACTIVAR CUADO HAY NUEVAS ASOCIACIONES
                 $sql2 = "SELECT estado FROM empresa WHERE  empresa_id=" . $filator["empresa_id"];
 
-                $result2 = mysql_query($sql2);
-                $row = mysql_fetch_array($result2);
+                $result2 = mysqli_query($conn,$sql2);
+                $row = mysqli_fetch_array($result2);
                 if ($row) {
                     $asociacion = $row["estado"];
                 } else {
                     $asociacion = "N/A";
                 }
             }
-
             if ($fecha_hoy > $fecha_inicio &&  $fecha_hoy < $fecha_cierre && $puedeInscribir && $torneo_permitido) {
                 $nrotorneos++;
 
                 $record_encontrados++;
                 $consulta_mysql = "SELECT modalidad,categoria,torneoinscrito_id,pagado FROM torneoinscritos "
                     . "WHERE torneo_id=$torneo_id AND atleta_id=$atleta_id";
-                $resultado_SQL_inscritos = mysql_query($consulta_mysql);
+                $resultado_SQL_inscritos = mysqli_query($conn,$consulta_mysql);
 
-                $row = mysql_fetch_array($resultado_SQL_inscritos);
+                $row = mysqli_fetch_array($resultado_SQL_inscritos);
 
                 $array_modalidad = NULL;
                 if ($row) {
@@ -425,8 +418,8 @@ header('Content-Type: text/html; charset=utf-8');
                 }
 
 
-                //Devuelve un arreglo con la table row a imprimir
-                $array_tr = Torneo::Estatus_Inscripcion($estatus);
+                //Devuelve un arreglo con los iconos a imprimir relacionados con el estatus
+                $array_tr = Funciones::Estatus_Inscripcion($estatus);
 
                 //Determina el estatus del torneo(Factorizado)
                 $estatus_torneo =  Torneo::Estatus_Torneo($fechadecierre, $fecha_inicio_torneo, $grado_torneo, $condicion);
@@ -439,18 +432,18 @@ header('Content-Type: text/html; charset=utf-8');
                     $chk = "";
                     $chkinscribe = "disabled";
                     $chkdesinscribe = "disabled";
-                    $array_tr = Torneo::Estatus_Inscripcion($estatus, "");
+                    $array_tr = Funciones::Estatus_Inscripcion($estatus, "");
                     echo $array_tr[0]; //echo '<tr class=" " >';
                     echo $array_tr[1]; //echo "<td><p class='glyphicon glyphicon-lock'></p></td>";
 
                 } else {
                     if ($flaginscrito) {
                         if ($torneopagado > 0) {
-                            $array_tr = Torneo::Estatus_Inscripcion($estatus, "");
+                            $array_tr = Funciones::Estatus_Inscripcion($estatus, "");
                             echo $array_tr[0]; //echo '<tr class="warning"  >  ';
                             echo $array_tr[1]; //echo "<td><p class='glyphicon glyphicon-usd'></p></td>";
                         } else {
-                            $array_tr = Torneo::Estatus_Inscripcion($estatus, "");
+                            $array_tr = Funciones::Estatus_Inscripcion($estatus, "");
                             echo $array_tr[0]; //'<tr class="success"  >  ';
                             echo $array_tr[1]; //'<td><p class=" glyphicon glyphicon-ok"  ></p></td>  ';
                         }
@@ -458,7 +451,7 @@ header('Content-Type: text/html; charset=utf-8');
                         //                    echo '<tr class=" " >';
                         //                    echo "<td><p class='glyphicon glyphicon-pencil'></p></td>";
                         //Estatus abierto
-                        $array_tr = Torneo::Estatus_Inscripcion($estatus, "");
+                        $array_tr = Funciones::Estatus_Inscripcion($estatus, "");
                         echo $array_tr[0]; //echo '<tr class=" " >';
                         echo $array_tr[1]; //echo "<td><p class='glyphicon glyphicon-pencil'></p></td>";
 
@@ -543,10 +536,10 @@ header('Content-Type: text/html; charset=utf-8');
 
                 foreach ($rsmodalidades as $value) {
                     $select = " ";
-                    if (in_array($value[modalidad], $array_modalidad, true)) {
+                    if (in_array($value['modalidad'], $array_modalidad, true)) {
                         $select = " selected ";
                     }
-                    echo '<option class="miselect"  ' . $select . 'value="' . $value[modalidad] . '">' . $value[descripcion] . '</option>';
+                    echo '<option class="miselect"  ' . $select . 'value="' . $value['modalidad'] . '">' . $value['descripcion'] . '</option>';
                 }
 
                 echo '</select>';
@@ -564,9 +557,9 @@ header('Content-Type: text/html; charset=utf-8');
                 //Fechas del Torneo
                 echo "<td class='fechas' data-toggle='tooltip' data-placement='auto' title='Fechas'>"
                     . ""
-                    . "<p class='ffechacierre'>Cierre: ". date_format(date_create($fechadecierre),"Y-m-d / H:i")."</p>"
-                    . "<p class='ffecharetiro'>Retiro: ".date_format(date_create($fecha_retiros),"Y-m-d / H:i")."</p>"
-                    . "<p class='ffechainicio'>Inicio: ".date_format(date_create($fecha_inicio_torneo),"Y-m-d / H:i")."</p>"
+                    . "<p class='ffechacierre'>Cierre: ". date_format(date_create($fechadecierre),"d-M  H:i")."</p>"
+                    . "<p class='ffecharetiro'>Retiro: ".date_format(date_create($fecha_retiros),"d-M  H:i")."</p>"
+                    . "<p class='ffechainicio'>Inicio: ".date_format(date_create($fecha_inicio_torneo),"d-M  H:i")."</p>"
                     . ""
                     . "</td>";
 
@@ -585,7 +578,7 @@ header('Content-Type: text/html; charset=utf-8');
 
 
     //mysqli_close($conn);mysqli
-    mysql_close($conn);
+    mysqli_close($conn);
     
     echo "      </table>";
     

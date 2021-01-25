@@ -34,7 +34,7 @@ if (!isset($_SESSION['asociacion'])){
      <head> 
         <meta charset="utf-8" >
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Federacion Venezolana de Tenis</title>
+        <title>Asociaciones</title>
         <meta name="description" content="Sitio web para Inscripciones onLine para Torneos de Tenis de Campo y Tenis de Playa">
 <!--        <link rel="stylesheet" href="Normalize.css">
         <link rel="stylesheet" href="css/tenis_estilos.css">-->

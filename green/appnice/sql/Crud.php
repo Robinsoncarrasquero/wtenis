@@ -155,7 +155,7 @@ class Crud {
         $this->fields_count=  count($this->fields); // numero de campos en el arreglo devuelto;
     }
     
-    public function valida_fields()
+    public function valida_fields($objeto)
     {
         $objeto->table_fields();
         echo '<pre>';
@@ -269,7 +269,7 @@ class Crud {
                 $subject = $asunto ;
                 $txt = "Estimado(a) $nombre_atleta,$apellido_atleta, le notificamos que $notificacion "
                         . $notificacion2;
-                $headers = "From: info@fvtenis.com.ve" 
+                $headers = "From: info@example" 
                         . "\r\n" ."BCC: atenismiranda@gmail.com";
 
                 

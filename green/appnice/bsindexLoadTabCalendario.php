@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'clases/Noticias_cls.php';
 require_once "clases/Empresa_cls.php";
 require_once "clases/Torneos_cls.php";
@@ -10,6 +9,9 @@ require_once 'sql/ConexionPDO.php';
 require_once 'funciones/Imagenes_cls.php';
 require_once 'clases/Encriptar_cls.php';
 
+if ($_SERVER['REQUEST_METHOD']=='GET'){
+    die();
+}
 $empresa_id =$_POST['emp'];
 $mes=$_POST['mes'];
 $status_filtro=$_POST['status'];

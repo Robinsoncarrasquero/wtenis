@@ -1,11 +1,11 @@
 <?php
-
-
-session_start();
 require_once 'clases/Noticias_cls.php';
 require_once 'sql/ConexionPDO.php';
 //require 'conexion.php';
 
+if ($_SERVER['REQUEST_METHOD']=='GET'){
+    die();
+}
 if ($_SESSION['niveluser']!=9){
      header('Location: sesion_inicio.php');
  }

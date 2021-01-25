@@ -16,10 +16,13 @@ Maneja los estilo de la fotos del portal
     background-size:auto;
     position: relative;
 }
+.ccopa{
+  
+}
 .circulo .copa{
-    -moz-border-radius:50%;
-    -webkit-border-radius:50% ;
-    border-radius: 50%;
+    -moz-border-radius:1%;
+    -webkit-border-radius:1% ;
+    border-radius: 1%;
     background-color: #809090;
     font-size:20px;
     color:#FFFFFF;

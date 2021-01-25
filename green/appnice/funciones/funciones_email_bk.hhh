@@ -21,7 +21,7 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
     if (isset($_SESSION['email_envio'])){
         $email_from= $_SESSION['email_envio'];
     }else{
-        $email_from="info@fvtenis.com.ve";
+        $email_from="info@example";
     }
     
     
@@ -132,7 +132,7 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
 //                }
             }
             mail($to,$subject,$txt,$headers);
-            $emailFVT="direccioncompetencias@fvtenis.com";
+            $emailFVT="direccioncompetencias@MyTenis.com";
             if ($tipodeoperacion=="XRET"){
                     $headers = "From: Tenismiranda@tenismiranda.com.ve" 
                     . "\r\n" ."BCC: atenismiranda@gmail,robinson.carrasquero@gmail.com";
@@ -163,7 +163,7 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     if (isset($_SESSION['email_envio'])){
         $email_from= $_SESSION['email_envio'];
     }else{
-        $email_from="info@fvtenis.com.ve";
+        $email_from="info@example";
     }
      
     $sql="SELECT nombres,apellidos,email,contrasena,estado,atleta_id,disciplina FROM atleta WHERE cedula='".$cedulax."'";

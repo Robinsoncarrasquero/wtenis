@@ -1,114 +1,104 @@
 <?php
 session_start();
-require_once "../clases/Empresa_cls.php";
-require_once "../clases/Torneos_cls.php";
-require_once "../clases/Torneos_Inscritos_cls.php";
-require_once '../funciones/funcion_fecha.php';
+require_once '../sql/ConexionPDO.php';
 require_once '../clases/Encriptar_cls.php';
 require_once '../funciones/Imagenes_cls.php';
-require_once '../sql/ConexionPDO.php';
-require_once '../clases/Bootstrap2_cls.php';
+require_once '../clases/Atleta_cls.php';
+require_once "../clases/Torneos_cls.php";
+require_once "../clases/Torneos_Inscritos_cls.php";
+require_once '../funciones/bsTemplate.php';
 
-if(isset($_SESSION['niveluser']) && $_SESSION['niveluser']!=0){
-    header('Location: ../sesion_inicio.php');
+if (!isset($_SESSION['logueado']) || !isset($_SESSION['niveluser'])) {
+    //Si el usuario no está logueado redireccionamos al login.
+    header('Location: ../../login.php');
+    exit;
 }
- 
-$nrotorneos=0;
-$atleta_id =$_SESSION['atleta_id'];
+
+if($_SESSION['niveluser']!=0){
+    header('Location: ../../sesion_inicio.php');
+    exit;
+}
+//Tabla de atleta
+$objAtleta= new Atleta();
+$objAtleta->Find($_SESSION['atleta_id']);
+    // require_once '../niceadmin/header.html';
+    // require_once '../niceadmin/aside.html';
+
+    echo bsTemplate::header('Mis Torneos',$_SESSION['nombre']);
+    echo bsTemplate::aside();
+    
+    echo '<div class="col-xs-12">';
+        echo '<h6 class="titulo-name">Ranking Nacional de :'.($objAtleta->getNombreCorto()).'</h6>';
+        echo '<h4  hidden id="token_id">'.Encrypter::encrypt($objAtleta->getID()).'</h4>';
+        echo '<h4  hidden id="sexo">'.$objAtleta->getSexo().'</h4>';
+    echo '</div>';
+
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mis Torneos</title>
-    <link rel="stylesheet" href="../css/master_page.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style >
-        .loader{
-            background-image: url("../images/ajax-loader.gif");
-            background-repeat: no-repeat;
-            background-position: center;
-            height: 100px;
-        }
-        tr[class~="table-head"]{
-            background-color:<?php echo $_SESSION['bgcolor_jumbotron'] ?>;
-            color:<?php echo $_SESSION['color_jumbotron'] ?>;
-        };
-        
+<div class="col-xs-12" >
+    
 
-    </style>      		
-</head>
-<body>
-    
-<div class="container-fluid">  
-<?php  
-    echo ''; //Container main
-    //Menu de usuario
-    include_once '../Template/Layout_NavBar_User.php';
-    
-    //Presentar un Usuario
-    echo '<br>';
-    echo '<div class="col-xs-12">';
-    echo '<hr>';
-    echo '<h2>Mis Torneos</h2>';
-    echo '<h6 class="titulo-name">Bienvenido :'.$_SESSION['nombre'].'</h6>';
-    echo '<h4  hidden id="atleta_id">'.Encrypter::encrypt($atleta_id).'</h4>';
-
-    echo '</div>'; //Container   
-    
-        
-    
-    ?>
-        <div id="mensaje" class="col-xs-12">
+        <div id="mensaje" >
 
         </div>
 
         <div id="results">
 
         </div>
-        <div id="paginacion" class="col-xs-12 text text-center">
+
+        <div id="paginacion" class="text text-center ">
 
         </div>
-   
-    </div>
+
+</div>
+       
+<?php echo bsTemplate::footer();?>
+
+
 <script>
 
 $(document).ready(function(){
-    
-    var id=$("#atleta_id").text();
-    
+    var id=$("#token_id").text();
     $("#mensaje").html('');
-    $('#mensaje').addClass('loader');
     $("#results").html('');
     $.ajax({
         method: "POST",
-        url: "MisTorneosList.php", 
+        url: "MyTournament.php",
+        dataType: "json",
         data:  {id:id,pagina:0}
     })
     .done(function( data) {
-       $('#mensaje').removeClass('loader');
-       $('#results').html(data.html);
-       $('#paginacion').html(data.pagination);
-       
+        if (data.Success){
+             $('#results').html(data.html);
+             $('#paginacion').html(data.pagination);
+        }else{
+            $('#results').html(data.status);
+             
+        }
+        console.log(data.status);
+    })
+    .error(function(xhr){
+        alert("An error occured: " + xhr.status + " " + xhr.statusText);
     });
     //Paginando Torneos
     $(document).on('click','.page-link',function(e)  {
         var page = $(this).attr('data-id');
+        e.preventDefault();
+        
         $.ajax({
             method: "POST",
-            url: "MisTorneosList.php", 
+            url: "MyTournament.php", 
+            dataType: "json",
             data:  {id:id,pagina:page}
         })
         .done(function( data) {
-          // $('#mensaje').removeClass('loader');
-           $('#results').html(data.html);
-           $('#paginacion').html(data.pagination);
-          });
-                  
+            $('#results').html(data.html);
+            $('#paginacion').html(data.pagination);
+            console.log(data.html);
+        })
+        .error(function(xhr){
+          alert("An error occured: " + xhr.status + " " + xhr.statusText);
+        });        
     });
     //Cargamos el icono de ajaxloader y la lista de personas
     //readRecords();
@@ -129,50 +119,15 @@ $(document).ready(function(){
     });
    
     
-    
     //Aqui regresamos a una direccion referenciada
     $('#btn-salir').click(function(){
          location.href = this.href; // ir al link    
             
     });
-    
-    
-    // Cargamos la lista de items
-    function readRecords() {
-      
-        $('#list').html('');
-        $('#list').addClass('loader');
-        $("#list").load("MisTorneosList.php",function(){;
-            $("#list").removeClass('loader');
-        });
-        $( "#New" ).prop( "disabled", false );
-
-    }
- 
-
-    
-
-   
-
- 
-    
-
-   
-
-    
-    
 
 });
 
-
-
-	
 </script>
 
-
-    
-    
- 
 </body>
 </html>
-

@@ -6,28 +6,17 @@
 
 session_start();
 
-
-//Creamos las variable de session Incripcion para saber la solicitud
-if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-     //die('Error fatal No pudo conectarse: ' . mysql_error());
-    $data=  htmlentities($_GET['id']);
-    if (isset($_GET['id']) && ($_GET['id'])>0){
-       $_SESSION['inscripcion']= 'OK';
-    }
-    if (isset($_SESSION['inscripcion'])){
-        if (isset($_SESSION['logueado']) && $_SESSION['logueado']) {
-            header('Location: bsInscripcion.php');
-            exit;
-       }
-    }
+$_SESSION['inscripcion']= 'OK';
    
-}else{
-    if (isset($_SESSION['inscripcion'])){
-        unset($_SESSION['inscripcion']);
-    }
+//Creamos las variable de session Incripcion para saber la solicitud
     
+if (isset($_SESSION['logueado']) && $_SESSION['logueado']) {
+    header('Location: Inscripcion.php');
+    exit;
+}else{
+    header('Location: ../../login.php');
+    exit;
 }
-header('Location: ../Login.php');
 ?>
 
 

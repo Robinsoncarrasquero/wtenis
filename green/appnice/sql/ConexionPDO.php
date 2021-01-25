@@ -17,23 +17,31 @@ public function conectar()
 {
        
     date_default_timezone_set('America/Caracas');
-    error_reporting(0);
+    error_reporting(1);
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "atletasdb";
     if (MODO_DE_TEST==0){
         $servername = "localhost";
-        $username = "gsscomve_robinad";
-        $password = 'RO;bi%ns$on[2889';
-        $dbname = "gsscomve_atletasdb";
+        $username = "username";
+        $password = 'password';
+        $dbname = "dbname";
         error_reporting(0);
     }
-            
     
-    return new PDO("mysql:host=$servername;dbname=$dbname",$username,$password , 
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\'',
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+         
+    $port="3306";
+    try {
+        $cnn =new PDO("mysql:host=$servername;dbname=$dbname;port=3306", $username, $password,
+        array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\'',
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    } catch (PDOException $e) {
+        print "¡Error!: " . $e->getMessage() . "<br/>";
+        die();
+    }   
+             
+    return $cnn;
     
 }
     

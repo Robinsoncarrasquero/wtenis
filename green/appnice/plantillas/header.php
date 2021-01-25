@@ -1,4 +1,4 @@
-<meta name="keywords" content="Tenis,TENIS,Federacion,Venezolana, deporte, Deporte,CAMPO, DRAW, DRAWS, PENALIZACIONES, COSAT, FVTENIS,TENNIS, VENEZUELA,CIRCUITO, JUNIOR">
+<meta name="keywords" content="Tenis,TENIS,Asociaciones,Venezolana, deporte, Deporte,CAMPO, DRAW, DRAWS, PENALIZACIONES, COSAT, MyTenis,TENNIS, PORTUGAL,CIRCUITO, JUNIOR">
 <meta name="author" content="Robinson Carrasquero">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <a href=" "> <img id="Logo" src="images/logo.png"  ></a>

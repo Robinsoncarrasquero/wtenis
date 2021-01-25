@@ -51,7 +51,7 @@ if ($op=='formalizar' || $op=='federar'){
                 $jsondata = array("Success" => True, "Mensaje" => $objAfiliaciones->getMensaje());
             }
         }
-        //Formalizar Federacion
+        //Formalizar Asociaciones
         if ($op == "federar") {
             if ($chkMarcarPago == 1) {
                 email_notificacion("ServicioWebFormalizado", $objAtleta->getCedula());

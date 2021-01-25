@@ -2,13 +2,13 @@
 
 
 ol[class~="breadcrumb"] {
-   background-color:#B40431;
-   //font-size: 12px;
+   /* background-color:#B40431; */
+   /* font-size: 12px; */
    color: white;
 }
 .breadcrumb > li > a {
-   // font-size: 12px;
-    color:#FFFFFF;
+     /* font-size: 12px; */
+    color:#FFFFFF; 
         
 }
 .breadcrumb > li > span{
