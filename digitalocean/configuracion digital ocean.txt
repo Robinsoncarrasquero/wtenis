@@ -1,0 +1,72 @@
+droplet lamp-s-1vcpu-1gb-nyc1-01
+
+sudo chown -R $USER:$USER /var/www/wtenis
+
+sudo nano /etc/apache2/sites-available/wtenis.conf
+sudo cat /etc/apache2/sites-available/vision360.conf /etc/apache2/sites-available/wtenis.conf
+
+<VirtualHost *:80>
+    ServerName wtenis
+    ServerAlias http://134.122.120.12/wtenis
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/wtenis
+    <Directory /var/www/wtenis/>
+         Options Indexes FollowSymLinks
+         AllowOverride All
+         Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <IfModule mod_dir.c>
+	DirectoryIndex index.php index.pl index.cgi index.html index.xhtml >
+    </IfModule>
+
+</VirtualHost>
+
+<VirtualHost *:80>
+    #ServerName wtenis
+    #ServerAlias http://134.122.120.12/wtenis
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/wtenis
+    #<Directory /var/www/wtenis/>
+    #     Options Indexes FollowSymLinks
+    #     AllowOverride All
+    #     Require all granted
+    #</Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <IfModule mod_dir.c>
+	DirectoryIndex index.php index.pl index.cgi index.html index.xhtml >
+    </IfModule>
+
+</VirtualHost>
+
+
+sudo mkdir -p /var/www/wtenis/public_html
+sudo a2ensite wtenis
+
+sudo systemctl reload apache2
+
+
+creamos un sitio de prueba
+nano /var/www/wtenis/index.html
+
+<html>
+  <head>
+    <title>Prueba de wtenis website</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+
+    <p>This is the landing page of <strong>your_domain</strong>.</p>
+  </body>
+</html>
+
+http://134.122.120.12/wtenis
+
+
+sudo nano /etc/apache2/sites-available/000-default

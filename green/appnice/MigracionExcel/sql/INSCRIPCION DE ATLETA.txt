@@ -1,0 +1,4 @@
+29625408
+
+INSERT INTO `torneoinscritos`(atleta_id,`torneo_id`, `categoria`) 
+VALUES (7, 4,  `14`)

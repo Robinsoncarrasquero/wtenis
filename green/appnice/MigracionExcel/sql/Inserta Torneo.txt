@@ -1,0 +1,2 @@
+INSERT INTO `tenismir_atletasdb`.`torneo` (`torneo_id`, `codigo`, `nombre`, `estatus`, `fecha`, `categoria`, `fechacierre`, `fechainicio`, `fecharetiros`, `fecha_inicio_torneo`, `fecha_fin_torneo`, `asociacion`) 
+VALUES (NULL, '3G11418', 'III TORNEO G1 14-14 LARA', 'A', '2015-09-30 13:00:00', '1416', '2015-09-30 13:00:00', '2015-09-22 00:00:00', '2015-10-05 13:00:00', '2015-10-09 07:00:00', '2015-10-11 18:00:00', 'MIR');

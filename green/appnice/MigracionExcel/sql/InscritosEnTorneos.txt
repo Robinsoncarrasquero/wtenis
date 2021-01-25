@@ -1,0 +1,11 @@
+SELECT atleta.estado,atleta.nombres, atleta.apellidos, atleta.cedula,atleta.sexo,DATE_FORMAT(atleta.fecha_nacimiento, '%d-%m-%Y') as fechanac,
+            torneo.nombre as nombretorneo,torneoinscritos.categoria ,torneoinscritos.fecha_registro,
+            ranking.rknacional,ranking.rkregional,ranking.rkestadal FROM atleta 
+            INNER JOIN torneoinscritos on atleta.atleta_id=torneoinscritos.atleta_id 
+            INNER JOIN ranking on torneoinscritos.atleta_id =ranking.atleta_id AND torneoinscritos.categoria=ranking.categoria 
+            INNER JOIN torneo on torneoinscritos.torneo_id=torneo.torneo_id where torneo.codigo='4G41418' ORDER BY torneoinscritos.categoria
+
+
+INSERT INTO `torneoinscritos` (`atleta_id`,  `torneo_id`, `estatus`, `categoria`) VALUES (487,2,'empujado','14')
+
+INSERT INTO ranking(atleta_id,categoria,rknacional,rkregional,rkestadal) VALUES(487,'18',999,999,999)

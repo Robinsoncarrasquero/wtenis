@@ -1,0 +1,9 @@
+[18-Jan-2019 21:34:49 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18
+[23-Jan-2019 09:02:15 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18
+[09-Feb-2019 23:57:51 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18
+[16-Feb-2019 08:52:48 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18
+[22-Feb-2019 16:03:23 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18
+[03-Mar-2019 17:01:19 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18
+[03-Mar-2019 19:32:32 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18
+[20-Mar-2019 09:42:31 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18
+[23-Mar-2019 06:10:08 UTC] PHP Fatal error:  Class 'Dompdf\Exception' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Exception/ImageException.php on line 18

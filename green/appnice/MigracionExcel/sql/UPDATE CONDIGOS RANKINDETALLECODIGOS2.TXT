@@ -1,0 +1,18 @@
+UPDATE `rankingdetalle` SET codigo='TPI' WHERE descripcion="TOTAL PUNTOS INTERNACIONALES' ;
+UPDATE `rankingdetalle` SET codigo='TTS' WHERE descripcion="TOTAL SINGLES';
+UPDATE `rankingdetalle` SET codigo='TTD' WHERE descripcion="TOTAL DOBLES
+UPDATE `rankingdetalle` SET codigo='IR' WHERE `descripcion`='REORDENATORIO' ;
+UPDATE `rankingdetalle` SET codigo='NE' WHERE `descripcion`='NACIONAL POR EQUIPO' ;
+UPDATE `rankingdetalle` SET codigo='COSAT' WHERE descripcion="COSAT';
+UPDATE `rankingdetalle` SET codigo='COTTEC' WHERE descripcion="COTTEC';
+UPDATE `rankingdetalle` SET codigo='IM' WHERE descripcion="INTOTAL SINGLES';
+
+
+
+
+
+
+ 
+
+
+

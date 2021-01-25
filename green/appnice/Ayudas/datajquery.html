@@ -1,0 +1,34 @@
+<html> 
+<head> 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js">
+</script> 
+<script type="text/javascript"> 
+	var page=1; 
+	function loadMore() 
+	{ $.ajax({ 
+	url: 'datajquery.php', 
+	data: {"p":page}, 
+	dataType: 'json', 
+	success: function(arr)
+	{ $(arr).each(function(i) 
+	{ $('#lagente').append( "<td>" + arr[i] + "</td>" ); });
+       
+	 page=page+1; } }); } 
+	 $(document).ready(loadMore); 
+ </script> 
+ </head> 
+ <body> 
+     <table >
+        
+         <tr>
+         <p id="lagente"></p>
+     </tr>
+        
+      
+    
+     </table>
+     <button onclick="loadMore()">Cargar Mas</button> 
+ </body> 
+ </html> 
+
+-

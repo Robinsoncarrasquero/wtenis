@@ -1,0 +1,33 @@
+[
+{
+"display": "Torneos",
+"url": "torneoRead.php",
+"id": "menuuop1"
+},
+{
+"display": "Atletas",
+"url": "atletaRead.php",
+"id": "menuuop1"
+},
+{
+"display": "Afiliaciones",
+"url": "afiliacionespago.php",
+"id": "menuuop1"
+},
+{
+"display": "Noticias",
+"url": "NoticiasModal.php",
+"id": "menuuop1"
+},
+{
+"display": "Configuracion",
+"url": "ConfigModal.php",
+"id": "menuuop1"
+},
+
+{
+"display": "Cerrar Sesion",
+"url": "sesion_cerrar.php",
+"id": "menuuop1"
+}
+]

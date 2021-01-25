@@ -1,0 +1,58 @@
+INSERT INTO `rankingdetallecodigo`(`codigo`, `descripcion`, `id`, `base`) 
+VALUES 
+('1G1S', '1 GRADO 1 SIGLE', 'NULL', '100%'),
+('1G1D', '1 GRADO 1 DOBLE', 'NULL', '25%'),
+('2G1S', '2 GRADO 1 SIGLE', 'NULL', '100%'),
+('2G1D', '2 GRADO 1 DOBLE', 'NULL', '25%'),
+('3G1S', '3 GRADO 1 SIGLE', 'NULL', '100%'),
+('3G1D', '3 GRADO 1 DOBLE', 'NULL', '25%'),
+('1G2S', '1 GRADO 2 SIGLE', 'NULL', '100%'),
+('1G2D', '1 GRADO 2 DOBLE', 'NULL', '25%'),
+('2G2S', '2 GRADO 2 SIGLE', 'NULL', '100%'),
+('2G2D', '2 GRADO 2 DOBLE', 'NULL', '25%'),
+('3G2S', '3 GRADO 2 SIGLE', 'NULL', '100%'),
+('3G2D', '3 GRADO 2 DOBLE', 'NULL', '25%'),
+('4G2S', '4 GRADO 2 SIGLE', 'NULL', '100%'),
+('4G2D', '4 GRADO 2 DOBLE', 'NULL', '25%'),
+('5G2S', '5 GRADO 2 SIGLE', 'NULL', '100%'),
+('5G2D', '5 GRADO 2 DOBLE', 'NULL', '25%'),
+('1G3S', '1 GRADO 3 SIGLE', 'NULL', '100%'),
+('1G3D', '1 GRADO 3 DOBLE', 'NULL', '25%'),
+('2G3S', '2 GRADO 3 SIGLE', 'NULL', '100%'),
+('2G3D', '2 GRADO 3 DOBLE', 'NULL', '25%'),
+('3G3S', '3 GRADO 3 SIGLE', 'NULL', '100%'),
+('3G3D', '3 GRADO 3 DOBLE', 'NULL', '25%'),
+('4G3S', '4 GRADO 3 SIGLE', 'NULL', '100%'),
+('4G3D', '4 GRADO 3 DOBLE', 'NULL', '25%'),
+('1G4S', '1 GRADO 4 SIGLE', 'NULL', '100%'),
+('1G4D', '1 GRADO 4 DOBLE', 'NULL', '25%'),
+('2G4S', '2 GRADO 4 SIGLE', 'NULL', '100%'),
+('2G4D', '2 GRADO 4 DOBLE', 'NULL', '25%'),
+('3G4S', '3 GRADO 4 SIGLE', 'NULL', '100%'),
+('3G4D', '3 GRADO 4 DOBLE', 'NULL', '25%'),
+('4G4S', '4 GRADO 4 SIGLE', 'NULL', '100%'),
+('4G4D', '4 GRADO 4 DOBLE', 'NULL', '25%'),
+('5G4S', '5 GRADO 4 SIGLE', 'NULL', '100%'),
+('5G4D', '5 GRADO 4 DOBLE', 'NULL', '25%'),
+('6G4S', '6 GRADO 4 SIGLE', 'NULL', '100%'),
+('6G4D', '6 GRADO 4 DOBLE', 'NULL', '25%'),
+('1G4BS', '1 GRADO 4B SIGLE', 'NULL', '100%'),
+('1G4BD', '1 GRADO 4B DOBLE', 'NULL', '25%'),
+('2G4BS', '2 GRADO 4B SIGLE', 'NULL', '100%'),
+('2G4BD', '2 GRADO 4B DOBLE', 'NULL', '25%'),
+('3G4BS', '3 GRADO 4B SIGLE', 'NULL', '100%'),
+('3G4BD', '3 GRADO 4B DOBLE', 'NULL', '25%'),
+('4G4BS', '4 GRADO 4B SIGLE', 'NULL', '100%'),
+('4G4BD', '4 GRADO 4B DOBLE', 'NULL', '25%')
+('NE', 'NACIONAL POR EQUIPO', 'NULL', '100%'),
+('IR', 'REORDENATORIO SINGLE', 'NULL', '100%'),
+('IRD', 'REORDENATORIO DOBLE', 'NULL', '100%'),
+('TMA', 'TOTAL MAXIMO ACUMULADO', 'NULL', '25%')
+
+
+
+
+ 
+
+
+

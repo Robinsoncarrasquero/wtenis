@@ -1,0 +1,3 @@
+SELECT torneoinscritos.categoria,atleta.cedula,atleta.nombres,atleta.apellidos 
+FROM `torneoinscritos` inner join atleta on torneoinscritos.atleta_id=atleta.atleta_id 
+WHERE torneo_id=3  order  by torneoinscritos.categoria

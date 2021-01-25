@@ -1,0 +1,10 @@
+SELECT torneoinscritos.categoria,atleta.sexo,atleta.cedula,atleta.nombres,atleta.apellidos 
+FROM `torneoinscritos` inner join atleta on torneoinscritos.atleta_id=atleta.atleta_id 
+WHERE torneo_id=4 GROUP BY torneoinscritos.categoria,atleta.sexo 
+ORDER BY torneoinscritos.categoria,atleta.sexo
+
+CONTAR RECORD
+SELECT COUNT(*),torneoinscritos.categoria,atleta.sexo
+FROM `torneoinscritos` inner join atleta on torneoinscritos.atleta_id=atleta.atleta_id 
+WHERE torneo_id=4 GROUP BY torneoinscritos.categoria,atleta.sexo order
+by torneoinscritos.categoria,atleta.sexo 

@@ -1,0 +1,11 @@
+UPDATE `rankingdetalle` SET `codigo`="IM" WHERE `descripcion`="INTERNACIONAL MIAMI";
+UPDATE `rankingdetalle` SET `codigo`="IM" WHERE `descripcion`="INTERNACIONAL MIAMI DOBLE";
+UPDATE `rankingdetalle` SET `codigo`="ITF" WHERE `descripcion`="ITF";
+
+UPDATE `rankingdetalle` SET `codigo`="COSAT" WHERE `descripcion`="COSAT";
+UPDATE `rankingdetalle` SET `codigo`="COTTEC" WHERE `descripcion`="COTTEC";
+UPDATE `rankingdetalle` SET `codigo`="ITF" WHERE `descripcion`="ITF";
+
+UPDATE `rankingdetalle` SET `codigo`="ATPWTA" WHERE `descripcion`="ATP / WTA";
+
+

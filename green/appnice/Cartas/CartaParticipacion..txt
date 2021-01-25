@@ -1,0 +1,13 @@
+CONSTANCIA DE PARTICIPACION
+
+
+Se hace constar que @@ATLETA @@NOMBRE titular de la Cédula de Identidad N° @@CEDULA perteneciente a la Asociación de Tenis del Estado @@ESTADO, participa en el evento: @@TORNEO que se celebra desde el @@FECHA_DESDE  hasta el @@FECHA_HASTA .
+
+
+
+Agradecemos toda la colaboración y receptividad amparadas en la Ley Orgánica de Deporte, Actividad Física y Educación Física vigente y sus Artículos Nº 1 enconcordancia con el artículo 14, donde se establece el deporte como un derecho fundamental de los ciudadanos y ciudadanas y el derecho de todo atleta ha gozar de permisos para entrenamiento y competencia sin afectar la continuidad de la escolaridad.
+
+
+
+
+Constancia que se expide a la solicitud de la parte interesada a los @@DIAS dias del mes de @@MES  de @@ANO.

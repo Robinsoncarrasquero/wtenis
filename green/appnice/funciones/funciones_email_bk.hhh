@@ -1,0 +1,522 @@
+<?php
+
+/* 
+ * Utilizamos esta funcion para hacer el envion de correo de cualquier moovimiento tales 
+ * como Inscripcion, eliminacion de inscripcion, retiros.
+ */
+function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
+    
+    
+    if ( $_SESSION['niveluser']==8 || MODO_DE_PRUEBA=="1" ){
+     return;
+    }
+    //Cuando hay una impersonalizacion del usuario
+    if ($_SESSION['niveluser']==1){
+        return;
+    }
+    
+    
+    
+    $email_empresa= $_SESSION['email_empresa'];
+    if (isset($_SESSION['email_envio'])){
+        $email_from= $_SESSION['email_envio'];
+    }else{
+        $email_from="info@fvtenis.com.ve";
+    }
+    
+    
+    
+    switch ($tipodeoperacion){
+        case "ELI": //Eliminacion
+            $movimiento="Eliminacion de Inscripcion";
+            break;
+        case "RET": //Retiro
+            $movimiento="Retiro de Inscripcion";
+            break;
+        case "Dat": //Modificacion de datos
+            $movimiento="Modificacion de Datos";
+            break;
+        
+        default:
+             $movimiento="Inscripcion";
+            
+   } 
+   
+   // Aqui hacemos una descripcion de categoria(12,14,16,PN,PV)
+    switch ($categoria){
+        case "PV": // Categoria PV
+            $titcategoria="Pelota Verde";
+            break;
+        case "PN": // Categoria PN
+            $titcategoria="Pelota Naranja";
+            break;
+      
+        default:
+            $titcategoria=$categoria; // Las categoria por defecto
+   } 
+//   $banco ="CUENTA CORRIENTE: BANCO PROVINCIAL 0108-0013-7001-0000-1188" 
+//                    ." ATEM RIF J-00189790-9 infoatem@gmail.com";
+   
+
+
+
+    $sql="SELECT codigo,nombre,empresa_id,tipo FROM torneo WHERE torneo_id=$torneoid";
+    $result=mysql_query($sql);
+    $row = mysql_fetch_array($result);
+    if ($row){
+        $codigo_torneo=$row["codigo"];
+        $nombre_torneo=$row["nombre"];
+        $empresa_id=$row["empresa_id"];
+        $grado=$row["tipo"];
+        $sql="SELECT nombres,apellidos,email,estado FROM atleta WHERE atleta_id=$atleta_id ";
+        $result=mysql_query($sql);
+        $row = mysql_fetch_array($result);
+        $nombre_atleta=$row["nombres"];
+        $apellido_atleta=$row["apellidos"];
+        $email=$row["email"];
+        $estado=$row["estado"];
+        
+        if ($_SESSION['niveluser']==1 && $email_empresa!=''){
+            $email=$email_empresa;
+            
+        }
+        
+        $sqlEmp="SELECT cuenta,banco,rif,nombre,email FROM empresa WHERE empresa_id=" .$empresa_id;
+       
+        $result2=mysql_query($sqlEmp);
+        $rsempresa= mysql_fetch_assoc($result2);
+        if ($rsempresa){
+            $banco =$rsempresa['banco'];
+            $cuenta =$rsempresa['cuenta'];
+            $rif =$rsempresa['rif'];
+            $nombre_empresa =$rsempresa['nombre'];
+            $email_pago=$rsempresa['email'];
+        }else{
+            $banco ="desconocido";
+            $cuenta ="desconocida";
+            $rif ="desconocido";
+            $nombre_pago ="desconocida";
+            $email_pago="desconocido";
+            
+        }
+        //enviamos correor de inscripcion
+        if ($row && $email !=null){ // enviamos correo
+
+            $to = $email; //"robinson.carrasquero@gmail.com";
+            $subject = "$movimiento al torneo:($codigo_torneo)";
+            $txt = "Estimado(a) Atleta($estado) $nombre_atleta, $apellido_atleta, le informamos que su solicitud de $movimiento al Torneo: "
+                    . "$nombre_torneo Categoria($titcategoria) "
+                    . "fue procesada exitosamente.\r\n";
+                    if ($tipodeoperacion=="INS"){
+                        if ($grado=='G4'){
+                            $txt .= "DATOS PARA PAGOS : \r\n";
+                            $txt .= "BANCO :$banco \r\n";
+                            $txt .= "CUENTA :$cuenta \r\n";
+                            $txt .= "RIF: $rif \r\n";
+                            $txt .= "NOMBRE :$nombre_empresa \r\n";
+                            $txt .= "EMAIL :".$email_pago;
+                        }else{
+                            $txt .= "NOTA: \r\n";
+                            $txt .= "Solo debe pagar al momento de la firma del Torneo Grado : $grado";
+                         }
+                    }
+                    
+            if ($atleta_id==487){ // Prueba de usuario
+            $headers = "From: $email_from" 
+                    . "\r\n" ."BCC:atenismiranda@gmail.com";
+            }else{
+                $headers = "From: $email_from" 
+                    . "\r\n" ."BCC:atenismiranda@gmail.com,$email_empresa";
+//                if ($tipodeoperacion=="RET"){
+//                     $headers .= ";infoatem@gmail.com";
+//                }
+            }
+            mail($to,$subject,$txt,$headers);
+            $emailFVT="direccioncompetencias@fvtenis.com";
+            if ($tipodeoperacion=="XRET"){
+                    $headers = "From: Tenismiranda@tenismiranda.com.ve" 
+                    . "\r\n" ."BCC: atenismiranda@gmail,robinson.carrasquero@gmail.com";
+                    $txt = "Estimados Señores de la Direccion de Competencias, sirva la presente para solicitar el Retiro de $nombre_atleta,$apellido_atleta "
+                            . "en el Torneo: $nombre_torneo Categoria($titcategoria)\r\r\r\r\r\n Saludos cordiales";
+                     $to="atenismiranda@gmail.com,$emailFVT";
+                     $to="atenismiranda@gmail.com";
+                     mail($to,$subject,$txt,$headers);
+            
+            }
+                       
+            
+        }
+    }
+    return;
+}
+
+//Utilizamos esta funcion para enviar un correo cuando se hacen modifican datos
+//de correos, cambio de clave, ingreso al sitio, etc. En este caso la plantilla
+//de mensaje es distinta.
+function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
+   
+    if (MODO_DE_PRUEBA=="1"){
+     return;
+    }
+   
+    $email_empresa= $_SESSION['email_empresa'];
+    if (isset($_SESSION['email_envio'])){
+        $email_from= $_SESSION['email_envio'];
+    }else{
+        $email_from="info@fvtenis.com.ve";
+    }
+     
+    $sql="SELECT nombres,apellidos,email,contrasena,estado,atleta_id,disciplina FROM atleta WHERE cedula='".$cedulax."'";
+    $result=mysql_query($sql);
+    $row = mysql_fetch_array($result);
+    $atleta_id=$row['atleta_id'];
+    $nombre_atleta=trim($row["nombres"]);
+    $apellido_atleta=trim($row["apellidos"]);
+    $disciplina=trim($row["disciplina"]);
+    $email=$row["email"];
+    $estado=$row["estado"];
+    $notificacion2="fue procesada exitosamente.";
+    $BCC="BCC:atenismiranda@gmail.com";
+    
+    
+    
+    //Determinamos Afiliacion activa del periodo
+    $sql = "SELECT afiliacion_id FROM afiliacion WHERE fecha_desde<=now() && fecha_hasta>=now() && empresa_id=". $_SESSION['empresa_id'];
+    $result = mysql_query($sql);
+    $rsAfiliacion = mysql_fetch_array($result);
+    $afiliacion_id=$rsAfiliacion['afiliacion_id'];
+
+    //Determinamos que el afiliado haya formalizado su pago
+    $sql = "SELECT pagado FROM afiliaciones WHERE  atleta_id=$atleta_id && afiliacion_id=".$afiliacion_id;
+    $result = mysql_query($sql);
+    $rsAfiliados = mysql_fetch_array($result);
+    if ($rsAfiliados['pagado'] ==1) {
+          $afiliacion_pagada=1;
+    }else{
+         $afiliacion_pagada=0;
+
+    }
+
+    $sqlEmp="SELECT cuenta,banco,rif,nombre,email FROM empresa WHERE estado='$estado'";
+    $result=mysql_query($sqlEmp);
+    $rsempresa = mysql_fetch_array($result);
+    if ($rsempresa){
+        $banco =$rsempresa['banco'];
+        $cuenta =$rsempresa['cuenta'];
+        $rif =$rsempresa['rif'];
+        $nombre_empresa =$rsempresa['nombre'];
+        $email_empresa=$rsempresa['email'];
+    }else{
+        $banco ="";
+        $cuenta ="";
+        $rif ="";
+        $nombre_empresa ="";
+        
+        
+    }
+//    $banco ="CUENTA CORRIENTE :BANCO PROVINCIAL 0108-0013-7001-0000-1188" 
+//                    ." ATEM RIF J-00189790-9 infoatem@gmail.com";
+    switch ($tipoNotificacion){
+       case "Rank": //Ranking Modificado
+           $asunto="Actualizacion de Ranking";
+           $notificacion="la actualizacion de ranking";
+           $notificacion2="fue procesada exitosamente.";
+           break;
+       case "Email": //Ingreso de Email
+           $asunto="Actualizacion de correo";
+           $notificacion="la actualizacion de correo";
+           $notificacion2="fue procesada exitosamente.";
+           break;
+       case "Clave": //Modificacion de clave
+           $asunto="Cambio de clave";
+           $notificacion="su nueva clave es :".$row["contrasena"];
+           $notificacion2=" ";
+           break;
+       case "RecuperarClave": //Recuperacion de clave
+           $asunto="Recuperacion de clave";
+           $notificacion="su nueva clave es :".$row["contrasena"];
+           $notificacion2=" ";
+           break;
+       case "Afiliacion": //Afiliacion 
+            $asunto="Afiliacion";
+            $notificacion="La Solicitud de Afiliacion,";
+            $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+            $notificacion2="fue procesada exitosamente.\r\n";
+            $notificacion2.="Nota: Recuerde realizar el pago correspondiente y enviarlo a la brevedad para formalizar su afiliacion.\r\n";
+            $notificacion2.= "Coordenadas para Transferencias:: \r\n";
+            $notificacion2.= "BANCO :$banco \r\n";
+            $notificacion2.= "CUENTA :$cuenta \r\n";
+            $notificacion2.= "RIF: $rif \r\n";
+            $notificacion2.= "NOMBRE :$nombre_empresa \r\n";
+            $notificacion2.= "EMAIL :".$email_empresa;
+           break;
+        
+       
+       case "DesAfiliacion": //Afiliacion anual
+           $asunto="DesAfiliacion";
+           $notificacion="la solicitud de eliminacion de afiliacion,";
+           $notificacion2="fue procesada....\r\n";
+           
+           $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+           
+            $email=NULL;// Nulo no envia correo
+            
+           break;
+       case "AfiliacionConfirmada": //Afiliacion confirmada
+           $asunto="Pago de Afiliacion Confirmado";
+           $notificacion="La Afiliacion fue confirmada.";
+           $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+           $notificacion2="Gracias por su pago.";
+           break;
+        case "AfiliacionNoConfirmada": //Afiliacion no confirmada
+            $asunto="Pago de Afiliacion no ha sido confirmado";
+            $notificacion="la afiliacion no ha sido formalizada.";
+            $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+            $notificacion2="Nota: Recuerde realizar el pago correspondiente y enviarlos a la brevedad para formalizar su afiliacion.\r\n";
+            
+            $notificacion2.= "Coordenadas para Transferencias:: \r\n";
+            $notificacion2.= "BANCO :$banco \r\n";
+            $notificacion2.= "CUENTA :$cuenta \r\n";
+            $notificacion2.= "RIF: $rif \r\n";
+            $notificacion2.= "NOMBRE :$nombre_empresa \r\n";
+            $notificacion2.= "EMAIL :".$email_empresa;
+           
+           break;
+       case "AfiliacionConciliada": //Afiliacion conciliada osea recibida por la empresa
+           $asunto="Afiliacion Conciliada";
+           $notificacion="La Afiliacion fue conciliada.";
+           $email="robinson.carrasquero@gmail.com";
+           $BCC="BCC:atenismiranda@gmail.com";
+           $notificacion2="Gracias por su pago.";
+           break;
+       case "AfiliacionNoConciliada": //Afiliacion conciliada osea recibida por la empresa
+           $asunto="Afiliacion No Conciliada";
+           $notificacion="La Afiliacion no fue conciliada.";
+           $email="robinson.carrasquero@gmail.com";
+           $BCC="BCC:atenismiranda@gmail.com";
+           $notificacion2="Disculpe, esperamos su pago pronto.";
+           break;
+       
+       
+        case "PagoConfirmado": //Pago confirmado
+           $asunto="Pago confirmado del Torneo: $nota";
+           $notificacion="su pago para la inscripcion en el torneo $nota ha sido confirmado.";
+           $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+           $notificacion2=" ";
+           if ($afiliacion_pagada==0){
+               $email=NULL;// Nulo no envia correo
+           }
+           
+           break;
+       
+       
+        case "PagoNoConfirmado": //Afiliacion no confirmada
+            $asunto="Pago no confirmado del Torneo :$nota";
+            $notificacion="hasta la fecha no hemos recibido el pago correspondiente para la inscripcion en el torneo $nota.";
+            $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+            $notificacion2="Nota: Es importante realizar el pago en los lapsos establecidos.\r\n";
+            $notificacion2.= "Coordenadas para Transferencias:: \r\n";
+            $notificacion2.= "BANCO :$banco \r\n";
+            $notificacion2.= "CUENTA :$cuenta \r\n";
+            $notificacion2.= "RIF: $rif \r\n";
+            $notificacion2.= "NOMBRE :$nombre_empresa \r\n";
+            $notificacion2.= "EMAIL :".$email_empresa;
+            if ($afiliacion_pagada==0){
+               $email=NULL;// Nulo no envia correo
+            }
+           break;
+       //Solicitud de afiliacion federacion y asociacion
+       case "Afiliarme": 
+            $asunto="Afiliacion";
+            $notificacion="La Solicitud de Afiliacion,";
+            $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+            $notificacion2="fue procesada exitosamente.\r\n";
+            $notificacion2.="Nota: Recuerde realizar el pago correspondiente y enviarlo a la brevedad para formalizar su afiliacion.\r\n";
+            $notificacion2.= "Coordenadas para Transferencias: \r\n";
+            $notificacion2.= "Banco :$banco \r\n";
+            $notificacion2.= "Cuenta :$cuenta \r\n";
+            $notificacion2.= "Rif: $rif \r\n";
+            $notificacion2.= "Nombre :$nombre_empresa \r\n";
+            $notificacion2.= "Email :".$email_empresa;
+           break;
+       
+       case "DesAfiliarme": //Afiliacion anual
+           $asunto="DesAfiliarme";
+           $notificacion="la solicitud de eliminacion de afiliacion,";
+           $notificacion2="fue procesada....\r\n";
+           
+           $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+           
+            $email=NULL;// Nulo no envia correo
+            
+           break;
+       //Notificaciones de los servicio web
+       case "ServicioWeb": //Afiliacion 
+            $asunto="Servicio Web";
+            $notificacion="La Solicitud de servicio web,";
+            $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+            $notificacion2="fue procesada exitosamente.\r\n";
+            $notificacion2.="Nota: Recuerde realizar el pago correspondiente y enviarlo para su confirmacion.\r\n";
+            $notificacion2.= "Coordenadas para Transferencias:: \r\n";
+            $notificacion2.= "Banco :$banco \r\n";
+            $notificacion2.= "Cuenta :$cuenta \r\n";
+            $notificacion2.= "Rif: $rif \r\n";
+            $notificacion2.= "Nombre :$nombre_empresa \r\n";
+            $notificacion2.= "Email :".$email_empresa;
+           break;
+       case "DesServicioWeb": //Desafiliacion web
+           $asunto="Eliminacion de servicio Web";
+           $notificacion="la solicitud de retiro del servicio web,";
+           $notificacion2="fue procesado....\r\n";
+           
+           $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+           
+            $email=NULL;// Nulo no envia correo
+            
+           break;
+       
+       case "AfiliacionFormalizada": //Afiliacion confirmada
+           $asunto="Pago de Afiliacion Formalizada";
+           $notificacion="La Afiliacion fue formalizada.";
+           $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+           $notificacion2="Gracias por su pago.";
+                      
+           break;
+        case "AfiliacionNoFormalizada": //Afiliacion no confirmada
+            $asunto="Pago de Afiliacion no ha sido formalizada";
+            $notificacion="la afiliacion no ha sido formalizada.";
+            $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+            $notificacion2="Nota: Recuerde realizar el pago correspondiente y enviarlo a la brevedad para formalizar su afiliacion.\r\n";
+            
+            $notificacion2.= "Coordenadas para Transferencias: \r\n";
+            $notificacion2.= "Banco :$banco \r\n";
+            $notificacion2.= "Cuenta :$cuenta \r\n";
+            $notificacion2.= "Rif: $rif \r\n";
+            $notificacion2.= "Nombre :$nombre_empresa \r\n";
+            $notificacion2.= "Email :".$email_empresa;
+          
+           break;
+       
+        case "ServicioWebFormalizado": 
+           $asunto="Confirmacion de Afiliacion Federativa Procesada";
+           $notificacion="La Confirmacion de Afiliacion Federativa fue procesada exitosamente.";
+           $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+           $notificacion2="Gracias por su pago.";
+           break;
+        case "ServicioWebNoFormalizado": 
+            $asunto="Confirmacion de Afiliacion Federativa No Procesada";
+            $notificacion="La Confirmacion de Afiliacion Federativa no fue formalizada exitosamente, comuniquese con su asociacion.\r\n";
+            $BCC="BCC:atenismiranda@gmail.com,$email_empresa";
+            $notificacion2="Nota: Recuerde realizar el pago correspondiente y enviarlos a la brevedad para procesar y formalizar su afiliacion.\r\n";
+           
+            $notificacion2.= "DATOS PARA TRANSFERENCIAS: \r\n";
+            $notificacion2.= "Banco :$banco \r\n";
+            $notificacion2.= "Cuenta :$cuenta \r\n";
+            $notificacion2.= "Rif: $rif \r\n";
+            $notificacion2.= "Nombre :$nombre_empresa \r\n";
+            $notificacion2.= "Email :".$email_empresa;
+           
+           break;
+
+
+       default:
+           $asunto="Ingreso al sistema";
+           $notificacion="Entrada al sistema";
+
+           return;
+
+    } 
+//    $ano_afiliacion=$_SESSION['ano_afiliacion'];
+//    if (!Control_Afiliacion_Anual($atleta_id, $ano_afiliacion)){
+//            
+//        return;
+//    }
+   
+//    //enviamos correor de inscripcion
+//        echo '<pre>';
+//        var_dump($nombre_atleta).'</br>';
+//        var_dump($apellido_atleta).'</br>';
+//        var_dump($email).'</br>';
+//        var_dump($cedulax).'</br>';
+//        echo '</pre>';
+   
+    if ($email !=NULL){ // enviamos correo
+        
+        $date=date_create();
+        $to = $email; //"robinson.carrasquero@gmail.com";
+        $subject = $asunto ;
+        $txt = "Estimado(a) atleta($estado) $nombre_atleta,$apellido_atleta, le notificamos que $notificacion "
+                . $notificacion2;
+        if ($atleta_id==100000487){ // Prueba de usuario
+            $headers = "From: $email_from" 
+                    . "\r\n" ."BCC:atenismiranda@gmail.com,robinson.carrasquero@gmail.com";
+        }else{
+            $headers = "From: $email_from" 
+                . "\r\n" .$BCC;
+        }
+        mail($to,$subject,$txt,$headers);
+    }
+   
+    return;
+}
+
+function Control_Afiliacion_Anual2($atleta_id) {
+    
+    
+    $sql = "SELECT empresa.empresa_id FROM atleta inner join empresa on atleta.estado=empresa.estado "
+               . " WHERE  atleta.atleta_id=".$atleta_id;
+       
+    $result = mysql_query($sql);
+    $rsAtleta = mysql_fetch_array($result);
+    $empresa_id=$rsAtleta['empresa_id'];
+        
+  
+    if ($rsAtleta){
+
+        $afiliacion_id=Afiliacion_Anual($empresa_id);   
+
+        $result = mysql_query($sql);
+        $rsAfiliados = mysql_fetch_array($result);
+        $sql = "SELECT pagado FROM afiliaciones WHERE  atleta_id=$atleta_id && afiliacion_id=$afiliacion_id";
+
+        $result = mysql_query($sql);
+        $rsAfiliados = mysql_fetch_array($result);
+
+        if ($rsAfiliados['pagado']>0){
+            $habilitado= TRUE; //Habilitado para salir en el listado
+        }else{
+            $habilitado= FALSE; //inHabilitado para imprimir o enviar correo
+        }
+
+    }else{
+
+        $habilitado=FALSE;
+
+    }
+
+    return $habilitado;
+    
+}
+function Control_Afiliacion_Anual($atleta_id,$ano_afiliacion) {
+    
+    
+    
+    
+     //Verificamos pago de afiliacion
+        $sql = "SELECT pagado FROM afiliaciones WHERE  atleta_id=$atleta_id && ano=$ano_afiliacion";
+
+        $result = mysql_query($sql);
+        $rsAfiliados = mysql_fetch_array($result);
+        
+        if ($rsAfiliados['pagado']>0){
+            $habilitado= TRUE; //Habilitado para imprimir o enviar correo
+        }else{
+            $habilitado= FALSE; //Habilitado para imprimir o enviar correo
+        }
+        
+       
+        
+        return $habilitado;
+        
+
+}

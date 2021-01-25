@@ -1,0 +1,4 @@
+UPDATE `rankingdetalle` SET `descripcion`='TOTAL PUNTOS INTERNACIONALES' WHERE `descripcion`='Total puntos internacionales';
+UPDATE `rankingdetalle` SET `descripcion`='TOTAL SINGLES' WHERE `descripcion`='Total Singles';
+UPDATE `rankingdetalle` SET `descripcion`='TOTAL DOBLES' WHERE `descripcion`='Total Dobles';
+UPDATE `rankingdetalle` SET `descripcion`='REORDENATORIO' WHERE `descripcion`='Reordenatorio'

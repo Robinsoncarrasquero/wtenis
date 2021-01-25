@@ -1,0 +1,15 @@
+[22-Jun-2019 01:47:18 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/EstadisticasAfiliaciones.php on line 23
+[22-Jun-2019 01:47:21 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/Data_Combo_List.php on line 12
+[22-Jun-2019 01:47:21 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/Data_Combo_List.php on line 12
+[22-Jun-2019 01:47:21 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/EstadisticasAfiliaciones.php on line 23
+[22-Jun-2019 03:19:30 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/EstadisticasAfiliaciones.php on line 23
+[22-Jun-2019 03:19:31 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/Data_Combo_List.php on line 12
+[22-Jun-2019 03:19:31 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/Data_Combo_List.php on line 12
+[25-Jun-2019 17:41:50 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/EstadisticasAfiliaciones.php on line 23
+[25-Jun-2019 17:41:51 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/Data_Combo_List.php on line 12
+[25-Jun-2019 17:41:51 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/Data_Combo_List.php on line 12
+[25-Jun-2019 17:41:51 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/EstadisticasAfiliaciones.php on line 23
+[25-Jun-2019 17:42:08 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/EstadisticasAfiliaciones.php on line 23
+[25-Jun-2019 17:42:09 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/Data_Combo_List.php on line 12
+[25-Jun-2019 17:42:09 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/EstadisticasAfiliaciones.php on line 23
+[25-Jun-2019 17:42:10 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/AEstadisticas/Data_Combo_List.php on line 12

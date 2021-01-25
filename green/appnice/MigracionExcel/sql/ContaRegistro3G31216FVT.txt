@@ -1,0 +1,3 @@
+SELECT count(*), torneoinscritos.categoria
+FROM `torneoinscritos` 
+WHERE torneo_id=3   group by categoria 

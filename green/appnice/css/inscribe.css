@@ -1,0 +1,342 @@
+.elementx{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#contenedorx {
+    background-color: #fff;
+    width: 100%;
+    margin: 0px auto 0px auto;
+    padding: 10px;
+    border: solid 1px #ccc;
+    box-shadow: 1px 1px 5px #000;
+    -moz-box-shadow: 1px 1px 5px #000;
+    -webkit-box-shadow: 1px 1px 5px #000;
+}
+.hora{
+ 
+width: 100%;
+float:left; 
+margin: 0px auto 0px auto;
+ 
+    
+}
+#contenedor {
+width: 100%;
+ float:left;
+}
+header {
+    text-align: center;
+}
+nav ul{
+    width: 450px;
+    margin: 0px auto 0px auto;
+}
+nav li{
+    float: left;
+    width: 120px;
+    height: 20px;
+    list-style: none;
+    border: solid 1px #999;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    -moz-border-radius: 5px 15px 5px 5px;
+    -webkit-border-radius: 5px 15px 5px 5px;
+    text-align: center;
+}
+nav .google_mas {
+    background-image: url(../images/google_mas_icono.jpg);
+}
+nav .facebook {
+    background-image: url(../images/facebook_icono.jpg);
+}
+nav .twitter {
+    background-image: url(../images/twitter_icono.jpg);
+}
+nav a {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+section .imagen_logo {
+    float: left;
+    width: auto;
+}
+section .descripcion p {
+    text-align: justify;
+}
+.clear {
+    clear: both;
+}
+
+
+ul {
+
+
+}
+a{
+    
+    
+}
+a:hover { 
+    background-color: yellow;
+}
+	
+ul.a {
+    list-style-type: circle;
+    background-color:white;
+    border-style:double;
+	
+}
+
+ul.b {
+    list-style-type: square;
+    background-color:#DEDEDE;
+    border-style:double;
+
+}
+
+h1,h2,h3{
+    color:  #CC0000;
+    text-align: center;
+
+
+}
+
+h4,h5{
+	
+	
+	
+ 
+}
+
+
+.tachado{text-decoration:line-through;
+}
+
+
+
+#Logo{
+
+float:left;
+
+       
+}
+
+.frmlogin{
+    margin-top: 5%;
+    margin-left: 40%;
+    float:left;
+    width:50%;
+    
+	
+}
+.frmlogin.h2{ 
+    text-align: justify; text-decoration: solid;
+}
+.msgerror{
+    
+    color: red;
+    font-size: 16px;
+    padding:5px 5px 5px 5px;
+   
+}
+
+.frminscripcion{
+    float:left;
+    width:100%;
+    
+}
+.botones{
+  float:left;
+    
+}
+
+#boton1,#boton2,#boton3{
+	
+	margin-top: 100px;
+	float:left;
+	height:30px;
+	border-color: #CC0000;
+	text-align:center;
+        background: #F2F2F2;
+	margin-left:4px;
+       
+}
+
+
+.menuuser{
+    margin-top: 2%;
+    margin-left: 15%;
+    float:left;
+    
+    	
+}
+.menuuser .h2{
+    text-align:left;
+     
+}
+
+#menuuop1,#menuuop2,#menuuop3,#menuuop4{
+	padding:6px 5px 12px 5px;
+	margin-top:1%;
+	float:left;
+	width:8em;
+	margin-left:10%;
+	border-style:  solid;
+	border-color:#CCC;
+	text-align:center;
+	            
+        background:#CEECF5;
+	
+}
+
+.frmdatos{
+
+    margin-top: 1px;
+    margin-left: 40%;
+    
+    
+    
+   
+    
+}  
+	
+
+input[type="text"] {
+  border: 2px solid #CC0000;
+  padding: 4px 8px;
+  //background:#D4ECF8;
+}
+input[type="date"] {
+  border: 1px solid #CC0000;
+  padding: 4px 8px;
+  background: #D4ECF8;
+  
+}
+input[type="time"] {
+  border: 2px solid #CC0000;
+  padding: 4px 8px;
+  background:    #D4ECF8;
+}
+input[type="select"] {
+  
+ 
+  
+}
+
+input[type="text"]:focus {
+  border: 1px solid #000;
+  
+}
+input[type="password"] {
+  border: 1px solid  #ddd;
+  padding: 4px 8px;
+}
+input[type="password"]:focus {
+  border: 1px solid #000;
+}
+
+input[type="button"] {
+  font-weight: bold;
+  padding: 10px 10px;
+  border:1px solid #000;
+  background:  #3b5998;
+  color: #fff;
+  
+}
+
+
+input[type="submit"] {
+  font-weight: bold;
+  padding: 8px 16px;
+  border:1px solid #000;
+  background:  #3b5998;
+  color:#fff;
+  
+ 
+  
+}
+.frmdatos input[type="submit"]{
+  margin: 0 auto;
+  margin:20px;
+ 
+  
+    
+    
+    
+}
+
+
+.frmdatos input[type="email"] {
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+  width:100%;
+}
+
+.frmlogin input[type="text"]{
+  border: 2px solid  #ddd;
+  padding: 4px 8px;
+  
+    
+}
+
+form {
+  width: 100%;
+  margin: 0 auto;
+ 
+}
+
+.p {
+  padding-top: 30px;
+}
+.Galeria{
+  float:right;
+  
+  
+}
+
+.googlead{
+
+float:left;
+margin-left: 4%;
+  
+}
+.linkayuda{
+float:right;
+margin-right: 1%;
+
+  
+}
+.Box4Col
+{
+    border: 2px solid #CCC;
+    float:left;
+    text-align:center;
+    width:100%;
+    margin-top: 100px;}
+#Box4Col{
+       
+	float:left;
+        width:49%;
+        border:  2px solid #CCC;
+	text-align:center;
+        background:  #CEECF5;
+}
+
+th{
+background-color:  #CEECF5;
+}
+
+tr:nth-child(odd) {
+background-color:  #DEDEDE;
+}
+tr:nth-child(even) {
+background-color:#fbfbfb;
+}
+
+
+     
+         

@@ -1,0 +1,17 @@
+categoria 08: #215
+categoria 10: #324
+categoria 12: #467
+categoria 14: #772
+categoria 16: #819
+categoria 18: #696
+categoria todas: #3293
+
+SELECT count(*) FROM `atleta` INNER JOIN ranking on atleta.atleta_id=ranking.atleta_id 
+WHERE ranking.categoria=10
+
+SELECT count(*) FROM `atleta` INNER JOIN ranking on atleta.atleta_id=ranking.atleta_id 
+WHERE ranking.categoria=12
+
+
+SELECT count(*) FROM `atleta` INNER JOIN ranking on atleta.atleta_id=ranking.atleta_id 
+WHERE ranking.categoria=18 

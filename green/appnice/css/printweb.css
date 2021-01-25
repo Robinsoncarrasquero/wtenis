@@ -1,0 +1,8 @@
+header, footer, nav, aside {
+  display: none;
+}
+
+body {
+  background-image: none;
+}
+

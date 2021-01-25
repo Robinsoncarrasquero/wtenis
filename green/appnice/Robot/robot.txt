@@ -1,0 +1,6 @@
+php -q /home/tenismirandacom/public_html/app/bs_send_email_open.php
+
+
+cd home/tenismirandacom/public_html/app/;php bs_send_email_torneo_open.php
+
+cd home/tenismirandacom/public_html/app/;php bs_robot_torneo_open_send_email.php

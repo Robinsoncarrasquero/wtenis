@@ -1,0 +1,4 @@
+C,Calendario
+S,Suspendido
+X,Cancelado
+D,Diferido

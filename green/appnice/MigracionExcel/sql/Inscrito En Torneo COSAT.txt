@@ -1,0 +1,24 @@
+SELECT ranking.rkcosat,torneoinscritos.categoria,atleta.sexo,atleta.cedula,atleta.nombres,atleta.apellidos,atleta.atleta_id 
+FROM atleta  INNER JOIN torneoinscritos ON atleta.atleta_id=torneoinscritos.atleta_id 
+INNER JOIN `ranking` ON atleta.atleta_id =ranking.atleta_id AND torneoinscritos.categoria=ranking.categoria
+WHERE torneo_id=5 OR torneo_id=6 GROUP BY torneoinscritos.categoria,atleta.sexo 
+ORDER BY torneoinscritos.categoria,atleta.sexo
+
+
+CONTAR RECORD
+SELECT COUNT(*),torneoinscritos.categoria,atleta.sexo
+FROM `torneoinscritos` inner join atleta on torneoinscritos.atleta_id=atleta.atleta_id 
+WHERE torneo_id=4 GROUP BY torneoinscritos.categoria,atleta.sexo order
+by torneoinscritos.categoria,atleta.sexo 
+
+ranking cosat 
+update ranking set rkcosat=111 where atleta_id=839 and categoria=14 //matos javier 28317929
+update ranking set rkcosat=87 where atleta_id=789 and categoria=16 //sergio perez 
+
+update ranking set rkcosat=111 where atleta_id=839 and categoria=14 
+update ranking set rkcosat=87 where atleta_id=789 and categoria=16 
+
+update ranking set rkcosat=155 where atleta_id=3 and categoria=14 // sofia blanco
+
+
+ATLETA_ID=2321 PV 135 25 14

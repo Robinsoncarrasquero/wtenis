@@ -1,0 +1,90 @@
+body {
+          font-family: "Times New Roman", serif;
+          font-size: 8;
+         
+        }
+
+.encabezado{
+text-align: center;
+width: 100%;
+margin-left: 10px;
+
+
+ 
+    
+}
+.encabezado-left{
+text-align: left;
+width: 50%;
+ 
+margin: 0px auto 0px auto;
+
+    
+}
+
+.encabezado-right{
+text-align: right;
+width: 50%;
+ 
+margin: 0px auto 0px auto;
+
+  
+}
+
+
+
+
+
+
+
+section .imagen_logo {
+    float: left;
+    width: auto;
+}
+section .descripcion p {
+    text-align: justify;
+}
+.clear {
+    clear: both;
+}
+
+
+.tachado{text-decoration:line-through;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+     
+         
+
+#chkExportar {
+
+}

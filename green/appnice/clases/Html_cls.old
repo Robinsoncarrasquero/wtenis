@@ -1,0 +1,179 @@
+<?php
+
+/**
+ * Esta clase maneja la configuracion del html del sitio web
+ *
+ * @author robinson
+ */
+class HTML_SET {
+    
+    public $js_script_array;
+
+
+    //Cargar el head de la pagina el la primera que se debe cargar
+    public static function html_head($title,$content,$css_path){
+        $contentx='Sitio web para Inscripciones onLine de Torneos de Tenis de Campo, Tenis de Playa'; 
+        $contentx=$content;
+        echo '<!DOCTYPE html>';
+        print_r("\n");
+        echo '<!html lang="en">';
+        print_r("\n");
+        echo '<head>';
+        print_r("\n");
+        echo '<meta charset="utf-8" >';
+        print_r("\n");
+        echo '<title>'.$title.'</title>';
+        print_r("\n");
+        echo '<meta name="description" content="'.$contentx.'">';
+        print_r("\n");
+        echo '<meta http-equiv="X-UA-Compatible" content="IE=edge">';
+        print_r("\n");
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">';
+        print_r("\n");
+        echo '<link rel="stylesheet" href="'.$css_path.'css/Normalize.css">';
+        print_r("\n");
+        echo '<link rel="stylesheet" href="'.$css_path.'css/tenis_estilos.css">';
+        print_r("\n");
+        echo '<link rel="stylesheet" href="'.$css_path.'css/FotosPortal2.css">';
+        print_r("\n");
+        echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
+        print_r("\n");
+        echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>';
+        print_r("\n");
+        echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+        print_r("\n");
+        echo '<link rel="shortcut icon" href="'.$_SESSION['favicon'].' " />';
+        print_r("\n");
+    /*    
+    echo '<link href="Galerias/jquery.bsPhotoGallery.css" rel="stylesheet">';
+    echo '<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>';
+    echo '<script src="Galerias/jquery.bsPhotoGallery.js"></script>';
+    */    
+       
+    }
+    
+    //Abre tag body
+    public static function html_head_closed(){
+        echo '</head>';
+        print_r("\n");
+    }
+    //Abre tag body
+    public static function html_body_open(){
+        echo '<body>';
+        print_r("\n");
+    }
+    //Cierra tag Body
+    public static function html_body_closed(){
+        echo '</body>';
+        print_r("\n");
+    }
+    //Abre tag html
+    public static function html_open(){
+        echo '<html>';
+        print_r("\n");
+    }
+    //Abre tag html
+    public static function html_closed(){
+        echo '</html>';
+        print_r("\n");
+    }
+    //Abre tab style
+    public static function style_open(){
+        echo '<style>'; 
+        print_r("\n");
+        
+       
+    }
+    public static function style_content($path_) {
+        echo '<style>'; 
+        print_r("\n");
+        echo '.loader{
+            background-image: url("'.$path.'/ajax-loader.gif");
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100px;
+        }';
+        print_r("\n");
+        echo 'nav.navbar {
+            background-color:    #000;
+            background-color:'. $_SESSION['bgcolor_navbar'].'
+        }';
+        print_r("\n");
+        echo '.jumbotron{
+            background-color:'.$_SESSION['bgcolor_jumbotron'].';
+            color:'.$_SESSION['color_jumbotron'].';
+        }';
+        print_r("\n");
+        echo '.title-table{
+            background-color:'.$_SESSION['bgcolor_jumbotron'].';
+            color:'.$_SESSION['color_jumbotron'].';
+        }';
+        print_r("\n");
+        echo '.post-mininoticia-title-head{
+            background-color:'.$_SESSION['bgcolor_jumbotron'].';
+            color:'.$_SESSION['color_jumbotron'].';
+        }';
+        print_r("\n");
+        echo  '.twitter-title{
+            background-color:'.$_SESSION['bgcolor_jumbotron'].';
+            color:'.$_SESSION['color_jumbotron'].';
+        }';
+        print_r("\n");
+        echo 'iframe{
+            width: 100%;
+        }';
+        print_r("\n");
+        
+  $style='      ul {
+  
+ 
+  background-color: #f1f1f1;
+}
+
+dropdown-toggle {
+ 
+  padding: 5px;
+  width: 50px;
+  background-color: #f1f1f1;
+  padding: 8px 16px;
+  
+}
+
+.navbar-header .navbar-nav{
+ 
+  padding: 5px;
+  width: 50px;
+  background-color: #f1f1f1;
+  padding: 8px 16px;
+  
+}
+
+';
+  //echo ($style);
+        echo '</style>';   
+        print_r("\n");
+        
+    }
+    //Cierra tab style
+    public static function style_closed(){
+        echo '</style>';       
+    }
+    
+    //Abre tag js
+    public static function html_JS_open($source_library){
+        $this->js_script_array[]=$source_library;
+    }
+    
+     //Cierra tag js
+    public static function html_JS_closed(){
+        echo '<script type="text/javascript"';
+      
+        foreach ($this->js_script_array as $value) {
+            print_r("\n");
+            echo $value;
+        }
+        echo '></script>"';
+        print_r("\n");
+    }
+   
+}

@@ -1,0 +1,33 @@
+
+.social-email, .social-email a {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+.social-email ul {
+ 	list-style: none;
+	width: 600px;
+}
+.social-email ul li {
+ 	display:inline-block;
+	margin:0 30px 0 30px;
+}
+
+.social-email ul li a{
+	color:#FFFFFF;
+	display: inline-block;  zoom: 1;
+	width: 20px;
+	padding:20px 20px 20px 20px;
+	margin-right: 1px;
+	text-align: center;
+	font-family: Fontawesome;
+	font-size: 18px;
+	border-radius: 80px 80px 80px 80px ;
+	box-shadow: 0 -2px 6px #666;
+}
+
+.social-email ul li .fa-facebook {background:#3B559F;} /* Establecemos los colores de cada red social, aprovechando su class */
+.social-email ul li .fa-twitter {background: #01AFEC;}
+
+.social-email ul li .fa-instagram {background: #ae181f;}
+.social-email ul li .fa-mail {background: #666666;}

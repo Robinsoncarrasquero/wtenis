@@ -1,0 +1,120 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 9/07/2019, 03:35:40 PM
+    Author     : robinson
+*/
+
+ol[class~="breadcrumb"] {
+   background-color:#B40431;
+   //font-size: 12px;
+   color: white;
+}
+.breadcrumb > li > a {
+   // font-size: 12px;
+    color:#FFFFFF;
+        
+}
+.breadcrumb > li > span{
+    font-style:oblique;
+    font-weight: bold;
+    color:#ffffff;
+}
+
+
+.fechacierre{
+    background-color:#BDC3C7;
+}
+.fecharetiro{
+    background-color:#BDC3C7 ;
+}
+.fechainicio{
+    background:#BDC3C7 ;
+}
+.fechacierre, .fechainicio, .fecharetiro{
+    color:#000000;
+    margin:0;
+    font-weight: bold;
+}
+.apuntar{
+    background-color:gold;
+   
+    
+}
+
+.borrar{
+    background-color:gold;
+    
+}
+
+
+
+.notas-left {
+          font-size:10px;  
+          float:left;
+          margin:0;
+          padding:2px;
+          //position:relative ; /* Hacemos que la posición en pantalla sea fija para que siempre se muestre en pantalla*/
+           /* Establecemos la barra en la izquierda */
+          top: 2px; /* Bajamos la barra 200px de arriba a abajo */
+          //z-index: 2000; /* Utilizamos la propiedad z-index para que no se superponga algún otro elemento como sliders, galerías, etc */
+}
+
+.tab-calendario{
+    font-size:10px;
+}
+.tab-status{
+    font-size:10px;
+}
+td{
+   font-size:10px;
+}
+thead{
+
+ font-size:10px;
+
+}
+      
+.master-title-table{
+
+}
+.master-table-head{
+    background-color: #ac2925;
+    color:#FFFFFF;
+
+}
+
+tr[class~="tttable-head"] {
+   background-color:#DF0101 !important;
+   color:#FFFFFF !important;         
+    
+}
+
+.titulo-name{
+        font-family:sans-serif;
+        font-weight:bold;
+        font-size: 14px;
+        padding: 2px;
+        border: #1abc9c;
+        color:gray;
+       
+}
+
+.titulo-empresa{
+        font-family:sans-serif;
+        font-weight:bold;
+        font-size: 14px;
+        padding: 2px;
+        border: #1abc9c;
+        color:gray;
+        
+}
+
+
+
+
+
+

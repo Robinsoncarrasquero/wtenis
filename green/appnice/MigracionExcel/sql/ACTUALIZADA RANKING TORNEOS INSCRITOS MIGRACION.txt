@@ -1,0 +1,48 @@
+ACTUALIZA EL RANKING DE LAS INSCRIPCIONES DE TORNEOS
+
+update torneoinscritos t1,atleta t2 set t1.sexo = t2.sexo where t1.atleta_id=t2.atleta_id
+UPDATE torneoinscritos T1,ranking T2
+SET T1.rknacional = T2.rknacional, T1.fecha_ranking =T2.fecha_ranking
+
+WHERE T1.atleta_id=T2.atleta_id && T1.categoria=T2.categoria 
+&& (T1.torneo_id=28 || T1.torneo_id=28 || T1.torneo_id=32 || T1.torneo_id=33)
+
+
+
+UPDATE torneoinscritos T1,ranking T2
+SET T1.rknacional = T2.rknacional, T1.fecha_ranking =T2.fecha_ranking
+WHERE T1.atleta_id=T2.atleta_id && T1.categoria=T2.categoria 
+&& (T1.torneo_id=34 || T1.torneo_id=35 || T1.torneo_id=36 || T1.torneo_id=37 || T1.torneo_id=37)
+
+
+
+UPDATE torneoinscritos T1,ranking T2
+SET T1.rknacional = T2.rknacional, T1.fecha_ranking =T2.fecha_ranking
+WHERE T1.atleta_id=T2.atleta_id && T1.categoria=T2.categoria 
+&& (T1.torneo_id=70 || T1.torneo_id=105 || T1.torneo_id=107 || T1.torneo_id=80|| T1.torneo_id=85 || T1.torneo_id=86 || T1.torneo_id=82 || T1.torneo_id=83 || T1.torneo_id=2 || T1.torneo_id=73 || T1.torneo_id=84 || T1.torneo_id=87 || T1.torneo_id=88)
+
+
+UPDATE torneoinscritos T1,ranking T2
+SET T1.rknacional = T2.rknacional, T1.fecha_ranking =T2.fecha_ranking
+WHERE T1.atleta_id=T2.atleta_id && T1.categoria=T2.categoria 
+&& (T1.torneo_id=80)
+
+
+//UPDATE CON FECHA DE INICIO MAYOR A HOY
+UPDATE torneoinscritos T1,ranking T2, torneo T3
+SET T1.rknacional = T2.rknacional, T1.fecha_ranking =T2.fecha_ranking
+
+WHERE T1.atleta_id=T2.atleta_id && T1.categoria=T2.categoria 
+&& (T1.torneo_id=T3.torneo_id and T3.fecha_inicio_torneo>now())
+
+
+
+//consulta de atletas en torneo
+
+SELECT atleta.cedula,atleta.estado, 
+atleta.contrasena,atleta.nombres, torneoinscritos.pagado 
+FROM `torneoinscritos` inner join atleta on torneoinscritos.atleta_id=atleta.atleta_id 
+WHERE torneoinscritos.torneo_id=73
+
+
+

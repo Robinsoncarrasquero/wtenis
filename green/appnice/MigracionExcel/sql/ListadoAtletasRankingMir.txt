@@ -1,0 +1,8 @@
+SELECT atleta.cedula,atleta.nombres,ranking.rknacional,ranking.categoria FROM atleta 
+INNER JOIN ranking on atleta.atleta_id=ranking.atleta_id 
+WHERE atleta.ESTADO='MIR'
+
+//ranking cosat
+SELECT atleta.cedula,atleta.nombres, ranking.rkcosat ranking.rknacional,ranking.categoria FROM atleta 
+INNER JOIN ranking on atleta.atleta_id=ranking.atleta_id 
+WHERE atleta.ESTADO='MIR' and ranking.rkcosat<>''

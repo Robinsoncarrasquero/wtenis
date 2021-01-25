@@ -1,0 +1,4 @@
+UPDATE empresa T1,constancia T2
+SET T2.constancia = T1.constancia,
+ T2.cartafederativa = T1.cartafederativa
+WHERE T1.empresa_id=6

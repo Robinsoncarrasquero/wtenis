@@ -1,0 +1,1 @@
+select atleta.cedula,atleta.nombres,ranking.* from atletasdb.atleta INNER JOIN atletasdb.ranking WHERE atleta.atleta_id=ranking.atleta_id

@@ -1,0 +1,1 @@
+droplet : lamp-s-1vcpu-1gb-nyc1-01

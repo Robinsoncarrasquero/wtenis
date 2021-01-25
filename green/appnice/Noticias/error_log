@@ -1,0 +1,5 @@
+[29-Apr-2019 11:34:21 UTC] PHP Notice:  Undefined index: empresa_id in /home/gsscomve/public_html/fvt/app/Noticias/NoticiasModalSave.php on line 11
+[29-Apr-2019 11:34:21 UTC] PHP Notice:  Undefined index: niveluser in /home/gsscomve/public_html/fvt/app/Noticias/NoticiasModalList.php on line 8
+[29-Apr-2019 11:34:21 UTC] PHP Notice:  Undefined index: niveluser in /home/gsscomve/public_html/fvt/app/Noticias/NoticiasModalList.php on line 8
+[29-Apr-2019 11:34:33 UTC] PHP Notice:  Undefined index: niveluser in /home/gsscomve/public_html/fvt/app/Noticias/NoticiasModalList.php on line 8
+[29-Apr-2019 11:34:47 UTC] PHP Notice:  Undefined index: niveluser in /home/gsscomve/public_html/fvt/app/Noticias/NoticiasModalList.php on line 8

@@ -1,0 +1,7 @@
+[29-Jan-2018 08:34:40 UTC] PHP Fatal error:  Class 'Dompdf\Renderer\AbstractRenderer' not found in /home/gsscomve/public_html/gss/app/dompdf/src/Renderer.php on line 28
+[29-Jan-2018 15:54:09 UTC] PHP Fatal error:  Class 'Dompdf\Renderer\AbstractRenderer' not found in /home/gsscomve/public_html/gss/app/dompdf/src/Renderer.php on line 28
+[29-Jan-2018 21:52:15 UTC] PHP Fatal error:  Class 'Dompdf\Renderer\AbstractRenderer' not found in /home/gsscomve/public_html/gss/app/dompdf/src/Renderer.php on line 28
+[30-Jan-2018 09:44:34 UTC] PHP Fatal error:  Class 'Dompdf\Renderer\AbstractRenderer' not found in /home/gsscomve/public_html/gss/app/dompdf/src/Renderer.php on line 28
+[01-Feb-2018 16:31:07 UTC] PHP Fatal error:  Class 'Dompdf\Renderer\AbstractRenderer' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Renderer.php on line 28
+[04-Feb-2018 11:29:22 UTC] PHP Fatal error:  Class 'Dompdf\Renderer\AbstractRenderer' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Renderer.php on line 28
+[08-Feb-2018 00:52:22 UTC] PHP Fatal error:  Class 'Dompdf\Renderer\AbstractRenderer' not found in /home/gsscomve/public_html/fvt/app/dompdf/src/Renderer.php on line 28

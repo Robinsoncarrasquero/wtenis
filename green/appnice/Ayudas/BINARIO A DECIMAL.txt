@@ -1,0 +1,99 @@
+CONVERTIR DE BINARIO DECIMAL
+
+1010110(2)= LO VOLTEAMOS QUEDANDO = 0110101
+
+PROCEDEMOS
+   
+ 0          1          1       0       1            0      1 
+(0X2^0)+(1X2^1) + (0X2^2) +(OX2^3) + (1X2^4) + (0X2^5) + (1X2^6)
+
+  0    +    2   +    4    +   0    +  16     +   0     + 64 =86
+
+
+
+COMPROBAMOS CONVERTIRMOS DECIMAL A BINARIO DIVIDIENDO EL NUMERO DECIMAL POR LA BASE 2 BINARIA
+
+2/86 =0
+2/43=1
+2/21=1
+2/10=0
+2/5=1
+2/2=0
+2/1=1 
+1010110
+
+
+
+
+
+----------------------------------------------------------------------
+
+
+DE OCTAL A DECIMAL
+
+473 = VOLTEAMOS EL NUMERO = 374
+
+PROCEDEMOS CON LA BASE 8 EN POTENCIAS
+
+3          7            4
+
+(3X8^0) + (7X8^1) + (4X8^2) = 
+
+3       + 56      + 256 = 315
+
+-----------------------------------
+DE DECIMAL A OCTAL
+
+315/64= 4 =256
+315-256=59
+59/8 = 7 = 56
+59-56=3
+OCT=0,1,2,3,4,5,6,7
+
+RESULTADO 473
+
+-------------------------------------------------------------------------
+
+HEXADECIMAL A DECIMAL
+
+47D = VOLTEAMOS EL NUMERO = D74
+
+PROCEDEREMOS CON LA BASE 16
+
+HEX=0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+DEC=0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5
+ 
+D             7            4
+(13X16^0) + (7X16^1) + (4X16^2)
+
+     13   +    112   + 1024 = 1149
+
+
+-----------------------------------
+
+DECIMAL A HEXADECIMAL
+HEX=0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+
+1149= 
+
+BUSCAMOS LA POTENCIA MAS ALTA PERO DE MENOR VALOR QUE EL NUMERO A CONVERTIR
+
+16^3=4096
+
+16^2=256
+
+16^1= 16
+
+
+1149/256=4.48   = 4X256=1024  =4
+1149-1024= 125/16=7 X16=112   =7
+125-112 =13                   =D
+
+RESULTADO =47D
+
+
+
+
+
+
+

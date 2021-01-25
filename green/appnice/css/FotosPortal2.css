@@ -1,0 +1,120 @@
+/*
+Maneja los estilo de la fotos del portal
+*/
+/* 
+    Created on : 9/05/2019, 06:09:28 PM
+    Author     : robinson
+*/
+
+.bg-imagen-panel{
+    background-image: url("../images/balltennis.jpg");
+    
+    background-color: #cccccc;
+    /* height:auto; */
+    background-position:center ;
+    background-repeat:no-repeat;
+    background-size:auto;
+    position: relative;
+}
+.circulo .copa{
+    -moz-border-radius:50%;
+    -webkit-border-radius:50% ;
+    border-radius: 50%;
+    background-color: #809090;
+    font-size:20px;
+    color:#FFFFFF;
+    -moz-transform: scale(0.99);
+    -webkit-transform:scale(0.99);
+    transform: scale(0.99)
+}
+
+#info-torneo{
+    padding: 4px;
+    border: 4px;
+    color:#FFFFFF;
+    background-color: #cc9900;
+    vertical-align: middle;
+    -moz-border-radius:50px;
+    -webkit-border-radius:50px ;
+    border-radius: 50px;
+}
+#fotos-Portal{
+    margin-right: 10%;
+    margin-left: 10%;
+}
+#titulo-renovacion{
+   /* font-size: 12px; */
+    background-color:#B40431;
+    padding: 6px;
+    border: 4px;
+       
+}
+#titulo-renovacion a{
+   font-size: 16px;
+   color:white;
+        
+}
+
+#Carrusel-Portal{
+  overflow:hidden;
+  /* Border Radius */
+  -moz-border-radius:20px;
+  -webkit-border-radius:20px ;
+  border-radius: 20px; 
+  background-color: transparent;
+  
+ 
+    
+    
+}
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+/*    max-height: 800px;
+    min-width: 100px;
+    
+    margin:auto;*/
+   width: 100%;
+     
+  }
+
+
+.-portal-gallery {
+
+  /* Border Radius */
+  -moz-border-radius:20px;
+  -webkit-border-radius:20px ;
+  border-radius: 20px;
+  position: static;
+  width: 100%;
+  
+}
+
+.xcarousel-inner :hover {
+  -moz-transform: scale(0.95);
+  -webkit-transform:scale(0.95);
+  transform: scale(0.95);
+ 
+}
+
+#xCarrusel-Portal :hover {
+  -moz-transform: scale(1.01);
+  -webkit-transform:scale(1.01);
+  transform: scale(1.01)
+ 
+}
+ 
+
+.carousel-inner{
+  overflow:hidden;
+  /* Border Radius */
+  -moz-border-radius:20px;
+  -webkit-border-radius:20px ;
+  border-radius: 20px; 
+ 
+}
+
+
+
+
+

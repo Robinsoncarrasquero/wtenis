@@ -1,0 +1,11 @@
+tyffany atleta_id=7
+mella atleta_id=240
+piino 27439206
+27439548
+
+INSERT INTO `atleta` (atleta_id,cedula,contrasena,nombres,apellidos,fechanac,sexo,estado,nacionalidad_id) 
+VALUES (null, 'cm12399817','cm12399817','CAMILA NICOLE','DE MICHELE GARZON','2007-08-06','F','MIR',12)
+
+
+INSERT INTO `torneoinscritos`(atleta_id,torneo_id, categoria) 
+VALUES (1657, 10,  'PN')

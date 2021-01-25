@@ -1,0 +1,39 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-es
+
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'root1251251';
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root12511251';
+
+
+FLUSH PRIVILEGES;
+
+
+CREATE USER 'sammy'@'localhost' IDENTIFIED BY 'password';
+
+
+CREATE USER 'robinson'@'localhost' IDENTIFIED BY 'root12511251';
+CREATE USER 'atletas'@'localhost' IDENTIFIED BY 'atleta12511251';
+
+GRANT ALL PRIVILEGES ON *.* TO 'robinson'@'localhost' WITH GRANT OPTION;
+
+directorio de la base de datos en VPS
+
+mysqladmin -u root -p variables | grep datadir
+
+lsblk
+
+BACKUP DE BASE DE DATOS
+
+mysqldump -u root -p EVA360 > data-dump-EVA360.sql
+
+copiar al local desde el remoto 
+scp -r root@134.122.120.12:/var/lib/mysql/data-dump-EVA360.sql Talent360
+
+los archivos de my sqlestan
+/var/lib/mysql
+
+IMPORTAR BASE DE DATOS A MYSQL
+scp -r Mytenis/atletasdb.sql root@134.122.120.12:/var/lib/mysql
+mysql -u root -p atletasdb < atletasdb-dump.sql
