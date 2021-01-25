@@ -1,11 +1,11 @@
 ﻿<?php
 session_start();
-require_once 'appnice/clases/Atleta_cls.php';
-require_once 'appnice/sql/ConexionPDO.php';
-require_once 'appnice/clases/Funciones_cls.php';
-require_once 'appnice/clases/Encriptar_cls.php';
-require_once 'appnice/clases/Ranking_cls.php';
-require_once 'appnice/clases/Paginacion_cls.php';
+require_once __DIR__.'/appnice/clases/Atleta_cls.php';
+require_once __DIR__.'/appnice/sql/ConexionPDO.php';
+require_once __DIR__.'/appnice/clases/Funciones_cls.php';
+require_once __DIR__.'/appnice/clases/Encriptar_cls.php';
+require_once __DIR__.'/appnice/clases/Ranking_cls.php';
+require_once __DIR__.'/appnice/clases/Paginacion_cls.php';
  
 
 ?>
@@ -23,7 +23,7 @@ require_once 'appnice/clases/Paginacion_cls.php';
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
-<meta name="description" content="Ranking y posiciones de los Jugadores de la FVT">
+<meta name="description" content="Ranking y posiciones de los Jugadores de la Liga">
    
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300' rel='stylesheet' type='text/css'/>

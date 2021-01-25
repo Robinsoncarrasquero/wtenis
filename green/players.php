@@ -12,7 +12,7 @@
 <meta http-equiv="expires" content="0" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
-<meta name="description" content="Jugadores de la FVT">
+<meta name="description" content="Ranking y posiciones de los Jugadores de la Liga">
 
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300' rel='stylesheet' type='text/css'/>
