@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['empresa_nombre']=$objEmpresa->getNombre();
       $_SESSION['asociacion']=$objEmpresa->getEstado();
       $_SESSION['email_empresa'] = $objEmpresa->getEmail();
-      $_SESSION['email_envio'] = $objEmpresa->getEmail_Envio();
+     // $_SESSION['email_envio'] = $objEmpresa->getEmail_Envio();
       $_SESSION['afiliado'] = 1; //Indica que el user es una afiliado de la asociacion
       //$_SESSION['home']=MODO_DE_PRUEBA ? 'bsindex.php?s1='.strtolower($objUser->getEstado()) : $objEmpresa->getURL();
       $_SESSION['home'] = __DIR__.'/index.php';

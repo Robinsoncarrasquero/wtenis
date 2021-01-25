@@ -6,19 +6,19 @@ require_once 'funciones/funciones.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario = $_POST['usuario'];
     $contrasena = $_POST['contrasena'];
-    $conn =  mysql_connect($servername, $username, $password);
-    $result=mysql_select_db($dbname,$conn);
+    $conn =  mysqli_connect($servername, $username, $password);
+    $result=mysqli_select_db($dbname,$conn);
     if (!$result) {
        echo "2"; //Not avalaible
-       die('No pudo conectarse: ' . mysql_error());
+       die('No pudo conectarse: ' . mysqli_error($conn));
     }
-    $usuario=  mysql_real_escape_string($usuario);
+    $usuario=  mysqli_real_escape_string($conn,$usuario);
 
     $sql = "SELECT atleta_id,estado,cedula,contrasena,nombres,apellidos,niveluser,email,clave_default FROM atleta WHERE cedula='".$usuario."' && bloqueado=0";
-    $result = mysql_query($sql);
+    $result = mysqli_query($conn,$sql);
     
-   if (mysql_num_rows($result)){
-        $record = mysql_fetch_assoc($result);
+   if (mysqli_num_rows($result)){
+        $record = mysqli_fetch_assoc($result);
                   
         $atleta_id=$record["atleta_id"];
         $cedula=$record["cedula"];
@@ -66,8 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['email_envio'] = NULL;
             $_SESSION['afiliado'] = 0;
             $sql = "SELECT colorNavbar,colorjumbotron,bgcolorjumbotron,url,estado,empresa_id,nombre,email,email_envio from empresa WHERE estado='$estado'";
-            $result2=mysql_query($sql);
-            $record = mysql_fetch_assoc($result2);
+            $result2=mysqli_query($conn,$sql);
+            $record = mysqli_fetch_assoc($conn,$result2);
             //Chequeamos si esta afiliado
             $_SESSION['home'] = 'bsindex.php?s1='.strtolower($_SESSION['asociacion']);
             $_SESSION['empresa_id'] = 0;
@@ -100,8 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             //Determinamos Afiliacion activa del periodo
             $sql = "SELECT afiliacion_id FROM afiliacion WHERE fecha_desde<=now() && fecha_hasta>=now() && empresa_id=". $_SESSION['empresa_id'];
-            $result = mysql_query($sql);
-            $rsAfiliacion = mysql_fetch_array($result);
+            $result = mysqli_query($conn,$sql);
+            $rsAfiliacion = mysqli_fetch_array($conn,$result);
             $afiliacion_id=$rsAfiliacion['afiliacion_id'];
             
             //Determinamos que el afiliado haya formalizado su pago
@@ -110,8 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Determinamos que el afiliado haya formalizado su pago
             $sql = "SELECT pagado,aceptado,afiliaciones_id FROM afiliaciones WHERE  atleta_id=$atleta_id && ano=".$ano_afiliacion;
            
-            $result = mysql_query($sql);
-            $rsAfiliados = mysql_fetch_array($result);
+            $result = mysqli_query($conn,$sql);
+            $rsAfiliados = mysqli_fetch_array($conn,$result);
             
             if ($rsAfiliados['pagado'] > 0) {
                 $_SESSION['deshabilitado'] = FALSE; //Habilitado para imprimir o enviar correo
@@ -138,17 +138,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //            echo 'console.log('.$_SESSION['SWEB'].')';
 //            echo '</script>';
 
-            $result=mysql_query($sql);
+            $result=mysqli_query($conn,$sql);
             if (!$result) {
                 //echo "Error insertado record: " .$conn_error();
             }
             //Contamos cuantos afiliados tenemos para determinar un minimo de afiliados para permitir 
-            $result=mysql_query("SELECT count(*) as total FROM afiliaciones   WHERE formalizacion>0 && afiliacion_id=$afiliacion_id");
-            $rsTotal = mysql_fetch_array($result);
+            $result=mysqli_query($conn,"SELECT count(*) as total FROM afiliaciones   WHERE formalizacion>0 && afiliacion_id=$afiliacion_id");
+            $rsTotal = mysqli_fetch_array($conn,$result);
             $formalizadas= $rsTotal['total'];
 
-            $result=mysql_query("SELECT count(*) as total FROM afiliaciones   WHERE pagado>0 && afiliacion_id=$afiliacion_id");
-            $rsTotal = mysql_fetch_array($result);
+            $result=mysqli_query($conn,"SELECT count(*) as total FROM afiliaciones   WHERE pagado>0 && afiliacion_id=$afiliacion_id");
+            $rsTotal = mysqli_fetch_array($conn,$result);
             $pagados= $rsTotal['total'];
 
             $_SESSION['total']=$rsTotal['total']*0.5;
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $minimo=1;    
             
            
-            mysql_close($conn);
+            mysqli_close($conn);
 
             //echo "found";
             echo "0"; //  Good
@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_login = false; 
         echo "1"; //  Invalid key
     }
-     mysql_close($conn);
+     mysqli_close($conn);
 }
  
 ?>

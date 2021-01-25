@@ -23,7 +23,7 @@ class Conexion
         $dbname = "atletasdb";
         if (MODO_DE_TEST==0){
             $servername = "localhost";
-            $username = "algunapersona";
+            $username = "username";
             $password = 'secret';
             $dbname = "database";
             error_reporting(0);
