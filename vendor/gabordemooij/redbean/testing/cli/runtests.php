@@ -36,6 +36,9 @@ echo '*** RedUNIT ***'.PHP_EOL;
 echo 'Welcome to RedUNIT Unit testing framework for RedBeanPHP.'.PHP_EOL;
 echo PHP_EOL;
 
+echo sprintf('PHP version: %s', phpversion());
+echo PHP_EOL;
+
 /**
  * Define some globals.
  */
@@ -196,6 +199,7 @@ $allPacks = array(
 	'Base/Misc',
 	'Base/Via',
 	'Base/PullRequest530',
+	'Base/Issue841',
 	'Mysql/Preexist',
 	'Mysql/Double',
 	'Mysql/Writer',

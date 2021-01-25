@@ -31,5 +31,13 @@ copiar al local desde el
 scp -r root@134.122.120.12:/var/lib/mysql/data-dump-EVA360.sql /Talent360
 
 
+
 CREATE USER 'atletaadmin'@'localhost' IDENTIFIED BY 'atleta12511251';
 GRANT ALL PRIVILEGES ON *.* TO 'robinson'@'localhost' WITH GRANT OPTION;
+
+https://dba.stackexchange.com/questions/124964/error-2013-hy000-lost-connection-to-mysql-server-during-query-while-load-of-my
+The error code ERROR 2013 (HY000) related with aborted connection. You can run the following command to verify this.
+mysql >SHOW GLOBAL STATUS LIKE  'Aborted_connects';
+
+aumentar el time d conexion
+SET GLOBAL connect_timeout = 10;

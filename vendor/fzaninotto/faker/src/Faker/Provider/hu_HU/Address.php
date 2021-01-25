@@ -111,7 +111,7 @@ class Address extends \Faker\Provider\Address
         'Saint Kitts és Nevis', 'Saint Vincent', 'Salamon-szigetek', 'Salvador', 'San Marino', 'Seychelle-szigetek', 'Spanyolország', 'Srí Lanka', 'Suriname', 'Svájc', 'Svédország', 'Szamoa', 'Szaúd-Arábia', 'Szenegál', 'Szerbia', 'Szingapúr', 'Szlovákia', 'Szlovénia', 'Szomália', 'Szudán', 'Szváziföld', 'Szíria', 'São Tomé és Príncipe',
         'Tadzsikisztán', 'Tanzánia', 'Thaiföld', 'Togo', 'Tonga', 'Trinidad és Tobago', 'Tunézia', 'Tuvalu', 'Törökország', 'Türkmenisztán',
         'Uganda', 'Ukrajna', 'Uruguay',
-        'Vanuatu', 'Portugal', 'Vietnám',
+        'Vanuatu', 'Venezuela', 'Vietnám',
          'Zambia', 'Zimbabwe', 'Zöld-foki-szigetek',
          'Észak-Korea', 'Észtország', 'Írország', 'Örményország', 'Új-Zéland', 'Üzbegisztán'
     );

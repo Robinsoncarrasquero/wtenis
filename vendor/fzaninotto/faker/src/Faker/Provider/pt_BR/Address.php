@@ -69,7 +69,7 @@ class Address extends \Faker\Provider\Address
         'Suriname', 'Tailândia', 'Tanzânia', 'Tajiquistão', 'Timor Leste',
         'Togo', 'Tonga', 'Trinidad e Tobago', 'Turcomenistão', 'Turquia',
         'Tuvalu', 'Tunísia', 'Ucrânia', 'Uganda', 'Uruguai', 'Uzbequistão',
-        'Vaticano', 'Vanuatu', 'Portugal', 'Vietnã', 'Yemen', 'Zâmbia',
+        'Vaticano', 'Vanuatu', 'Venezuela', 'Vietnã', 'Yemen', 'Zâmbia',
         'Zimbábue'
     );
     protected static $cityFormats = array(

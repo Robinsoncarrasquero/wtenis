@@ -64,7 +64,7 @@ class Address extends \Faker\Provider\Address
         'Sri Lanka','Sudan','Suriye','Suudi Arabistan',
         'Tacikistan','Tayland','Tayvan','Tunus','Türkiye',
         'Ukrayna','Umman','Ürdün',
-        'Portugal','Vietnam',
+        'Venezuela','Vietnam',
         'Yemen','Yeni Zelanda','Yeşil Burun','Yunanistan',
         'Zambiya','Zimbabve'
     );

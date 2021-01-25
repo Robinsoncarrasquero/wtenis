@@ -490,7 +490,7 @@ class Address extends \Faker\Provider\Address
         'Sahara Barat','Saint Kitts dan Nevis','Saint Lucia','Saint Vincent dan Grenadines','Samoa','San Marino','São Tomé dan Príncipe','Scotland','Senegal','Sepanyol','Serbia','Seychelles','Sierra Leone','Singapura','Slovakia','Slovenia','Kepulauan Solomon','Somalia','Somaliland','Sri Lanka','Sudan','Sudan Selatan','Suriname','Swaziland','Sweden','Switzerland','Syria',
         'Tajikistan','Tanjung Verde','Tanzania','Thailand','Timor Leste','Togo','Tonga','Transnistria','Trinidad dan Tobago','Tunisia','Turki','Turkmenistan','Tuvalu',
         'Uganda','Ukraine','United Kingdom','Uruguay','Uzbekistan',
-        'Vanuatu','Kota Vatican','Portugal','Vietnam',
+        'Vanuatu','Kota Vatican','Venezuela','Vietnam',
         'Yaman',
         'Zambia','Zimbabwe',
     );

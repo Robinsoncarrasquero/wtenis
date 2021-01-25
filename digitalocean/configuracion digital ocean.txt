@@ -69,4 +69,6 @@ nano /var/www/wtenis/index.html
 http://134.122.120.12/wtenis
 
 
-sudo nano /etc/apache2/sites-available/000-default
+sudo nano /etc/apache2/sites-available/vision360.conf
+
+sudo cp /etc/apache2/sites-available/wtenis.conf /etc/apache2/sites-available/vision360.conf 

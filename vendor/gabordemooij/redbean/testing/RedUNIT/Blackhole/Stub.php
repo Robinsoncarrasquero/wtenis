@@ -25,6 +25,8 @@ class Stub extends Base
 {
 	/**
 	 * Test CUBRID.
+	 *
+	 * @return void
 	 */
 	public function testCUBRID()
 	{
@@ -60,8 +62,6 @@ class Stub extends Base
 		$writer->addFK( $type, $targetType, $property, $targetProperty, $isDependent = FALSE );
 		pass();
 		$writer->callMethod( 'getKeyMapForType', 'bean' );
-		pass();
-		$writer->inferFetchType( $type, $property );
 		pass();
 		$writer->getTypeForID();
 		pass();
@@ -123,25 +123,28 @@ class Stub extends Base
 		pass();
 	}
 
-	/**
-	 * Stub test for SSL-connect.
-	 * 
-	 * @return void
-	 */
-	 public function testSSL()
+	 /**
+	  * Test base implementation of getKeyMapForType().
+	  *
+	  * @return void
+	  */
+	 public function testKeyMap()
 	 {
-		$pdo = R::getPDO();
-		$mock = new \MockPDO;
-		R::getDatabaseAdapter()->getDatabase()->setPDO( $mock );
-		R::addToolBoxWithKey( 'stub', new \RedBeanPHP\ToolBox( R::getRedBean(), R::getDatabaseAdapter(), R::getWriter()) );
-		R::useMysqlSSL( 'key.pem','cert.pem','cacert.pem', 'stub' );
-		R::getDatabaseAdapter()->getDatabase()->setPDO( $pdo );
-		$prop = \PDO::MYSQL_ATTR_SSL_KEY;
-		asrt( $mock->getDiagAttribute($prop), 'key.pem' );
-		$prop = \PDO::MYSQL_ATTR_SSL_CERT;
-		asrt( $mock->getDiagAttribute($prop), 'cert.pem' );
-		$prop = \PDO::MYSQL_ATTR_SSL_CA;
-		asrt( $mock->getDiagAttribute($prop), 'cacert.pem' );
+		 $proxyWriter = new \ProxyWriter;
+		 $empty = $proxyWriter->callMethod( $proxyWriter, 'getKeyMapForType', 'bean' );
+		 asrt( is_array( $empty ), TRUE );
+		 asrt( count( $empty ), 0 );
+	 }
+
+	  /**
+	  * Test whether autoresolve() function for BC exists.
+	  *
+	  * @return void
+	  */
+	 public function testSetAutoResolve()
+	 {
+		R::setAutoResolve( TRUE );
+		pass();
 	 }
 }
 

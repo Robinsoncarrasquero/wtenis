@@ -131,7 +131,7 @@ class Address extends \Faker\Provider\Address
         "Sør-Korea", "Sør-Ossetia", "Sør-Sudan", "Tadsjikistan", "Taiwan", "Tanzania", "Thailand", "Togo", "Tonga",
         "Transnistria", "Trinidad og Tobago", "Tsjad", "Tsjekkia", "Tunisia", "Turkmenistan", "Tuvalu", "Tyrkia",
         "Tyskland", "Uganda", "USA", "Ukraina", "Ungarn", "Uruguay", "Usbekistan", "Vanuatu", "Vatikanstaten",
-        "Portugal", "Vietnam", "Zambia", "Zimbabwe", "Østerrike", "Øst-Timor"
+        "Venezuela", "Vietnam", "Zambia", "Zimbabwe", "Østerrike", "Øst-Timor"
     );
 
     /**

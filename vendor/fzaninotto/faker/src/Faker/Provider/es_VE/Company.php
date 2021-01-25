@@ -29,7 +29,7 @@ class Company extends \Faker\Provider\Company
     }
 
     /**
-     * Generate random Taxpayer Identification Number (RIF in Portugal). Ex J-123456789-1
+     * Generate random Taxpayer Identification Number (RIF in Venezuela). Ex J-123456789-1
      * @param string $separator
      * @return string
      */

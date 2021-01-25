@@ -511,3 +511,10 @@ function get_uniques_for_type( $type )
 	}
 	return $list;
 }
+
+//array_column PHP 7 implementation
+function colfield( $objects, $field ) {
+	$ids = array();
+	foreach($objects as $object) $ids[] = $object->{$field};
+	return $ids;
+}

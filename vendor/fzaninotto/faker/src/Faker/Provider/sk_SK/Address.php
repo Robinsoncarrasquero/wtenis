@@ -319,7 +319,7 @@ class Address extends \Faker\Provider\Address
         'Spojené kráľovstvo', 'Spojené štáty', 'Srbsko', 'Srí Lanka', 'Stredoafrická republika', 'Sudán', 'Surinam', 'Svätá Lucia',
         'Svätý Krištof a Nevis', 'Svätý Tomáš a Princov ostrov', 'Svätý Vincent a Grenadíny', 'Svazijsko', 'Sýria', 'Šalamúnove ostrovy',
         'Španielsko', 'Švajčiarsko', 'Švédsko', 'Tadžikistan', 'Taliansko', 'Tanzánia', 'Thajsko', 'Togo', 'Tonga', 'Trinidad a Tobago',
-        'Tunisko', 'Turecko', 'Turkménsko', 'Tuvalu', 'Uganda', 'Ukrajina', 'Uruguaj', 'Uzbekistan', 'Vanuatu', 'Vatikán', 'Portugal', 'Vietnam',
+        'Tunisko', 'Turecko', 'Turkménsko', 'Tuvalu', 'Uganda', 'Ukrajina', 'Uruguaj', 'Uzbekistan', 'Vanuatu', 'Vatikán', 'Venezuela', 'Vietnam',
         'Východný Timor', 'Zambia', 'Zimbabwe', 'Zvrchovaný vojenský špitálsky rád sv. Jána Jeruzalemského z Ródu a Malty'
     );
     protected static $cityFormats = array(

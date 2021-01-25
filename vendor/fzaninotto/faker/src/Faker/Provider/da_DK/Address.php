@@ -177,7 +177,7 @@ class Address extends \Faker\Provider\Address
         'Swaziland', 'Turks- og Caicosøerne', 'Tchad', 'Franske Besiddelser i Det Sydlige Indiske Ocean', 'Togo',
         'Thailand', 'Tadsjikistan', 'Tokelau', 'Timor-Leste', 'Turkmenistan', 'Tunesien', 'Tonga', 'Tyrkiet',
         'Trinidad og Tobago', 'Tuvalu', 'Taiwan', 'Tanzania', 'Ukraine', 'Uganda', 'De Mindre Amerikanske Oversøiske Øer',
-        'USA', 'Uruguay', 'Usbekistan', 'Vatikanstaten', 'St. Vincent og Grenadinerne', 'Portugal',
+        'USA', 'Uruguay', 'Usbekistan', 'Vatikanstaten', 'St. Vincent og Grenadinerne', 'Venezuela',
         'De britiske jomfruøer', 'De amerikanske jomfruøer', 'Vietnam', 'Vanuatu', 'Wallis og Futunaøerne', 'Samoa',
         'Yemen', 'Mayotte', 'Sydafrika', 'Zambia', 'Zimbabwe',
     );

@@ -125,4 +125,88 @@ class Tree {
 
 		return $this->oodb->convertToBeans( $type, $rows );
 	}
+
+	/**
+	 * Counts all children beans associates with the specified
+	 * bean in a tree structure.
+	 *
+	 * @note this only works for databases that support
+	 * recusrive common table expressions.
+	 *
+	 * <code>
+	 * $count = R::countChildren( $newsArticle );
+	 * $count = R::countChildren( $newsArticle, ' WHERE title = ? ', [ $t ] );
+	 * $count = R::countChildren( $newsArticle, ' WHERE title = :t ', [ ':t' => $t ] );
+	 * </code>
+	 *
+	 * @note:
+	 * You are allowed to use named parameter bindings as well as
+	 * numeric parameter bindings (using the question mark notation).
+	 * However, you can not mix. Also, if using named parameter bindings,
+	 * parameter binding key ':slot0' is reserved for the ID of the bean
+	 * and used in the query.
+	 *
+	 * @note:
+	 * By default, if no SQL or select is given or select=TRUE this method will subtract 1 of
+	 * the total count to omit the starting bean. If you provide your own select,
+	 * this method assumes you take control of the resulting total yourself since
+	 * it cannot 'predict' what or how you are trying to 'count'.
+	 *
+	 * @param OODBBean       $bean     reference bean to find children of
+	 * @param string         $sql      optional SQL snippet
+	 * @param array          $bindings optional parameter bindings for SQL snippet
+	 * @param string|boolean $select   select snippet to use (advanced, optional, see QueryWriter::queryRecursiveCommonTableExpression)
+	 *
+	 * @return integer
+	 */
+	public function countChildren( OODBBean $bean, $sql = NULL, $bindings = array(), $select = TRUE ) {
+		$type = $bean->getMeta('type');
+		$id   = $bean->id;
+		$rows = $this->writer->queryRecursiveCommonTableExpression( $type, $id, FALSE, $sql, $bindings, $select );
+		$first = reset($rows);
+		$cell  = reset($first);
+		return (intval($cell) - (($select === TRUE && is_null($sql)) ? 1 : 0));
+	}
+
+	/**
+	 * Counts all parent beans associates with the specified
+	 * bean in a tree structure.
+	 *
+	 * @note this only works for databases that support
+	 * recusrive common table expressions.
+	 *
+	 * <code>
+	 * $count = R::countParents( $newsArticle );
+	 * $count = R::countParents( $newsArticle, ' WHERE title = ? ', [ $t ] );
+	 * $count = R::countParents( $newsArticle, ' WHERE title = :t ', [ ':t' => $t ] );
+	 * </code>
+	 *
+	 * Note:
+	 * You are allowed to use named parameter bindings as well as
+	 * numeric parameter bindings (using the question mark notation).
+	 * However, you can not mix. Also, if using named parameter bindings,
+	 * parameter binding key ':slot0' is reserved for the ID of the bean
+	 * and used in the query.
+	 *
+	 * Note:
+	 * By default, if no SQL or select is given or select=TRUE this method will subtract 1 of
+	 * the total count to omit the starting bean. If you provide your own select,
+	 * this method assumes you take control of the resulting total yourself since
+	 * it cannot 'predict' what or how you are trying to 'count'.
+	 *
+	 * @param OODBBean $bean     reference bean to find parents of
+	 * @param string   $sql      optional SQL snippet
+	 * @param array    $bindings optional parameter bindings for SQL snippet
+	 * @param string|boolean $select   select snippet to use (advanced, optional, see QueryWriter::queryRecursiveCommonTableExpression)
+	 *
+	 * @return integer
+	 */
+	public function countParents( OODBBean $bean, $sql = NULL, $bindings = array(), $select = TRUE ) {
+		$type = $bean->getMeta('type');
+		$id   = $bean->id;
+		$rows = $this->writer->queryRecursiveCommonTableExpression( $type, $id, TRUE, $sql, $bindings, $select );
+		$first = reset($rows);
+		$cell  = reset($first);
+		return (intval($cell) - (($select === TRUE && is_null($sql)) ? 1 : 0));
+	}
 }

@@ -538,7 +538,7 @@ This will the last minor release in the `1.x` cycle.
 * Added password formatter to the Internet provider[\#402](https://github.com/fzaninotto/Faker/pull/402) ([fzaninotto](https://github.com/fzaninotto))
 * Added Company and Internet Austrian (de\_AT) Providers [\#400](https://github.com/fzaninotto/Faker/pull/400) ([bessl](https://github.com/bessl))
 * Added third-party libraries section in README [\#399](https://github.com/fzaninotto/Faker/pull/399) ([fzaninotto](https://github.com/fzaninotto))
-* Added Spanish for Portugal (es\_VE) locale [\#398](https://github.com/fzaninotto/Faker/pull/398) ([DIOHz0r](https://github.com/DIOHz0r))
+* Added Spanish for Venezuela (es\_VE) locale [\#398](https://github.com/fzaninotto/Faker/pull/398) ([DIOHz0r](https://github.com/DIOHz0r))
 * Added PhoneNumber Autrian (de\_AT) Provider, and missing test for the 'locale' method. [\#395](https://github.com/fzaninotto/Faker/pull/395) ([bessl](https://github.com/bessl))
 * Removed wrongly localized Lorem provider [\#394](https://github.com/fzaninotto/Faker/pull/394) ([fzaninotto](https://github.com/fzaninotto))
 * Fixed Miscellaneous provider (made the `locale` formatter static) [\#390](https://github.com/fzaninotto/Faker/pull/390) ([bessl](https://github.com/bessl))

@@ -213,7 +213,7 @@ class Address extends \Faker\Provider\Address
         // http://id.wikipedia.org/wiki/Holy_See
         'Vatikan',
 
-        'Portugal', 'Vietnam', 'Wallis dan Futuna', 'Wilayah Palestina',
+        'Venezuela', 'Vietnam', 'Wallis dan Futuna', 'Wilayah Palestina',
 
         // http://id.wikipedia.org/wiki/United_States_Virgin_Islands
         'Wilayah Samudra Hindia Britania',

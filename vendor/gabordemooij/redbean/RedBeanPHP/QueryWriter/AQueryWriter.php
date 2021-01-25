@@ -109,6 +109,54 @@ abstract class AQueryWriter
 	protected static $noNuke = false;
 
 	/**
+	 * Sets a data definition template to change the data
+	 * creation statements per type.
+	 *
+	 * For instance to add  ROW_FORMAT=DYNAMIC to all MySQL tables
+	 * upon creation:
+	 *
+	 * $sql = $writer->getDDLTemplate( 'createTable', '*' );
+	 * $writer->setDDLTemplate( 'createTable', '*', $sql . '  ROW_FORMAT=DYNAMIC ' );
+	 *
+	 * For property-specific templates set $beanType to:
+	 * account.username -- then the template will only be applied to SQL statements relating
+	 * to that column/property.
+	 *
+	 * @param string $type     ( 'createTable' | 'widenColumn' | 'addColumn' )
+	 * @param string $beanType ( type of bean or '*' to apply to all types )
+	 * @param string $template SQL template, contains %s for slots
+	 *
+	 * @return void
+	 */
+	public function setDDLTemplate( $type, $beanType, $template )
+	{
+		$this->DDLTemplates[ $type ][ $beanType ] = $template;
+	}
+
+	/**
+	 * Returns the specified data definition template.
+	 * If no template can be found for the specified type, the template for
+	 * '*' will be returned instead.
+	 *
+	 * @param string $type     ( 'createTable' | 'widenColumn' | 'addColumn' )
+	 * @param string $beanType ( type of bean or '*' to apply to all types )
+	 * @param string $property specify if you're looking for a property-specific template
+	 *
+	 * @return string
+	 */
+	public function getDDLTemplate( $type, $beanType = '*', $property = NULL )
+	{
+		$key = ( $property ) ? "{$beanType}.{$property}" : $beanType;
+		if ( isset( $this->DDLTemplates[ $type ][ $key ] ) ) {
+			return $this->DDLTemplates[ $type ][ $key ];
+		}
+		if ( isset( $this->DDLTemplates[ $type ][ $beanType ] ) ) {
+			return $this->DDLTemplates[ $type ][ $beanType ];
+		}
+		return $this->DDLTemplates[ $type ][ '*' ];
+	}
+
+	/**
 	 * Toggles support for IS-NULL-conditions.
 	 * If IS-NULL-conditions are enabled condition arrays
 	 * for functions including findLike() are treated so that
@@ -827,7 +875,7 @@ abstract class AQueryWriter
 	 */
 	public function glueLimitOne( $sql = '')
 	{
-		return ( strpos( strtoupper( $sql ), 'LIMIT' ) === FALSE ) ? ( $sql . ' LIMIT 1 ' ) : $sql;
+		return ( strpos( strtoupper( ' ' . $sql ), ' LIMIT ' ) === FALSE ) ? ( $sql . ' LIMIT 1 ' ) : $sql;
 	}
 
 	/**
@@ -843,16 +891,16 @@ abstract class AQueryWriter
 	/**
 	 * @see QueryWriter::addColumn
 	 */
-	public function addColumn( $type, $column, $field )
+	public function addColumn( $beanType, $column, $field )
 	{
-		$table  = $type;
+		$table  = $beanType;
 		$type   = $field;
 		$table  = $this->esc( $table );
 		$column = $this->esc( $column );
 
 		$type = ( isset( $this->typeno_sqltype[$type] ) ) ? $this->typeno_sqltype[$type] : '';
 
-		$this->adapter->exec( "ALTER TABLE $table ADD $column $type " );
+		$this->adapter->exec( sprintf( $this->getDDLTemplate('addColumn', $beanType, $column ), $table, $column, $type ) );
 	}
 
 	/**
@@ -904,17 +952,205 @@ abstract class AQueryWriter
 	}
 
 	/**
+	 * @see QueryWriter::parseJoin
+	 */
+	public function parseJoin( $type, $sql, $cteType = NULL )
+	{
+		if ( strpos( $sql, '@' ) === FALSE ) {
+			return $sql;
+		}
+
+		$sql = ' ' . $sql;
+		$joins = array();
+		$joinSql = '';
+
+		if ( !preg_match_all( '#@((shared|own|joined)\.[^\s(,=!?]+)#', $sql, $matches ) )
+			return $sql;
+
+		$expressions = $matches[1];
+		// Sort to make the joins from the longest to the shortest
+		uasort( $expressions, function($a, $b) {
+			return substr_count( $b, '.' ) - substr_count( $a, '.' );
+		});
+
+		$nsuffix = 1;
+		foreach ( $expressions as $exp ) {
+			$explosion = explode( '.', $exp );
+			$joinTable = $type;
+			$joinType  = array_shift( $explosion );
+			$lastPart  = array_pop( $explosion );
+			$lastJoin  = end($explosion);
+			if ( ( $index = strpos( $lastJoin, '[' ) ) !== FALSE ) {
+				$lastJoin = substr( $lastJoin, 0, $index);
+			}
+			reset($explosion);
+
+			// Let's check if we already joined that chain
+			// If that's the case we skip this
+			$joinKey  = implode( '.', $explosion );
+			foreach ( $joins as $chain => $suffix ) {
+				if ( strpos ( $chain, $joinKey ) === 0 ) {
+					$sql = str_replace( "@{$exp}", "{$lastJoin}__rb{$suffix}.{$lastPart}", $sql );
+					continue 2;
+				}
+			}
+			$sql = str_replace( "@{$exp}", "{$lastJoin}__rb{$nsuffix}.{$lastPart}", $sql );
+			$joins[$joinKey] = $nsuffix;
+
+			// We loop on the elements of the join
+			$i = 0;
+			while ( TRUE ) {
+				$joinInfo = $explosion[$i];
+				if ( $i ) {
+					$joinType = $explosion[$i-1];
+					$joinTable = $explosion[$i-2];
+				}
+
+				$aliases = array();
+				if ( ( $index = strpos( $joinInfo, '[' ) ) !== FALSE ) {
+					if ( preg_match_all( '#(([^\s:/\][]+)[/\]])#', $joinInfo, $matches ) ) {
+						$aliases = $matches[2];
+						$joinInfo = substr( $joinInfo, 0, $index);
+					}
+				}
+				if ( ( $index = strpos( $joinTable, '[' ) ) !== FALSE ) {
+					$joinTable = substr( $joinTable, 0, $index);
+				}
+
+				if ( $i ) {
+					$joinSql .= $this->writeJoin( $joinTable, $joinInfo, 'INNER', $joinType, FALSE, "__rb{$nsuffix}", $aliases, NULL );
+				} else {
+					$joinSql .= $this->writeJoin( $joinTable, $joinInfo, 'LEFT', $joinType, TRUE, "__rb{$nsuffix}", $aliases, $cteType );
+				}
+
+				$i += 2;
+				if ( !isset( $explosion[$i] ) ) {
+					break;
+				}
+			}
+			$nsuffix++;
+		}
+
+		$sql = str_ireplace( ' where ', ' WHERE ', $sql );
+		if ( strpos( $sql, ' WHERE ') === FALSE ) {
+			if ( preg_match( '/^(ORDER|GROUP|HAVING|LIMIT|OFFSET)\s+/i', trim($sql) ) ) {
+				$sql = "{$joinSql} {$sql}";
+			} else {
+				$sql = "{$joinSql} WHERE {$sql}";
+			}
+		} else {
+			$sqlParts = explode( ' WHERE ', $sql, 2 );
+			$sql = "{$sqlParts[0]} {$joinSql} WHERE {$sqlParts[1]}";
+		}
+
+		return $sql;
+	}
+
+	/**
 	 * @see QueryWriter::writeJoin
 	 */
-	public function writeJoin( $type, $targetType, $leftRight = 'LEFT' )
+	public function writeJoin( $type, $targetType, $leftRight = 'LEFT', $joinType = 'parent', $firstOfChain = TRUE, $suffix = '', $aliases = array(), $cteType = NULL )
 	{
 		if ( $leftRight !== 'LEFT' && $leftRight !== 'RIGHT' && $leftRight !== 'INNER' )
 			throw new RedException( 'Invalid JOIN.' );
 
-		$table = $this->esc( $type );
-		$targetTable = $this->esc( $targetType );
-		$field = $this->esc( $targetType, TRUE );
-		return " {$leftRight} JOIN {$targetTable} ON {$targetTable}.id = {$table}.{$field}_id ";
+		$globalAliases = OODBBean::getAliases();
+		if ( isset( $globalAliases[$targetType] ) ) {
+			$destType      = $globalAliases[$targetType];
+			$asTargetTable = $this->esc( $targetType.$suffix );
+		} else {
+			$destType      = $targetType;
+			$asTargetTable = $this->esc( $destType.$suffix );
+		}
+
+		if ( $firstOfChain ) {
+			$table = $this->esc( $type );
+		} else {
+			$table = $this->esc( $type.$suffix );
+		}
+		$targetTable = $this->esc( $destType );
+
+		if ( $joinType == 'shared' ) {
+
+			if ( isset( $globalAliases[$type] ) ) {
+				$field      = $this->esc( $globalAliases[$type], TRUE );
+				if ( $aliases && count( $aliases ) === 1 ) {
+					$assocTable = reset( $aliases );
+				} else {
+					$assocTable = $this->getAssocTable( array( $cteType ? $cteType : $globalAliases[$type], $destType ) );
+				}
+			} else {
+				$field      = $this->esc( $type, TRUE );
+				if ( $aliases && count( $aliases ) === 1 ) {
+					$assocTable = reset( $aliases );
+				} else {
+					$assocTable = $this->getAssocTable( array( $cteType ? $cteType : $type, $destType ) );
+				}
+			}
+			$linkTable      = $this->esc( $assocTable );
+			$asLinkTable    = $this->esc( $assocTable.$suffix );
+			$leftField      = "id";
+			$rightField     = $cteType ? "{$cteType}_id" : "{$field}_id";
+			$linkField      = $this->esc( $destType, TRUE );
+			$linkLeftField  = "id";
+			$linkRightField = "{$linkField}_id";
+
+			$joinSql = " {$leftRight} JOIN {$linkTable}";
+			if ( isset( $globalAliases[$targetType] ) || $suffix ) {
+				$joinSql .= " AS {$asLinkTable}";
+			}
+			$joinSql .= " ON {$table}.{$leftField} = {$asLinkTable}.{$rightField}";
+			$joinSql .= " {$leftRight} JOIN {$targetTable}";
+			if ( isset( $globalAliases[$targetType] ) || $suffix ) {
+				$joinSql .= " AS {$asTargetTable}";
+			}
+			$joinSql .= " ON {$asTargetTable}.{$linkLeftField} = {$asLinkTable}.{$linkRightField}";
+
+		} elseif ( $joinType == 'own' ) {
+
+			$field      = $this->esc( $type, TRUE );
+			$rightField = "id";
+
+			$joinSql = " {$leftRight} JOIN {$targetTable}";
+			if ( isset( $globalAliases[$targetType] ) || $suffix ) {
+				$joinSql .= " AS {$asTargetTable}";
+			}
+
+			if ( $aliases ) {
+				$conditions = array();
+				foreach ( $aliases as $alias ) {
+					$conditions[] = "{$asTargetTable}.{$alias}_id = {$table}.{$rightField}";
+				}
+				$joinSql .= " ON ( " . implode( ' OR ', $conditions ) . " ) ";
+			} else {
+				$leftField  = $cteType ? "{$cteType}_id" : "{$field}_id";
+				$joinSql .= " ON {$asTargetTable}.{$leftField} = {$table}.{$rightField} ";
+			}
+
+		} else {
+
+			$field      = $this->esc( $targetType, TRUE );
+			$leftField  = "id";
+
+			$joinSql = " {$leftRight} JOIN {$targetTable}";
+			if ( isset( $globalAliases[$targetType] ) || $suffix ) {
+				$joinSql .= " AS {$asTargetTable}";
+			}
+
+			if ( $aliases ) {
+				$conditions = array();
+				foreach ( $aliases as $alias ) {
+					$conditions[] = "{$asTargetTable}.{$leftField} = {$table}.{$alias}_id";
+				}
+				$joinSql .= " ON ( " . implode( ' OR ', $conditions ) . " ) ";
+			} else {
+				$rightField = "{$field}_id";
+				$joinSql .= " ON {$asTargetTable}.{$leftField} = {$table}.{$rightField} ";
+			}
+
+		}
+
+		return $joinSql;
 	}
 
 	/**
@@ -960,8 +1196,8 @@ abstract class AQueryWriter
 		} else {
 			$sql = $this->glueSQLCondition( $addSql );
 		}
-
-		$fieldSelection = ( self::$flagNarrowFieldMode ) ? "{$table}.*" : '*';
+		$sql = $this->parseJoin( $type, $sql );
+		$fieldSelection = self::$flagNarrowFieldMode ? "{$table}.*" : '*';
 		$sql   = "SELECT {$fieldSelection} {$sqlFilterStr} FROM {$table} {$sql} {$this->sqlSelectSnippet} -- keep-cache";
 		$this->sqlSelectSnippet = '';
 		$rows  = $this->adapter->get( $sql, $bindings );
@@ -985,9 +1221,11 @@ abstract class AQueryWriter
 			$sqlFilterStr = $this->getSQLFilterSnippet( $type );
 		}
 
-		$fieldSelection = ( self::$flagNarrowFieldMode ) ? "{$table}.*" : '*';
-
 		$sql = $this->glueSQLCondition( $addSql, NULL );
+
+		$sql = $this->parseJoin( $type, $sql );
+		$fieldSelection = self::$flagNarrowFieldMode ? "{$table}.*" : '*';
+
 		$sql = "SELECT {$fieldSelection} {$sqlFilterStr} FROM {$table} {$sql} -- keep-cache";
 
 		return $this->adapter->getCursor( $sql, $bindings );
@@ -1070,7 +1308,8 @@ abstract class AQueryWriter
 
 		$sqlFilterStr = '';
 		if ( count( self::$sqlFilters ) ) {
-			$sqlFilterStr = $this->getSQLFilterSnippet( $destType );
+			$linkType = $this->getAssocTable( array( $sourceType, $destType ) );
+			$sqlFilterStr = $this->getSQLFilterSnippet( "{$linkType}" );
 		}
 
 		if ( $sourceTable === $destTable ) {
@@ -1182,6 +1421,8 @@ abstract class AQueryWriter
 			$sql = $this->glueSQLCondition( $addSql );
 		}
 
+		$sql = $this->parseJoin( $type, $sql );
+
 		$sql    = "SELECT COUNT(*) FROM {$table} {$sql} -- keep-cache";
 		$count  = (int) $this->adapter->getCell( $sql, $bindings );
 
@@ -1240,11 +1481,15 @@ abstract class AQueryWriter
 	/**
 	 * @see QueryWriter::queryRecursiveCommonTableExpression
 	 */
-	public function queryRecursiveCommonTableExpression( $type, $id, $up = TRUE, $addSql = NULL, $bindings = array() )
+	public function queryRecursiveCommonTableExpression( $type, $id, $up = TRUE, $addSql = NULL, $bindings = array(), $selectForm = FALSE )
 	{
+		if ($selectForm === QueryWriter::C_CTE_SELECT_COUNT) {
+			$selectForm = "count(redbeantree.*)";
+		} elseif ( $selectForm === QueryWriter::C_CTE_SELECT_NORMAL ) {
+			$selectForm = "redbeantree.*";
+		}
 		$alias     = $up ? 'parent' : 'child';
 		$direction = $up ? " {$alias}.{$type}_id = {$type}.id " : " {$alias}.id = {$type}.{$type}_id ";
-
 		/* allow numeric and named param bindings, if '0' exists then numeric */
 		if ( array_key_exists( 0,$bindings ) ) {
 			array_unshift( $bindings, $id );
@@ -1253,22 +1498,20 @@ abstract class AQueryWriter
 			$idSlot = ':slot0';
 			$bindings[$idSlot] = $id;
 		}
-
 		$sql = $this->glueSQLCondition( $addSql, QueryWriter::C_GLUE_WHERE );
-
+		$sql = $this->parseJoin( 'redbeantree', $sql, $type );
 		$rows = $this->adapter->get("
-			WITH RECURSIVE tree AS
+			WITH RECURSIVE redbeantree AS
 			(
 				SELECT *
 				FROM {$type} WHERE {$type}.id = {$idSlot}
 				UNION ALL
 				SELECT {$type}.* FROM {$type}
-				INNER JOIN tree {$alias} ON {$direction}
+				INNER JOIN redbeantree {$alias} ON {$direction}
 			)
-			SELECT * FROM tree {$sql};",
+			SELECT {$selectForm} FROM redbeantree {$sql};",
 			$bindings
 		);
-
 		return $rows;
 	}
 
@@ -1324,7 +1567,7 @@ abstract class AQueryWriter
 
 		$newType = $this->typeno_sqltype[$dataType];
 
-		$this->adapter->exec( "ALTER TABLE $table CHANGE $column $column $newType " );
+		$this->adapter->exec( sprintf( $this->getDDLTemplate( 'widenColumn', $type, $column ), $type, $column, $column, $newType ) );
 
 		return TRUE;
 	}
@@ -1412,23 +1655,6 @@ abstract class AQueryWriter
 	public function safeTable( $table, $noQuotes = FALSE )
 	{
 		return $this->esc( $table, $noQuotes );
-	}
-
-	/**
-	 * @see QueryWriter::inferFetchType
-	 */
-	public function inferFetchType( $type, $property )
-	{
-		$type = $this->esc( $type, TRUE );
-		$field = $this->esc( $property, TRUE ) . '_id';
-		$keys = $this->getKeyMapForType( $type );
-
-		foreach( $keys as $key ) {
-			if (
-				$key['from'] === $field
-			) return $key['table'];
-		}
-		return NULL;
 	}
 
 	/**
