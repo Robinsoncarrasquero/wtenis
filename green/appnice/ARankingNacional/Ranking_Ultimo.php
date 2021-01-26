@@ -23,7 +23,7 @@ $strWhere=" WHERE  ";
 
 $strWhere .=" atleta.estado!=' '";
 
-$strWhere .=" && rank_id=$rank_id ";
+$strWhere .=" && ranking.rank_id=$rank_id ";
 $querycount = "SELECT count(*) as total  FROM atleta "
          ."INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id ".$strWhere
          ." ";
