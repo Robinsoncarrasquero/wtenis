@@ -19,7 +19,7 @@ $array_jsondata = Rank::data_combo_list($disciplina,$categoria,$sexo);
 $datox = array("value"=>0,"texto"=>"Seleccione");
 array_push($dato, $datox);
 foreach ($array_jsondata as $value) {
-    $datox = array("value"=>$value[value],"texto"=>$value[texto]);
+    $datox = array("value"=>$value['value'],"texto"=>$value['texto']);
     array_push($dato, $datox);
     
 }

@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')    { // comprobamos que venga mediante
             $msg='El Cambio de Clave se ha realizado exitosamente';
         }else{
                 $error_login=TRUE;
-                $msg="Error imposible establecer la Conexion con el sistema, intente mas tarde...";
+                $msg="Error imposible establecer la Conexion con el servidor, intente mas tarde...";
             $nr=1;
         }
     }

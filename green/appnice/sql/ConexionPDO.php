@@ -18,10 +18,12 @@ public function conectar()
        
     date_default_timezone_set('America/Caracas');
     error_reporting(1);
+    $dbms='mysql';
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "atletasdb";
+    $port='3306';
     if (MODO_DE_TEST==0){
         $servername = "localhost";
         $username = "username";
@@ -32,7 +34,7 @@ public function conectar()
              
     $port="3306";
     try {
-        $cnn =new PDO("mysql:host=$servername;dbname=$dbname;port=3306", $username, $password,
+        $cnn =new PDO("$dbms:host=$servername;dbname=$dbname;port=$port", $username, $password,
         array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\'',
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     } catch (PDOException $e) {

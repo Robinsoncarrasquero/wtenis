@@ -1,0 +1,43 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-ubuntu-20-04
+The /etc/aliases file contains a list of alternate names for email recipients. Open it for editing:
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-on-ubuntu-20-04-es
+
+echo "This is the body of the email" | mail -s "This is the subject line" rcarrasquero@gmail.com
+
+
+sudo nano /etc/postfix/virtual
+contact@example.com sammy
+admin@example.com sammy
+
+
+echo 'init' | s-nail -s 'init' -Snorecord robinson
+
+
+cat ~/test_message | s-nail -s 'Test email talent360 from prostfix' -r robinson@talent360.cf rcarrasquero@gmail.com
+
+
+sudo apt install certbot
+sudo certbot certonly --apache --rsa-key-size 4096 --agree-tos --preferred-challenges http -d talent360.cf
+
+CERTIFICADO ESTA AQUI
+/etc/letsencrypt.
+
+As written in the notes, your certificate and private key file were saved under
+ /etc/letsencrypt/live/your_domain.
+
+
+
+echo "This is the body of an encrypted email for TALENT360.CF" | mail -s "This is the subject line" rcarrasquero@gmail.com
+
+
+echo 'init' | s-nail -s 'init' -Snorecord robinson
+
+
+cat ~/test_message | s-nail -s 'Test email subject line' -r robinson@talent360.cf rcarrasquero@gmail.com
+
+echo 'Prueba' | s-nail -s 'init' -Snorecord robinson
+
+
+
+
