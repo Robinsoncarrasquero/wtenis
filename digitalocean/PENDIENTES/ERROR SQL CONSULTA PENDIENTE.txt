@@ -1,0 +1,14 @@
+SELECT atleta.atleta_id,atleta.sexo,atleta.cedula,atleta.estado,
+        atleta.nombres,atleta.apellidos,
+        DATE_FORMAT(atleta.fecha_nacimiento,'%d-%m-%Y') as fecha_nacimiento,
+        ranking.rknacional,ranking.rkregional,ranking.rkestadal,
+        ranking.categoria,ranking.ranking_id,ranking.puntos,
+        DATE_FORMAT(ranking.fecha_ranking,'%d-%m-%Y') as fecha_ranking  FROM atleta 
+        INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id && ranking.rank_id=311
+        ORDER by ranking.rknacional,ranking.rkregional,ranking.rkestadal
+
+SELECT count(*) as total  FROM atleta "
+         INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id & ranking.rank_id=311
+
+
+SELECT * FROM rank WHERE categoria='16' and sexo='F' and disciplina='TDC' ORDER BY fecha DESC LIMIT 1

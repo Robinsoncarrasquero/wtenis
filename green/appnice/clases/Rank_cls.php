@@ -254,14 +254,18 @@ class Rank {
     } 
     public static function Find_Last_Ranking($disciplina,$categoria,$sexo){
    
-       $model = new Conexion;
+       $model = new Conexion();
        $conn=$model->conectar();
-       $SQL = $conn->prepare('SELECT * FROM ' . self::TABLA .' '
+        // set the PDO error mode to exception
+       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         
+       $SQL = $conn->prepare(' SELECT * FROM ' . self::TABLA .' '
                . ' WHERE categoria=:categoria and sexo=:sexo and disciplina=:disciplina '
-               . ' ORDER BY fecha DESC LIMIT 1 ');
+               . ' ORDER BY fecha DESC LIMIT 1,1');
        $SQL->bindParam(':categoria', $categoria);
        $SQL->bindParam(':sexo', $sexo);
        $SQL->bindParam(':disciplina', $disciplina);
+
        $SQL->execute();
        $registro = $SQL->fetch();
        $conn=NULL;

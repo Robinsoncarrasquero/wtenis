@@ -1,0 +1,9 @@
+http://wtenis.test.ve/green/appnice/ARankingNacional/RankingTest.php
+
+
+scp /c/Users/robinson/wtenis/RankingTest.php root@134.122.120.12:/var/www/wtenis/green/appnice/ARankingNacional
+
+scp -r root@134.122.120.12:/var/lib/mysql/data-dump-EVA360.sql /Talent360
+
+
+scp RankingTest.php root@134.122.120.12:/var/www/wtenis/green/appnice/ARankingNacional

@@ -622,10 +622,8 @@ class Atleta   {
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-                $SQL = $conn->prepare(" SELECT * FROM " . self::TABLA . ' WHERE atleta_id = :id');
-                $SQL->bindParam(':id', $atleta_id);
-            
-          
+            $SQL = $conn->prepare(" SELECT * FROM " . self::TABLA . ' WHERE atleta_id = :id');
+            $SQL->bindParam(':id', $atleta_id);
             
             $SQL->execute();
             $record = $SQL->fetch();

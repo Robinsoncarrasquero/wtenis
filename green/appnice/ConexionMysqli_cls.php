@@ -42,13 +42,13 @@ public static function Conexion($MODO_DE_TEST){
 
     return  $conn;
 }
+
 //Ejecutar consulta
-public static function query($strSQL) {
+public static function mysqli_query($strSQL) {
     $conn=Conexion_mysqli::Conexion(1);
     $results=$conn->query($strSQL);
     return $results;
 }
-
 //Cerrar la conexion
 public static function mysqli_close($conn) {
     
@@ -64,10 +64,10 @@ public static function  mysqli_fetch_assoc($result){
     return mysqli_fetch_assoc($result);
 }
 
-public static function fetch_field($result){
+public static function mysqli_fetch_field($result){
     return $result->fetch_field() ;
 }
-public static function fetch_array($sql){
+public static function mysqli_fetch_array($sql){
     return mysqli_fetch_array($sql, MYSQLI_ASSOC);
 }
     

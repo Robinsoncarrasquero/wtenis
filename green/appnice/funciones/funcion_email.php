@@ -1,5 +1,6 @@
 <?php
 require_once 'funcion_fecha.php';
+require_once '../ConexionMysqli_cls.php';
 /* 
  * Utilizamos esta funcion para hacer el envion de correo de cualquier moovimiento tales 
  * como Inscripcion, eliminacion de inscripcion, retiros.
@@ -47,9 +48,9 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
             . "fecha_inicio_torneo,codigo,nombre,empresa_id,tipo "
             . "FROM torneo "
             . "WHERE torneo_id=$torneoid";
-    
-    $result=mysql_query($sql);
-    $row = mysql_fetch_array($result);
+    $conn = Conexion_mysqli::Conexion(MODO_DE_TEST);
+    $result=Conexion_mysqli::mysqli_query($sql);
+    $row = Conexion_mysqli::mysqli_fetch_array($result);
     if ($row){
         $codigo_torneo=$row["codigo"];
         $nombre_torneo=$row["nombre"];
@@ -68,8 +69,8 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
                 . "FROM atleta "
                 . "WHERE atleta_id=$atleta_id ";
         
-        $result=mysql_query($sql);
-        $row = mysql_fetch_array($result);
+        $result=Conexion_mysqli::mysqli_query($sql);
+        $row = Conexion_mysqli::mysqli_fetch_array($result);
         
         $nombre_atleta=$row["nombres"];
         $apellido_atleta=$row["apellidos"];
@@ -86,8 +87,8 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
                 . "FROM empresa "
                 . "WHERE estado='$entidad_torneo'";
         
-        $result2=mysql_query($sqlEmp);
-        $rsempresa= mysql_fetch_assoc($result2);
+        $result2=Conexion_mysqli::mysqli_query($sqlEmp);
+        $rsempresa= Conexion_mysqli::mysqli_fetch_assoc($result2);
         if ($rsempresa){
             $banco_empresa =$rsempresa['banco'];
             $cuenta_empresa =$rsempresa['cuenta'];
@@ -128,6 +129,7 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
         //Enviamos el Correo
         {
             $nombre_remitente='mytenis';
+            $email_empresa='robinson.carrasquero@gmail.com';
             $to = $email; //"robinson.carrasquero@gmail.com";
             $subject = "$movimiento al torneo:($codigo_torneo)";
             
@@ -165,8 +167,8 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
             . "FROM atleta "
             . "WHERE cedula=$cedulax";
     
-    $result=mysqli_query($sql);
-    $row = mysql_fetch_array($result);
+    $result=Conexion_mysqli::mysqli_query($sql);
+    $row = Conexion_mysqli::mysqli_fetch_array($result);
     $atleta_id=$row['atleta_id'];
     $nombre_atleta=trim($row["nombres"]);
     $apellido_atleta=trim($row["apellidos"]);
@@ -187,8 +189,8 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
             . " FROM empresa "
             . " WHERE empresa_id=$empresa_id";
     
-    $resultemp=mysql_query($sqlEmp);
-    $rsempresa = mysql_fetch_array($resultemp);
+    $resultemp=Conexion_mysqli::mysqli_query($sqlEmp);
+    $rsempresa =Conexion_mysqli::mysqli_fetch_array($resultemp);
     if ($rsempresa) {
         $banco_empresa = $rsempresa['banco'];
         $cuenta_empresa = $rsempresa['cuenta'];
@@ -383,13 +385,15 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     // echo json_encode($jsondata, JSON_FORCE_OBJECT);
     
     $nombre_remitente='mytenis';
+    $email_empresa='rcarrasquero@gmail.com';
+    $email_from ='atenimiranda@gmail.com';
     //Enviamos Correo
     {
         $to = $email; //"robinson.carrasquero@gmail.com";
         $subject = $asunto;
         if ($atleta_id == 487) { // Prueba de usuario
-            $from = "From: mytenis<info@example>"
-                    . "\r\n" . "BCC:atenismiranda@gmail.com";
+            $from = "From: mytenis<$email_from>"
+                    . "\r\n" . "BCC:robinson.carrasquero@gmail.com";
         } else {
             $from = "From: $nombre_remitente<" . $email_from . ">"
                     . "\r\n" . "BCC:atenismiranda@gmail.com,$email_empresa";
@@ -405,8 +409,8 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
 function Control_Afiliacion_Anual($atleta_id,$ano_afiliacion) {
     //Verificamos pago de afiliacion
     $sql = "SELECT pagado FROM afiliaciones WHERE  atleta_id=$atleta_id && ano=$ano_afiliacion";
-    $result = mysql_query($sql);
-    $rsAfiliados = mysql_fetch_array($result);
+    $result = Conexion_mysqli::mysqli_query($sql);
+    $rsAfiliados =Conexion_mysqli::mysqli_fetch_array($result);
     if ($rsAfiliados['pagado']>0){
         $habilitado= TRUE; //Habilitado para imprimir o enviar correo
     }else{
@@ -425,7 +429,7 @@ function html_template($campos, $valores, $strDocumento) {
 function email_smtp($to,$subject,$body,$from){
     $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
     $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
-    if ($to !=NULL && MODO_DE_PRUEBA==0){
+    if ($to !=NULL && MODO_DE_PRUEBA==1){
         mail($to,$subject,$body,$cabeceras.$from);
     }
 }
