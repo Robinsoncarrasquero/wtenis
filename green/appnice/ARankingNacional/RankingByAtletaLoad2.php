@@ -76,7 +76,6 @@ foreach ($records as $row) {
 }
 
 $lineaOut .= $main_content . $table_head . $table_data . $table_footer;
-$lineaOut .= $main_content . $table_head . $table_data . $table_footer;
 if ($nr>0){
     $jsondata = array("Success" => True, "html"=>$lineaOut,"pagination"=>$objPaginacion->Paginacion());   
 
