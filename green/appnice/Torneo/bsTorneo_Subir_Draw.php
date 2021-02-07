@@ -1,14 +1,13 @@
 <?php
 session_start();
-require_once '../sql/ConexionPDO.php';
-require_once '../sql/Crud.php';
+// require_once '../sql/ConexionPDO.php';
+// require_once '../sql/Crud.php';
 require_once '../funciones/funcion_fecha.php';
-require_once'../funciones/funcion_archivos.php';
 require_once "../clases/Empresa_cls.php";
 require_once "../clases/Torneos_cls.php";
 require_once '../sql/ConexionPDO.php';
 require_once '../clases/Encriptar_cls.php';
-
+require_once '../funciones/funcion_archivos.php';
 if ( $_SESSION['niveluser']<9){
     header('Location: ../sesion_usuario.php');
     exit;
@@ -279,11 +278,11 @@ else
     
                        // Imprimiendo una linea
                       
-                       if ($value[estado]==$entidad){
-                            echo  '<option selected value="'.$value[estado].'">'.$value[estado].'</option>';
+                       if ($value["estado"]==$entidad){
+                            echo  '<option selected value="'.$value["estado"].'">'.$value["estado"].'</option>';
                            
                        }else{
-                           echo  '<option value="'.$value[estado].'">'.$value[estado].'</option>'; 
+                           echo  '<option value="'.$value["estado"].'">'.$value["estado"].'</option>'; 
                        }
                     }
                     ?>

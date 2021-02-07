@@ -205,15 +205,15 @@ class Crud {
     
     public function valida_fields()
     {
-        $objeto->table_fields();
+        $this->objeto->table_fields();
         echo '<pre>';
-            var_dump($objeto->fields[0]);
+            var_dump($this->objeto->fields[0]);
             
             echo '</pre>';
-        for ($i=0;$i<$objeto->fields_count;$i++){
+        for ($i=0;$i<$this->objeto->fields_count;$i++){
             //$datos_bd= array($record->name=>$record[$records->name]);
             echo '<pre>';
-            var_dump($objeto->fields[$i]);
+            var_dump($this->objeto->fields[$i]);
             
             echo '</pre>';
         }  
@@ -271,6 +271,7 @@ class Crud {
         $nombre_atleta=trim($this->roww[0]["nombres"]);
         $apellido_atleta=trim($this->roww[0]["atleta_id"]);
         $email=$this->roww[0]["email"];
+        $contrasena=$this->roww[0]["contrasena"];
         
         switch ($tipo){
             case "Rank": //Ranking Modificado
@@ -296,8 +297,8 @@ class Crud {
 
         } 
         $notificacion2="fue realizada exitosamente";
-        if ($tipoNotificacion=="RecuperarClave" || $tipoNotificacion="Clave"){
-            $notificacion="su nueva clave es :".$row["contrasena"];
+        if ($tipo=="RecuperarClave" || $tipo=="Clave"){
+            $notificacion="su nueva clave es :".$contrasena;
             $notificacion2=" ";
         }
         
@@ -308,7 +309,7 @@ class Crud {
             $subject = $asunto ;
             $txt = "Estimado(a) $nombre_atleta,$apellido_atleta, le notificamos que $notificacion "
                     . $notificacion2;
-            $headers = "From: info@tenis.net.ve" 
+            $headers = "From: rcarrasquero@gmail.com" 
                     . "\r\n" ."BCC: atenismiranda@gmail.com";
 
             mail($to,$subject,$txt,$headers);

@@ -316,11 +316,11 @@ $arbitro=0;
     
                        // Imprimiendo una linea
                       
-                       if ($value[estado]==$entidad){
-                            echo  '<option selected value="'.$value[estado].'">'.$value[estado].'</option>';
+                       if ($value['estado']==$entidad){
+                            echo  '<option selected value="'.$value['estado'].'">'.$value['estado'].'</option>';
                            
                        }else{
-                           echo  '<option value="'.$value[estado].'">'.$value[estado].'</option>'; 
+                           echo  '<option value="'.$value['estado'].'">'.$value['estado'].'</option>'; 
                        }
                     }
                     ?>
@@ -361,10 +361,10 @@ $arbitro=0;
                          <?php
                          {
                             foreach ($array_condicion as $value) {
-                                if ($condicion == $value[condicion]) {
-                                    echo '<option selected value="' . $value[condicion] . '">' . $value[descripcion] . '</option>';
+                                if ($condicion == $value['condicion']) {
+                                    echo '<option selected value="' . $value['condicion'] . '">' . $value['descripcion'] . '</option>';
                                 } else {
-                                    echo '<option value="' . $value[condicion] . '">' . $value[descripcion] . '</option>';
+                                    echo '<option value="' . $value['condicion'] . '">' . $value['descripcion'] . '</option>';
                                 }
                             }
                          }
@@ -390,7 +390,7 @@ $arbitro=0;
                          {
                             echo '<option selected value="' . '0' . '">' . 'POR ASIGNAR'. '</option>';
                             foreach ($rsarbitros as $value) {
-                                echo '<option value="' . $value[atleta_id] . '">' . $value[nombres] ." ".$value[apellidos]. '</option>';
+                                echo '<option value="' . $value['atleta_id'] . '">' . $value['nombres'] ." ".$value['apellidos']. '</option>';
                             }
                          }
          

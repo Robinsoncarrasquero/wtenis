@@ -1,4 +1,5 @@
 <?php
+require_once 'ConexionPDO.php';
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,14 +32,16 @@ class Crud {
     public $fields;
     public $fields_count;
     private $dirty;
+   
+
     public function __construct() {
-       
        $this->dirty=false;
        $this->operacionExitosa=false;
     }
 
     public function Create()
     {
+   
         try{
             $model = new Conexion();
             $conexion = $model->conectar();

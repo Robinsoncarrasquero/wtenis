@@ -1,13 +1,12 @@
 <?php
 session_start();
-require_once '../sql/ConexionPDO.php';
 require_once '../sql/Crud.php';
 require_once '../funciones/funcion_fecha.php';
-require_once'../funciones/funcion_archivos.php';
 require_once "../clases/Empresa_cls.php";
 require_once "../clases/Torneos_cls.php";
 require_once '../clases/Atleta_cls.php';
 require_once '../clases/Encriptar_cls.php';
+require_once '../funciones/funcion_archivos.php';
 
 if ( $_SESSION['niveluser']<9){
     header('Location: ../sesion_usuario.php');
@@ -277,10 +276,10 @@ else
 
                             // Imprimiendo una linea
 
-                            if ($value[estado] == $entidad) {
-                                echo '<option selected value="' . $value[estado] . '">' . $value[estado] . '</option>';
+                            if ($value['estado'] == $entidad) {
+                                echo '<option selected value="' . $value['estado'] . '">' . $value['estado'] . '</option>';
                             } else {
-                                echo '<option value="' . $value[estado] . '">' . $value[estado] . '</option>';
+                                echo '<option value="' . $value['estado'] . '">' . $value['estado'] . '</option>';
                             }
                         }
                         ?>
@@ -325,10 +324,10 @@ else
                     <?php
                     {
                         foreach ($array_condicion as $value) {
-                            if ($condicion == $value[condicion]) {
-                                echo '<option selected value="' . $value[condicion] . '">' . $value[descripcion] . '</option>';
+                            if ($condicion == $value['condicion']) {
+                                echo '<option selected value="' . $value['condicion'] . '">' . $value['descripcion'] . '</option>';
                             } else {
-                                echo '<option value="' . $value[condicion] . '">' . $value[descripcion] . '</option>';
+                                echo '<option value="' . $value['condicion'] . '">' . $value['descripcion'] . '</option>';
                             }
                         }
                     }
@@ -353,10 +352,10 @@ else
                          {
                             echo '<option  value="' . '0' . '">' . 'POR ASIGNAR'. '</option>';
                             foreach ($rsarbitros as $value) {
-                                if ($arbitro == $value[atleta_id]) {
-                                    echo '<option selected value="' . $value[atleta_id] . '">' . $value[nombres] ." ".$value[apellidos]. '</option>';
+                                if ($arbitro == $value['atleta_id']) {
+                                    echo '<option selected value="' . $value['atleta_id'] . '">' . $value['nombres'] ." ".$value['apellidos']. '</option>';
                                 } else {
-                                    echo '<option value="' . $value[atleta_id] . '">' . $value[nombres] ." ".$value[apellidos]. '</option>';
+                                    echo '<option value="' . $value['atleta_id'] . '">' . $value['nombres'] ." ".$value['apellidos']. '</option>';
                                 }
                           
                             }
