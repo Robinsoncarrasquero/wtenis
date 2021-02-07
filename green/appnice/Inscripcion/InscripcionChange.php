@@ -12,12 +12,11 @@ if (isset($_SESSION['logueado']) && !$_SESSION['logueado']){
     header('Location:../sesion_cerrar.php');
     exit;
 }
-
 // if (!$result) {
 //     die('No pudo conectarse: ' . mysql_error());
 // }
 
-if ($_POST['btnProcesar']){   
+if (@$_POST['btnProcesar']){   
     //Aqui eliminamos en las inscripciones que aun se encuentran activas antes de la fecha de cierre
     //de inscripcion. Una vez cerradas las inscripcionesse solo se permite retiro.
     if (isset($_POST['chkeliminar'])){
@@ -116,11 +115,11 @@ if ($_POST['btnProcesar']){
                     $franking = $objRanking->getFechaRankingNacional();
                 }
             }
-            die("Paso agregar Error Inesperado en la inscripcion ");
             //Creamos la inscripcion
             $objInscripcion = new TorneosInscritos();
             $objInscripcion->Find_Atleta($torneoid,$objAtleta->getID());
             if (!$objInscripcion->Operacion_Exitosa){
+                die("Paso 1 crear la inscripcion ");
                 $objInscripcion->setTorneo_id($torneoid);
                 $objInscripcion->setAtleta_id($atleta_id);
                 $objInscripcion->setRknacional($rknacional);
@@ -132,6 +131,7 @@ if ($_POST['btnProcesar']){
                 $objInscripcion->create(); 
                 
             }else{
+                die("Paso 2 update la inscripcion ");
                 $objInscripcion->setRknacional($rknacional);
                 $objInscripcion->setCategoria($categoria);
                 $objInscripcion->setFechaRanking($franking);
@@ -139,9 +139,7 @@ if ($_POST['btnProcesar']){
                 $objInscripcion->Update(); 
                
             }
-            die("Error depsues de agregar la inscripcion ");
-    
-
+            
             if (!$objInscripcion->Operacion_Exitosa()) {
                 die('ERROR No pudo conectarse: ');
             }
