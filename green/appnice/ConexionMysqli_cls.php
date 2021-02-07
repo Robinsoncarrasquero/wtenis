@@ -27,7 +27,6 @@ public static function Conexion($MODO_DE_TEST){
         $username = "username";
         $password = "password";
         $dbname = "dbname";
-        error_reporting(0);
     }
 
     $conn =mysqli_connect($servername, $username, $password,$dbname);

@@ -162,12 +162,12 @@ class Rank {
             
             $SQL = $conn->prepare('INSERT INTO ' .self::TABLA. $campos. ' VALUES '. $valores);
             $SQL->bindParam(':fecha', $this->fecha, PDO::PARAM_STR);
-            $SQL->bindParam(':categoria', $this->categoria);
-            $SQL->bindParam(':sexo', $this->sexo);
-            $SQL->bindParam(':carpeta', $this->carpeta);
-            $SQL->bindParam(':filename', $this->filename);
-            $SQL->bindParam(':filetype', $this->filetype);
-            $SQL->bindParam(':disciplina', $this->disciplina);
+            $SQL->bindParam(':categoria', $this->categoria,PDO::PARAM_STR);
+            $SQL->bindParam(':sexo', $this->sexo,PDO::PARAM_STR);
+            $SQL->bindParam(':carpeta', $this->carpeta,PDO::PARAM_STR);
+            $SQL->bindParam(':filename', $this->filename,PDO::PARAM_STR);
+            $SQL->bindParam(':filetype', $this->filetype,PDO::PARAM_STR);
+            $SQL->bindParam(':disciplina', $this->disciplina,PDO::PARAM_STR);
            
             $SQL->execute();
             $this->id = $conn->lastInsertId();
@@ -197,11 +197,11 @@ class Rank {
                     . 'filename=:filename,filetype=:filetype,disciplina=:disciplina,'
                     . 'procesado=:procesado';
             $stmt = $conn->prepare('UPDATE ' . self::TABLA . $SQL. ' WHERE id= :id');
-            $stmt->bindParam(':carpeta', $this->carpeta);
-            $stmt->bindParam(':filename', $this->filename);
-            $stmt->bindParam(':filetype', $this->filetype);
-            $stmt->bindParam(':disciplina', $this->disciplina);
-            $stmt->bindParam(':procesado', $this->procesado);
+            $stmt->bindParam(':carpeta', $this->carpeta,PDO::PARAM_STR);
+            $stmt->bindParam(':filename', $this->filename,PDO::PARAM_STR);
+            $stmt->bindParam(':filetype', $this->filetype,PDO::PARAM_STR);
+            $stmt->bindParam(':disciplina', $this->disciplina,PDO::PARAM_STR);
+            $stmt->bindParam(':procesado', $this->procesado,PDO::PARAM_STR);
             $stmt->bindParam(':id', $this->id);
             $stmt->execute();
             //echo "New records created successfully";
@@ -255,29 +255,28 @@ class Rank {
     public static function Find_Last_Ranking($disciplina,$categoria,$sexo){
    
         try{
-        $model = new Conexion();
-        $conn=$model->conectar();
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $SQL = $conn->prepare(' SELECT * FROM ' . self::TABLA .' '
-        . ' WHERE categoria=:categoria and sexo=:sexo and disciplina=:disciplina '
-        . ' ORDER BY fecha DESC LIMIT 1,1');
-         // set the PDO error mode to exception
-        $SQL->bindParam(':categoria', $categoria);
-        $SQL->bindParam(':sexo', $sexo);
-        $SQL->bindParam(':disciplina', $disciplina);
-       }
-       catch(PDOException $e)
-       {
-           echo "Error: " . $e->getMessage();
-           $mensaje="Error Update: " . $e->getMessage();
-       }
-       $SQL->execute();
-       $registro = $SQL->fetch();
-       $conn=NULL;
-       return $registro;
-        
-
-    
+            $model = new Conexion();
+            $conn=$model->conectar();
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL = $conn->prepare(' SELECT * FROM ' . self::TABLA .' '
+            . ' WHERE categoria=:categoria and sexo=:sexo and disciplina=:disciplina '
+            . ' ORDER BY fecha DESC LIMIT 1,1');
+            // set the PDO error mode to exception
+            $SQL->bindParam(':categoria', $categoria,PDO::PARAM_STR);
+            $SQL->bindParam(':sexo', $sexo,PDO::PARAM_STR);
+            $SQL->bindParam(':disciplina', $disciplina,PDO::PARAM_STR);
+            $SQL->execute();
+        }
+        catch(PDOException $e)
+        {
+            echo "Error: " . $e->getMessage();
+            $mensaje="Error Update: " . $e->getMessage();
+        }
+      
+        $registro = $SQL->fetch();
+        $conn=NULL;
+        return $registro;
+          
     }
     
     //Lee todos los registros y devuelve un recordset
@@ -329,9 +328,9 @@ class Rank {
            $SQL->bindParam(":fecha",$fecha, PDO::PARAM_STR);
            
         }
-        $SQL->bindParam(":sexo",$sexo);
-        $SQL->bindParam(":categoria",$categoria);
-        $SQL->bindParam(":disciplina",$disciplina);
+        $SQL->bindParam(":sexo",$sexo,PDO::PARAM_STR);
+        $SQL->bindParam(":categoria",$categoria,PDO::PARAM_STR);
+        $SQL->bindParam(":disciplina",$disciplina,PDO::PARAM_STR);
         
         $SQL->execute();
         $records = $SQL->fetchAll();
@@ -341,11 +340,5 @@ class Rank {
        
     }
     
-    
-     
-       
-    
-
-
 }
 

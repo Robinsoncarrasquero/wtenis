@@ -17,7 +17,6 @@ class Conexion
     {
         
         date_default_timezone_set('America/Caracas');
-        error_reporting(1);
         $dbms='mysql';
         $servername = "localhost";
         $username = "root";
