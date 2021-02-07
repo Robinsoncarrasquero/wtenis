@@ -30,20 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      
     $usuario = $_POST['usuario'];
     $contrasena = $_POST['contrasena'];
-    $conn =  mysql_connect($servername, $username, $password);
-    $result=mysql_select_db($dbname,$conn);
+    $conn =  mysqli_connect($servername, $username, $password);
+    $result=mysqli_select_db($conn,$dbname);
     
   
     if (!$result) {
-        die('No pudo conectarse: ' . mysql_error());
+        die('No pudo conectarse: ' . mysqli_error($conn));
     }
-    $usuario=  mysql_real_escape_string($usuario);
+    $usuario=  mysqli_real_escape_string($conn,$usuario);
 
     $sql = "SELECT atleta_id,estado,cedula,contrasena,nombres,apellidos,niveluser,email,clave_default FROM atleta WHERE cedula='".$usuario."' && bloqueado=0";
-    $result = mysql_query($sql);
+    $result = mysqli_query($conn,$sql);
     
-   if (mysql_num_rows($result)){
-        $record = mysql_fetch_assoc($result);
+   if (mysqli_num_rows($result)){
+        $record = mysqli_fetch_assoc($result);
               
         $atleta_id=$record["atleta_id"];
         $cedula=$record["cedula"];
@@ -92,8 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['afiliado'] = 0;
             $_SESSION['ano_afiliacion']=2017;
             $sql = "SELECT estado,empresa_id,email,email_envio from empresa WHERE estado='$estado'";
-            $result2=mysql_query($sql);
-            $record = mysql_fetch_assoc($result2);
+            $result2=mysqli_query($conn,$sql);
+            $record = mysqli_fetch_assoc($result2);
             
             if ($record){
                 
@@ -112,8 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Verificamos pago de afiliacion
             $sql = "SELECT pagado FROM afiliaciones WHERE  atleta_id=$atleta_id && ano=2017";
 
-            $result = mysql_query($sql);
-            $rsAfiliados = mysql_fetch_array($result);
+            $result = mysqli_query($conn,$sql);
+            $rsAfiliados = mysqli_fetch_array($result);
             if ($rsAfiliados) {
                 if ($rsAfiliados['pagado']>0){
                         $_SESSION['deshabilitado'] = FALSE; //Habilitado para imprimir o enviar correo
@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //            echo "<pre>";
 //            echo "var_dump($sql)";
 //            echo "<pre>";
-            $result=mysql_query($sql);
+            $result=mysqli_query($conn,$sql);
             if (!$result) {
                 
                echo "Error insertado record: " .$conn_error();
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               
             }
            
-            mysql_close($conn);
+            mysqli_close($conn);
             exit;
         }else{
             $error_login = false;
@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_login = false; 
          
     }
-     mysql_close($conn);
+     mysqli_close($conn);
 }
  
 ?>

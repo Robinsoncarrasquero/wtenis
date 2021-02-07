@@ -4,6 +4,8 @@ include 'extensions/Mobile-Detect.php';
 require_once 'conexion.php';
 require_once 'clases/Html_cls.php';
 
+header('Location: ../index.php');
+exit;
 ?>
 
 <!DOCTYPE html>

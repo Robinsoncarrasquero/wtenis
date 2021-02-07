@@ -25,7 +25,7 @@ public static function inscripcion_reload($cedulaid) {
   $consulta_mysql = "SELECT * FROM atleta WHERE cedula='".$cedulaid."'";
   //$result_atleta = $conn>query($consulta_mysql); mysqli
   //while($fila = $result_atleta->fetch_assoc()) mysqli
-  $result_atleta = mysql_query($consulta_mysql);
+  $result_atleta = mysqli_query($consulta_mysql);
   $nrtorneos=0;//Cuenta los torneos disponible para el usuario
   while ($fila = mysql_fetch_assoc($result_atleta )) 
                 

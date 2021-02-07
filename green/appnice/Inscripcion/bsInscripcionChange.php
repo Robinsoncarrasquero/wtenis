@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['logueado']) and $_S
 //$deshabilitado= $_SESSION['niveluser']==1 ? false : $_SESSION['deshabilitado'];
 $sWEB=1;
 if (!$result) {
-    die('No pudo conectarse: ' . mysql_error());
+    die('No pudo conectarse: ' . mysqli_error($conn));
 }
 
 if (@$_POST['btnProcesar']){   
@@ -38,15 +38,15 @@ if (@$_POST['btnProcesar']){
              $t_id = (int) $torneo_inscrito_id;
             // sql to delete a record
             $sql = "DELETE FROM torneoinscritos WHERE torneoinscrito_id=$t_id";
-             $result=mysql_query($sql);
+             $result=mysqli_query($conn,$sql);
             if (!$result) {
-                echo "Error borrando inscripcion: " .mysql_error();
+                echo "Error borrando inscripcion: " .mysqli_error($conn);
             }else{
                 email_inscripcion("ELI", $torneoid, $atleta_id, $categoria);
             }
         }
         
-        mysql_close($conn);
+        mysqli_close($conn);
         header('Location: bsInscripcion.php');
         exit;
     }
@@ -73,14 +73,14 @@ if (@$_POST['btnProcesar']){
              $t_id = (int) $torneo_inscrito_id;
             // sql to delete a record
             $sql = "UPDATE torneoinscritos SET estatus='Retiro', condicion=9 WHERE torneoinscrito_id=$t_id";
-            $result=mysql_query($sql);
+            $result=mysqli_query($conn,$sql);
             if (!$result) {
-                echo "Error retirando inscripcion: " .mysql_error();
+                echo "Error retirando inscripcion: " .mysqli_error($conn);
             }else{
                 email_inscripcion("RET", $torneoid, $atleta_id, $categoria);
             }
         }
-        mysql_close($conn);
+        mysqli_close($conn);
         header('Location: bsInscripcion_Retiros.php');
         exit;
     }
@@ -126,8 +126,8 @@ if (@$_POST['btnProcesar']){
             $categoria= (isset($_POST[$torneoid]) ? trim($_POST[$torneoid]): "XX") ;
             $lacategoria= "'".  substr($categoria, 0,2)."'";
             $sql="SELECT sexo FROM atleta WHERE atleta_id=$atleta_id";
-            $result=mysql_query($sql);
-            $record = mysql_fetch_assoc($result);
+            $result=mysqli_query($conn,$sql);
+            $record = mysqli_fetch_assoc($result);
             $sexo="'".$record['sexo']."'";
        
             $time=time();
@@ -144,10 +144,10 @@ if (@$_POST['btnProcesar']){
             $sql="SELECT sexo,categoria,fecha FROM rank WHERE categoria=".$lacategoria ." and sexo=".$sexo
                     ." ORDER BY fecha DESC LIMIT 1 ";
                   
-            $resultRANK=mysql_query($sql);
-            $recordRANK = mysql_fetch_assoc($resultRANK);
+            $resultRANK=mysqli_query($conn,$sql);
+            $recordRANK = mysqli_fetch_assoc($resultRANK);
             $fechaRANK= $recordRANK['fecha'];
-            if (mysql_num_rows($resultRANK)==0){ 
+            if (mysqli_num_rows($resultRANK)==0){ 
                 $rknacional = 999;
                 $franking = $fecha_rk_hoy;
                 $rkcosat = 999;
@@ -158,8 +158,8 @@ if (@$_POST['btnProcesar']){
                         . " WHERE fecha_ranking='$fechaRANK' && atleta_id=$atleta_id AND  categoria=".$lacategoria
                         . " ORDER BY fecha_ranking DESC LIMIT 1 ";
 
-                $result=mysql_query($sql);
-                if (mysql_num_rows($result)==0){ 
+                $result=mysqli_query($conn,$sql);
+                if (mysqli_num_rows($result)==0){ 
                     $rknacional = 999;
                     $franking = $fecha_rk_hoy;
                     $rkcosat = 999;
@@ -171,7 +171,7 @@ if (@$_POST['btnProcesar']){
     //              }
 
                 }else{
-                    $record = mysql_fetch_assoc($result);
+                    $record = mysqli_fetch_assoc($result);
                     $rknacional = $record["rknacional"];
                     $franking = $record["fecha_ranking"];
                 }
@@ -179,11 +179,11 @@ if (@$_POST['btnProcesar']){
             if ($t_id==0){
                 $sql="INSERT INTO torneoinscritos(torneo_id,atleta_id,rknacional,categoria,sexo,fecha_ranking,afiliado,codigo,modalidad)"
                         . " VALUES($torneoid,$atleta_id,$rknacional,$lacategoria,$sexo,'".$franking."',".$sWEB.",'".$codigo."','$modalidad')";
-                $result=mysql_query($sql);
+                $result=mysqli_query($conn,$sql);
                
             }else{
                 $sql="UPDATE torneoinscritos set categoria=$lacategoria,rknacional=$rknacional,fecha_ranking='$franking',modalidad=$modalidad WHERE torneoinscrito_id=$t_id";
-                $result=mysql_query($sql);
+                $result=mysqli_query($conn,$sql);
             }
     
 
@@ -201,7 +201,7 @@ if (@$_POST['btnProcesar']){
             
         } 
        
-        mysql_close($conn);
+        mysqli_close($conn);
         header('Location: bsInscripcion.php');
         exit;
         
@@ -214,19 +214,3 @@ if (@$_POST['btnProcesar']){
 }
 
 ?>
-
-
-   
-
-        
-
-         
-	
-         
-	
-        
-        
-	
-	
-
-
