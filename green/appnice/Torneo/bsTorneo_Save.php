@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once '../sql/ConexionPDO.php';
 require_once '../sql/Crud.php';
 require_once '../funciones/funcion_fecha.php';
 require_once '../funciones/funcion_archivos.php';

@@ -106,14 +106,15 @@ if (@$_POST['btnProcesar']){
             $recordUltimoRanking=Rank::Find_Last_Ranking($disciplina,$categoria,$sexo);
             
             //Buscamos el ranking de la ultima fecha publica en la categoria del atleta  
+            $rknacional = 999;
+            $franking = date("Y-m-d");
             $objRanking = new Ranking();
-            $objRanking->Find_Ranking_By_Fecha($objAtleta->getID(),$recordUltimoRanking['id']);
-            if ($objRanking->Operacion_Exitosa()){
-                $rknacional =$objRanking->getRknacional();
-                $franking = $objRanking->getFechaRankingNacional();
-            }else{
-                $rknacional = 999;
-                $franking = date("Y-m-d");
+            if ($recordUltimoRanking){
+                $objRanking->Find_Ranking_By_Fecha($objAtleta->getID(),$recordUltimoRanking['id']);
+                if ($objRanking->Operacion_Exitosa()){
+                    $rknacional =$objRanking->getRknacional();
+                    $franking = $objRanking->getFechaRankingNacional();
+                }
             }
           
             //Creamos la inscripcion

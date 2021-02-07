@@ -15,6 +15,8 @@ unset($_SESSION['empresa_id']);
 unset($_SESSION['inscripcion']);
 unset($_SESSION['renovacion']);
 
+header('Location: sesion_inicio.php');
+exit;    
 //remove all session variables
 // remove all session variables
 
