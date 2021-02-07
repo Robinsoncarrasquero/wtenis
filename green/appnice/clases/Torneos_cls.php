@@ -605,7 +605,7 @@ class Torneo {
     }
     
     //Funcion que determina los dias segun el grado del torneo
-    private function DiasParaOpen($grado){
+    private static function DiasParaOpen($grado){
         
          switch ($grado) {
             case 'G1':
