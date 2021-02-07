@@ -29,11 +29,6 @@ if (MODO_DE_TEST==0){
     error_reporting(0);
 }
 
-
-// $au =  mysqli_connect($servername, $username, $password);
-// $conn=mysqli_select_db($dbname,$au);
-// mysqli_set_charset($conn,"utf8mb4");
-
     $conn =mysqli_connect($servername, $username, $password,$dbname);
 
     if (!$conn) {

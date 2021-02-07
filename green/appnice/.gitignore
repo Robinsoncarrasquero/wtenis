@@ -1,10 +1,10 @@
 #FILE_TORNEO/
 #FILE_RANKING/
-uploadFotos/perfil/
+#uploadFotos/perfil/
 uploadFotos/portal/
 MYSQL/
 remotopdo.php
 digitalocean/
-sql/ConexionPDO.php
+sql/
 conexion.php
 ConexionMysqli_cls.php
