@@ -1,0 +1,21 @@
+https://www.digitalocean.com/community/tutorials/how-to-configure-ssl-tls-for-mysql-on-ubuntu-18-04
+
+ARCHIVO DE CONFIGURACION INDIVIUDAL
+nano /etc/mysql/mysql.conf.d/mysqld.cnf
+
+ARCHIVO DE CONFIGURACION GLOBAL
+nano /etc/mysql/my.cnf
+
+
+
+
+DESHABILITAR SSL
+sudo mv /var/lib/mysql/ca.pem /var/lib/mysql/ca.pem.bak
+sudo mv /var/lib/mysql/server-cert.pem /var/lib/mysql/server-cert.pem.bak
+sudo mv /var/lib/mysql/server-key.pem /var/lib/server-key.pem.bak 
+mysql> show variables like ‘have_ssl’;
+
+
+sudo systemctl status mysql.service
+
+

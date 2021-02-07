@@ -383,7 +383,7 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     // $jsondata = array("Success" => TRUE, "msg"=>$FILE ."FILE ".$DROOT . "DROOT ". $DIR. " DIR ","html"=>json_encode($body, JSON_FORCE_OBJECT));
     // header('Content-type: application/json; charset=utf-8');
     // echo json_encode($jsondata, JSON_FORCE_OBJECT);
-    
+    //var_dump($body);
     $nombre_remitente='mytenis';
     $email_empresa='rcarrasquero@gmail.com';
     $email_from ='atenimiranda@gmail.com';
@@ -429,7 +429,9 @@ function html_template($campos, $valores, $strDocumento) {
 function email_smtp($to,$subject,$body,$from){
     $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
     $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
-    if ($to !=NULL && MODO_DE_PRUEBA==1){
+    //$cabeceras = 'X-Mailer: PHP/' . phpversion();
+    if ($to !='' && MODO_DE_PRUEBA==1){
         mail($to,$subject,$body,$cabeceras.$from);
     }
+ 
 }

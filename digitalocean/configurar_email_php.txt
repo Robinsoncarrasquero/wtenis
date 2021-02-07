@@ -1,0 +1,23 @@
+https://devanswers.co/how-to-get-php-mail-working-on-ubuntu-16-04-digitalocean-droplet/
+
+echo "Test Email message body" | mail -s "Email test subject" rcarrasquero@gmail.com
+
+sudo tail /var/log/mail.log
+
+
+<?php
+$to      = 'rcarrasquero@gmail.com';
+$subject = 'the subject';
+$message = 'hello';
+$headers = 'From: webmaster@talent360.cf' . "\r\n" .
+    'Reply-To: robinsoncarrasquero@gmail.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+mail($to, $subject, $message, $headers);
+?>
+
+inet_interfaces = loopback-only
+
+sudo systemctl restart postfix
+
+https://devanswers.co/how-to-get-php-mail-working-on-ubuntu-16-04-digitalocean-droplet/

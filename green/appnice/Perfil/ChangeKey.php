@@ -1,14 +1,14 @@
 <?php
 session_start();
-require_once '../conexion.php';
-require_once '../funciones/funcion_email.php';
+//require_once '../conexion.php';
+//require_once '../funciones/funcion_email.php';
 require_once '../clases/Bootstrap2_cls.php';
 require_once '../clases/Encriptar_cls.php';
 require_once '../funciones/bsTemplate.php';
+require_once '../clases/Atleta_cls.php';
 require_once '../sql/ConexionPDO.php';
 require_once  '../clases/Torneos_cls.php';
 require_once  '../clases/Torneos_Inscritos_cls.php';
-
 
 if (!isset($_SESSION['logueado']) || !$_SESSION['logueado']){
     //Si el usuario no está logueado redireccionamos al login.

@@ -1,0 +1,4 @@
+intentando conectarme via cmd
+https://www.digitalocean.com/community/tutorials/how-to-troubleshoot-socket-errors-in-mysql
+root@talent360:/# mysql
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)

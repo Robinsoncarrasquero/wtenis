@@ -3,6 +3,7 @@ session_start();
 require_once '../conexion.php';
 require_once '../funciones/funciones.php';
 require_once '../clases/Bootstrap2_cls.php';
+
  if(isset($_SESSION['logueado']) and $_SESSION['logueado']){
     $nombre = $_SESSION['nombre'];
     $cedula = $_SESSION['cedula'];
@@ -22,33 +23,26 @@ $categoria=(isset($_GET['categoria'])) ? $_GET['categoria'] : null;
 $sexo=(isset($_GET['sexo'])) ? $_GET['sexo'] : null;
 $estatus=(isset($_GET['estatus'])) ? $_GET['estatus'] : null; // Inscrito o Retirado
 
-
 if ($codigo_torneo!=null)
 { 
     $codigo_torneo=strtoupper($codigo_torneo);
-    $codigo_torneo=mysql_real_escape_string($codigo_torneo);
+    $codigo_torneo=mysqli_real_escape_string($conn,$codigo_torneo);
     $categoria=  strtoupper($categoria);
-    $categoria=mysql_real_escape_string($categoria);
+    $categoria=mysqli_real_escape_string($conn,$categoria);
     $sexo=  strtoupper($sexo);
-    $sexo=mysql_real_escape_string($sexo);
-    $estatus=mysql_real_escape_string($estatus);
+    $sexo=mysqli_real_escape_string($conn,$sexo);
+    $estatus=mysqli_real_escape_string($conn,$estatus);
     
-    //Obtenemos los registros desde MySQL
-    //Ahora procedemos a extraer los registros de nuestra base de datos, 
-    //en este caso solo obtenemos el nombre, dirección y telefono de la tabla empresa de nuestra base de datos.
-    $conexion = mysql_connect($servername, $username, $password);
-    mysql_select_db($dbname,$conexion);
-     mysql_query('SET NAMES "utf8"');
-    //mysqli_query($conexion, 'SET NAMES "utf8"');
-    //$codigo_torneo = mysql1_real_escape_string($conexion, $codigo_torneo);
-    //$categoria = mysql1_real_escape_string($conexion, $categoria);
-   
-   $categoria = trim($categoria);
+    $conexion = mysqli_connect($servername, $username, $password);
+    mysqli_select_db($conexion,$dbname);
+    mysqli_query($conexion,'SET NAMES "utf8"');
+    
+    $categoria = trim($categoria);
     $codigo_torneo = trim($codigo_torneo);
     $sql = "SELECT torneo.categoria as categoria,torneo.tipo as grado,torneo.numero as numero,torneo.entidad as entidad,torneo.ano as ano,tipo_torneo,nombre as nombre_torneo FROM torneo where codigo='".$codigo_torneo."'";
-    $result = mysql_query($sql, $conexion) or die(mysql_error());
-    mysql_query('SET NAMES "utf8"');
-    $record = mysql_fetch_assoc($result);
+    $result = mysqli_query($conexion,$sql) or die(mysqli_error($conexion));
+    mysqli_query($conexion,'SET NAMES "utf8"');
+    $record = mysqli_fetch_assoc($result);
     $nombre_torneo=$record['nombre_torneo'];
     
     $strRanking="torneoinscritos.rknacional as elranking ";
@@ -75,8 +69,8 @@ if ($codigo_torneo!=null)
          $queEmp.=" AND torneoinscritos.categoria='".$categoria."' ";
     }
     
-    $resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
-    $totEmp = mysql_num_rows($resEmp);
+    $resEmp = mysqli_query($conexion, $queEmp) or die(mysqli_error($conexion));
+    $totEmp = mysqli_num_rows($resEmp);
     
      switch ($sexo){
         case "F":
@@ -199,7 +193,7 @@ if ($codigo_torneo!=null)
             
             $ixx = 0;
     
-            while($datatmp = mysql_fetch_assoc($resEmp)) {
+            while($datatmp = mysqli_fetch_assoc($resEmp)) {
                 $ixx++;
 
                $rowid=$datatmp['torneoinscrito_id'];
@@ -272,7 +266,7 @@ if ($codigo_torneo!=null)
     $("#mensaje").removeClass('alert alert-success');
     
     {
-     
+        
         $.ajax({
         method: "POST",
         url:url, 

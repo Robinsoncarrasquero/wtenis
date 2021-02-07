@@ -45,7 +45,7 @@ public static function Conexion($MODO_DE_TEST){
 
 //Ejecutar consulta
 public static function mysqli_query($strSQL) {
-    $conn=Conexion_mysqli::Conexion(1);
+    $conn=Conexion_mysqli::Conexion(MODO_DE_TEST);
     $results=$conn->query($strSQL);
     return $results;
 }

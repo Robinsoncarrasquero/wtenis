@@ -1,0 +1,30 @@
+https://www.digitalocean.com/community/tutorials/how-to-configure-ssl-tls-for-mysql-on-ubuntu-18-04
+
+sudo mysql_ssl_rsa_setup --uid=mysql
+
+sudo find /var/lib/mysql -name '*.pem' -ls
+ 
+ https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-20-04-es
+ PASO 1:
+ sudo apt install certbot python3-certbot-apache
+ 
+PASO 2 
+ sudo nano /etc/apache2/sites-available/talent360.conf
+
+Paso 3: Habilitar HTTPS a través del firewall
+sudo ufw status
+sudo ufw allow 'Apache Full'
+sudo ufw delete allow 'Apache'
+
+Paso 4: Obtener un certificado SSL
+sudo certbot --apache
+ 
+ You should test your configuration at:
+https://www.ssllabs.com/ssltest/analyze.html?d=talent360.cf
+https://www.ssllabs.com/ssltest/analyze.html?d=www.talent360.cf
+https://www.ssllabs.com/ssltest/analyze.html?d=vision360.cf
+
+
+Paso 5: Verificar la renovación automática de Certbot
+sudo systemctl status certbot.timer
+

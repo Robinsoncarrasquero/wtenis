@@ -9,11 +9,9 @@
 if (!defined('MODO_DE_PRUEBA')) {
     define("MODO_DE_PRUEBA", "1");  // Esta variable define cuando tenemos la aplicacion 
     //en modo_de_prueba para evitar el envio de correos(1=true 0=false)
-
 }
 if (!defined('MODO_DE_TEST')) {
     define("MODO_DE_TEST", 1); // Modo de Test para apuntar al servidor de test o produccion
-
 }
 date_default_timezone_set('America/Caracas');
 

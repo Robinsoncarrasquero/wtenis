@@ -35,12 +35,12 @@ $chkpagado=0;
 if ($codigo_torneo!=null)
 { 
     $codigo_torneo=strtoupper($codigo_torneo);
-    $codigo_torneo=mysql_real_escape_string($codigo_torneo);
+    $codigo_torneo=mysqli_real_escape_string($conn,$codigo_torneo);
     $categoria=  strtoupper($categoria);
-    $categoria=mysql_real_escape_string($categoria);
+    $categoria=mysqli_real_escape_string($conn,$categoria);
     $sexo=  strtoupper($sexo);
-    $sexo=mysql_real_escape_string($sexo);
-    $estatus=mysql_real_escape_string($estatus);
+    $sexo=mysqli_real_escape_string($conn,$sexo);
+    $estatus=mysqli_real_escape_string($conn,$estatus);
     
     //Obtenemos los registros desde MySQL
     //Ahora procedemos a extraer los registros de nuestra base de datos, 
@@ -118,7 +118,7 @@ if ($codigo_torneo!=null)
 <head>
 	
     
-    <title>Listado de Inscritos</title>
+    <title>Listado de Jugadores Inscritos</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--    <a > <img id="Logo" src="../images/logo/fvtlogo.png" width="200"  ></a>-->
