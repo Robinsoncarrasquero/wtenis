@@ -49,12 +49,27 @@ $SelectParam = "SELECT atleta.atleta_id,atleta.sexo,atleta.cedula,atleta.estado,
         . "ranking.categoria,ranking.ranking_id,ranking.puntos,"
         . "DATE_FORMAT(ranking.fecha_ranking,'%d-%m-%Y') as fecha_ranking  FROM atleta "
         . " INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id "
-        . " WHERE atleta.estado ". $operador." :estado "
+        . " WHERE atleta.estado  $operador  :estado "
         . " && rank_id = :rank_id "
         . " ORDER by ranking.rknacional,ranking.rkregional,ranking.rkestadal ";
          
 $Param=array(':estado'=>$estado,':rank_id' => $rank_id);
 $records=$objPaginacion->SelectRecordsParam($SelectParam,$Param);
+
+
+// $mySelect = $SelectParam . " LIMIT ".$objPaginacion->getInicio().",". $objPaginacion->getRegistrosPorPaginas();
+
+// $model = new Conexion;
+// $conn=$model->conectar();
+// //$SQL->execute($Array_Param);
+// $SQL = $conn->prepare($mySelect,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+// $SQL->bindParam(':estado', $estado, PDO::PARAM_STR);
+// $SQL->bindParam(':rank_id', $rank_id, PDO::PARAM_INT);
+// $SQL->execute();
+
+// $records = $SQL->fetchAll();
+
+
 
 $strTableHead =
 '   

@@ -751,27 +751,25 @@ class Atleta   {
     }
     
     public static function LikeApellido($apellidos,$estado=' '){
-    try {
-       $model = new Conexion;
-       $conn=$model->conectar();
-       if ($estado!=' '){
-            $SQL = $conn->prepare('SELECT * FROM ' . self::TABLA .' WHERE apellidos like "'.$apellidos.'%"  && estado=:estado && niveluser=0 ');
-            $SQL->bindParam(':estado', $estado);
-       }else{
-          $SQL = $conn->prepare('SELECT * FROM ' . self::TABLA .' WHERE apellidos like "'.$apellidos.'%" && niveluser=0 ');
+        try {
+        $model = new Conexion;
+        $conn=$model->conectar();
+        if ($estado!=' '){
+                $SQL = $conn->prepare('SELECT * FROM ' . self::TABLA .' WHERE apellidos like "'.$apellidos.'%"  && estado=:estado && niveluser=0 ');
+                $SQL->bindParam(':estado', $estado);
+        }else{
+            $SQL = $conn->prepare('SELECT * FROM ' . self::TABLA .' WHERE apellidos like "'.$apellidos.'%" && niveluser=0 ');
+            }
+        
+        $SQL->execute();
+        $registros = $SQL->fetchall();
+        $conn=NULL;
+        return $registros;
         }
-       
-       $SQL->execute();
-       $registros = $SQL->fetchall();
-       return $registros;
-    }catch(PDOException $e)
-        {
-           echo "Error: " . $e->getMessage();
+        catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
             
         }
-        
-        
-        $conn=NULL;
         
           
     }

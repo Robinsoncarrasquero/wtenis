@@ -38,21 +38,30 @@ class Paginacion   {
         return ceil($this->total_registros/  $this->registrosxpagina);
     }
     
-    
+    public function getRegistrosPorPaginas() {
+        return $this->registrosxpagina;
+    }
     
     //Consulta SQL 
     public function SelectRecordsParam($Select,$Array_Param) {
-        $mySelect = $Select . " LIMIT ".$this->getInicio().",". $this->registrosxpagina;
+        try {
+            $mySelect = $Select . " LIMIT ".$this->getInicio().",". $this->registrosxpagina;
 
-        $model = new Conexion;
-        $conn=$model->conectar();
-        $SQL = $conn->prepare($mySelect,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        $SQL->execute($Array_Param);
-        $records = $SQL->fetchAll();
+            $model = new Conexion;
+            $conn=$model->conectar();
+            $SQL = $conn->prepare($mySelect,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $SQL->execute($Array_Param);
+            $records = $SQL->fetchAll();
+            $conn=NULL;
+            return $records;
+        }
+        catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+           
+        }
+               
+    }
         
-        $conn=NULL;
-        return $records;
-     }
     //Consulta SQL 
     public function SelectRecords($Select) {
        $mySelect = $Select . " LIMIT ".$this->getInicio().",". $this->registrosxpagina;
