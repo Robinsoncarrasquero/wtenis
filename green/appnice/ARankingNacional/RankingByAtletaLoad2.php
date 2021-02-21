@@ -15,9 +15,12 @@ $pagina= intval(substr($_POST['pagina'],4));
 
 //Paginacion 
 $objPaginacion = new Paginacion(4,$pagina);
-$countRecord="SELECT COUNT(*) as total FROM ranking"
-               . " WHERE atleta_id =$atleta_id ";
-$objPaginacion->setTotal_Registros($countRecord);
+
+$querycoun="SELECT COUNT(*) as total FROM ranking"
+. " WHERE atleta_id = :atleta_id ";
+
+$Array_Param=array(':atleta_id' => $atleta_id);
+$objPaginacion->setTotal_Registros_Param($querycoun,$Array_Param);
 
 $slq_order="  ";
 
@@ -25,8 +28,7 @@ $SelectParam="SELECT * FROM ranking "
 . " WHERE atleta_id = :atleta_id "
 . " ORDER BY categoria,fecha_ranking DESC ";
 
-$Param=array(':atleta_id' => $atleta_id);
-$records=$objPaginacion->SelectRecordsParam($SelectParam,$Param);
+$records=$objPaginacion->SelectRecordsParam($SelectParam,$Array_Param);
 
 //Main content
 $main = [];

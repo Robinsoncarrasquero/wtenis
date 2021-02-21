@@ -91,6 +91,22 @@ class Paginacion   {
        $conn=NULL;
        
     }
+    //Contamos los registros de la consulta
+    public function setTotal_Registros_Param($Select,$Array_Param) {
+       
+        $model = new Conexion;
+        $conn=$model->conectar();
+        $SQL = $conn->prepare($Select,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $SQL->execute($Array_Param);
+        $record = $SQL->fetch();
+        if ($record){
+            $this->total_registros=$record['total'];
+        }else{
+            $this->total_registros=0;
+        }
+        $conn=NULL;
+        
+     }
     public function getTotal_Registros(){
         return $this->total_registros;
     }

@@ -29,6 +29,12 @@ $strWhere .=" && ranking.rank_id=$rank_id ";
 $querycount = "SELECT count(*) as total  FROM atleta "
          ."INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id ".$strWhere
          ." ";
+$Array_Param=array(':estado' => ' ', ':rank_id' => $rank_id);
+
+//Buscamos los registros para la paginacion
+//Paginacion mediante una clase
+$objPaginacion = new Paginacion(20,$pagina);
+$objPaginacion->setTotal_Registros_Param($querycount,$Array_Param);
 
 $SelectParam = " SELECT atleta.atleta_id,atleta.sexo,atleta.cedula,atleta.estado,"
          . " atleta.nombres,atleta.apellidos,"
@@ -41,13 +47,7 @@ $SelectParam = " SELECT atleta.atleta_id,atleta.sexo,atleta.cedula,atleta.estado
          . " &&  ranking.rank_id = :rank_id "
           ." ORDER by ranking.rknacional,ranking.rkregional,ranking.rkestadal ";
          
-//Buscamos los registros para la paginacion
-//Paginacion mediante una clase
-$objPaginacion = new Paginacion(20,$pagina);
-$objPaginacion->setTotal_Registros($querycount);
-$Param=array(':estado' => ' ', ':rank_id' => $rank_id);
-$records=$objPaginacion->SelectRecordsParam($SelectParam,$Param);
-//$records=$objPaginacion->SelectRecords($Select);
+$records=$objPaginacion->SelectRecordsParam($SelectParam,$Array_Param);
                             
 $linea =" ";
 
