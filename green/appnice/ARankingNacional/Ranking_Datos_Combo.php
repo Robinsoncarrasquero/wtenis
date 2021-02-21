@@ -20,7 +20,7 @@ switch ($tabla_pedida) {
         array_push($dato, $datox);
         $array_data = Categoria::data_combo_list();
         foreach ($array_data as $value) {
-            $datox = array("value"=>$value[value],"texto"=>$value[texto]);
+            $datox = array("value"=>$value['value'],"texto"=>$value['texto']);
             array_push($dato, $datox);
         }
         $array_jsondata=$dato;
