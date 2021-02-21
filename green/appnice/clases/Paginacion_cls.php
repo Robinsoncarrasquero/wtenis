@@ -39,11 +39,24 @@ class Paginacion   {
     }
     
     
+    
+    //Consulta SQL 
+    public function SelectRecordsParam($Select,$Array_Param) {
+        $mySelect = $Select . " LIMIT ".$this->getInicio().",". $this->registrosxpagina;
+
+        $model = new Conexion;
+        $conn=$model->conectar();
+        $SQL = $conn->prepare($mySelect,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $SQL->execute($Array_Param);
+        $records = $SQL->fetchAll();
+        
+        $conn=NULL;
+        return $records;
+     }
     //Consulta SQL 
     public function SelectRecords($Select) {
        $mySelect = $Select . " LIMIT ".$this->getInicio().",". $this->registrosxpagina;
        
-       ///$mySelect .=($sql_order==NULL) ? ";" : $sql_order;
        $model = new Conexion;
        $conn=$model->conectar();
        $SQL = $conn->prepare($mySelect);
