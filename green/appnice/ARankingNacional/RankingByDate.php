@@ -247,8 +247,8 @@ $(document).ready(function(){
            //Empresa o Estados
             var ecount = Object.keys(data.tabla).length;
             var datalistbox = document.getElementById("cmb"+latabla);
-//            console.log(ecount);
-//            console.log(data);
+            console.log(ecount);
+            console.log(data);
             for(var i=0;i<ecount;i++){
                datalistbox.options[i] = new Option(data.tabla[i].texto,data.tabla[i].value);
             }
@@ -285,8 +285,8 @@ $(document).ready(function(){
         .done(function( data) {
             var ecount = Object.keys(data.tabla).length;
             var datalistbox = document.getElementById("cmbfechark");
-//            console.log(ecount);
-//            console.log(data);
+            console.log(ecount);
+            console.log(data);
             for(var i=0;i<ecount;i++){
                datalistbox.options[i] = new Option(data.tabla[i].texto,data.tabla[i].value);
             }
