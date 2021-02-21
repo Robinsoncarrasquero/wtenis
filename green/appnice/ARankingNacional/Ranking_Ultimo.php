@@ -27,7 +27,9 @@ $strWhere .=" && ranking.rank_id=$rank_id ";
 
 
 $querycount = "SELECT count(*) as total  FROM atleta "
-         ."INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id ".$strWhere
+         ."INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id "
+         . " WHERE atleta.estado != :estado "
+         . " &&  ranking.rank_id = :rank_id "
          ." ";
 $Array_Param=array(':estado' => ' ', ':rank_id' => $rank_id);
 
