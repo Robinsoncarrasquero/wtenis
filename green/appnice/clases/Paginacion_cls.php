@@ -49,7 +49,7 @@ class Paginacion   {
 
             $model = new Conexion;
             $conn=$model->conectar();
-            $SQL = $conn->prepare($mySelect,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $SQL = $conn->prepare($Select,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY, PDO::ATTR_EMULATE_PREPARES, false ));
             $SQL->execute($Array_Param);
             $records = $SQL->fetchAll();
             $conn=NULL;
@@ -96,7 +96,7 @@ class Paginacion   {
        
         $model = new Conexion;
         $conn=$model->conectar();
-        $SQL = $conn->prepare($Select,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $SQL = $conn->prepare($Select,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY, PDO::ATTR_EMULATE_PREPARES, false ));
         $SQL->execute($Array_Param);
         $record = $SQL->fetch();
         if ($record){
