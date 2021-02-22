@@ -17,15 +17,28 @@ $sexo='M';
 $disciplina='TDC';
 $pagina=isset($_POST['pagina']) ? intval(substr($_POST['pagina'],4)) : 0;
 
-$objRank = Rank::Find_Last_Ranking($disciplina,$categoria,$sexo);
-$rank_id = $objRank['id'];
-var_dump($objRank);
+// $objRank = Rank::Find_Last_Ranking($disciplina,$categoria,$sexo);
+// $rank_id = $objRank['id'];
+// var_dump($objRank);
 
+
+$SelectParam="SELECT id FROM rank "
+. " WHERE categoria = :categoria and sexo = :sexo and disciplina = :disciplina "
+          
+. " ORDER BY fecha DESC LIMIT 1 ";
+$Array_Param=array(':categoria'=>$categoria,':sexo'=>$sexo,':disciplina'=>$disciplina);
+
+
+$objRank=Paginacion::SelectbyParam($SelectParam,$Array_Param);
+
+$rank_id = $objRank[0]['id'];
+var_dump($objRank);
 $strWhere=" WHERE  ";
 
 $strWhere .=" atleta.estado!=' '";
 
 $strWhere .=" && ranking.rank_id=$rank_id ";
+
 $querycount = "SELECT count(*) as total  FROM atleta "
          ."INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id "
          . " WHERE atleta.estado != :estado "

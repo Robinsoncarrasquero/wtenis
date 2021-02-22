@@ -61,6 +61,24 @@ class Paginacion   {
         }
                
     }
+
+    public static function SelectbyParam($Select,$Array_Param) {
+        try {
+            
+            $model = new Conexion;
+            $conn=$model->conectar();
+            $SQL = $conn->prepare($Select,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY, PDO::ATTR_EMULATE_PREPARES, false ));
+            $SQL->execute($Array_Param);
+            $records = $SQL->fetchAll();
+            $conn=NULL;
+            return $records;
+        }
+        catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+           
+        }
+               
+    }
         
     //Consulta SQL 
     public function SelectRecords($Select) {
