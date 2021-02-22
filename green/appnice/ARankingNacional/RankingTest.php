@@ -19,6 +19,7 @@ $pagina=isset($_POST['pagina']) ? intval(substr($_POST['pagina'],4)) : 0;
 
 $objRank = Rank::Find_Last_Ranking($disciplina,$categoria,$sexo);
 $rank_id = $objRank['id'];
+var_dump($objRank);
 
 $strWhere=" WHERE  ";
 
@@ -26,24 +27,29 @@ $strWhere .=" atleta.estado!=' '";
 
 $strWhere .=" && ranking.rank_id=$rank_id ";
 $querycount = "SELECT count(*) as total  FROM atleta "
-         ."INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id ".$strWhere
+         ."INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id "
+         . " WHERE atleta.estado != :estado "
+         . " &&  ranking.rank_id = :rank_id "
          ." ";
-
-
-$Select = "SELECT atleta.atleta_id,atleta.sexo,atleta.cedula,atleta.estado,"
-        . "atleta.nombres,atleta.apellidos,"
-        . "DATE_FORMAT(atleta.fecha_nacimiento,'%d-%m-%Y') as fecha_nacimiento,"
-        . "ranking.rknacional,ranking.rkregional,ranking.rkestadal,"
-        . "ranking.categoria,ranking.ranking_id,ranking.puntos,"
-        . "DATE_FORMAT(ranking.fecha_ranking,'%d-%m-%Y') as fecha_ranking  FROM atleta "
-         ."INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id ".$strWhere
-         ."ORDER by ranking.rknacional,ranking.rkregional,ranking.rkestadal ";
+$Array_Param=array(':estado' => ' ', ':rank_id' => $rank_id);
 
 //Buscamos los registros para la paginacion
 //Paginacion mediante una clase
 $objPaginacion = new Paginacion(20,$pagina);
-$objPaginacion->setTotal_Registros($querycount);
-$records=$objPaginacion->SelectRecords($Select);
+$objPaginacion->setTotal_Registros_Param($querycount,$Array_Param);
+
+$SelectParam = " SELECT atleta.atleta_id,atleta.sexo,atleta.cedula,atleta.estado,"
+         . " atleta.nombres,atleta.apellidos,"
+         . " DATE_FORMAT(atleta.fecha_nacimiento,'%d-%m-%Y') as fecha_nacimiento,"
+         . " ranking.rknacional,ranking.rkregional,ranking.rkestadal,"
+         . " ranking.categoria,ranking.ranking_id,ranking.puntos,"
+         . " DATE_FORMAT(ranking.fecha_ranking,'%d-%m-%Y') as fecha_ranking  FROM atleta "
+         . " INNER JOIN ranking ON atleta.atleta_id=ranking.atleta_id"
+         . " WHERE atleta.estado != :estado "
+         . " &&  ranking.rank_id = :rank_id "
+          ." ORDER by ranking.rknacional,ranking.rkregional,ranking.rkestadal ";
+         
+$records=$objPaginacion->SelectRecordsParam($SelectParam,$Array_Param);
                             
 $linea =" ";
 

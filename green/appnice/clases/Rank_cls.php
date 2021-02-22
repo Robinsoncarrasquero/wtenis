@@ -260,7 +260,7 @@ class Rank {
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $SQL = $conn->prepare(' SELECT * FROM ' . self::TABLA .' '
             . ' WHERE categoria=:categoria and sexo=:sexo and disciplina=:disciplina '
-            . ' ORDER BY fecha DESC LIMIT 1,1');
+            . ' LIMIT 1,1 ');
             // set the PDO error mode to exception
             $SQL->bindParam(':categoria', $categoria,PDO::PARAM_STR);
             $SQL->bindParam(':sexo', $sexo,PDO::PARAM_STR);
