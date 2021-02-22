@@ -23,7 +23,7 @@ $pagina=isset($_POST['pagina']) ? intval(substr($_POST['pagina'],4)) : 0;
 
 
 $SelectParam="SELECT id FROM rank "
-. " WHERE categoria = :categoria and sexo = :sexo and disciplina = :disciplina "
+. " WHERE categoria = :categoria && sexo = :sexo && disciplina = :disciplina "
           
 . " ORDER BY fecha DESC LIMIT 1 ";
 $Array_Param=array(':categoria'=>$categoria,':sexo'=>$sexo,':disciplina'=>$disciplina);
