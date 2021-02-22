@@ -257,15 +257,15 @@ class Rank {
         try{
             $model = new Conexion();
             $conn=$model->conectar();
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $SQL = $conn->prepare(' SELECT * FROM ' . self::TABLA .' '
-            . ' WHERE categoria=:categoria and sexo=:sexo and disciplina=:disciplina '
-            . ' LIMIT 1,1 ');
+            //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $SQL = $conn->prepare(" SELECT * FROM " . self::TABLA ." "
+            . " WHERE categoria = :categoria and sexo = :sexo and disciplina = :disciplina "
+            . " LIMIT 1,1 ",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY, PDO::ATTR_EMULATE_PREPARES, false ));
             // set the PDO error mode to exception
-            $SQL->bindParam(':categoria', $categoria,PDO::PARAM_STR);
-            $SQL->bindParam(':sexo', $sexo,PDO::PARAM_STR);
-            $SQL->bindParam(':disciplina', $disciplina,PDO::PARAM_STR);
-            $SQL->execute();
+            // $SQL->bindParam(':categoria', $categoria,PDO::PARAM_STR);
+            // $SQL->bindParam(':sexo', $sexo,PDO::PARAM_STR);
+            // $SQL->bindParam(':disciplina', $disciplina,PDO::PARAM_STR);
+            $SQL->execute(array(':categoria'=>$categoria,':sexo'=>$sexo,':disciplina'=>$disciplina));
         }
         catch(PDOException $e)
         {
