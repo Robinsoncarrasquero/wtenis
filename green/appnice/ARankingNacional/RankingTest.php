@@ -27,11 +27,21 @@ $SelectParam="SELECT id FROM rank "
           
 . " ORDER BY fecha DESC LIMIT 1 ";
 $Array_Param=array(':categoria'=>$categoria,':sexo'=>$sexo,':disciplina'=>$disciplina);
+ // set the PDO error mode to exception
+            $model = new Conexion;
+            $conn=$model->conectar();
+            $SQL = $conn->prepare($SelectParam,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY, PDO::ATTR_EMULATE_PREPARES, false ));
+            $SQL->bindParam(':categoria', $categoria,PDO::PARAM_STR);
+            $SQL->bindParam(':sexo', $sexo,PDO::PARAM_STR);
+            $SQL->bindParam(':disciplina', $disciplina,PDO::PARAM_STR);
+            $SQL->execute();
+            
+            $objRank = $SQL->fetch();
+            $conn=NULL;            
 
+//$objRank=Paginacion::SelectbyParam($SelectParam,$Array_Param);
 
-$objRank=Paginacion::SelectbyParam($SelectParam,$Array_Param);
-
-$rank_id = $objRank[0]['id'];
+$rank_id = $objRank['id'];
 var_dump($objRank);
 $strWhere=" WHERE  ";
 
