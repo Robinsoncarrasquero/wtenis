@@ -261,7 +261,7 @@ class Rank {
             $SQL = $conn->prepare(" SELECT id FROM " . self::TABLA ." "
             . " WHERE categoria = :categoria and sexo = :sexo and disciplina = :disciplina "
             //. " LIMIT 1 ",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY, PDO::ATTR_EMULATE_PREPARES, false ));
-            . " ODER BY fecha DESC LIMIT 1 ");
+            . " ORDER BY fecha DESC LIMIT 1 ");
             $SQL->setFetchMode(PDO::FETCH_ASSOC);
             // set the PDO error mode to exception
             // $SQL->bindParam(':categoria', $categoria,PDO::PARAM_STR);

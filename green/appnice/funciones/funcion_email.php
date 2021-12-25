@@ -1,6 +1,14 @@
 <?php
-require_once 'funcion_fecha.php';
-require_once '../ConexionMysqli_cls.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+    require_once '../PHPMailer/src/Exception.php';
+    require '../PHPMailer/src/PHPMailer.php';
+    require '../PHPMailer/src/SMTP.php';
+    require_once 'funcion_fecha.php';
+    require_once '../ConexionMysqli_cls.php';
+
 /* 
  * Utilizamos esta funcion para hacer el envion de correo de cualquier moovimiento tales 
  * como Inscripcion, eliminacion de inscripcion, retiros.
@@ -140,6 +148,7 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
                 $from = "From: $nombre_remitente<".$email_from.">" 
                     . "\r\n" ."BCC:atenismiranda@gmail.com,$email_empresa";
             }
+            $from = $email_empresa;
             email_smtp($to,$subject,$body,$from);
         }
     }
@@ -384,7 +393,7 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     // header('Content-type: application/json; charset=utf-8');
     // echo json_encode($jsondata, JSON_FORCE_OBJECT);
     //var_dump($body);
-    $nombre_remitente='mytenis';
+    $nombre_remitente='FVT';
     $email_empresa='rcarrasquero@gmail.com';
     $email_from ='atenimiranda@gmail.com';
     //Enviamos Correo
@@ -398,6 +407,7 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
             $from = "From: $nombre_remitente<" . $email_from . ">"
                     . "\r\n" . "BCC:atenismiranda@gmail.com,$email_empresa";
         }
+        $from = $email_from;
         //Enviamos correos via smtp                  
         email_smtp($to, $subject, $body, $from);
                    
@@ -431,7 +441,48 @@ function email_smtp($to,$subject,$body,$from){
     $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
     //$cabeceras = 'X-Mailer: PHP/' . phpversion();
     if ($to !='' && MODO_DE_PRUEBA==1){
+        phpmailer($to,$subject,$body,$from);
+        
+    }else{
         mail($to,$subject,$body,$cabeceras.$from);
     }
  
 }
+function phpmailer($to,$subject,$body,$from)
+{
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+    
+    try {
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.mailtrap.io';                    //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = '896c82690c0727';                     //SMTP username
+        $mail->Password   = 'c08b0ee324f862';                               //SMTP password
+        //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 2525;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom($from, 'Mailer');
+        $mail->addAddress($to, 'Joe User');     //Add a recipient
+        //$mail->addAddress('ellen@example.com');               //Name is optional
+        //$mail->addReplyTo('info@example.com', 'Information');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+        //Content
+        $mail->isHTML(false);                                  //Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body    = $body;//'This is the HTML message body <b>in bold!</b>';
+        $mail->AltBody = $body;//'This is the body in plain text for non-HTML mail clients';
+        $mail->send();
+        // echo 'Message has been sent';
+    } catch (Exception $e) {
+        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+

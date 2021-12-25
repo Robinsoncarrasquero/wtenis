@@ -226,11 +226,10 @@ class Afiliacion {
             $conn = $objConn->conectar();
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $campos='(ano,fvt,asociacion,sistemaweb,modalidad,fvtciclocobro,asociacionciclocobro,sistemawebciclocobro,empresa_id,ciclo,'
-                    . 'fecha_desde,fecha_hasta,moneda)';
-            $valores='(:ano,:fvt,:asociacion,:sistemaweb,:modalidad,'
-                    . ':fvtciclocobro,:asociacionciclocobro,:sistemawebciclocobro,:empresa_id,:ciclo'
-                    . ':fecha_desde,:fecha_hasta,:moneda)';
+            $campos='(ano,fvt,asociacion,sistemaweb,modalidad,fvtciclocobro,asociacionciclocobro,sistemawebciclocobro'
+                    . ',empresa_id,ciclo,fecha_desde,fecha_hasta,moneda)';
+            $valores='(:ano,:fvt,:asociacion,:sistemaweb,:modalidad,:fvtciclocobro,:asociacionciclocobro,:sistemawebciclocobro'
+                    . ',:empresa_id,:ciclo,:fecha_desde,:fecha_hasta,:moneda)';
             
             $SQL = $conn->prepare('INSERT INTO ' .self::TABLA. $campos. ' VALUES '. $valores);
             $SQL->bindParam(':ano', $this->ano);
@@ -274,15 +273,15 @@ class Afiliacion {
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
            
-            $SQL=' SET ano = :xano,'
+            $SQL=' SET '
                 . 'fvt = :xfvt, asociacion = :xasociacion, sistemaweb=:xsistemaweb, modalidad=:xmodalidad,'
                 . 'fvtciclocobro = :xfvtciclocobro, asociacionciclocobro = :xasociacionciclocobro, '
-                . 'sistemawebciclocobro = :xsistemawebciclocobro,empresa_id = :xempresa_id, ciclo=:xciclo,'
+                . 'sistemawebciclocobro = :xsistemawebciclocobro, ciclo=:xciclo,'
                 . 'fecha_desde=:xfecha_desde,fecha_hasta=:xfecha_hasta,moneda=:xmoneda ';
                
             
-            $stmt = $conn->prepare('UPDATE ' . self::TABLA . $SQL. ' WHERE empresa_id= :xempresa_id');
-            $stmt->bindParam(':xano', $this->ano);
+            $stmt = $conn->prepare('UPDATE ' . self::TABLA . $SQL. ' WHERE afiliacion_id= :id');
+            $stmt->bindParam(':id', $this->id);
             
             $stmt->bindParam(':xfvt',  $this->fvt);
             $stmt->bindParam(':xasociacion', $this->asociacion);
@@ -291,13 +290,12 @@ class Afiliacion {
             $stmt->bindParam(':xfvtciclocobro',  $this->fvtCicloCobro);
             $stmt->bindParam(':xasociacionciclocobro', $this->asociacionCicloCobro);
             $stmt->bindParam(':xsistemawebciclocobro', $this->sistemaWebCicloCobro);
-            $stmt->bindParam(':xempresa_id', $this->empresa_id);
             $stmt->bindParam(':xciclo', $this->ciclo);
             $stmt->bindParam(':xfecha_desde', $this->fecha_desde,PDO::PARAM_STR);
             $stmt->bindParam(':xfecha_hasta', $this->fecha_hasta,PDO::PARAM_STR);
             $stmt->bindParam(':xmoneda', $this->moneda);
             $stmt->execute();
-
+            
             //echo "New records created successfully";
             $this->mensaje='Record update..';
             $this->SQLresultado_exitoso=TRUE;
@@ -626,6 +624,47 @@ class Afiliacion {
     }
     
     
+    public function findAfiliacion($empresa_id,$ano) {
+        $model = new Conexion;
+        $conn=$model->conectar();
+        //Estatus 1=Disponible 0=todos;
+        $SQL = $conn->prepare('SELECT * FROM ' . self::TABLA . ' WHERE empresa_id = :emp_id && ano = :ano ');
+        
+        $SQL->bindParam(':emp_id', $empresa_id);
+        $SQL->bindParam(':ano', $ano);
+        $SQL->execute();
+        $record = $SQL->fetch();
+        $this->record($record);
+        if ($SQL->rowCount()==0)
+         {
+             $this->SQLresultado_exitoso=FALSE;
+             $errorCode= $conn->errorCode();
+             $errorInfo=$conn->errorInfo();
+             $this->mensaje="ERROR No se encontraron registros..".$errorInfo ;
+             switch ($errorCode) 
+             {
+                 case 00000:
+                     $this->mensaje="ERROR Numero" .$errorCode;
+                     break;
+                 default:
+                     $this->mensaje="ERROR No se encontraron registros..".$errorInfo ;
+                     break;
+             }
+                   
+         }
+         else
+         {   
+            
+             $this->mensaje='Registros encontrados..';
+             $this->SQLresultado_exitoso=TRUE;
+         }
+         
+        $conn=NULL;
+         
+         return $record;
+         
+     }
+
     public function isDirty()
     {
         

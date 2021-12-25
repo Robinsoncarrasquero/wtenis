@@ -82,8 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <div class="signin-form">
 
     <div class="container">
-       
-         
+               
         <div class="row">   
             <div class="col-xs-12">
                 <form class="form-signin " method="POST" id="register-form" >
@@ -201,35 +200,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 $(document).ready(function (){
     
-    
-   
-    
-            
-  
-        
-        
-        
-   
-   
-    
-    
     //Aqui regresamos a una direccion referenciada
     $('#btn-salir').click(function(){
          location.href = this.href; // ir al link   
-        
             
     });
-    
-    
-    
-    
-
-
+  
 });
 
 
-
-	
 </script>
 	
  

@@ -10,10 +10,10 @@ class bsTemplate
 {
     public static function header($title,$user_name,$url='http://gss.com.ve/',$keyword=null,$descripcion=null){
         if ($descripcion==null){
-            $descripcion='Asociaciones - Sistema Web de Inscripciones OnLine';
+            $descripcion='Asociaciones - Sistema Web de Torneos de Tenis con Inscripciones OnLine';
         }
         if ($keyword==null){
-            $keyword="MyTenis, Inscripciones, Torneos, Asociaciones, Tenis, Juegos, Senior, Juvenil, Junior";
+            $keyword="Sistema de Inscripciones, Torneos, Asociaciones, Tenis, Juegos, Senior, Juvenil, Junior";
         }
         $str_header=
         '

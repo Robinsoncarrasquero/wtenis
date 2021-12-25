@@ -12,7 +12,7 @@ $rsEntidades = Empresa::Entidades();
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<title>mytenis Registro de Afiliados</title>
+<title>Registro de Afiliados</title>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="author" content="mytenis"/>
 <meta name="keywords" content="Asociaciones, Tenis, club, eventos deportivos,MyTenis, non-profit, junior, tennis, sport, deporte, magazine, non profit" />
@@ -52,7 +52,7 @@ $rsEntidades = Empresa::Entidades();
     <div class="container">
 <div class="col-sm-12">
     <div class="box-support"> 
-      <p class="support-info"><i class="fa fa-envelope-o"></i> info@example</p>
+      <p class="support-info"><i class="fa fa-envelope-o"></i> info@example.com</p>
    </div>
     <div class="box-login"> 
      <!-- <i class="fa fa-shopping-cart"></i>-->

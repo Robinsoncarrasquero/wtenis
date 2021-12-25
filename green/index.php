@@ -5,7 +5,7 @@ date_default_timezone_set('America/La_Paz');
 
 <html>
 <head>
-<title>System online </title>
+<title>Sistema integral de Tenis</title>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="author" content="mytenis"/>
 <meta name="keywords" content="Tenis, club, eventos, deportivos,deporte, juniors, junior, tennis, sport, magazine" />
@@ -278,9 +278,9 @@ date_default_timezone_set('America/La_Paz');
              <div class="col-md-3">
             <h3>Sobre Nosotros</h3>
                 <p>Gracias por visitar nuesto portal, nuestra mision es fomentar y administrar 
-                el tenis de competencia estadal. Planificar, coordinar y ejecutar el plan anual de
+                el tenis de competencia. Planificar, coordinar y ejecutar el plan anual de
                 torneos para dar cumplimiento al calendario oficial establecido. Brindar informacion sobre el tenis
-                del estado.
+                nacional.
                 
             </div>
               <div class="col-md-3 cat-footer">
@@ -295,7 +295,7 @@ date_default_timezone_set('America/La_Paz');
               </div>
               <div class="col-md-3">
               <h3>Noticias</h3>
-              <ul class="footer-last-news">
+              <!-- <ul class="footer-last-news">
                 <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="Foto" />
                   <p>El resto de las series del Grupo Mundial I han celebrado sus sorteos en la jornada del viernes.</p>
                 </li>
@@ -306,8 +306,8 @@ date_default_timezone_set('America/La_Paz');
                   <p>Fusce risus metus, placerat in consectetur eu...</p>
                 </li>
                 </ul>
-             </div>
-              <div class="col-md-3 footer-newsletters">
+             </div> -->
+              <!-- <div class="col-md-3 footer-newsletters">
                 <h3>Newsletters</h3>
                 <form method="post">     
                     <div class="name">
@@ -322,7 +322,7 @@ date_default_timezone_set('America/La_Paz');
                                 <input type="submit" value="Submit"/>
                         </div>
                 </form>
-              </div>
+              </div> -->
               <div class="col-xs-12">
                 <ul class="social">
                       <li><a href=""><i class="fa fa-facebook"></i></a></li>
@@ -343,7 +343,7 @@ date_default_timezone_set('America/La_Paz');
     </section>
     <footer>
     <div class="col-md-12 content-footer">
-		<p>© 2020 mytenis All rights reserved. </p>
+		<p>© 2020 Tenis All rights reserved. </p>
       </div>
 	</footer>
 

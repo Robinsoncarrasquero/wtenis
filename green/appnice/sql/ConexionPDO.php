@@ -30,7 +30,6 @@ class Conexion
             $dbname = "dbname";
         }
                 
-        $port="3306";
         try {
             $cnn =new PDO("$dbms:host=$servername;dbname=$dbname;port=$port", $username, $password,
             array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\'',

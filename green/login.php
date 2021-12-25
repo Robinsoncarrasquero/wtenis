@@ -6,7 +6,7 @@ date_default_timezone_set('America/La_Paz');
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<title>mytenis Login de Acceso</title>
+<title>Login de Acceso</title>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="author" content="mytenis"/>
 <meta name="keywords" content="Asociaciones, Tenis, club, eventos deportivos,MyTenis, non-profit, junior, tennis, sport, deporte, magazine, non profit" />
@@ -40,7 +40,7 @@ date_default_timezone_set('America/La_Paz');
     <div class="container">
 <div class="col-md-12">
     <div class="box-support"> 
-      <p class="support-info"><i class="fa fa-envelope-o"></i> info@example</p>
+      <p class="support-info"><i class="fa fa-envelope-o"></i> info@example.com</p>
    </div>
     <div class="box-login"> 
      <!-- <i class="fa fa-shopping-cart"></i>-->
@@ -112,12 +112,12 @@ fin carrito-->
            <div class="top-score-title right-score col-md-6">
                 <h3>Bienvenido<span class="point-int"> !</span></h3>
                 <div class="col-md-12 login-page login-w-page">
-                   <p class="logiin-w-title">mytenis Tour necesitas una membresía de afiliacion para participar en el circuito.</p>
+                   <p class="logiin-w-title">Tenis Tour necesitas una membresía de afiliacion para participar en el circuito.</p>
                    <p>Son numerosos torneos para cada categoria y distintos lugares para visitar, crea la experiencia que se adapta a ti.
                    </p>
                    <h3><img class="ball-tennis" src="images/ball.png" alt=""/>mytenis informacion privilegiada del Tour</h3>
                    <p>Salga de la cancha y participe en los eventos de la gira nacional.</p>
-                   <h3><img class="ball-tennis" src="images/ball.png" alt=""/>mytenis Tour Semanal</h3>
+                   <h3><img class="ball-tennis" src="images/ball.png" alt=""/>Tenis Tour</h3>
                    <p>Informe oficial del
                     calendario incluyendo los resultados</p>
                 </div>
@@ -187,9 +187,9 @@ fin carrito-->
          <div class="col-md-3">
          <h3>Sobre Nosotros</h3>
             <p>Gracias por visitar nuesto portal, nuestra mision es fomentar y administrar 
-            el tenis de competencia estadal. Planificar, coordinar y ejecutar el plan anual de
+            el tenis de competencias. Planificar, coordinar y ejecutar el plan anual de
              torneos para dar cumplimiento al calendario oficial establecido. Brindar informacion sobre el tenis
-             del estado.
+             nacional.
             
          </div>
          <div class="col-md-3 cat-footer">
@@ -212,7 +212,7 @@ fin carrito-->
                   <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="" /><p>Fusce risus metus, placerat in consectetur eu...</p></li>
             </ul>
          </div>
-         <div class="col-md-3 footer-newsletters">
+         <!-- <div class="col-md-3 footer-newsletters">
            <h3>Newsletters</h3>
            <form method="post" >     
                <div class="name">
@@ -227,7 +227,7 @@ fin carrito-->
                            <input type="submit" value="submit"/>
                    </div>
            </form>
-         </div>
+         </div> -->
          <div class="col-xs-12">
            <ul class="social">
                  <li><a href=""><i class="fa fa-facebook"></i></a></li>
@@ -248,7 +248,7 @@ fin carrito-->
 </section>
 <footer>
     <div class="col-md-12 content-footer">
-      <p>© 2020 mytenis All rights reserved. </p>
+      <p>© 2020 All rights reserved. </p>
     </div>
 </footer>
 </section>

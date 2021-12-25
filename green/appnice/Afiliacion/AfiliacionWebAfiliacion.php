@@ -149,11 +149,11 @@ if ($atleta_id>0)
         echo '<select id="estado" name="txt_asociacion" class="form-control">';
                         // Recorremos todas las lineas del archivo
                 foreach ($rsEntidades as $value) {
-                  if ($estado==$value[estado]){
-                    echo  '<option selected value="'.$value[estado].'">'.ucwords($value[entidad]).'</option>'; 
+                  if ($estado==$value['estado']){
+                    echo  '<option selected value="'.$value['estado'].'">'.ucwords($value['entidad']).'</option>'; 
                   }else{
                     if ($objAfiliado->getFormalizacion()!=1){
-                        echo  '<option value="'.$value[estado].'">'.ucwords($value[entidad]).'</option>'; 
+                        echo  '<option value="'.$value['estado'].'">'.ucwords($value['entidad']).'</option>'; 
                     }
                   }
                 }

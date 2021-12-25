@@ -157,10 +157,10 @@ if ($objAtleta->getCelular()==NULL || $objAtleta->getLugarNacimiento()==NULL ||
                 <?php
                 // Recorremos todas las lineas del archivo
                 foreach ($rsEntidades as $value) {
-                    if ($value[estado]==$estado){
-                        echo  '<option selected value="'.$value[estado].'">'.ucwords($value[entidad]).'</option>'; 
+                    if ($value['estado']==$estado){
+                        echo  '<option selected value="'.$value['estado'].'">'.ucwords($value['entidad']).'</option>'; 
                     }else{
-                        echo  '<option value="'.$value[estado].'">'.ucwords($value[entidad]).'</option>'; 
+                        echo  '<option value="'.$value['estado'].'">'.ucwords($value['entidad']).'</option>'; 
                     }
                     
                 }

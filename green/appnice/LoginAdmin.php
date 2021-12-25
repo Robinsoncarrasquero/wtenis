@@ -156,17 +156,13 @@ $(document).ready(function (){
                             minlength: 4
                     },
                     contrasena:{required: true}
-                    
-                    
-                   
+                  
 
             },
             messages: {
                     usuario: "Usuario requerido",
                     contrasena: "Password requerido"
                    
-                  
-
             },
             
             errorElement: "em",

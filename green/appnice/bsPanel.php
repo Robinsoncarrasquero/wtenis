@@ -262,6 +262,10 @@ $urlHome=$_SESSION['home'];
                    </ul>
                 </li>
             </ul>
+
+           
+
+
             
             <ul class="nav navbar-nav">
        
@@ -294,6 +298,19 @@ $urlHome=$_SESSION['home'];
                         echo '<li><a href="AEstadisticas/AfiliacionesEntidad.php">Afiliaciones Entidad</a></li>';
                     echo '</ul>';
                 echo '</ul>';
+
+
+                echo '
+                    
+                <ul class="nav navbar-nav">
+       
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Afiliacion<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="Afiliacion/AbrirAfiliacion.php" >Abrir nuevo periodo</a></li>
+                      </ul>
+                  </li>
+              </ul>';
                   
                 }
             
