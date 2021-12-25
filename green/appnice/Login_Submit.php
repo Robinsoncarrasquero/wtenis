@@ -7,6 +7,10 @@ require_once 'conexion.php';
 require_once 'funciones/funciones.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // $dotenv = Dotenv\Dotenv::createImmutable('../');
+    // $dotenv->load();
+
     $usuario = addslashes($_POST['usuario']);
     $contrasena = addslashes($_POST['contrasena']);
 
@@ -77,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $result2=mysqli_query($conn,$sql);
             $record = mysqli_fetch_assoc($result2);
             //Chequeamos si esta afiliado
-            $_SESSION['home'] = 'bsindex.php?s1='.strtolower($_SESSION['asociacion']);
+            //$_SESSION['home'] = 'bsindex.php?s1='.strtolower($_SESSION['asociacion']);
             $_SESSION['empresa_id'] = 0;
 
 

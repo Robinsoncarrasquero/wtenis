@@ -6,6 +6,8 @@
  * and open the template in the editor.
  */
 
+
+
 if (!defined('MODO_DE_PRUEBA')) {
     define("MODO_DE_PRUEBA", "1");  // Esta variable define cuando tenemos la aplicacion 
     //en modo_de_prueba para evitar el envio de correos(1=true 0=false)
@@ -15,12 +17,20 @@ if (!defined('MODO_DE_TEST')) {
 }
 date_default_timezone_set('America/Caracas');
 
-error_reporting(1);
+error_reporting(0);
+
+$servername = $_ENV["SERVERNAME"];
+$username = $_ENV["USERNAME"];
+$password = $_ENV["PASSWORD"];
+$dbname = $_ENV["DBNAME"];
+$dbms=$_ENV["DBMS"];
+$port=$_ENV["PORT"];
 
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "atletasdb";
+$port='3306';
 if (MODO_DE_TEST==0){
     $servername = "localhost";
     $username = "usename";

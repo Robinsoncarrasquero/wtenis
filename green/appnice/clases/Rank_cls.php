@@ -21,7 +21,7 @@ class Rank {
     private $dirty;
     private $mensaje;
     private $SQLresultado_exitoso;
-    const TABLA = 'rank';
+    const TABLA = '`rank`';
     const CAMPOS='(fecha,sexo,categoria,carpeta,filename,filetype,disciplina,procesado)';
     const VALORES='(:fecha,:sexo,:categoria,:carpeta,:filetype,:filename,:disciplina,:procesado)';
     private $fields;
@@ -143,7 +143,7 @@ class Rank {
         }
         catch(PDOException $e)
             {
-                //echo "Error: " . $e->getMessage();
+                echo "Error: " . $e->getMessage();
                 $this->mensaje='Record Not Found..' . $e->getMessage();
                 $this->SQLresultado_exitoso=FALSE;
             }
@@ -261,7 +261,7 @@ class Rank {
             $SQL = $conn->prepare(" SELECT id FROM " . self::TABLA ." "
             . " WHERE categoria = :categoria and sexo = :sexo and disciplina = :disciplina "
             //. " LIMIT 1 ",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY, PDO::ATTR_EMULATE_PREPARES, false ));
-            . " ORDER BY fecha DESC LIMIT 1 ");
+            . " ORDER BY fecha Desc LIMIT 1 ");
             $SQL->setFetchMode(PDO::FETCH_ASSOC);
             // set the PDO error mode to exception
             // $SQL->bindParam(':categoria', $categoria,PDO::PARAM_STR);
@@ -272,6 +272,7 @@ class Rank {
         catch(PDOException $e)
         {
             echo "Error: " . $e->getMessage();
+            
             $mensaje="Error Update: " . $e->getMessage();
         }
       

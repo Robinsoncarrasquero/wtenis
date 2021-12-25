@@ -130,7 +130,8 @@ class Atleta   {
     }
     
     public function anoFechaNacimiento() {
-       $ano_nac= explode("-",$this->fecha_nacimiento);
+    $fn=$this->fecha_nacimiento;
+       $ano_nac= explode("-", $fn);
        return $ano_nac[0];
     }
     

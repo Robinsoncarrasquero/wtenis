@@ -5,7 +5,8 @@
     "require": {
         "fzaninotto/faker": "^1.9",
         "gabordemooij/redbean": "^5.6",
-        "phpmailer/phpmailer": "^6.5"
+        "phpmailer/phpmailer": "^6.5",
+        "vlucas/phpdotenv": "^5.4"
     },
     
     "authors": [

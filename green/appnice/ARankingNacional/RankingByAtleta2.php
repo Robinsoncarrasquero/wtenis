@@ -62,7 +62,7 @@ $objAtleta->Find($_SESSION['atleta_id']);
                             </span>
                         </div>
                         <div class="col-xs-offset-4 col-xs-3">
-                            <img class="img-responsive"   src="../images/logo/fvtlogo.png" ></img>
+                            <img class="img-responsive"   src="../images/logo/logo_jugador.png" ></img>
                         </div>
                         
                     </div>
@@ -139,13 +139,14 @@ $(document).ready(function(){
         data: {rkid:rkid,id:id}
         })
         .done(function( data) {
-              //console.log(data.html);
+        console.log(data.html);
            if (!data.html) return e.preventDefault(); // stops modal from being shown
            $('#header').html('<i class="small">'+data.Nombre+"</i>");
            $('#puntos').html('<i class="small">'+data.Puntos+"</i>");
            $('#detail').html('<i class="small">'+data.html+"</i>");
+        
         });
-    
+        
     });
      
     //Ranking detallado

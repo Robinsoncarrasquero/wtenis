@@ -20,7 +20,7 @@ echo "<header>";
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>';
-                echo '<a id="navbar-brand-panel-admin" class="navbar-brand glyphicon glyphicon-home" href="../bsindex.php?s1='.$_SESSION['asociacion'].'"></a>';
+                echo '<a id="navbar-brand-panel-admin" class="navbar-brand glyphicon glyphicon-home" href="'.$_SESSION['home'].'"></a>';
    
         echo '</div>';
         //Opciones en el dispositivo 

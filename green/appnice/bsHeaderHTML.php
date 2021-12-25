@@ -42,7 +42,7 @@ Programa para manejar el HLML comun de incio de la pagina
         iframe{
             width: 100%;
         }
-                // Use as-is
+    
         
        
     </style>

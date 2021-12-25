@@ -113,9 +113,9 @@ fin carrito-->
                 <h3>Bienvenido<span class="point-int"> !</span></h3>
                 <div class="col-md-12 login-page login-w-page">
                    <p class="logiin-w-title">Tenis Tour necesitas una membresía de afiliacion para participar en el circuito.</p>
-                   <p>Son numerosos torneos para cada categoria y distintos lugares para visitar, crea la experiencia que se adapta a ti.
+                   <p>Son numerosos torneos para cada categoria y distintos lugares para jugar, crea la experiencia que se adapta a ti.
                    </p>
-                   <h3><img class="ball-tennis" src="images/ball.png" alt=""/>mytenis informacion privilegiada del Tour</h3>
+                   <h3><img class="ball-tennis" src="images/ball.png" alt=""/>Tenis informacion actualizada de los juegos</h3>
                    <p>Salga de la cancha y participe en los eventos de la gira nacional.</p>
                    <h3><img class="ball-tennis" src="images/ball.png" alt=""/>Tenis Tour</h3>
                    <p>Informe oficial del
@@ -142,7 +142,7 @@ fin carrito-->
                                   
                   </form>
                     <div id="myerrors">
-                    
+
                     </div>
       
                   
@@ -278,6 +278,7 @@ $(document).ready(function (){
           if (data.Success){
             location.href ="appnice/sesion_usuario.php";
           }else{
+          
             $("#myerrors").addClass("alert alert-danger");
             $('#myerrors').html(data.msg);
       

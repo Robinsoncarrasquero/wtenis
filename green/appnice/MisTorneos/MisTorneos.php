@@ -75,10 +75,10 @@ $(document).ready(function(){
             $('#results').html(data.status);
              
         }
-        console.log(data.status);
+        //console.log(data.status);
     })
     .error(function(xhr){
-        alert("An error occured: " + xhr.status + " " + xhr.statusText);
+    //    alert("An error occured: " + xhr.status + " " + xhr.statusText);
     });
     //Paginando Torneos
     $(document).on('click','.page-link',function(e)  {

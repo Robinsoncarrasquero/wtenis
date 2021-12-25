@@ -58,15 +58,18 @@ $strTable =
                         }
                         $strTable .= '<td >' . $nr . '</td>';
                         if($objRankingDetalleCodigo->getTipo()!='TT'){
-                            $strTable .= '<td class="small italic text text-capitalize">' . strtolower($objRankingDetalleCodigo->getDescripcion()) . '</td>';
+                            $strTable .= '<td class="small italic text text-capitalize">' . ($objRankingDetalleCodigo->getDescripcion()) . '</td>';
                         }else{
-                            $strTable .= '<td class="small italic text text-capitalize" >' . strtolower($objRankingDetalleCodigo->getDescripcion()) . '</td>';
+                            $strTable .= '<td class="small italic text text-capitalize" >' .$objRankingDetalleCodigo->getDescripcion() . '</td>';
                         }    
                         $strTable .= '<td class="small " >' . $row['puntos'] . '</td>';
                         
-                        $strTable .= '<td class="small ">' . $objRankingDetalleCodigo->getBase()/100 . '</td>';
+                        $base=   $objRankingDetalleCodigo->getBase();
+                        $strTable .= '<td class="small ">' .   $base  . '</td>';
                         
-                        $strTable .= '<td class="small ">' . $row['puntos']*$objRankingDetalleCodigo->getBase()/100 . '</td>';
+                        $ganado= (intval($row['puntos']) / 100 * intval($objRankingDetalleCodigo->getBase())); 
+                        $strTable .= '<td class="small ">' . $ganado . '</td>';
+           
                         if (array_key_exists($objRankingDetalleCodigo->getTipo(), $arrayincluyeOtros) ){
                            $strTable .= '<td class="small"><span class="glyphicon glyphicon-asterisk"></span>'. '</td>';
                         }elseif (array_key_exists($row['codigo'],$arrayRankingPrimeros6)){

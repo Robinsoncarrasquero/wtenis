@@ -1,7 +1,8 @@
 <?php
 session_start();
-require_once 'clases/Atleta_cls.php';
 require_once 'sql/ConexionPDO.php';
+require_once 'clases/Atleta_cls.php';
+
 
 if (isset($_SESSION['renovacion'])){
     unset($_SESSION['renovacion']);

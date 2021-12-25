@@ -974,7 +974,6 @@ class Torneo {
             $SQLresultado_exitoso = FALSE;
             $errorCode = $conn->errorCode();
             $errorInfo = $conn->errorInfo();
-            $mensaje = "ERROR No se encontraron registros.." . $errorInfo;
             switch ($errorCode) {
                 case 00000:
                     $mensaje = "ERROR Numero" . $errorCode;
@@ -1017,7 +1016,7 @@ class Torneo {
             $SQLresultado_exitoso = FALSE;
             $errorCode = $conn->errorCode();
             $errorInfo = $conn->errorInfo();
-            $mensaje = "ERROR No se encontraron registros.." . $errorInfo;
+            
             switch ($errorCode) {
                 case 00000:
                     $mensaje = "ERROR Numero" . $errorCode;

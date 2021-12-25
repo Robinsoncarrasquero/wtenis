@@ -5,18 +5,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+
 define("MODO_DE_PRUEBA", "1");  // Esta variable define cuando tenemos la aplicacion 
                                 //en modo_de_prueba para evitar el envio de correos(1=true 0=false)
 define("MODO_DE_TEST", 1); // Modo de Test para apuntar al servidor de test o produccion
-error_reporting(1);
-
 class Conexion
 {
    
     public function conectar()
     {
-        
+
+               
         date_default_timezone_set('America/Caracas');
+        // $dbms=$_SERVER["DBMS"];
+        // $servername = $_SERVER["SERVERNAME"];
+        // $username = $_SERVER["USERNAME"];
+        // $password = $_SERVER["PASSWORD"];
+        // $dbname = $_SERVER["DBNAME"];
+        // $port=$_SERVER["PORT"];
+
         $dbms='mysql';
         $servername = "localhost";
         $username = "root";

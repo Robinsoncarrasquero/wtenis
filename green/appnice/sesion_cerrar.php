@@ -26,10 +26,8 @@ exit;
 $home = $_SESSION['home'];
 if (isset($_SESSION['home'])){
 
-    $home = $_SESSION['home'];
-    session_unset(); 
     header('Location: '.$home);
-    //header('Location: sesion_inicio.php');
+    session_unset(); 
     exit();
 }else{
     session_unset(); 

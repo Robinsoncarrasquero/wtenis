@@ -1,5 +1,6 @@
 <?php
 session_start();
+require '../vendor/autoload.php';
 require_once __DIR__.'/appnice/clases/Atleta_cls.php';
 require_once __DIR__.'/appnice/clases/AbstractCrud_cls.php';
 require_once __DIR__.'/appnice/clases/Visita_cls.php';
@@ -11,9 +12,11 @@ require_once __DIR__.'/appnice/sql/ConexionPDO.php';
 
 date_default_timezone_set('America/La_Paz');
 $error_login = false; 
-$msg='ERROR: El Usuario suministrado es incorrecto o el Password es invalido!';
-       
+$msg='ERROR: El Usuario suministrado es incorrecto o el Password es invalido!</br>Ingrese una clave usuario y clave valida';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $dotenv = Dotenv\Dotenv::createImmutable('../');
+    $dotenv->load();
     $usuario = addslashes($_POST['name_login']);
     $contrasena = addslashes($_POST['password_login']);
     $objUser = new Atleta();
@@ -42,7 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       //$_SESSION['home'] = 'bsindex.php?s1='.strtolower($objUser->getEstado());
       $_SESSION['empresa_id'] = 0;
-  
+      $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+      $config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
+      $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+      $_SESSION['home'] = $config['base_url'].'index.php';
       //Datos de la Entidad o Asociacion Nacional
       $objEmpresa = new Empresa();
       $objEmpresa->Fetch($objUser->getEstado());
@@ -53,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      // $_SESSION['email_envio'] = $objEmpresa->getEmail_Envio();
       $_SESSION['afiliado'] = 1; //Indica que el user es una afiliado de la asociacion
       //$_SESSION['home']=MODO_DE_PRUEBA ? 'bsindex.php?s1='.strtolower($objUser->getEstado()) : $objEmpresa->getURL();
-      $_SESSION['home'] = __DIR__.'/index.php';
+      
       
       //Varibles reseteo
       $_SESSION['ano_afiliacion']=date("Y");
@@ -87,6 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 }
+
+
 $jsondata = array("Success" => $error_login, "msg"=>$msg);   
 
 header('Content-type: application/json; charset=utf-8');

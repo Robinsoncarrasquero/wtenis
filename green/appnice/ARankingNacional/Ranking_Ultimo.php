@@ -79,13 +79,14 @@ foreach ($records as $row){
         'denmark','ven','czech','canada','bulgaria','ven',
         'brazil','argentina','ven','ven'
     ];
-    $bandera=$banderas[rand(0,count($banderas)-1)];
+    //$bandera=$banderas[rand(0,count($banderas)-1)];
     
     $banderas=
     [
         'ven','ven'
     ];
-    //$bandera=$banderas[rand(0,count($banderas)-1)];
+    
+    $bandera=$banderas[rand(0,count($banderas)-1)];
     $linea .= '<tr>';  
         $linea .= "<td class='score-position'>".$row['rknacional'].".</td>";
         $linea .= "<td class='score-position'>".$row['rkregional'].".</td>";
