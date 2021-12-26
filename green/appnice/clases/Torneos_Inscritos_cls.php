@@ -438,7 +438,7 @@ class TorneosInscritos   {
             $this->sexo=$record['sexo'];
             $this->condicion=$record['condicion'];
             $this->codigo=$record['codigo'];
-            $this->modalidad=$record['nmodalidad'];
+            $this->modalidad=$record['modalidad'];
             $this->entidad=$record['entidad'];
             $this->id=$record['torneoinscrito_id'];
             $this->fecha_registro=$record['fecha_registro'];

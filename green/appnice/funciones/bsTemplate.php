@@ -127,14 +127,14 @@ class bsTemplate
                 $i=0;
                 foreach ($array_breadcrum as $key=>$value) {
                     
-                    {
-                        $html .='<li><i class="'.($i==0 ? $value['icono']: ' ').'"></i><a href="'.$value['href'].'">'.$value['opcion'].'</a></li>';    
-                        $i++;
-                    }
+                    // {
+                    //     $html .='<li><i class="'.($i==0 ? $value['icono']: ' ').'"></i><a href="'.$value['href'].'">'.$value['opcion'].'</a></li>';    
+                    //     $i++;
+                    // }
                     
                 }
                 if (count($array_breadcrum)>0){
-     //               $html .='<li><i class="glyphicon glyphicon-calendar></i><span class="glyphicon glyphicon-chevron">></span></li>';    
+                //    $html .='<li><i class="glyphicon glyphicon-calendar></i><span class="glyphicon glyphicon-chevron"></span></li>';    
 
                 }
                 

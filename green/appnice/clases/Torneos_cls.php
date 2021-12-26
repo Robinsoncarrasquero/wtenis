@@ -452,7 +452,7 @@ class Torneo {
             $this->arbitro = $record['arbitro'];
             $this->empresa_id = $record['empresa_id'];
             $this->condicion = $record['condicion'];
-            $this->modalidad = $record['modalidad'];
+            $this->modalidad = empty($record['modalidad']) ? 'tdc' : $record['modalidad'];
             $this->entidad = $record['entidad'];
             $this->ano = $record['ano'];
             $this->numero = $record['numero'];
@@ -774,34 +774,29 @@ class Torneo {
     
     //Funcion que devuelve el estatus de un torneo
     public static function Estatus_Torneo($fechacierre,$fechainicio,$grado,$condicion) {
+
         if (Torneo::Fecha_Apertura_Calendario($fechacierre, $grado) <= Torneo::Fecha_Hoy() 
-            && Torneo::Fecha_Create($fechacierre) > Torneo::Fecha_Hoy()) {
+            && Torneo::Fecha_Create($fechacierre) > (Torneo::Fecha_Hoy())) {
 
             $estatus = "Abierto";
-        } else {
-            if (Torneo::Fecha_Apertura_Calendario($fechacierre, $grado) > Torneo::Fecha_Hoy()) {
+        } elseif (Torneo::Fecha_Apertura_Calendario($fechacierre, $grado) > Torneo::Fecha_Hoy()) {
 
-                $estatus = "Proximo";
-            } else {
-
-                //Aqui mantenemos la fecha entre dos intervalos para el running
+            $estatus = "Proximo";
+               //Aqui mantenemos la fecha entre dos intervalos para el running
                 //Cuando comienza y terminael torneo
-                if (Torneo::Fecha_Fin_Torneo($fechainicio) >= Torneo::Fecha_Hoy()
+             
+        }elseif (Torneo::Fecha_Fin_Torneo($fechainicio) >= Torneo::Fecha_Hoy()
                     && Fecha_ini_Torneo($fechainicio, $grado) < Torneo::Fecha_Hoy()) {
 
                     $estatus = "Accion";
-                } else {
-                    if (Torneo::Fecha_Fin_Torneo($fechainicio) < Torneo::Fecha_Hoy()) {
+        } elseif (Torneo::Fecha_Fin_Torneo($fechainicio) < Torneo::Fecha_Hoy()) {
 
-                        $estatus = "Finalizado";
-                    } else {
-                        $estatus = "Cerrado";
-                    }
-                }
-            }
-        }
-
-
+                    $estatus = "Finalizado";
+        } else {
+                $estatus = "Cerrado";
+         }
+        
+        
         switch ($condicion) {
             case "X":
                 $estatus = 'Cancelado';

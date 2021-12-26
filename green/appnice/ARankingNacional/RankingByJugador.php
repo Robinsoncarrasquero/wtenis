@@ -40,7 +40,7 @@ require_once '../clases/Rank_cls.php';
              
             /* font-size:10px;
             background-image: url("../images/logo/fvt/tennis-mediacanchaxpelota.jpg");
-            background-image: url("../images/logo/fvt/raqueta500x334.jpeg");
+            background-image: url("../images/logo/fvt/fvtlogo.png");
             background-color: #cccccc;
             height:auto;
             background-position:center ;
@@ -199,10 +199,10 @@ require_once '../clases/Rank_cls.php';
                 <div class="col-xs-12 ">
                     
                     <div class="col-xs-6">
-                        <img id="avatar"  src="../uploadFotos/perfil/female.jpg" ></img>
+                        <img id="avatar"  class="img-responsive"  src="../uploadFotos/perfil/female.jpg" ></img>
                     </div>
                     <div class="col-xs-offset-2 col-xs-4">
-                        <img class="img-responsive"   src="../images/logo/fvtlogo.png" ></img>
+                        <img class="img-responsive"   src="../images/logo/logo_jugador.png" ></img>
                     </div>
                 
                 </div>

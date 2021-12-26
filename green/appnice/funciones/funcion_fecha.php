@@ -5,7 +5,7 @@ define("DIAS_PARA_OPEN_G2",'30');
 define("DIAS_PARA_OPEN_G3",'30');
 define("DIAS_PARA_OPEN_G4",'30');
 define("DIAS_PARA_OPEN_G5",'30');
-
+define("DIAS_PARA_OPEN",'30');
 
 /* 
  * To change this license header, choose License Headers in Project Properties.

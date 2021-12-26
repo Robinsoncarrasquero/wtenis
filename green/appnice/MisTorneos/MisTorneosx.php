@@ -68,17 +68,19 @@ $(document).ready(function(){
         data:  {id:id,pagina:0}
     })
     .done(function( data) {
-       $('#mensaje').removeClass('loader');
-       $('#results').html(data.html);
-       $('#paginacion').html(data.pagination);
         
-        
+        if (data.Success){
+             $('#results').html(data.html);
+             $('#paginacion').html(data.pagination);
+        }else{
+            $('#results').html(data.status);
+             
+        }
+        console.log(data.status);
     })
     .error(function(xhr){
     //    alert("An error occured: " + xhr.status + " " +  xhr.statusText);
     });
-
-    
     //Paginando Torneos
     $(document).on('click','.page-link',function(e)  {
         var page = $(this).attr('data-id');
@@ -93,7 +95,7 @@ $(document).ready(function(){
         .done(function( data) {
             $('#results').html(data.html);
             $('#paginacion').html(data.pagination);
-            
+            console.log(data.html);
         })
         .error(function(xhr){
           alert("An error occured: " + xhr.status + " " + xhr.statusText);

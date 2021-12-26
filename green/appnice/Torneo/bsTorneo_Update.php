@@ -54,22 +54,25 @@ if (isset($_GET['tid']))
         $arrayArchivos=NULL;
         $fsheet_size=0;$draw_size=0;
         $fsheet_tipo=NULL;$draw_tipo=NULL;$drawd_tipo=NULL;$lista_tipo=NULL;
-        foreach ($rsArchivos as $rsRow) {
-            $arrayArchivos[]=array("Doc"=>$rsRow['documento'],'tipo'=>$rsRow['tipo'],'id'=>$rsRow['id']);
-            if ($rsRow['doc']=="fs"){
-                $fsheet_tipo=  $rsRow['tipo'];
+        if ($rsArchivos){
+            foreach ($rsArchivos as $rsRow) {
+                $arrayArchivos[]=array("Doc"=>$rsRow['doc'],'tipo'=>$rsRow['tipo'],'id'=>$rsRow['id']);
+                if ($rsRow['doc']=="fs"){
+                    $fsheet_tipo=  $rsRow['tipo'];
+                }
+                if ($rsRow['doc']=="ds"){
+                    $draw_tipo=  $rsRow['tipo'];
+                }
+                if ($rsRow['doc']=="dd"){
+                    $drawd_tipo=  $rsRow['tipo'];
+                }
+                if ($rsRow['doc']=="la"){
+                    $lista_tipo=  $rsRow['tipo'];
+                }
+                
             }
-            if ($rsRow['doc']=="ds"){
-                $draw_tipo=  $rsRow['tipo'];
-            }
-            if ($rsRow['doc']=="dd"){
-                $drawd_tipo=  $rsRow['tipo'];
-            }
-            if ($rsRow['doc']=="la"){
-                $lista_tipo=  $rsRow['tipo'];
-            }
-            
         }
+        
         $objFiles=NULL;
         //Get file
         //header("Content-disposition: attachment; filename=$filename");

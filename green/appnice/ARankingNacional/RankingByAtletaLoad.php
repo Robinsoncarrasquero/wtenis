@@ -12,7 +12,7 @@ $atleta_id= ($_POST['id']);
 $pagina= intval(substr($_POST['pagina'],4));
 
 //Paginacion 
-$objPaginacion = new Paginacion(5,$pagina);
+$objPaginacion = new Paginacion(25,$pagina);
 $countRecord="SELECT COUNT(*) as total FROM ranking"
                . " WHERE atleta_id =$atleta_id ";
 $objPaginacion->setTotal_Registros($countRecord);
@@ -69,7 +69,7 @@ $strTableFooter=
                     '</tbody>    
             </table>';
 
-$lineaOut .= $strTableHead.$linea.$strTableFooter;
+$lineaOut = $strTableHead.$linea.$strTableFooter;
 
 if ($nr>0){
     $jsondata = array("Success" => True, "html"=>$lineaOut,"pagination"=>$objPaginacion->Paginacion());   

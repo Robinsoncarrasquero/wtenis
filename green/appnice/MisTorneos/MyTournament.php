@@ -53,8 +53,8 @@ foreach ($records as $record) {
 
     $objTorneo = new Torneo();
     $row=$objTorneo->RecordById($record['torneo_id']);
-    $estatus= Torneo::Estatus_Torneo($row['fechacierre'],$row['fecha_inicio_torneo'],$row['tipo'],$row['condicion']);
-    
+    //$estatus= Torneo::Estatus_Torneo($row['fechacierre'],$row['fecha_inicio_torneo'],$row['tipo'],$row['condicion']);
+    $estatus="Open";
         //Filtro condicional por la fecha
         if (Torneo::Fecha_Create($row['fecha_inicio_torneo']) <= Torneo::Fecha_Hoy()){
             $mostrar=TRUE;
@@ -129,6 +129,7 @@ foreach ($records as $record) {
                    
         $strTable .= '</tr>';
         $table_data =$strTable;
+
         $nr++;
         
     
@@ -145,9 +146,7 @@ foreach ($records as $record) {
 // }
 
 
-//$lineaOut=$main_content . $table_head  . $table_data . $table_footer . $notaspanel;
-$lineaOut =$main_content . $table_head  . $table_data . $table_footer;
-//$lineaOut=$table_data;
+
 
 // $table_data = '<tr class="small">';
 // $table_data .= '<td >'. $row['entidad'].'</td>';
@@ -159,13 +158,15 @@ $lineaOut =$main_content . $table_head  . $table_data . $table_footer;
 // $table_data .= '<td >'. $row['entidad'].'</td>';
 // $table_data .= '</tr >  ';
 
-$lineaOut =$main_content . $table_head  . $table_data . $table_footer;
+
+$salida  = trim($main_content . $table_head  . $table_data . $table_footer);
 if ($nr>0){
    // $jsondata = array("Success" => True, "main_content"=>$main_content,"table_head"=>$table_head,"table_data"=>$table_data,"table_footer"=>$table_footer,"html"=>$lineaOut,"pagination"=>$objPaginacion->Paginacion());   
-    $jsondata = array("Success" => True, "html"=>$lineaOut,"pagination"=>$objPaginacion->Paginacion());   
+    $jsondata = array("Success" => True, "html"=>$salida,"pagination"=>$objPaginacion->Paginacion());   
 
 } else {    
     $jsondata = array("Success" => False, "html"=>"No hay datos registrados","pagination"=>"");
 }
+//var_dump($salida);
 header('Content-type: application/json; charset=utf-8');
 echo json_encode($jsondata,JSON_FORCE_OBJECT);

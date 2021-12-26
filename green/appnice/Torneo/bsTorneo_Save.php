@@ -3,7 +3,7 @@ session_start();
 require_once '../sql/Crud.php';
 require_once '../funciones/funcion_fecha.php';
 require_once '../funciones/funcion_archivos.php';
-
+error_reporting(0);
 if  ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $empresa_id=$_SESSION['empresa_id'];

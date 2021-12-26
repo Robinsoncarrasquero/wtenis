@@ -343,7 +343,7 @@ class Afiliacion {
             $this->fvt=$record['fvt'];
             $this->sistemaweb=$record['sistemaweb'];
             $this->asociacion=$record['asociacion'];
-            $this->modalidad=$record['modalidad'];
+            $this->modalidad= empty($record['modalidad']) ?  'TDC' : $record['modalidad'];
             $this->fvtCicloCobro=$record['fvtciclocobro'];
             $this->asociacionCicloCobro=$record['asociacionciclocobro'];
             $this->sistemaWebCicloCobro=$record['sistemawebciclocobro'];
