@@ -14,7 +14,7 @@
 class Conexion_mysqli{
     //put your code here
 
-public $conn;
+
 
 //Crea la conexion
 public static function Conexion($MODO_DE_TEST){

@@ -42,6 +42,7 @@ if ($_SESSION['niveluser']>9){
 }
 $rsAfiliacion_empresa = Afiliacion::ReadByCiclo($empresa_id, $ano_afiliacion, 1);
 $array_empresa=array();
+$nr=0;
 foreach ($rsAfiliacion_empresa as $datatmp){
     $rsEmpresa = new Empresa();
     $rsEmpresa->Find($datatmp['empresa_id']);

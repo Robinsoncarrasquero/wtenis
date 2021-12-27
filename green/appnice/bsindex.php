@@ -66,6 +66,8 @@ foreach ($array_meses as $valor_mes){
 //    $nr += Torneo::Count_Open_Mes($empresa_id, $mes,'G4');
 //    $nr += Torneo::Count_Open_Mes($empresa_id, $mes,'G5');
     $nr= Torneo::Count_Open_Mes($empresa_id, $mes,null);
+    $bage1 = $bage2= $bage3 = $bage4 = $bage5 = $bage6 = $bage7 = $bage8 = $bage9 = $bage10= $bage11= $bage12=0;
+    
     if ($nr>0){
         switch ($mes) {
             case 1:
@@ -152,8 +154,11 @@ echo HTML_SET::html_body_open();
             <li><a href="Asociaciones/Asociaciones.php" >Asociaciones</a></li>
           </ul>
         
-        <?php 
-        if ($_SESSION['niveluser']==10){
+        <?php
+    
+
+        
+        if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']==10){
              
             echo ' <ul class="nav navbar-nav navbar-right">';
             echo '   <li class="dropdown">';
@@ -166,7 +171,7 @@ echo HTML_SET::html_body_open();
             
             echo ' </ul>'; 
              
-        }elseif ($_SESSION['niveluser']==8){
+        }elseif (isset($_SESSION['niveluser']) && $_SESSION['niveluser']==8){
              
             echo ' <ul class="nav navbar-nav navbar-right">';
             echo '   <li class="dropdown">';
@@ -224,6 +229,7 @@ echo HTML_SET::html_body_open();
                   </ul>
                 </li>
             </ul>
+        
          <?php }?>;
 
         </div>
@@ -552,7 +558,7 @@ $(document).ready(function(){
         function(data){
             $('#div_tab'+status).removeClass('loader');
             if (data.Success){
-               $('#div_tab'+status).html(data.HTML);
+               $('#div_tab'+status).html(data.html);
                
             }else{
                 $('#div_tab'+status).html(data.Mensaje);

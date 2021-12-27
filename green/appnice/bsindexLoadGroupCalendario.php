@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 
 $empresa_id =$_POST['emp'];
 $mes=$_POST['mes'];
-$mes=0;
 $status_filtro=$_POST['status'];
 //sleep(1);
 $mes_en_letras= fun_Mes_Literal($mes);
@@ -31,12 +30,12 @@ switch ($status_filtro) {
         break;
 }
         $strDataHTML='';
-                  
+        $HTMLDATA='';
         // Buscamos los torneos vigentes
         $objTorneo = new Torneo();
         //$rsColeccion_Torneos=$objTorneo->ReadAll($empresa_id,TRUE,$mes);
         $rsColeccion_Torneos=$objTorneo->ReadAll(0,TRUE,$mes);
-        $rsColeccion_Torneos=$objTorneo->ReadAll(0,TRUE,$mes);
+       
         
         foreach ($rsColeccion_Torneos as $row) {
 
@@ -50,7 +49,7 @@ switch ($status_filtro) {
                     //Aqui mantenemos la fecha entre dos intervalos para el running
                     //Cuando comienza y terminael torneo
                     if (Torneo::Fecha_Fin_Torneo($row['fecha_inicio_torneo']) >= Torneo::Fecha_Hoy()
-                        && Fecha_ini_Torneo($row['fecha_inicio_torneo'],$row['tipo']) < Torneo::Fecha_Hoy()){
+                        && Torneo::Fecha_Ini_Torneo($row['fecha_inicio_torneo'],$row['tipo']) < Torneo::Fecha_Hoy()){
                             $estatus="Running";
                     }else {
                         if (Torneo::Fecha_Fin_Torneo($row['fecha_inicio_torneo']) < Torneo::Fecha_Hoy()) {
@@ -276,9 +275,9 @@ switch ($status_filtro) {
     }
 
 if ($strDataHTML==''){
-    $jsondata= array("Success"=>FALSE,"Mensaje"=>"<p id='info-torneo' >No hay Informacion para el Estatus $status_filtro en el Mes  $mes_en_letras </p>",HTML=>"");   
+    $jsondata= array("Success"=>FALSE,"Mensaje"=>"<p id='info-torneo' >No hay Informacion para el Estatus $status_filtro en el Mes  $mes_en_letras </p>",'html'=>"");   
 }else{
-    $jsondata= array("Success"=>TRUE,"Mensaje"=>"Informacion disponible",HTML=>$HTMLDATA);
+    $jsondata= array("Success"=>TRUE,"Mensaje"=>"Informacion disponible",'html'=>$HTMLDATA);
 }
 header("Content-type: application/json; charset=utf-8");
 echo json_encode($jsondata,JSON_FORCE_OBJECT);

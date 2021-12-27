@@ -20,7 +20,7 @@ $chkExportarXML = $_GET['chkExportar'];
 
 
 $rsAfiliadosVerificados = AfiliacionesXML::RegistrosVerificados();
-$booksArray = array();
+$booksArray = array(); $ixx=0;
 foreach ($rsAfiliadosVerificados as $datatmp) {
     $atleta_id = $datatmp['atleta_id'];
     $objAtleta = new Atleta();
@@ -45,17 +45,20 @@ foreach ($rsAfiliadosVerificados as $datatmp) {
     
               
     //Separamos los nombres y apellidos    
-    $arraynombre=explode(" ",$objAtleta->getNombres());
-    $arrayapelli=explode(" ",$objAtleta->getApellidos());
+    $nombres=$objAtleta->getNombres();
+    $apellido=$objAtleta->getApellidos();          
+    //Separamos los nombres y apellidos    
+    $arraynombre = explode(" ","$nombres");
+    $arrayapelli=explode(" ","$apellido");
     $dato = array(
         'atleta_id' => $objAtleta->getID(),
         'idJugador' => '',
         'cedula' => $objAtleta->getCedula(),
         'nacionalidad' => $objNacionalidad->getPais(),
-        'nombre' => $arraynombre[0],
-        'snombre' => $arraynombre[1],
-        'apellido' => $arrayapelli[0],
-        'sapellido' => $arrayapelli[1],
+        'nombre' => (count($arraynombre)>0 ? $arraynombre[0] : " "),
+        'snombre' => (count($arraynombre)>1 ? $arraynombre[1] : " "),
+        'apellido' => (count($arrayapelli)>0 ? $arrayapelli[0] : " "),
+        'sapellido' => (count($arrayapelli)>1 ? $arrayapelli[1] : " "),
         'sexo' => $objAtleta->getSexo(),
         'correo' => $objAtleta->getEmail(),
         'telefono' => $objAtleta->getTelefonos(),
@@ -106,7 +109,7 @@ if (count($booksArray)) {
         }
     }
      
-    $jsondata = array("Sucess" => True,"html"=>$str.$lineat.$table);
+    $jsondata = array("Sucess" => True,"html"=>" ");
     
 } else {
     $jsondata = array("Sucess" => False, "html" => '<b>Nada que Exportar</b>');

@@ -585,13 +585,13 @@ class Torneo {
             $this->SQLresultado_exitoso = FALSE;
             $errorCode = $conn->errorCode();
             $errorInfo = $conn->errorInfo();
-            $this->mensaje = "ERROR No se encontraron registros.." . $errorInfo;
+            $this->mensaje = "ERROR No se encontraron registros.." .$errorCode;
             switch ($errorCode) {
                 case 00000:
                     $this->mensaje = "ERROR Numero" . $errorCode;
                     break;
                 default:
-                    $this->mensaje = "ERROR No se encontraron registros.." . $errorInfo;
+                    $this->mensaje = "ERROR No se encontraron registros.." . $errorCode;
                     break;
             }
         }else {
@@ -786,7 +786,7 @@ class Torneo {
                 //Cuando comienza y terminael torneo
              
         }elseif (Torneo::Fecha_Fin_Torneo($fechainicio) >= Torneo::Fecha_Hoy()
-                    && Fecha_ini_Torneo($fechainicio, $grado) < Torneo::Fecha_Hoy()) {
+                    && Torneo::Fecha_Ini_Torneo($fechainicio, $grado) < Torneo::Fecha_Hoy()) {
 
                     $estatus = "Accion";
         } elseif (Torneo::Fecha_Fin_Torneo($fechainicio) < Torneo::Fecha_Hoy()) {

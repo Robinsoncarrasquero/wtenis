@@ -3,7 +3,7 @@ session_start();
 require_once '../sql/Crud.php';
 require_once '../funciones/funcion_fecha.php';
 require_once '../funciones/funcion_archivos.php';
-error_reporting(0);
+error_reporting(1);
 if  ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $empresa_id=$_SESSION['empresa_id'];
@@ -83,10 +83,12 @@ if  ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     }
     
+    $folder_destino = dirname(dirname(__FILE__)).'\/FILE_TORNEO/';
+
     $subir = count($_FILES);
     $subidos = 0;
     $maximobytes = 1600000;
-    $folder_destino="../FILE_TORNEO/";
+    //$folder_destino="../FILE_TORNEO/";
     $array_documento=array('fs','ds','dd','la');
   
     //Subir los archivos al servidor mediante un arreglo de archivos  

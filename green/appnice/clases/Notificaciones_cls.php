@@ -1,22 +1,21 @@
 <?php
-require_once 'funcion_fecha.php';
-// require_once '../ConexionMysqli_cls.php';
-require_once '../clases/Atleta_cls.php';
-require_once '../clases/Empresa_cls.php';
-require_once '../clases/Torneos_cls.php';
-require_once '../sql/ConexionPDO.php';
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
-    require_once '../PHPMailer/src/Exception.php';
-    require '../PHPMailer/src/PHPMailer.php';
-    require '../PHPMailer/src/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+
+require dirname(dirname(__FILE__)).'\/PHPMailer/src/SMTP.php';
+require dirname(dirname(__FILE__)).'\/PHPMailer/src/Exception.php';
+require dirname(dirname(__FILE__)).'\/PHPMailer/src/PHPMailer.php';
+
+
+class Notificaciones   {
+    
+
     
 /* 
  * Utilizamos esta funcion para hacer el envion de correo de cualquier moovimiento tales 
  * como Inscripcion, eliminacion de inscripcion, retiros.
  */
-function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
+public function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
     $email_empresa= $_SESSION['email_empresa'];
     if (isset($_SESSION['email_envio'])){
         $email_from= $_SESSION['email_envio'];
@@ -92,10 +91,7 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
         
         //Buscamos los datos Banciarios en la Tabla Empresa o asociacion
         //$sqlEmp="SELECT telefonos,entidad,cuenta,banco,rif,nombre,email FROM empresa WHERE empresa_id=" .$empresa_id;
-        $sqlEmp="SELECT telefonos,entidad,cuenta,banco,rif,nombre,email "
-                . "FROM empresa "
-                . "WHERE estado='$entidad_torneo'";
-        
+                
         $rsempresa = new Empresa();
         $rsempresa->Fetch($entidad_torneo);
 
@@ -156,129 +152,16 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
             
     }
 
-    /*
-
-    $conn = Conexion_mysqli::Conexion(MODO_DE_TEST);
-    $result=Conexion_mysqli::mysqli_query($sql);
-    $row = Conexion_mysqli::mysqli_fetch_array($result);
-
-    
-    if ($row){
-        $codigo_torneo=$row["codigo"];
-        $nombre_torneo=$row["nombre"];
-        $empresa_id=$row["empresa_id"];
-        $grado=$row["tipo"];
-        $fechacierre=$row["fechacierre"];
-        $fecharetiro=$row["fecharetiros"];
-        $fechainicio=$row["fecha_inicio_torneo"];
-        $categoria_torneo=$row['categoria'];
-        $entidad_torneo=$row["entidad"];
-        
-        $disciplina = $row['modalidad'];
-         
-        //Datos del Atleta
-        $sql="SELECT cedula,fecha_nacimiento,sexo,nombres,apellidos,email,estado "
-                . "FROM atleta "
-                . "WHERE atleta_id=$atleta_id ";
-        
-        $result=Conexion_mysqli::mysqli_query($sql);
-        $row = Conexion_mysqli::mysqli_fetch_array($result);
-        
-        $nombre_atleta=$row["nombres"];
-        $apellido_atleta=$row["apellidos"];
-        $email=$row["email"];
-        $estado=$row["estado"];
-        $sexo=$row["sexo"];
-        $cedula=$row["cedula"];
-        $fechanacimiento=  fecha_date_dmYYYY($row["fecha_nacimiento"]);
-        $categoria_natural = categoria_natural(anodeFecha($row["fecha_nacimiento"]));
-        
-        //Buscamos los datos Banciarios en la Tabla Empresa o asociacion
-        //$sqlEmp="SELECT telefonos,entidad,cuenta,banco,rif,nombre,email FROM empresa WHERE empresa_id=" .$empresa_id;
-        $sqlEmp="SELECT telefonos,entidad,cuenta,banco,rif,nombre,email "
-                . "FROM empresa "
-                . "WHERE estado='$entidad_torneo'";
-        
-        $result2=Conexion_mysqli::mysqli_query($sqlEmp);
-        $rsempresa= Conexion_mysqli::mysqli_fetch_assoc($result2);
-        if ($rsempresa){
-            $banco_empresa =$rsempresa['banco'];
-            $cuenta_empresa =$rsempresa['cuenta'];
-            $rif_empresa =$rsempresa['rif'];
-            $nombre_empresa =$rsempresa['nombre'];
-            $email_empresa=$rsempresa['email'];
-            $telefonos_empresa=$rsempresa['telefonos'];
-        }else{
-            $banco_empresa ="desconocido";
-            $cuenta_empresa ="desconocida";
-            $rif_empresa ="desconocido";
-            $nombre_pago ="desconocida";
-            $email_empresa="desconocido";
-            $telefonos_empresa='desconocido';
-        }
-      
-        $strMensaje = "Estimado(a) Atleta($estado) $nombre_atleta, $apellido_atleta, le informamos que su solicitud de $movimiento al Torneo: "
-                . "$nombre_torneo Categoria($titcategoria) "
-                . "fue procesada exitosamente.";
-        if ($tipodeoperacion == "INS") {
-            $strMensaje .= "<br><br>NOTA:";
-            $strMensaje .= "Solo debe pagar al momento de la firma del Torneo Grado : $grado";
-        }
-        //Obtenemos la Plantilla HTML
-        $file_template= file_get_contents("../Email_Template/". $fileTemplate);
-       
-        //Creamos los paramentros de la plantila HTML
-        $campos=['@@OPERACION','@@SOLICITUD','@@CEDULA','@@NOMBRES','@@APELLIDOS','@@FECHANACIMIENTO','@@SEXO',
-            '@@ASOCIACION','@@CATEGORIANATURAL','@@CODIGO','@@NOMBRE_TORNEO','@@ENTIDAD','@@GRADO','@@CATEGORIA','@@FECHACIERRE','@@FECHARETIRO','@@FECHAINICIO',
-            '@@DISCIPLINA','@@TELEFONOS','@@BANCO','@@CUENTA','@@RIF','@@BENEFICIARIO','@@EMAIL_PAGO'];
-        
-        $valores=[$movimiento,$strMensaje,$cedula,$nombre_atleta,$apellido_atleta,$fechanacimiento,$sexo,
-            $estado,$categoria_natural,$codigo_torneo,$nombre_torneo,$entidad_torneo,$grado,$categoria,$fechacierre,
-           $fecharetiro,$fechainicio,$disciplina,$telefonos_empresa,$banco_empresa,$cuenta_empresa,$rif_empresa,$nombre_empresa,$email_empresa];
-        
-        //Reemplazamos los parametros con los valores del Template
-        $body = html_template($campos, $valores, $file_template);
-        //Enviamos el Correo
-        {
-            $nombre_remitente='mytenis';
-            $email_empresa='robinson.carrasquero@gmail.com';
-            $to = $email; //"robinson.carrasquero@gmail.com";
-            $subject = "$movimiento al torneo:($codigo_torneo)";
-            
-            if ($atleta_id==487){ // Prueba de usuario
-                $from = "From: mytenis<info@example>"
-                    . "\r\n" ."BCC:atenismiranda@gmail.com";
-            }else{
-                $from = "From: $nombre_remitente<".$email_from.">" 
-                    . "\r\n" ."BCC:atenismiranda@gmail.com,$email_empresa";
-            }
-            $from = $email_empresa;
-            email_smtp($to,$subject,$body,$from);
-        }
-    }
-    */
+   
     return;
 }
 
 
 
-//Utilizamos esta funcion para enviar un correo cuando se hacen modifican datos
-//de correos, cambio de clave, ingreso al sitio, etc. En este caso la plantilla
-//de mensaje es distinta.
-function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
+//Enavimos un correo cuando se hacen modificacion de datos de correo
+//cambio de clave, ingreso al sitio, etc manejando plantillas.
+public function email_notificacion(Atleta $atleta,Empresa $rsempresa,$tipoNotificacion,$nota=null){
     
-    
-    $email_empresa= $_SESSION['email_empresa'];
-    $empresa_id=$_SESSION['empresa_id'];
-    if (isset($_SESSION['email_envio'])){
-        $email_from= $_SESSION['email_envio'];
-    }else{
-        $email_from="info@example";
-    }
-    
-    //Datos Atleta
-    $atleta = new Atleta();
-    $atleta->Find_Cedula($cedulax);
     $atleta_id=$atleta->getID();
     $nombre_atleta=$atleta->getNombres();
     $apellido_atleta=$atleta->getApellidos();
@@ -286,15 +169,18 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     $estado=$atleta->getEstado();
     $sexo=$atleta->getSexo();
     $cedula=$atleta->getCedula();
-    $fechanacimiento=   fecha_date_dmYYYY($atleta->getFechaNacimiento());
-    $categoria_natural = categoria_natural(anodeFecha($atleta->getFechaNacimiento()));
-    $lugarnacimiento=$atleta->getLugarNacimiento();
+    $fechanacimiento=$atleta->FechaNacimientoDDMMYYYY();
+    $categoria_natural = $atleta->Categoria_Natural(date ("Y"));
     $disciplina=$atleta->getDisciplina();
 
     //Datos Empresa
-    $rsempresa = new Empresa();
-    $rsempresa->Find($empresa_id);
-
+    $email_empresa= $rsempresa->getEmail();
+    if ($rsempresa->getEmail_Envio()){
+        $email_from= $rsempresa->getEmail_Envio();
+    }else{
+        $email_from="info@example";
+    }
+    
     if ($rsempresa){
         $banco_empresa =$rsempresa->getBanco();
         $cuenta_empresa =$rsempresa->getCuenta();
@@ -306,63 +192,11 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
         $banco_empresa ="desconocido";
         $cuenta_empresa ="desconocida";
         $rif_empresa ="desconocido";
-        $nombre_pago ="desconocida";
+        $nombre_empresa ='desconocido';
         $email_empresa="desconocido";
         $telefonos_empresa='desconocido';
     }
 
-
-    /*
-    //Datos del atleta
-    $sql="SELECT lugarnacimiento,cedula,sexo,fecha_nacimiento,nombres,apellidos,"
-            . "email,contrasena,estado,atleta_id,disciplina "
-            . "FROM atleta "
-            . "WHERE cedula=$cedulax";
-    
-    $result=Conexion_mysqli::mysqli_query($sql);
-    $row = Conexion_mysqli::mysqli_fetch_array($result);
-    $atleta_id=$row['atleta_id'];
-    $nombre_atleta=trim($row["nombres"]);
-    $apellido_atleta=trim($row["apellidos"]);
-    $disciplina=trim($row["disciplina"]);
-    $email=$row["email"];
-    $estado=$row["estado"];
-    $sexo=$row["sexo"];
-    $cedula=$row["cedula"];
-    $fechanacimiento=  fecha_date_dmYYYY($row["fecha_nacimiento"]);
-    $categoria_natural = categoria_natural(anodeFecha($row["fecha_nacimiento"]));
-    $lugarnacimiento=$row["lugarnacimiento"];
-    
-    $notificacion2="fue procesada exitosamente.";
-    $BCC="BCC:atenismiranda@gmail.com";
-    
-    
-
-    //Datos Bancarios
-    $sqlEmp="SELECT entidad,telefonos,cuenta,banco,rif,nombre,email "
-            . " FROM empresa "
-            . " WHERE empresa_id=$empresa_id";
-    
-    $resultemp=Conexion_mysqli::mysqli_query($sqlEmp);
-    $rsempresa =Conexion_mysqli::mysqli_fetch_array($resultemp);
-    if ($rsempresa) {
-        $banco_empresa = $rsempresa['banco'];
-        $cuenta_empresa = $rsempresa['cuenta'];
-        $rif_empresa = $rsempresa['rif'];
-        $nombre_empresa = $rsempresa['nombre'];
-        $email_empresa = $rsempresa['email'];
-        $entidad_asociacion = $rsempresa['entidad'];
-        $estado_asociacion = $rsempresa['estado'];
-        $telefonos_empresa = $rsempresa['telefonos'];
-    } else {
-        $banco_empresa ="desconocida";
-        $cuenta_empresa = "desconocida";
-        $rif_empresa = "desconocido";
-        $email_empresa = "desconocido";
-        $entidad_asociacion = 'desconocido';
-        $telefonos_empresa = 'desconocido';
-    }
-    */
 
     $fileTemplate="Template_Notificacion.html";
     switch ($tipoNotificacion){
@@ -532,22 +366,16 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
        $email_empresa];
     
     //Reemplazamos los valores de la platilla 
-    $body = html_template($campos, $valores, $file_Template);
-    // $DIR=__DIR__;
-    // $FILE=__FILE__;
-    // $DROOT=$_SERVER['DOCUMENT_ROOT'];        
-    // $jsondata = array("Success" => TRUE, "msg"=>$FILE ."FILE ".$DROOT . "DROOT ". $DIR. " DIR ","html"=>json_encode($body, JSON_FORCE_OBJECT));
-    // header('Content-type: application/json; charset=utf-8');
-    // echo json_encode($jsondata, JSON_FORCE_OBJECT);
-    //var_dump($body);
+    $body = $this->html_template($campos, $valores, $file_Template);
+    
     $nombre_remitente='FVT';
     $email_empresa='rcarrasquero@gmail.com';
     $email_from ='atenimiranda@gmail.com';
     //Enviamos Correo
     {
-        $to = $email; //"robinson.carrasquero@gmail.com";
+        $to = $email; 
         $subject = $asunto;
-        if ($atleta_id == 487) { // Prueba de usuario
+        if ($atleta_id == 487) { 
             $from = "From: mytenis<$email_from>"
                     . "\r\n" . "BCC:robinson.carrasquero@gmail.com";
         } else {
@@ -555,8 +383,9 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
                     . "\r\n" . "BCC:atenismiranda@gmail.com,$email_empresa";
         }
         $from = $email_from;
+        
         //Enviamos correos via smtp                  
-        email_smtp($to, $subject, $body, $from);
+        $this->email_smtp($to, $subject, $body, $from);
                    
     }
     return;
@@ -588,13 +417,14 @@ function email_smtp($to,$subject,$body,$from){
     $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
     //$cabeceras = 'X-Mailer: PHP/' . phpversion();
     if ($to !='' && MODO_DE_PRUEBA==1){
-        phpmailer($to,$subject,$body,$from);
+        $this->phpmailer($to,$subject,$body,$from);
         
     }else{
         mail($to,$subject,$body,$cabeceras.$from);
     }
  
 }
+
 function phpmailer($to,$subject,$body,$from)
 {
     //Create an instance; passing `true` enables exceptions
@@ -629,7 +459,8 @@ function phpmailer($to,$subject,$body,$from)
         $mail->send();
         // echo 'Message has been sent';
     } catch (Exception $e) {
-        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return  "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
 
+}

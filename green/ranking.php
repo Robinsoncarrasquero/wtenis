@@ -50,7 +50,7 @@ require_once __DIR__.'/appnice/clases/Paginacion_cls.php';
     <div class="box-login"> 
      <!-- <i class="fa fa-shopping-cart"></i>-->
       <a href='login.php'>Login</a>
-      <a href='login.php'>Sign Up</a>
+      <a href='appnice/sesion_cerrar.php'>Sign Up</a>
    </div>
 <!-- Carrito	
    <div class="cart-prod hiddenbox">
@@ -118,7 +118,7 @@ fin carrito-->
                 <h3>Ranking <span>Nacional</span><span class="point-little">.</span></h3>
                 <div class="cat-con-desc">
                 <img src="images/cup1.jpg" alt="" /><p class="news-title-right">Ranking y resultados</p>
-                <p class="txt-right">Los jugadores y Jugadoras con los mejores resultados logrados en el Tour del circuito de Tenis, 
+                <p class="txt-right">Los jugadores y Jugadoras con los resultados logrados en el Tour del circuito de Tenis, 
                    con la participacion de las mejores raquetas del pais.</p>
                 <p class="txt-right">El respeto, la disciplina, la constancia, el entrenamiento diario nos demuestra
                  que solo con dedicacion diaria, podemos lograr nuestros objetivos en cualquier ambito de la vida.</p>
@@ -137,8 +137,6 @@ fin carrito-->
                                         <option value="18">18</option>
                                         <option value="PV">PV</option>
                                         <option value="PN">PN</option>
-                                        
-                                        
                                     </select>
                                 </a>
                                </li>
@@ -170,9 +168,10 @@ fin carrito-->
                                   <tr><td class="score-position">18.</td><td><a href="single_player.html">Tommy Rotmans</a></td><td><img src="images/flags/brazil.png" alt="" /></td><td>4225</td></tr>
                                   <tr><td class="score-position">19.</td><td><a href="single_player.html">Paolo Bautista</a></td><td><img src="images/flags/italy.png" alt="" /></td><td>4225</td></tr>
                                   <tr><td class="score-position">20.</td><td><a href="single_player.html">Kevin Anderfig</a></td><td><img src="images/flags/germany.png" alt="" /></td><td>4225</td></tr> -->
-                                  <div id="results">
-                              
-                                   </div>                    
+                                  <div class="top-score-title col-md-12 right-title">
+                                    <h3 id="results"></h3>
+                                   
+                                  </div>                    
                                 </table>
                                 </div>
                                 
@@ -369,7 +368,7 @@ fin carrito-->
                 </li>
             </ul>
          </div>
-         <div class="col-md-3 footer-newsletters">
+         <!-- <div class="col-md-3 footer-newsletters">
            <h3>Newsletters</h3>
            <form method="post">     
                <div class="name">
@@ -384,7 +383,7 @@ fin carrito-->
                            <input type="submit" value="Submit"/>
                    </div>
            </form>
-         </div>
+         </div> -->
          <div class="col-xs-12">
            <ul class="social">
                  <li><a href=""><i class="fa fa-facebook"></i></a></li>

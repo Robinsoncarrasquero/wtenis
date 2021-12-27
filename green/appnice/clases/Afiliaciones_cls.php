@@ -634,7 +634,7 @@ class Afiliaciones   {
             $this->SQLresultado_exitoso=FALSE;
             $errorCode= $conn->errorCode();
             $errorInfo=$conn->errorInfo();
-            $this->mensaje="ERROR No se encontraron registros..".$errorInfo ;
+            $this->mensaje="ERROR No se encontraron registros..".$errorCode ;
            
            switch ($errorCode) 
             {
@@ -642,7 +642,7 @@ class Afiliaciones   {
                     $this->mensaje="ERROR Numero" .$errorCode;
                     break;
                 default:
-                    $this->mensaje="ERROR No se encontraron registros..".$errorInfo ;
+                    $this->mensaje="ERROR No se encontraron registros..".$errorCode ;
                     break;
             }
                    
@@ -655,7 +655,6 @@ class Afiliaciones   {
         
    
         $conn=NULL;
-       
         return $registros;
         
     }

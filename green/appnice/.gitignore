@@ -4,7 +4,6 @@
 uploadFotos/portal/
 MYSQL/
 remotopdo.php
-digitalocean/
-sql/
 conexion.php
 ConexionMysqli_cls.php
+sql/ConexionPDO.php

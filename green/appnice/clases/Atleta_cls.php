@@ -674,6 +674,65 @@ class Atleta   {
         $conn=NULL;
        
     }
+
+    public function Find_Cedula($cedula) {
+        try {
+            $objConn = new Conexion();
+            $conn = $objConn->conectar();
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            $SQL = $conn->prepare(" SELECT * FROM " . self::TABLA . ' WHERE cedula = :cedula');
+            $SQL->bindParam(':cedula', $cedula);
+            
+            $SQL->execute();
+            $record = $SQL->fetch();
+           
+            if($record){
+               
+                 $this->cedula=$record['cedula'];
+                 $this->nombres=$record['nombres'];
+                 $this->apellidos= $record['apellidos'];
+                 $this->sexo= $record['sexo'];
+                 $this->fecha_nacimiento=$record['fecha_nacimiento'];
+                 $this->email=$record['email'];
+                 $this->biografia=$record['biografia'];
+                 $this->contrasena=$record['contrasena'];
+                 $this->nacionalidad_id=$record['nacionalidad_id'];
+                 $this->estado_id=$record['estado_id'];
+                 $this->estado=$record['estado'];
+                 $this->niveluser=$record['niveluser'];
+                 $this->sesion_id=$record['sesion_id'];
+                 $this->bloqueado=$record['bloqueado'];
+                 $this->clave_default=$record['clave_default'];
+                 $this->direccion=$record['direccion'];
+                 $this->telefonos=$record['telefonos'];
+                 $this->cedula_representante=$record['cedularep'];
+                 $this->nombre_representante=$record['nombrerep'];
+                 $this->categoria=$record['categoria'];
+                 $this->lugarNacimiento=$record['lugarnacimiento'];
+                 $this->lugarTrabajo=$record['lugartrabajo'];
+                 $this->celular=$record['celular'];
+                 $this->fecha_alta=$record['fecha_alta'];
+                 $this->fecha_modificacion=$record['fecha_modificacion'];
+                 $this->disciplina=$record['disciplina'];
+                 $this->id=$record['atleta_id'];
+                 $this->mensaje='Record Found successfully ';
+                $this->SQLresultado_exitoso=TRUE;
+                 
+            
+            }
+        }
+        catch(PDOException $e)
+            {
+                //echo "Error: " . $e->getMessage();
+                $this->mensaje='Record Not Found..' . $e->getMessage();
+                $this->SQLresultado_exitoso=FALSE;
+            }
+            
+        $conn=NULL;
+       
+    }
     
     public static function ReadById($id,$cedula){
         

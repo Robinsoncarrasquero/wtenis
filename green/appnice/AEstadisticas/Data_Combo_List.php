@@ -22,7 +22,7 @@ switch ($tabla) {
         $array_data = Afiliacion::data_combo_list($empresa_id);
         $dato=array();
         foreach ($array_data as $value) {
-            $datox = array("value"=>$value[value],"texto"=>$value[texto]);
+            $datox = array("value"=>$value['value'],"texto"=>$value['texto']);
             array_push($dato, $datox);
         }
         $array_jsondata=$dato;
@@ -33,7 +33,7 @@ switch ($tabla) {
         array_push($dato, $datox);
         $array_data = Categoria::data_combo_list();
         foreach ($array_data as $value) {
-            $datox = array("value"=>$value[value],"texto"=>$value[texto]);
+            $datox = array("value"=>$value['value'],"texto"=>$value['texto']);
             array_push($dato, $datox);
         }
         $array_jsondata=$dato;

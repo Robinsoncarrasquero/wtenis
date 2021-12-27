@@ -33,9 +33,11 @@ $querycount = "SELECT count(*) as total  FROM atleta "
          ." ";
 $Array_Param=array(':estado' => ' ', ':rank_id' => $rank_id);
 
+
 //Buscamos los registros para la paginacion
 //Paginacion mediante una clase
-$objPaginacion = new Paginacion(20,$pagina);
+$lotepaginacion=30;
+$objPaginacion = new Paginacion($lotepaginacion,$pagina);
 $objPaginacion->setTotal_Registros_Param($querycount,$Array_Param);
 
 $SelectParam = " SELECT atleta.atleta_id,atleta.sexo,atleta.cedula,atleta.estado,"
@@ -108,7 +110,7 @@ $linea_out=$tabla. $linea ;
 if ($nr>0){
     $jsondata = array("Success" => True, "html"=>$linea_out,"pagination"=>$objPaginacion->PaginacionSimple());   
 } else {    
-    $jsondata = array("Success" => False, "html"=>"No hay datos registrados","pagination"=>"");
+    $jsondata = array("Success" => False, "html"=>"No hay ranking registrado","pagination"=>"");
 }
 header('Content-type: application/json; charset=utf-8');
 echo json_encode($jsondata, JSON_FORCE_OBJECT);

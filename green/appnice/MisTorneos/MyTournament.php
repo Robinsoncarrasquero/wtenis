@@ -53,8 +53,7 @@ foreach ($records as $record) {
 
     $objTorneo = new Torneo();
     $row=$objTorneo->RecordById($record['torneo_id']);
-    //$estatus= Torneo::Estatus_Torneo($row['fechacierre'],$row['fecha_inicio_torneo'],$row['tipo'],$row['condicion']);
-    $estatus="Open";
+    $estatus= Torneo::Estatus_Torneo($row['fechacierre'],$row['fecha_inicio_torneo'],$row['tipo'],$row['condicion']);
         //Filtro condicional por la fecha
         if (Torneo::Fecha_Create($row['fecha_inicio_torneo']) <= Torneo::Fecha_Hoy()){
             $mostrar=TRUE;

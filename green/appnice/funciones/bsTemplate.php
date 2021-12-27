@@ -547,11 +547,11 @@ class bsTemplate
                         <a href="../Inscripcion/Inscripcion.php">
                         <div class="task-info">
                             <div class="desc ">'.$record['numero']."-".$record['grado']."-".$record['categoria']."-".$record['entidad']. ' cerrando: '.$record['time_time'].$record['time_titulo'].' </div>
-                            <div class="percent">'.$record['consumido'].'%</div>
+                            <!--<div class="percent">'.$record['consumido'].'%</div> -->
                         </div>
                         <div class="'.$progressbar.'">
                             <div class="'.$progressbaralert.'" role="progressbar" aria-valuenow="'.$record['consumido'].'" aria-valuemin="0" aria-valuemax="100" style="width: '.$record['consumido'].'%">
-                            <span class="sr-only">'.$record['consumido'].'% Complete (success)</span>
+                            <!-- <span class="sr-only">'.$record['consumido'].'% Complete (success)</span> -->
                             </div>
                         </div>
                         </a>

@@ -1,5 +1,8 @@
 ﻿<?php
 session_start();
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
+
 require_once 'appnice/clases/Nacionalidad_cls.php';
 require_once 'appnice/clases/Empresa_cls.php';
 require_once 'appnice/sql/ConexionPDO.php';
@@ -247,7 +250,10 @@ fin carrito-->
                               <input type="button" name="previous" class="previous-form btn btn-default" value="Regresar" />
                               <input type="submit" id="btn-submit" name="submit" class="btn btn-default" value="Registrar" />
                           </fieldset>
-                          <div id="mensaje"></div>
+                          
+                        
+                    
+                        <div id="mensaje"></div>
 
                       </form>
                       <div class="ctn-img">
@@ -300,9 +306,9 @@ fin carrito-->
          <div class="col-sm-3">
             <h3>Sobre Nosotros</h3>
             <p>Gracias por visitar mytenis, nuestra mision es fomentar y reglamentar 
-            el tenis de competencia nacional e internacional. Crear, planificar, coordinar y ejecutar el plan anual de
-             torneos oficiales para dar cumplimiento al calendario establecido. Brindar informacion y recursos sobre el tenis
-             Federado.
+            el tenis de competencia nacional. Crear, planificar, coordinar y ejecutar el plan anual de
+             torneos oficiales para dar cumplimiento al calendario establecido. Brindar informacion sobre el tenis
+             Federativo.
          </div>
          <div class="col-sm-3 cat-footer">
            <div class="footer-map"></div>
@@ -324,7 +330,7 @@ fin carrito-->
                   <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="" /><p>Fusce risus metus, placerat in consectetur eu...</p></li>
             </ul>
          </div>
-         <div class="col-sm-3 footer-newsletters">
+         <!-- <div class="col-sm-3 footer-newsletters">
            <h3>Newsletters</h3>
            <form method="post" >     
                <div class="name">
@@ -339,7 +345,7 @@ fin carrito-->
                            <input type="submit" value="Submit"/>
                    </div>
            </form>
-         </div>
+         </div> -->
          <div class="col-sm-12">
            <ul class="social">
                  <li><a href=""><i class="fa fa-facebook"></i></a></li>
@@ -360,7 +366,7 @@ fin carrito-->
 </section>
 <footer>
     <div class="col-sm-12 content-footer">
-      <p>© 2020 mytenis All rights reserved. </p>
+      <p>© 2020 All rights reserved. </p>
     </div>
 </footer>
 </section>
@@ -489,6 +495,14 @@ function ValidateEmail (valor){
       $('#mensaje').addClass('alert alert-danger').html(error_message);
       return false;
     }else{
+      
+      if(!$("#txt_nombre").val()) {
+        error_message+="<br>Debe indicar un Nombre";
+      }
+      if(!$("#txt_apellido").val()) {
+        error_message+="<br>Debe indicar un Apellido";
+      }
+       
       return true;
     }
   }
@@ -504,6 +518,8 @@ function ValidateEmail (valor){
         if (data.Success){
       //    $('#results').removeClass('alert alert-danger hide').addClass('alert alert-success').html(data.msg);
           $('#mensaje').removeClass('alert alert-danger').addClass('alert alert-success').html(data.msg);
+          setTimeout(go_link, 2000);
+
         }else{
       //    $('#results').removeClass('alert alert-success hide').addClass('alert alert-danger').html(data.msg);
           $('#mensaje').removeClass('alert alert-success').addClass('alert alert-danger').html(data.msg);
@@ -518,6 +534,10 @@ function ValidateEmail (valor){
 
 
   });
+
+function go_link(){
+    window.location.replace("login.php");
+ };
 
 
 });

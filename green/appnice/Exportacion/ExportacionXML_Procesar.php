@@ -20,7 +20,7 @@ $chkExportarXML = $_POST['chkExportar'];
 
 
 $rsAfiliadosVerificados = AfiliacionesXML::RegistrosVerificados();
-$booksArray = array();
+$booksArray = array(); $ixx=0;
 foreach ($rsAfiliadosVerificados as $datatmp) {
     $atleta_id = $datatmp['atleta_id'];
     $objAtleta = new Atleta();
@@ -43,19 +43,20 @@ foreach ($rsAfiliadosVerificados as $datatmp) {
     $objAfiliacion_afiliado= new Afiliaciones();
     $objAfiliacion_afiliado->Atleta($atleta_id);
     
-              
+    $nombres=$objAtleta->getNombres();
+    $apellido=$objAtleta->getApellidos();          
     //Separamos los nombres y apellidos    
-    $arraynombre=explode(" ",$objAtleta->getNombres());
-    $arrayapelli=explode(" ",$objAtleta->getApellidos());
+    $arraynombre = explode(" ","$nombres");
+    $arrayapelli=explode(" ","$apellido");
     $dato = array(
         'atleta_id' => $objAtleta->getID(),
         'idJugador' => '',
         'cedula' => $objAtleta->getCedula(),
         'nacionalidad' => $objNacionalidad->getPais(),
-        'nombre' => $arraynombre[0],
-        'snombre' => $arraynombre[1],
-        'apellido' => $arrayapelli[0],
-        'sapellido' => $arrayapelli[1],
+        'nombre' => (count($arraynombre)>0 ? $arraynombre[0] : " "),
+        'snombre' => (count($arraynombre)>1 ? $arraynombre[1] : " "),
+        'apellido' => (count($arrayapelli)>0 ? $arrayapelli[0] : " "),
+        'sapellido' => (count($arrayapelli)>1 ? $arrayapelli[1] : " "),
         'sexo' => $objAtleta->getSexo(),
         'correo' => $objAtleta->getEmail(),
         'telefono' => $objAtleta->getTelefonos(),
@@ -109,7 +110,7 @@ if (count($booksArray)) {
     //Recorremos el array de registros para actualizar
     //el campo indicador de dato Exportado al archivo xml 
     //Para el sistema de afiliaciones interno.
-    $ixx=0;
+    $ixx=0; $lineat='';
     for ($i = 0; $i < count($booksArray); $i++) {
         $atleta_id = $booksArray[$i]['atleta_id'];
         //Si es exportacion definitiva actualizamos el campo de exportacion
@@ -160,7 +161,7 @@ if (count($booksArray)) {
     $lineat .= "</div>";
     $lineat .= "</table></div>";
    
-    $jsondata = array("Sucess" => True,"html"=>$str.$lineat.$table);
+    $jsondata = array("Sucess" => True,"html"=>$str.$lineat);
     
 } else {
     $jsondata = array("Sucess" => False, "html" => '<b>No hay Datos</b>');
