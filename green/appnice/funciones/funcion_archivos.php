@@ -14,7 +14,8 @@ function upload_file($file_load,$array_numero,$file_name,$forder_destino) {
     $posicion_array=$array_numero; // 0;
     $carpetaDestino=$forder_destino; //"../FILE_RANKING/"; 
     $nombreArchivo=$_FILES[$file_load]['name'][$posicion_array];
-    $ext=  strtolower(end(explode(".",$_FILES[$file_load]['name'][$posicion_array])));
+    $string_array=  explode(".",$nombreArchivo);
+    $ext = strtolower(end($string_array));
     $nombreTemporal=$_FILES[$file_load]['tmp_name'][$posicion_array];
     $tipoArchivo=$_FILES[$file_load]['type'][$posicion_array];
 

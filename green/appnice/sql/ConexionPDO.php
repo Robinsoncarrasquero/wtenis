@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Configuracion_cls.php';
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,21 +17,16 @@ class Conexion
     public function conectar()
     {
 
-               
         date_default_timezone_set('America/Caracas');
-        // $dbms=$_SERVER["DBMS"];
-        // $servername = $_SERVER["SERVERNAME"];
-        // $username = $_SERVER["USERNAME"];
-        // $password = $_SERVER["PASSWORD"];
-        // $dbname = $_SERVER["DBNAME"];
-        // $port=$_SERVER["PORT"];
-
-        $dbms='mysql';
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "atletasdb";
-        $port='3306';
+                      
+        $configuracion = new Configuracion();
+        $servername = $configuracion->servername;
+        $username = $configuracion->username;
+        $password = $configuracion->password;
+        $dbname = $configuracion->dbname;
+        $dbms = $configuracion->dbms;
+        $port = $configuracion->port;
+        
         if (MODO_DE_TEST==0){
             $servername = "localhost";
             $username = "username";

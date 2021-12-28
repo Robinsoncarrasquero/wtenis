@@ -96,6 +96,19 @@ if (!isset($_SESSION['asociacion'])){
             height: 60px;
             border-radius: 50%;
         }
+
+        /* On screens that are 600px or less, set the background color to olive */
+        @media screen and (max-width: 600px) {
+        body {
+            background-color: black;
+        }
+        }
+        /* On screens that are 992px or less, set the background color to blue */
+        @media screen and (max-width: 992px) {
+        body {
+            background-color: black;
+        }
+        }
     </style>
   
 <body>
@@ -285,8 +298,7 @@ $(document).ready(function(){
         .done(function( data) {
             var ecount = Object.keys(data.tabla).length;
             var datalistbox = document.getElementById("cmbfechark");
-            console.log(ecount);
-            console.log(data);
+            
             for(var i=0;i<ecount;i++){
                datalistbox.options[i] = new Option(data.tabla[i].texto,data.tabla[i].value);
             }

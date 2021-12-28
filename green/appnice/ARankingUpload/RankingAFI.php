@@ -321,7 +321,6 @@ $(document).ready(function() {
             $('#list').addClass('loader');
             $.ajax({
             method: "POST",
-            //url: "RankingAFI_Procesar.php", 
             url: "RankingAFI_Procesar.php", 
             data: { fecha_rk:fecha_rk,categoria:categoria,disciplina:disciplina,sexo:sexo}
             })
@@ -332,11 +331,8 @@ $(document).ready(function() {
                  }else{
                     $("#mensaje").addClass("alert alert-danger");
                     $("#mensaje").html(data.Mensaje);
-                    
                 }
-             
-             $('#list').removeClass('loader');
-             
+                $('#list').removeClass('loader');
              });
         }
     });

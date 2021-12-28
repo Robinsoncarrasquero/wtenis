@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-
+require_once 'sql/Configuracion_cls.php';
 
 if (!defined('MODO_DE_PRUEBA')) {
     define("MODO_DE_PRUEBA", "1");  // Esta variable define cuando tenemos la aplicacion 
@@ -19,18 +19,23 @@ date_default_timezone_set('America/Caracas');
 
 error_reporting(0);
 
-$servername = $_ENV["SERVERNAME"];
-$username = $_ENV["USERNAME"];
-$password = $_ENV["PASSWORD"];
-$dbname = $_ENV["DBNAME"];
-$dbms=$_ENV["DBMS"];
-$port=$_ENV["PORT"];
+// $servername = $_ENV["SERVERNAME"];
+// $username = $_ENV["USERNAME"];
+// $password = $_ENV["PASSWORD"];
+// $dbname = $_ENV["DBNAME"];
+// $dbms=$_ENV["DBMS"];
+// $port=$_ENV["PORT"];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "atletasdb";
-$port='3306';
+$configuracion = new Configuracion();
+
+$servername = $configuracion->servername;
+$username = $configuracion->username;
+$password = $configuracion->password;
+$dbname = $configuracion->dbname;
+$dbms = $configuracion->dbms;
+$port = $configuracion->port;
+
+
 if (MODO_DE_TEST==0){
     $servername = "localhost";
     $username = "usename";

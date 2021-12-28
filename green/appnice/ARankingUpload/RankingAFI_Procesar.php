@@ -187,7 +187,11 @@ function rkjunior($rsFileRank,&$jdata){
                     
                    
                     //$TTP=($sheet->getCell("DG" . $row)->getValue());
-                    $TTP=implode("",explode(".",($sheet->getCell("EA" . $row)->getValue())));                
+                    $TMA=($sheet->getCell("DS" . $row)->getValue());
+                    $TTS=($sheet->getCell("DW" . $row)->getValue());
+                    $TTD=($sheet->getCell("DY" . $row)->getValue());
+                    $TTTT=$TMA + $TTS +  ($TTD*0.25);
+                    $TTP=implode("",explode(".",($sheet->getCell("DG" . $row)->getValue())));                
                     $TTPUNTOS = $TTP;
 
 

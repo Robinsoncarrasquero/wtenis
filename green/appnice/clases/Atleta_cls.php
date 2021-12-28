@@ -111,8 +111,8 @@ class Atleta   {
         return $this->apellidos.", ".$this->nombres;
     }
      public function getNombreCorto(){
-        $arrayNom=explode(" ",$this->nombres);
-        $arrayApe=explode(" ",$this->apellidos);
+        $arrayNom=explode(" ",trim($this->nombres));
+        $arrayApe=explode(" ",trim($this->apellidos));
         $Nombre1=$arrayNom[0];
         $Apellido1=$arrayApe[0];
         return ( substr(ucwords($Apellido1),0,1).", ". ucwords($Nombre1));

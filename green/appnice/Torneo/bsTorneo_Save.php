@@ -78,7 +78,7 @@ if  ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         $objeto->condition="torneo_id=$torneo_id";
         $objeto->Update();
-        $mensaje .="UPDATE Torneos :". $objeto->mensaje;
+        $mensaje ="UPDATE Torneos :". $objeto->mensaje;
         
 
     }

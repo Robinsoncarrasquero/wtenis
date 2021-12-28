@@ -1,4 +1,6 @@
 <?php
+
+
 session_start();
 require '../vendor/autoload.php';
 require_once __DIR__.'/appnice/clases/Atleta_cls.php';
@@ -9,6 +11,7 @@ require_once __DIR__.'/appnice/clases/Afiliaciones_cls.php';
 require_once __DIR__.'/appnice/clases/Empresa_cls.php';
 require_once __DIR__.'/appnice/clases/Funciones_cls.php';
 require_once __DIR__.'/appnice/sql/ConexionPDO.php';
+
 
 date_default_timezone_set('America/La_Paz');
 $error_login = false; 
