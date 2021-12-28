@@ -258,7 +258,7 @@ class Rank {
             $model = new Conexion();
             $conn=$model->conectar();
             //$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $SQL = $conn->prepare(" SELECT id FROM " . self::TABLA ." "
+            $SQL = $conn->prepare(" SELECT id,fecha FROM " . self::TABLA ." "
             . " WHERE categoria = :categoria and sexo = :sexo and disciplina = :disciplina "
             //. " LIMIT 1 ",array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY, PDO::ATTR_EMULATE_PREPARES, false ));
             . " ORDER BY fecha Desc LIMIT 1 ");
@@ -339,8 +339,6 @@ class Rank {
         // $SQL->bindParam(":disciplina",$disciplina,PDO::PARAM_STR);
         $SQL->execute($bindparam_array);
         $records = $SQL->fetchAll();
-        unset($model);
-        unset($conn);
         return $records;
        
     }

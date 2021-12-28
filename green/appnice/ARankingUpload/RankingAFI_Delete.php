@@ -16,7 +16,7 @@ $sexo=$rsFileRank->getSexo();
 $disciplina=$rsFileRank->getDisciplina();
 $rsFileRank->Delete($id);
 $rsLastRanking=Rank::Find_Last_Ranking($disciplina,$categoria,$sexo);
-$fechark=$rsLastRanking["fecha"];
+$fechark= $rsLastRanking["fecha"] ;
 
 $mensaje=TorneosInscritos::UpdateRankingByDate($disciplina,$fechark,$categoria,$sexo);
 $jdata=array();

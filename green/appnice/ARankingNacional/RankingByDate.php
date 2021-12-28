@@ -98,7 +98,7 @@ if (!isset($_SESSION['asociacion'])){
         }
 
         /* On screens that are 600px or less, set the background color to olive */
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width:  .) {
         body {
             background-color: black;
         }

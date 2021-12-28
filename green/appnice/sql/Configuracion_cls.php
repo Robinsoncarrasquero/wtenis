@@ -1,5 +1,5 @@
 <?php
-define('WTENIS_FILE_CONFIG',$_SERVER['DOCUMENT_ROOT'].'/wtenis/.env');
+define('WTENIS_FILE_CONFIG',dirname(__FILE__,4).'/.env');
 
 class Configuracion
 {
