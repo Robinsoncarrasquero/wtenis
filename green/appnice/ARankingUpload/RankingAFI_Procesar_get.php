@@ -201,12 +201,12 @@ function rkjunior($rsFileRank,&$jdata){
 
                         $regex = '#^[a-z]*[0-9][a-z0-9]*$#i'; //Acepta numero y letras o solo numero pero no letras
                         if (preg_match($regex, $cedula)) {
-                            var_dump($cedula);
                             $i++;
                             $ape = strtoupper($arraynombre[0]);
                             $nom = strtoupper($arraynombre[1]);
 
                             $fechanac = explode ('-', $fechan);
+                            var_dump($cedula." ".$ape." ".$fechan."</br>");
 
                             $ano=$fechanac[2];
                             $mes=$fechanac[1];
@@ -229,7 +229,10 @@ function rkjunior($rsFileRank,&$jdata){
                                 $ObjAtleta->setSexo($sexo);
                                 $ObjAtleta->setEstado($estado);
                                 $ObjAtleta->setNacionalidadID(1);
+                                $ObjAtleta->setCategoria(0);
+                                
                                 $ObjAtleta->create();
+                                var_dump($ObjAtleta->mensaje);
                             }
 
                             if ($ObjAtleta->getID()>0){

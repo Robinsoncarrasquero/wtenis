@@ -7,12 +7,8 @@ require_once '../clases/Ranking_cls.php';
 require_once '../clases/Torneos_Inscritos_cls.php';
 require_once '../sql/ConexionPDO.php';
 require_once '../PHPExcel/Classes/PHPExcel.php';
-//Programa para procesar los archivo s ranking subidos
 
 //sleep(1);
-//$disciplina_Filtro='TDC';//$_GET['d']; 
-//$fecha_rk_filtro= "2019-06-22";//$_GET['f']; 
-//$categoria_Filtro='12';//$_GET['c']; 
 $disciplina_Filtro=$_POST['disciplina']; 
 $fecha_rk_filtro= $_POST['fecha_rk']; 
 $categoria_Filtro=$_POST['categoria']; 
@@ -20,8 +16,6 @@ $sexo_Filtro=$_POST['sexo'];
  
 $rsFileRank= Rank::FileRanking($disciplina_Filtro,$categoria_Filtro,$fecha_rk_filtro,$sexo_Filtro);
 $jdata=array();
-
-///var_dump($rsFileRank);
 //Seleccionamos la disciplina y la categoria
 if ($disciplina_Filtro=='TDC'){
     switch ($categoria_Filtro) {
@@ -228,6 +222,7 @@ function rkjunior($rsFileRank,&$jdata){
                                 $ObjAtleta->setSexo($sexo);
                                 $ObjAtleta->setEstado($estado);
                                 $ObjAtleta->setNacionalidadID(1);
+                                $ObjAtleta->setCategoria(0);                               
                                 $ObjAtleta->create();
                             }
 
