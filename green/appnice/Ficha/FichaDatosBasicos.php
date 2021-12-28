@@ -200,10 +200,10 @@ if ($indice >= 0) {
                         <?php
                         // Recorremos todas las lineas del archivo
                         foreach ($rsEntidades as $value) {
-                           if ($value[estado]==$estado){
-                                echo  '<option selected value="'.$value[estado].'">'.ucwords($value[entidad]).'</option>'; 
+                           if ($value['estado']==$estado){
+                                echo  '<option selected value="'.$value['estado'].'">'.ucwords($value['entidad']).'</option>'; 
                             }else{
-                                echo  '<option value="'.$value[estado].'">'.ucwords($value[entidad]).'</option>'; 
+                                echo  '<option value="'.$value['estado'].'">'.ucwords($value['entidad']).'</option>'; 
                            }
                            
                         }
@@ -282,7 +282,7 @@ if ($indice >= 0) {
                     foreach ($rsNaciones as $record) {
                        $pais=$record['pais'];
                        $id=$record['id'];
-                       if ($id==nacion_id){
+                       if ($id==$ObjAtleta->getNacionalidadID()){
                             echo  '<option selected value="'.$record['id'].'">'.$pais.'</option>';
                        }else{
                             echo  '<option  value="'.$record['id'].'">'.$pais.'</option>';

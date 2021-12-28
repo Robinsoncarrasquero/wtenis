@@ -78,6 +78,7 @@ class Atleta   {
         $this->bloqueado=0;
         $this->dirty=FALSE;
         $this->SQLresultado_exitoso=FALSE;
+        $this->categoria=" ";
         
     }
     
@@ -439,6 +440,7 @@ class Atleta   {
             $SQL->bindParam(':xfecha_alta', $this->fecha_alta,  PDO::PARAM_STR);
             $SQL->bindParam(':xfecha_modificacion', $this->fecha_modificacion,  PDO::PARAM_STR);
             $SQL->bindParam(':xdisciplina', $this->disciplina);
+            
             
             $SQL->execute();
             $this->id = $conn->lastInsertId();

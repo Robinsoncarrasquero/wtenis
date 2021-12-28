@@ -84,7 +84,7 @@ foreach ($rsEmpresa as $record_empresa) {
                     $fechaa=trim($fecha_afi); /// fecha de afiliacion
 
                     $ObjAtleta = new Atleta();
-                    $ObjAtleta->Fetch(0, $cedula);
+                    $ObjAtleta->Find_Cedula($cedula);
                     if ($ObjAtleta->Operacion_Exitosa()){
                         $atleta_id=$ObjAtleta->getID();
                         $sexo = $ObjAtleta->getSexo();
@@ -102,41 +102,43 @@ foreach ($rsEmpresa as $record_empresa) {
                     }
 
 
+                    if ($atleta_id>0){
+
+                        
+
+                        //Categoria del atleta a inscribir
+                        $categoria = $ObjAtleta->Categoria_Afiliacion($ano_afiliacion);
+
+                        $objAfiliacion = new Afiliaciones();
+                        $objAfiliacion->Fetch($afiliacion_id, $atleta_id);
+                        if (!$objAfiliacion->Operacion_Exitosa()){
 
 
-                    //Categoria del atleta a inscribir
-                    $categoria = $ObjAtleta->Categoria_Afiliacion($ano_afiliacion);
+                            $objAfiliacion->setAno($ano_afiliacion);
+                            $objAfiliacion->setAfiliacion_id($afiliacion_id);
+                            $objAfiliacion->setAtleta_id($atleta_id);
+                            $objAfiliacion->setCategoria($categoria);
 
-                    $objAfiliacion = new Afiliaciones();
-                    $objAfiliacion->Fetch($afiliacion_id, $atleta_id);
-                    if (!$objAfiliacion->Operacion_Exitosa()){
-
-
-                        $objAfiliacion->setAno($ano_afiliacion);
-                        $objAfiliacion->setAfiliacion_id($afiliacion_id);
-                        $objAfiliacion->setAtleta_id($atleta_id);
-                        $objAfiliacion->setCategoria($categoria);
-
-                        $objAfiliacion->setSexo($sexo);
-                        $objAfiliacion->setAfiliarme(1);
-                        $objAfiliacion->setAceptado(1);
-                        $objAfiliacion->setFormalizacion(1);
-                        $objAfiliacion->setPagado(1);
-                        $objAfiliacion->setFecha_Pago($fechaa);
-                        //Crea una nueva afiliacion
-                        $objAfiliacion->create();                    
-                    }else{
-                        $objAfiliacion->setAfiliarme(1);
-                        $objAfiliacion->setAceptado(1);
-                        $objAfiliacion->setFormalizacion(1);
-                        $objAfiliacion->setPagado(1);
-                        $objAfiliacion->setFecha_Pago($fechaa);
-                        $objAfiliacion->Update();
+                            $objAfiliacion->setSexo($sexo);
+                            $objAfiliacion->setAfiliarme(1);
+                            $objAfiliacion->setAceptado(1);
+                            $objAfiliacion->setFormalizacion(1);
+                            $objAfiliacion->setPagado(1);
+                            $objAfiliacion->setFecha_Pago($fechaa);
+                            //Crea una nueva afiliacion
+                            $objAfiliacion->create();                    
+                        }else{
+                            $objAfiliacion->setAfiliarme(1);
+                            $objAfiliacion->setAceptado(1);
+                            $objAfiliacion->setFormalizacion(1);
+                            $objAfiliacion->setPagado(1);
+                            $objAfiliacion->setFecha_Pago($fechaa);
+                            $objAfiliacion->Update();
 
 
+                        }
+                        echo $i."--".$atleta_id."--".$cedula."-==".$estado."==".$nom."==".$ape."-".$fechan."-".$fechaa."-".$fechav."==".$telefono."<br>";
                     }
-                    echo $i."--".$atleta_id."--".$cedula."-==".$estado."==".$nom."==".$ape."-".$fechan."-".$fechaa."-".$fechav."==".$telefono."<br>";
-
 
 
                 }
@@ -144,6 +146,7 @@ foreach ($rsEmpresa as $record_empresa) {
 
 
             }
+            break;
         }
     }
    

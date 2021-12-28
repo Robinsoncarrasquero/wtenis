@@ -546,7 +546,7 @@ class bsTemplate
                     <li>
                         <a href="../Inscripcion/Inscripcion.php">
                         <div class="task-info">
-                            <div class="desc ">'.$record['numero']."-".$record['grado']."-".$record['categoria']."-".$record['entidad']. ' cerrando: '.$record['time_time'].$record['time_titulo'].' </div>
+                            <div class="desc ">'.$record['numero']."-".$record['grado']."-".$record['categoria']."-".$record['entidad']. ' cerrando en: '.$record['time_time'].$record['time_titulo'].' </div>
                             <!--<div class="percent">'.$record['consumido'].'%</div> -->
                         </div>
                         <div class="'.$progressbar.'">

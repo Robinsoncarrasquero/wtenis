@@ -114,7 +114,7 @@ if ($_POST['btnProcesar']){
             //Creamos la inscripcion
             $objInscripcion = new TorneosInscritos();
             $objInscripcion->Find_Atleta($torneoid,$objAtleta->getID());
-            if (!$objInscripcion->Operacion_Exitosa){
+            if (!$objInscripcion->Operacion_Exitosa()){
                 $objInscripcion->setTorneo_id($torneoid);
                 $objInscripcion->setAtleta_id($atleta_id);
                 $objInscripcion->setRknacional($rknacional);

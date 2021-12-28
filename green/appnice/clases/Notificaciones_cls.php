@@ -2,9 +2,9 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-require dirname(dirname(__FILE__)).'\/PHPMailer/src/SMTP.php';
-require dirname(dirname(__FILE__)).'\/PHPMailer/src/Exception.php';
-require dirname(dirname(__FILE__)).'\/PHPMailer/src/PHPMailer.php';
+require dirname(dirname(__FILE__)).'/PHPMailer/src/SMTP.php';
+require dirname(dirname(__FILE__)).'/PHPMailer/src/Exception.php';
+require dirname(dirname(__FILE__)).'/PHPMailer/src/PHPMailer.php';
 
 
 class Notificaciones   {

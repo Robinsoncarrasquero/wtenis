@@ -106,7 +106,7 @@ class Crud {
             $this->operacionExitosa=TRUE;     
             $this->mensaje="Registro Update con exito";
       } catch (PDOException $e) {
-            //echo 'Falló la conexión: ' . $e->getMessage();
+            echo 'Eroor algo fallo ' .  $e->getMessage();
             $this->mensaje= "ERROR : ". $e->getCode();
             $this->operacionExitosa=FALSE;
         }

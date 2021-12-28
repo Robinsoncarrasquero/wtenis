@@ -1,9 +1,9 @@
-#FILE_TORNEO/
-#FILE_RANKING/
+FILE_TORNEO/
+FILE_RANKING/
 #uploadFotos/perfil/
 uploadFotos/portal/
 MYSQL/
 remotopdo.php
-conexion.php
+conexion.php/
 ConexionMysqli_cls.php
 sql/ConexionPDO.php

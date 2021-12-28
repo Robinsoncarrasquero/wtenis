@@ -1,4 +1,7 @@
 <?php
+
+header('Location: sesion_inicio.php');
+exit;
 session_start();
 require_once 'clases/Atleta_cls.php';
 include_once 'funciones/funciones_bootstrap.php';
