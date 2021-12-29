@@ -39,7 +39,8 @@ require_once __DIR__.'/appnice/clases/Paginacion_cls.php';
     <link href="css/style_dir.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="image/png" href="img/favicon.ico" />
     <link href="css/responsive.css" rel="stylesheet" type="text/css" />
-</head>
+    
+ </head>
 <body>
 <section class="content-top-login">
     <div class="container">
@@ -52,6 +53,7 @@ require_once __DIR__.'/appnice/clases/Paginacion_cls.php';
       <a href='login.php'>Login</a>
       <a href='appnice/sesion_cerrar.php'>Sign Up</a>
    </div>
+
 <!-- Carrito	
    <div class="cart-prod hiddenbox">
       <div class="sec-prod">
@@ -399,12 +401,15 @@ fin carrito-->
 
                </ul>
          </div>
+        
+        
         </div>
       </div>
 </section>
+
 <footer>
 <div class="col-md-12 content-footer">
-<p>© 2020 mytenis All rights reserved. </p>
+<p>© 2020  All rights reserved. </p>
  </div>
 </footer>
 </section>

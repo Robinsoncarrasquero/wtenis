@@ -293,7 +293,7 @@ $colh=
         ';
 $HTMLDATA = $colh . $linea; 
 if ($strDataHTML==NULL){
-    $jsondata= array("Success"=>FALSE,"Mensaje"=>"<p id='info-torneo' >No hay Informacion para el Estatus $status_filtro en el Mes  $mes_en_letras </p>",'html'=>"");   
+    $jsondata= array("Success"=>FALSE,"Mensaje"=>"<p id='info-torneo' >No hay Informacion para el Estatus $status_filtro en el Mes  $mes </p>",'html'=>"");   
 }else{
     $jsondata= array("Success"=>TRUE,"Mensaje"=>"Informacion disponible",'html'=>$HTMLDATA);
 }

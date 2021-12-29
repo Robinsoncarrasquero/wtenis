@@ -26,8 +26,8 @@ class Nacionalidad {
     private $fields;
     private $fields_count;
     public function __construct() {
-        $this->codigo=NULL;
-        $this->pais=NULL;
+        $this->codigo="VEN";
+        $this->pais=1;
         $this->id=0;
         $this->dirty=FALSE;
         $this->SQLresultado_exitoso=FALSE;
@@ -187,7 +187,7 @@ class Nacionalidad {
              $this->mensaje='Record Not Found..';
        }
        $model=NULL;
-       
+
     }
     
     public function ReadById($id) {

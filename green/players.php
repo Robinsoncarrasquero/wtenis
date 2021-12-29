@@ -94,8 +94,8 @@ fin carrito-->
 <section class="drawer">
         <div class="col-md-12 size-img back-img-match">
             <div class="effect-cover">
-                <h3 class="txt-advert animated">The Tennis Players</h3>
-                <p class="txt-advert-sub">Jugadores en el Tours del circuito de Tenis</p>
+                <h3 class="txt-advert animated">Tenistas</h3>
+                <p class="txt-advert-sub">Jugadores en el circuito de Tenis</p>
             </div>
         </div>
      
@@ -104,10 +104,10 @@ fin carrito-->
               
            <div class="top-score-title right-score col-md-9">
                 <h3>Chicos <span>Players</span><span class="point-little">.</span></h3>
-                <p class="txt-right">Los jugadores del circuito oficial de tenis federado, quienes con disciplina, entrenamiento diario, respeto, competencia y lucha logran conseguir sus objetivos, 
-                  combinandolo con otras actividades para llevar siempre en alto la Bandera de Portugal y de su Estado en los mas profundo de su corazon.</p>
+                <p class="txt-right">Los jugadores del circuito oficial de tenis federado, quienes con disciplina, entrenamiento diario, competencia y constancia logran conseguir sus objetivos, 
+                  combinandolo con otras actividades para llevar siempre en alto la Bandera en los mas profundo de su corazon.</p>
                 <p class="txt-right txt-dd-second">El Respeto, la disciplina, la constancia, la responsabilidad son los valores primordiales que nuestros atletas 
-                  llevan dentro de su espiritu deportivo para ser personas de bien y de progreso para nuestro pais.</p>
+                  llevan dentro de su espiritu deportivo para ser personas de bien y de progreso para el pais.</p>
                 <div class="col-md-3 atp-player">
                   <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
                   <p>Nicol Radek</p></a>
@@ -150,10 +150,10 @@ fin carrito-->
                 </div>
                 <div class="content-wtp-player">
                     <h3>Chicas <span>Players</span><span class="point-little">.</span></h3>
-                    <p class="txt-right">Las jugadoras del circuito oficial de tenis federado, quienes con disciplina, entrenamiento diario, respeto, competencia y lucha logran conseguir sus objetivos, 
-                      combinandolo con otras actividades para llevar siempre en alto la bandera de su pais y de su estado con mucha pasion.</p>
+                    <p class="txt-right">Las jugadoras del circuito oficial de tenis federado, quienes con disciplina, entrenamiento diario, competencia y constancia logran conseguir sus objetivos, 
+                      combinandolo con otras actividades para llevar siempre en alto la bandera con mucha pasion.</p>
                     <p class="txt-right txt-dd-second">El Respeto, la disciplina, la constancia, la responsabilidad son los valores primordiales que nuestras atletas 
-                      llevan dentro de su espiritu deportivo para ser personas de bien y de progreso para nuestro pais.</p>
+                      llevan dentro de su espiritu deportivo para ser personas de bien y de progreso para el pais.</p>
                             <div class="col-md-3 atp-player">
                       <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
                        <p>Serena Peter</p></a>
@@ -199,7 +199,7 @@ fin carrito-->
            <div class="col-md-3 right-column">
             <div class="top-score-title col-md-12 right-title">
                   <h3>Noticias recientes</h3>
-                  <div class="right-content">
+                  <!-- <div class="right-content">
                       <p class="news-title-right">Serie 6-7 Marzo 2020</p>
                       <p class="txt-right">
                         Portugal peleará en los play-offs del Grupo Mundial I en marzo 2020 contra Nueva Zelanda. En el primer choque, 1960, los americanos ganaron a los kiwis.
@@ -219,7 +219,7 @@ fin carrito-->
                        Fue el encuentro número 12 de las naciones.
                       </p>
                       <a href="#single_news.html" class="ca-more"><i class="fa fa-angle-double-right"></i>more...</a>
-                  </div>
+                  </div> -->
             </div>
 
           <div class="top-score-title col-md-12">
@@ -350,9 +350,9 @@ fin carrito-->
         <div class="col-md-12">
          <div class="col-md-3">
             <h3>Sobre Nosotros</h3>
-            <p>Gracias por visitar mytenis, nuestra mision es fomentar y reglamentar 
-            el tenis de competencia nacional e internacional. Crear, Planificar, coordinar y ejecutar el plan anual de
-             torneos oficiales para dar cumplimiento al calendario establecido. Brindar informacion y recursos sobre el tenis
+            <p>Gracias por visitarnos, nuestra mision es fomentar y reglamentar 
+            el tenis de competencia nacional. Crear, Planificar, coordinar y ejecutar el plan anual de
+             torneos oficiales para dar cumplimiento al calendario establecido. Brindar informacion sobre el tenis
              Federado.
          </div>
          <div class="col-md-3 cat-footer">

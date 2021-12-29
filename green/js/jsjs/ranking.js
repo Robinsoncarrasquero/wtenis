@@ -1,6 +1,8 @@
 
 $(document).ready(function(){
   $( "#SexoM" ).click();
+  
+
 })  
 
 $("#SexoF,#SexoM").click(function(e){
@@ -34,4 +36,30 @@ $('#score-view-all').on('click','.page-link',function(e)  {
     });
                   
 });
+
+
+    //Ranking detallado
+    $("#myModal").on('show.bs.modal', function(e){   
+           
+        var button = $(e.relatedTarget); // Button that triggered the modal
+        var rkid = button.data('whatever'); // Extract info from data-* attributes
+        var id = button.data('id'); // Extract info from data-* attributes
+        
+        
+        $.ajax({
+        method: "POST",
+        url: "RankingDetail.php", 
+        data: {rkid:rkid,id:id}
+        })
+        .done(function( data) {
+                //console.log(data.html);
+            if (!data.html) return e.preventDefault(); // stops modal from being shown
+            $('#header').html(data.Nombre);
+            $('#puntos').html(data.Puntos);
+            $('#detail').html(data.html);
+        });
+                    
+    });               
+  
+
    

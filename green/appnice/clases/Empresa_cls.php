@@ -430,6 +430,7 @@ class Empresa   {
             $this->id=$record['empresa_id'];
             $this->mensaje='Record Found successfully ';
             $this->SQLresultado_exitoso=TRUE;
+            $this->cartaFederativa =$record['cartafederativa'];
        } else {
              $this->SQLresultado_exitoso=FALSE;
              $this->mensaje='Record Not Found..';

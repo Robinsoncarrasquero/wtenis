@@ -18,6 +18,7 @@ $json= Imagenes2_cls::crear_imagen($folder, 800, 600,"Fija");
  
    
 function change_Imagick($file) {
+    
     $img = new Imagick($img_loc . $file); 
     $img->setImageResolution(72,72); 
     $img->resampleImage(72,72,imagick::FILTER_UNDEFINED,1); 

@@ -29,7 +29,8 @@ class Imagenes2_cls {
             sleep(1);
             $datetime= date_timestamp_get($date_hoy);
             $datenow= date_format($date_hoy,"Y-M-d");
-            $newfilename=$folder."tmp_".$datetime.".".end(explode(".",$filename));
+            $array=explode(".",$filename);
+            $newfilename=$folder."tmp_".$datetime.".".end($array);
             $orifilename=$folder."tmp_".$datetime.".png";
             
             list($ww, $hh) = getimagesize($filenametmp);

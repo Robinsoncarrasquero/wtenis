@@ -6,7 +6,7 @@ require_once 'appnice/clases/Funciones_cls.php';
 //require_once 'appnice/clases/Encriptar_cls.php';
 //require_once 'appnice/clases/Ranking_cls.php';
 //require_once 'appnice/clases/Paginacion_cls.php';
- 
+require_once 'tournament_direct_cls.php';
 
 ?>
 
@@ -127,16 +127,21 @@ fin carrito-->
                  
                  for ($i=1; $i <= 12; $i++) {
                       $badge=Torneo::Count_Open_Mes(0, $i,null);
+                      $torneo = new Torneos_Directos($i);
+                      $data = $torneo->data();
+                      
                       $linea='
                       <div class="accordion" id="section'.$i.'"><i class="fa fa-calendar-o"></i>'
                       .Funciones::MesLiteral($i).' 
                       <mark class="badge">'.($badge> 0 ? $badge : "").'</mark>
                       <span ></span>
                       </div>
-                      <div class="acc-content">
-                            
+
+                      <div class="acc-content">' 
+                      .$data .
+                      '                   
                       </div>';
-                     echo $linea;
+                      echo $linea;
                         
                   }    
                      
@@ -297,9 +302,9 @@ fin carrito-->
         <div class="col-md-12">
          <div class="col-md-3">
             <h3>Sobre Nosotros</h3>
-            <p>Gracias por visitar mytenis, nuestra mision es fomentar y reglamentar 
-            el tenis de competencia nacional e internacional. Crear, Planificar, coordinar y ejecutar el plan anual de
-             torneos oficiales para dar cumplimiento al calendario establecido. Brindar informacion y recursos sobre el tenis
+            <p>Gracias por visitarnos, nuestra mision es fomentar y reglamentar 
+            el tenis de competencia nacional. Crear, Planificar, coordinar y ejecutar el plan anual de
+             torneos oficiales para dar cumplimiento al calendario establecido. Brindar informacion sobre el tenis
              Federado.
             
          </div>
@@ -323,7 +328,7 @@ fin carrito-->
                   <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="" /><p>Fusce risus metus, placerat in consectetur eu...</p></li>
             </ul>
          </div>
-         <div class="col-md-3 footer-newsletters">
+         <!-- <div class="col-md-3 footer-newsletters">
            <h3>Newsletters</h3>
            <form method="post">     
                <div class="name">
@@ -338,7 +343,7 @@ fin carrito-->
                            <input type="submit" value="Submit"/>
                    </div>
            </form>
-         </div>
+         </div> -->
          <div class="col-xs-12">
            <ul class="social">
                  <li><a href=""><i class="fa fa-facebook"></i></a></li>
@@ -359,7 +364,7 @@ fin carrito-->
 </section>
 <footer>
       <div class="col-md-12 content-footer">
-<p>© 2020 mytenis All rights reserved. </p>
+<p>© 2020  All rights reserved. </p>
  </div>
 </footer>
 </section>
@@ -389,7 +394,8 @@ fin carrito-->
     $( "#SexoM" ).click();
   })  
   
-  $(".accordion").click(function(e){
+  $(".aaaaccordion").click(function(e){
+      
       e.preventDefault();
       mes = $(this).attr('id');   
       id = $(this).attr('id').substr(7,2);
@@ -402,7 +408,7 @@ fin carrito-->
       
       .done(function( data) {
         if (data.Success){
-          //$('#results'+id).html(data.html);
+          $('#results'+id).html(data.html);
           $('.acc-content').html(data.html);
         }
         

@@ -162,7 +162,7 @@ class EstadisticasCls {
 
         return $records;
     }
-    function filtroProceso($proceso){
+    public static function filtroProceso($proceso){
         switch ($proceso) {
             //Afiliaciones Solicitadas 
             case 'sol':

@@ -5,7 +5,7 @@ date_default_timezone_set('America/La_Paz');
 
 <html>
 <head>
-<title>Sistema integral de Tenis</title>
+<title>Home</title>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta name="author" content="mytenis"/>
 <meta name="keywords" content="Tenis, club, eventos, deportivos,deporte, juniors, junior, tennis, sport, magazine" />
@@ -49,7 +49,7 @@ date_default_timezone_set('America/La_Paz');
            <div class="container">
       <div class="col-md-12">
            <div class="box-support"> 
-             <p class="support-info"><i class="fa fa-envelope-o"></i> info@example</p>
+             <p class="support-info"><i class="fa fa-envelope-o"></i> info@example.com</p>
           </div>
            <div class="box-login"> 
             <!-- <i class="fa fa-shopping-cart"></i>-->
@@ -197,9 +197,9 @@ date_default_timezone_set('America/La_Paz');
         <div class="container">
             <div class="col-md-12">
                 <div class="txt-training">
-                  <p>comienza a jugar</p>
-                  <h2>ENTRENA HOY</h2>
-                  <a href="#">Basic</a><a href="#">Medium</a><a href="#">Expert</a>
+                  <p>comienza a jugar tenis</p>
+                  <h2>JUEGA HOY</h2>
+                  <a href="#">Tenis 10</a><a href="#">Junior</a><a href="#">Adultos</a>
                 </div>
             </div>
         </div>

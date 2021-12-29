@@ -97,11 +97,11 @@ $(function (){
     //Buscamos que boton fue pulsado durante un update o new record
     // y cargar nuevamente los registros
     $('#myform').on('click','.btnbtn',function(e){
-        var contenfotosa =$('textarea[name="contentfotos"]').val();
-        var contenfotosb=$('#summernote1').summernote('code');
+        // var contenfotosa =$('textarea[name="contentfotos"]').val();
+        // var contenfotosb=$('#summernote1').summernote('code');
        
-        var contencartaa =$('textarea[name="contentcarta"]').val();
-        var contencartab=$('#summernote2').summernote('code');
+        // var contencartaa =$('textarea[name="contentcarta"]').val();
+        // var contencartab=$('#summernote2').summernote('code');
         
         var contenfedea =$('textarea[name="contentfederativa"]').val();
         var contenfedeb=$('#summernote3').summernote('code');
@@ -166,7 +166,7 @@ $(function (){
                     //$('#results').html(html);
                     $('#list').html(html);
                     $('#summernote1').summernote({height: 300,lineHeigh: 50});
-                    //$('#summernote2').summernote({height: 300,lineHeigh: 50});
+                    $('#summernote2').summernote({height: 300,lineHeigh: 50});
                     $('#summernote2').summernote({
                         
                        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],

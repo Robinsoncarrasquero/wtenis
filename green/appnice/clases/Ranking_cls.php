@@ -412,7 +412,7 @@ class Ranking   {
              $this->mensaje='Record not Found';
        }
        $conn=NULL;
-       
+       return $record;
     }
             
     //Cargar Propiedades

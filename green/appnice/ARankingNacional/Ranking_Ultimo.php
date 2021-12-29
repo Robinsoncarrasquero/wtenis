@@ -9,6 +9,7 @@ require_once '../clases/Rank_cls.php';
 require_once '../clases/Ranking_cls.php';
 require_once '../clases/Paginacion_cls.php';    
 require_once '../clases/Encriptar_cls.php';    
+require_once '../clases/Nacionalidad_cls.php';
 
 $categoria=isset($_POST['categoria']) ? $_POST['categoria'] :'99';
 $sexo=isset($_POST['sexo']) ? substr($_POST['sexo'],4,1) :'Z';
@@ -71,6 +72,11 @@ foreach ($records as $row){
 
     $ObjAtleta = new Atleta();
     $ObjAtleta->Find($row['atleta_id']);
+    $nombre = $ObjAtleta->getApellidos();
+    $lanacion = new Nacionalidad();
+    $lanacion->Find($ObjAtleta->getNacionalidadID());
+    $bandera= strtolower($lanacion->getPais());
+    
     $nr ++;
     $hash= Encrypter::encrypt($row['atleta_id']);
     $href="rankingDetail.php?rkdetail=".$hash;
@@ -87,15 +93,28 @@ foreach ($records as $row){
     [
         'ven','ven'
     ];
+    $banderas=
+    [
+        $bandera
+    ];
+    // $Ranking = new Ranking();
+    // $rsRanking=$Ranking->Find_Ranking_By_Fecha($row['atleta_id'],$rank_id);
     
+    $hash= $row['ranking_id'];
     $bandera=$banderas[rand(0,count($banderas)-1)];
+
     $linea .= '<tr>';  
         $linea .= "<td class='score-position'>".$row['rknacional'].".</td>";
         $linea .= "<td class='score-position'>".$row['rkregional'].".</td>";
         $linea .= "<td class='score-position'>".$row['rkestadal'].".</td>";
-        $linea .= "<td><a href='#single_player.php?id=$hash'>".$ObjAtleta->getNombreCorto().'</a></td>';
+        //$linea .= "<td><a href='#single_player.php?id=$hash'>".$ObjAtleta->getNombreCorto().'</a></td>';
+//        $linea .= "<td><a href='#' wha".$row['ranking_id']."'>".$ObjAtleta->getNombreCorto().'</a></td>';
+        $pt='<a href="#"  data-toggle="modal" data-target="#myModal" data-id="'.$row['atleta_id'].'" data-whatever="'.$hash.'">'. $ObjAtleta->getNombreCorto().'</a>';
+        $linea .= '<td >'.$pt.'</td>';                             
         $linea .= "<td><img src='images/flags/$bandera.png' alt='' /></td>";
-        $linea .= '<td>'.$row['puntos'].'</td>';
+        $pt='<a href="#"  data-toggle="modal" data-target="#myModal" data-id="'.$row['atleta_id'].'" data-whatever="'.$hash.'">'. $row['puntos'].'</a>';
+                             
+        $linea .= '<td>'.$pt.'</td>';
     $linea .= '</tr>';
     
     // $linea .= '<td >'. $row['rknacional'].'</td>';
