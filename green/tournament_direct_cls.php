@@ -279,9 +279,9 @@ class Torneos_Directos
                 $col5="<div class='col-md-2 t4'><p>SGL $single <br />DBL $doble</p></div>";
                 $col6='<div class="col-md-2 t5"><a '.$href.'>'.$estatus.'</a></div>';
                 $col7='<div class="acc-footer"></div>';
-
+        
                 //$HTMLDATA .= $strCard;
-                $linea .=$col1 . $col2 . $col3 . $col4 . $col5 . $col6 . $col7 ;
+                $linea .=$col1 . $col2 . $col3 . $col4 . $col5 . $col6 . $col7;
             }
                 
                     
@@ -294,7 +294,7 @@ class Torneos_Directos
                 <div class="col-md-2 acc-title">Entidad</div>
                 <div class="col-md-2 acc-title">Draw</div>
                 <div class="col-md-2 acc-title">Estatus</div>
-                <div class="col-md-2 acc-title">Estatus</div>
+               
             
             ';
         $data = $colh . $linea; 
