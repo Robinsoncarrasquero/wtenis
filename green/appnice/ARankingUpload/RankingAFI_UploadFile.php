@@ -4,13 +4,15 @@ require_once '../sql/ConexionPDO.php';
 require_once '../clases/Rank_cls.php';
 require_once '../funciones/funcion_archivos.php';
 sleep(1);
-//$arrDatos=$_POST['data'];
-//$fecha_rk=$arrDatos['fecha_rk']; 
-//$categoria_Filtro=$arrDatos['cmbcategoria']; //categoria
-//$disciplina_Filtro=$arrDatos['cmbdisciplina']; //categoria
-//$sexo_Filtro=$arrDatos['cmbsexo']; 
-//print_r($arrDatos);
 
+if (isset($_SESSION['logueado']) && !$_SESSION['logueado']) {
+    header('Location: ../sesion_inicio.php');
+    exit;
+}
+if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<10){
+   header('Location: ../sesion_inicio.php');
+   exit;
+}
 $disciplina_Filtro=$_POST['cmbdisciplina']; //disciplina
 
 $sexo_Filtro=$_POST['cmbsexo']; //sexo

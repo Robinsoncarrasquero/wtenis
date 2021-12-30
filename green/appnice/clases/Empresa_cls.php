@@ -340,12 +340,15 @@ class Empresa   {
             //echo "New records created successfully";
             $this->mensaje='Record update..';
             $this->SQLresultado_exitoso=TRUE;
+            
+        
         }
         catch(PDOException $e)
         {
             //echo "Error: " . $e->getMessage();
             $this->mensaje="Error Update: " . $e->getMessage();
             $this->SQLresultado_exitoso=FALSE;
+           
         }
         $conn = NULL;
 

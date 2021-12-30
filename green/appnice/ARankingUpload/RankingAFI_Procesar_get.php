@@ -1,5 +1,6 @@
 <?php
 session_start();
+exit;
 require_once '../clases/Rank_cls.php';
 require_once '../clases/Atleta_cls.php';
 require_once '../clases/Ranking_detalle_cls.php';

@@ -6,6 +6,16 @@ require_once '../clases/Torneos_Inscritos_cls.php';
 // Programa para eliminar un ranking completamente
 // en la 3 tablas relacionadas
 sleep(1);
+
+
+if (isset($_SESSION['logueado']) && !$_SESSION['logueado']) {
+    header('Location: ../sesion_inicio.php');
+    exit;
+}
+if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<10){
+   header('Location: ../sesion_inicio.php');
+   exit;
+}
 $id=$_POST['id']; // Id del registro de la tabla Rank
 
 

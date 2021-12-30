@@ -9,11 +9,11 @@ require_once '../clases/Afiliaciones_cls.php';
 require_once '../clases/Atleta_cls.php';
 require_once '../sql/ConexionPDO.php';
 
- if (isset($_SESSION['logueado']) && !$_SESSION['logueado']) {
+if (isset($_SESSION['logueado']) && !$_SESSION['logueado']) {
      header('Location: ../sesion_inicio.php');
      exit;
 }
-if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<99){
+if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<10){
     header('Location: ../sesion_inicio.php');
     exit;
 }

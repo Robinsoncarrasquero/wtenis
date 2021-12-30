@@ -8,6 +8,14 @@ require_once '../clases/Torneos_Inscritos_cls.php';
 require_once '../sql/ConexionPDO.php';
 require_once '../PHPExcel/Classes/PHPExcel.php';
 
+if (isset($_SESSION['logueado']) && !$_SESSION['logueado']) {
+    header('Location: ../sesion_inicio.php');
+    exit;
+}
+if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<10){
+   header('Location: ../sesion_inicio.php');
+   exit;
+}
 //sleep(1);
 $disciplina_Filtro=$_POST['disciplina']; 
 $fecha_rk_filtro= $_POST['fecha_rk']; 
