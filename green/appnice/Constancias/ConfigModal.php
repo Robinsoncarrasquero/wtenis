@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     <?php echo '
    <div  class="form-group col-xs-12">
-    <label for="txt_constancia">CONTANCIA DE PARTICIPACION</label>
+    <label for="txt_constancia">CONSTANCIA DE PARTICIPACION</label>
     <textarea class="form-input-block-level " rows="30"   id="summernote2" name="carta_torneo" placeholder="Escriba la constancia"  >'
     .$txt_constancia.'</textarea>
     </div>';

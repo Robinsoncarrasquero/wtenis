@@ -158,47 +158,45 @@ class Torneos_Directos
                 
                 $rsTorneo_fs = Torneo_Archivos::FindDocument($row['torneo_id'], "fs");
                 if($rsTorneo_fs){
-                    $strDatafs= '<td data-toggle="tooltip" data-placement="bottom" title="Fact Sheet"> <a href="Torneo/Download_Doc.php?thatid='.
-                            $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('fs')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon glyphicon-blackboard">  </a></td>';
+                    $fsheet= '<a href="appnice/Torneo/Download_Doc.php?thatid='.
+                            $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('fs')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon glyphicon-blackboard">F. Sheet</a>';
                 }else{
-                    $strDatafs= '<td data-toggle="tooltip" data-placement="bottom" title="Fact Sheet No Disponible"> <a  class="inactivo-glyphicon glyphicon glyphicon-blackboard">  </a></td>';
+                    $fsheet= '<a  class="inactivo-glyphicon glyphicon glyphicon-blackboard">F. Sheet</a>';
                 }
+
                 $Total_inscritos = TorneosInscritos::Count_Inscritos($row['torneo_id']);
+                
                 if ($Total_inscritos>0){
-                    $strDatali= '<td data-toggle="tooltip" data-placement="bottom" title="Lista de Inscritos"><a target="_blank" href="Torneo/bsTorneos_Consulta_Atletas_Inscritos.php?t='
-                    .$hash_codigo.'" class="activo-glyphicon glyphicon glyphicon-align-justify"></a></td>';
+                    $listaIn= '<a target="_blank" href="Torneo/bsTorneos_Consulta_Atletas_Inscritos.php?t='
+                    .$hash_codigo.'" class="activo-glyphicon glyphicon glyphicon-align-justify">Lista</a>';
                 }else{
-                    $strDatali= '<td data-toggle="tooltip" data-placement="bottom" title="Lista de Inscritos Vacia"> <a  class=" inactivo-glyphicon glyphicon glyphicon-align-justify">  </a></td>';
+                    $listaIn= '<a  class=" inactivo-glyphicon glyphicon glyphicon-align-justify">Lista</a>';
                 }
-                //echo '<td><a target="_blank" href="Torneo/bsTorneo_Listado_Atletas_pdf.php?torneo='.$row['codigo'].'&sexo=&categoria=&chk=0'.'" class="glyphicon glyphicon-list-alt"></a></td>';
+                
                 $rsTorneo_fs = Torneo_Archivos::FindDocument($row['torneo_id'], "la");
                 if($rsTorneo_fs){
-                    $strDatala= '<td data-toggle="tooltip" data-placement="bottom" title="Lista de Aceptacion"><a href="Torneo/Download_Doc.php?thatid='.
-                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('la')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-list">  </a></td>';
+                    $listaAc= '<a href="appnice/Torneo/Download_Doc.php?thatid='.
+                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('la')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-list">Lista Ac.</a>';
                 }else{
-                    $strDatala= '<td data-toggle="tooltip" data-placement="bottom" title="Lista de Aceptacion Vacia"><a  class="inactivo-glyphicon glyphicon glyphicon-list">  </a></td>';
+                    $listaAc= '<a  class="inactivo-glyphicon glyphicon glyphicon-list">Lista Ac.</a>';
                 } 
                 $rsTorneo_fs = Torneo_Archivos::FindDocument($row['torneo_id'], "ds");
-                $strDraw="<td>";
+               
                 if($rsTorneo_fs){
-                    $draws= '<p data-toggle="tooltip" data-placement="bottom" title="Draw Singles"><a href="Torneo/Download_Doc.php?thatid='.
-                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('ds')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-file">  </a></p>';
+                    $draws= '<a href="appnice/Torneo/Download_Doc.php?thatid='.
+                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('ds')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-file">Draw SG.</a>';
                 }else{
-                    $draws = '<p data-toggle="tooltip" data-placement="bottom" title="Draw Singles No Disponible"><a  class="inactivo-glyphicon glyphicon glyphicon-file">  </a></p>';
+                    $draws = '<a  class="inactivo-glyphicon glyphicon glyphicon-file">Draw SG.</a>';
                 }
-                $strDraw .=$draws;
-                
-                
+                               
                 $rsTorneo_fs = Torneo_Archivos::FindDocument($row['torneo_id'], "dd");
                 if($rsTorneo_fs){
-                    $drawd = '<p data-toggle="tooltip" data-placement="bottom" title="Draw Dobles"><a href="Torneo/Download_Doc.php?thatid='.
-                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('dd')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-duplicate">  </a></p>';
+                    $drawd = '<a href="appnice/Torneo/Download_Doc.php?thatid='.
+                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('dd')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-duplicate">Draw DB.</a>';
                 }else{
-                    $drawd = '<p data-toggle="tooltip" data-placement="bottom" title="Draw Dobles No Disponible"><a  class="inactivo-glyphicon glyphicon glyphicon-duplicate">  </a></p>';
+                    $drawd = '<a  class="inactivo-glyphicon glyphicon glyphicon-duplicate">Draw DB.  </a>';
                 }   
-                $strDraw .=$drawd;
-                $strDraw .="</td>";
-
+               
                 //Galeria
                 $folder="uploadFotos/torneos/".$row['torneo_id']."/";
                 
@@ -210,44 +208,7 @@ class Torneos_Directos
                 //     $strDataga= '<td data-toggle="tooltip" data-placement="bottom" title="Galeria No Disponible"><a  class="inactivo-glyphicon glyphicon glyphicon-picture">  </a></td>';
                 // }   
                 
-                $strDataHTML .= $strData;
                 
-                $strCard='
-                <br>
-                <div class="circulo">
-                <div class="panel panel-default bbg-imagen-panel">
-                <!-- Default panel contents -->
-                    <div class="panel-body text-center ccopa"><strong>@'.$strNumero.'-'.$strGrado.'-('.$row['categoria'].')-'.$strDataEntidad.'</strong></div>
-                    <!--<div class="panel-body text-center copa">CATEGORIA: '.$row['categoria'].' GRADO: '.$strGrado.' ENTIDAD: '.$strDataEntidad." NUMERO: ".$strNumero.'</div>
-                    <div class="panel-body "><a '.$href.'><h4>'.$copa.'<h4></a></div> -->
-                    <div class="panel-body text text-center ccopa" ><mark>'.$sfecha_ini.'</mark> Al <mark>'.$sfecha_fin.'</mark></div>
-                    
-                    <!-- Table -->
-                    <table class="table  ">
-                        <tr>
-                        <th class="glyphicon glyphicon-dashboard"></th>
-                        <th>Cat.</th>
-                        <th>Fecha</th>
-                        <th>FS</th>
-                        <th>LI</th> 
-                        <th>LA</th> 
-                        <th>Draw</th>
-                        </tr>
-                        <tr>'
-                        .$strData.' '
-                        .$strDataCategoria.''
-                        .$strDataFechas.''
-                        .$strDatafs.''
-                        .$strDatali.''
-                        .$strDatala.''
-                        .$strDraw.''
-                        .'</tr>
-                        
-                    </table>
-                    <div class="panel-body text text-center  '.$text_alert.'">'.'<a '.$href.'><h4>'.$estatus.'</h4></a></div>
-                </div>
-                </div>'
-                ;
                 switch ($row['tipo']) {
                     case 'G1':
                         $single='16';
@@ -268,19 +229,18 @@ class Torneos_Directos
                     default:
                         $single='ND';
                         $doble='ND';
-                    # code...
                         break;
                 }
                 
-                $col1='<div class="col-md-1 timg"><img src="images/tennis_p_small.png" alt="" />'.$row['numero']." - ".$strGrado.' - '.$row['categoria'].'</div>';
+                $col1='<div class="col-md-1 timg"><img src="images/tennis_p_small.png" alt="" />'.$row['numero']." - ".$strGrado.'  </br>'.$row['categoria'].'</div>';
                 $col2="<div class='col-md-2 t1'><p>$ffecha_inicio</p></div>";
                 $col3='<div class="col-md-3 t2"><p>'.$copa.'</p> </div>';
                 $col4='<div class="col-md-2 t3"><p>'.$row['entidad'].'</p></div>';
-                $col5="<div class='col-md-2 t4'><p>SGL $single <br />DBL $doble</p></div>";
+                //$col5="<div class='col-md-2 t4'><p>SGL $single <br />DBL $doble</p></div>";
+                $col5="<div class='col-md-2 t4'>$listaAc</br>$fsheet</br>$draws </br>$drawd</div>";
                 $col6='<div class="col-md-2 t5"><a '.$href.'>'.$estatus.'</a></div>';
                 $col7='<div class="acc-footer"></div>';
         
-                //$HTMLDATA .= $strCard;
                 $linea .=$col1 . $col2 . $col3 . $col4 . $col5 . $col6 . $col7;
             }
                 
@@ -290,9 +250,9 @@ class Torneos_Directos
                 '
                 <div class="col-md-1 acc-title">Cat.</div>
                 <div class="col-md-2 acc-title">Fecha</div>
-                <div class="col-md-3 acc-title">Tournament</div>
+                <div class="col-md-3 acc-title">Torneo</div>
                 <div class="col-md-2 acc-title">Entidad</div>
-                <div class="col-md-2 acc-title">Draw</div>
+                <div class="col-md-2 acc-title">Reportes</div>
                 <div class="col-md-2 acc-title">Estatus</div>
                
             
