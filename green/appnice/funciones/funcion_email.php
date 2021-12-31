@@ -587,31 +587,37 @@ function email_smtp($to,$subject,$body,$from){
     $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
     $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
     //$cabeceras = 'X-Mailer: PHP/' . phpversion();
-    if ($to !='' && MODO_DE_PRUEBA==1){
-        phpmailer($to,$subject,$body,$from);
-        
-    }else{
-        mail($to,$subject,$body,$cabeceras.$from);
+    if ($to !=''){
+        envphpmailer($to,$subject,$body,$from);
+    // }else{
+    //     mail($to,$subject,$body,$cabeceras.$from);
     }
  
 }
-function phpmailer($to,$subject,$body,$from)
+
+
+function envphpmailer($to,$subject,$body,$from)
 {
+
+    $Configuracion = new Configuracion();
+    $SMTP = $Configuracion->SMTP();
+    
+
     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
     
     try {
         $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'smtp.mailtrap.io';                    //Set the SMTP server to send through
+        $mail->Host       = $SMTP['SMTP_HOST'];                    //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = '896c82690c0727';                     //SMTP username
-        $mail->Password   = 'c08b0ee324f862';                               //SMTP password
-        //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $mail->Port       = 2525;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Username   = $SMTP['SMTP_USERNAME'];                    //SMTP username
+        $mail->Password   = $SMTP['SMTP_PASSWORD'];                            //SMTP password
+        $mail->SMTPSecure = $SMTP['SMTP_SECURE'];;            //Enable implicit TLS encryption
+        $mail->Port       = $SMTP['SMTP_PORT'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom($from, 'Mailer');
-        $mail->addAddress($to, 'Joe User');     //Add a recipient
+        $mail->setFrom($from, 'Sistemas ');
+        $mail->addAddress($to, 'Afiliado');     //Add a recipient
         //$mail->addAddress('ellen@example.com');               //Name is optional
         //$mail->addReplyTo('info@example.com', 'Information');
         //$mail->addCC('cc@example.com');
@@ -629,7 +635,7 @@ function phpmailer($to,$subject,$body,$from)
         $mail->send();
         // echo 'Message has been sent';
     } catch (Exception $e) {
-        // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return  "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }
 
