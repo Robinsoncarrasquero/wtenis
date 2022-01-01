@@ -26,9 +26,9 @@ foreach ($adata as $key=>$value) {
     $t_id = (int) $torneo_inscrito_id;
     //Delete suave
     $sql = "UPDATE torneoinscritos SET estatus='Retiro', condicion=9 WHERE torneoinscrito_id=$t_id";
-    $result=mysql_query($sql);
+    $result=mysqli_query($conn,$sql);
     if (!$result) {
-        $msg="Error retirando la inscripcion: " .mysql_error();
+        $msg="Error retirando la inscripcion: " .mysqli_error($conn);
         $blnoperacion=false;
     
     }else{

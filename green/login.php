@@ -152,9 +152,11 @@ fin carrito-->
                             <input type="submit" class=" btn-remember-key " value="Recordar la clave"/>
                           
                         </div>
+                              
                         <div id="msg-remember-form" class="alert-remember-form">
-
+                        
                         </div>
+                        
                   </form>
                   </div>
       
@@ -321,23 +323,30 @@ $(document).ready(function (){
   $('#remember-form').on('submit',function(e){
     
     let nameLogin = document.getElementById("name_login");
+    let msgRememberForm = document.querySelector(".alert-remember-form");
     if (nameLogin.value!='')
     {
       let data = $("#login-form").serialize();
       $.ajax({
-          url: "remember_key_submit.php",
+          url: "login_remember_key.php",
           type: "POST",
           data:data,
           success : function( data)
           {
             if (data.success){
-              $('#msg-remember-form').html(data.msg);
-              $("#msg-remember-form").addClass("alert alert-success");
+              
+              msgRememberForm.textContent=data.msg;
+              msgRememberForm.style.backgroundColor="black";
+              msgRememberForm.style.color="white";
+              msgRememberForm.classList.add('alert','alert-success');
             }else{
-              $("#msg-remember-form").addClass("alert alert-danger");
-              $('#msg-remember-form').html(data.msg);
-        
+              msgRememberForm.textContent=data.msg;
+              msgRememberForm.style.backgroundColor="red";
+              msgRememberForm.style.color="white";
+              msgRememberForm.classList.add('alert','alert-danger');
             }
+        
+            
           }
       })
     
@@ -354,6 +363,12 @@ $(document).ready(function (){
     $("#msg-remember-form").removeClass("alert alert-success").removeClass('alert alert-danger');
     $("#myerrors").html("");
     $("#myerrors").removeClass("alert alert-success").removeClass('alert alert-danger');
+
+    let msgRememberForm = document.querySelector(".alert-remember-form");
+    msgRememberForm.classList.remove ('alert','alert-success');
+    msgRememberForm.classList.remove('alert','alert-success');
+    
+
        
   }
   

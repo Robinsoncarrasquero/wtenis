@@ -77,6 +77,8 @@ if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<10){
                 <input type="number" class="form-control" maxlength="5"  id="tarifa" name="tarifa" value=25>
             </div>
 
+            
+            
             <div id="mensaje" class='span6'>
             <!-- error will be showen here ! -->
             </div>
@@ -88,6 +90,9 @@ if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<10){
                 <span class="glyphicon glyphicon-log-in"></span> &nbsp; Procesar
                 </button> 
             </div> 
+            <div id="list" class='span6'>
+            
+            </div>
             
         </div>
     </div>
@@ -135,16 +140,16 @@ $(document).ready(function() {
           })
           .done(function( data ) {
              
-              if (data.Success){
+              if (data.success){
                   $('#list').removeClass('loader');
                   $("#list").html(data.html);
                   $("#mensaje").addClass("alert alert-success");
-                  $("#mensaje").html(data.html);
+                  $("#mensaje").html(data.msg);
                }else{
                   $('#list').html('');
                   $('#list').removeClass('loader');
                   $("#mensaje").addClass("alert alert-danger");
-                  $("#mensaje").html(data.html);
+                  $("#mensaje").html(data.msg);
               }
              
           });

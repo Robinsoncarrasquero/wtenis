@@ -272,7 +272,7 @@ $urlHome=$_SESSION['home'];
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuracion<span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                      <li><a href="SubirFotos/index.php" >Subir Fotos al Portal</a></li>
+                      <!-- <li><a href="SubirFotos/index.php" >Subir Fotos al Portal</a></li> -->
                       <li><a href="Configurar/ConfigModal.php" >Configuracion</a></li>
                       <?php
                         if ($_SESSION['niveluser']>9){

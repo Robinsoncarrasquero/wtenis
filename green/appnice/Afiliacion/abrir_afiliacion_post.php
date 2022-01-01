@@ -25,34 +25,57 @@ $objeto_fecha_hasta = DateTime::createFromFormat('Y-m-d', $periodo."-12-31");
 $Empresas = Empresa::ReadAll();
 $nr=0;
 
-foreach ($Empresas as $key => $value) {
+$td='';
+foreach ($Empresas as $key => $empresa) {
     //Buscamos la Empresa
     $objAfiliacion = new Afiliacion();
-    $objAfiliacion->findAfiliacion($value['empresa_id'],$periodo);
+    $objAfiliacion->findAfiliacion($empresa['empresa_id'],$periodo);
 
     $objAfiliacion->setAno($periodo);
     $objAfiliacion->setFVT($tarifa);
     
     $objAfiliacion->setAsociacion(0);
     $objAfiliacion->setSistemaWeb(0);
-    $objAfiliacion->setEmpresa_id($value['empresa_id']);
+    $objAfiliacion->setEmpresa_id($empresa['empresa_id']);
     $objAfiliacion->setFechaDesde(date_format($objeto_fecha_desde, 'Y-m-d'));
     $objAfiliacion->setFechaHasta(date_format($objeto_fecha_hasta, 'Y-m-d'));
     $objAfiliacion->setMoneda($moneda);
+    $objAfiliacion->setCiclo(1);
     if ($objAfiliacion->Operacion_Exitosa()){
         $objAfiliacion->Update();
     }else{
         $objAfiliacion->create();
     }
+    $td .= '<tr><td >'.$empresa['nombre'].'</td>
+    <td>'.date_format($objeto_fecha_desde, 'Y-m-d').'</td>
+    <td>'.date_format($objeto_fecha_hasta, 'Y-m-d').'</td>
+    </tr>';
     $nr++;
 }
 
-$mensaje='<p>Procesadas la afiliacion anual';
+$table = '
+<table class="table table-dark">
+    <thead>
+    <th scope="col">Asociaciones</th>
+    <th scope="col">Fecha Dsde</th>
+    <th scope="col">Fecha Hasta</th>
+    </thead>
+    <body>'
+    .$td.
+    '</body>
+    </table >';
+if ($nr>0){
+    $mensaje='<p>Procesada la afiliacion anual exitosamente</p>';
+
+}else{
+    $mensaje='<p>No hay datos para procesar</p>';
+
+}
 
 if ($nr>0){
-    $jsondata = array("Success" => True, "html"=>$mensaje,"pagination"=>"");   
+    $jsondata = array("success" => True, "html"=>$table,'msg'=>$mensaje,"pagination"=>"");   
 } else {    
-    $jsondata = array("Success" => False, "html"=>"No fue efectuada la afiliacion","pagination"=>"");
+    $jsondata = array("success" => False, "html"=>"Errors no fue generada la afiliacion",'msg'=>$mensaje,"pagination"=>"");
 }
 
 header('Content-type: application/json; charset=utf-8');

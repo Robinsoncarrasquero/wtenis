@@ -60,9 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         
         
     }else{
-        $mensaje="Error: Usuario no existe en esta pllataforma, debe introducir un Usuario Valido!!";
+        $mensaje="Error: Usuario no existe en esta plataforma, debe introducir un Usuario Valido!!";
         $error_login=true;
-        $jsondata= array("success"=>FALSE,"msg"=>"Error: Usuario incorrecto o invalido, debe introducir un usuario resgitrado en la plataforma",'HTML'=>"");  
+        $jsondata= array("success"=>FALSE,"msg"=>"Error: Usuario incorrecto o invalido, debe introducir un usuario registrado en la plataforma",'HTML'=>"");  
         
     }   
 header("Content-type: application/json; charset=utf-8");

@@ -53,7 +53,7 @@ echo "<header>";
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuracion<span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                          <li><a href="../SubirFotos/index.php" >Subir Fotos al Portal</a></li>
+                         <!-- <li><a href="../SubirFotos/index.php" >Subir Fotos al Portal</a></li> -->
                           <li><a href="../Configurar/ConfigModal.php" >Configuracion</a></li>';
                             if ($_SESSION['niveluser']>9){
                               echo ' <li><a href="../Constancias/ConfigModal.php" >Constancia</a></li>';

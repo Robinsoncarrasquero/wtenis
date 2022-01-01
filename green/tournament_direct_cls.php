@@ -43,6 +43,7 @@ class Torneos_Directos
         foreach ($rsColeccion_Torneos as $row) {
 
             $estatus = Torneo::Estatus_Torneo($row['fechacierre'],$row['fecha_inicio_torneo'],$row['tipo'],$row['condicion']);
+            
             $copa=$row['nombre'];
             $fecha_cierre=$row['fechacierre'];
             $fecha_retiro=$row['fecharetiros'];

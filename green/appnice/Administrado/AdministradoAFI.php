@@ -14,7 +14,7 @@ if (isset($_SESSION['logueado']) && !$_SESSION['logueado']) {
      header('Location: ../sesion_inicio.php');
      exit;
 }
-if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<9){
+if (isset($_SESSION['niveluser']) && $_SESSION['niveluser']<"9"){
     header('Location: ../sesion_inicio.php');
     exit;
 }
@@ -41,7 +41,7 @@ if ($objEmpresa->Operacion_Exitosa()){
     $Afiliacion_id=$objAfiliacion->get_ID();
 }
 
-$empresa_id=0; //Empresa 0 para representar que son todas las
+//$empresa_id=0; //Empresa 0 para representar que son todas las
 $rsAfiliacion_empresa = Afiliacion::ReadByCiclo($empresa_id, $ano_afiliacion, 1);
 
 

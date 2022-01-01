@@ -116,12 +116,12 @@ Function Fecha_Fin_Torneo($fecha_inicio_torneo){
 function Fecha_ini_Torneo($fecha_,$grado_){
     
      $date_new = date_create($fecha_); // fecha cierre de la bd
-     if ($grado_=="G4"){
-         date_sub($date_new,date_interval_create_from_date_string("2 days"));
-     }  else {
-         date_sub($date_new,date_interval_create_from_date_string("1 days"));
-     }
-   
+    //  if ($grado_=="G4"){
+    //      date_sub($date_new,date_interval_create_from_date_string("2 days"));
+    //  }  else {
+    //      date_sub($date_new,date_interval_create_from_date_string("1 days"));
+    //  }
+     date_sub($date_new,date_interval_create_from_date_string("0 days"));
     return date_timestamp_get($date_new);
      
 }
