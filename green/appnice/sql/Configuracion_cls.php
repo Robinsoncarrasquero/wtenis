@@ -52,7 +52,7 @@ class Configuracion
         'SMTP_USERNAME'=> $contenido["SMTP_USERNAME"],
         'SMTP_PASSWORD'=> $contenido["SMTP_PASSWORD"],
         'SMTP_SECURE'=> $contenido["SMTP_SECURE"],
-        'SMTP_PORT =>'=>$contenido["SMTP_PORT"],
+        'SMTP_PORT'=>$contenido["SMTP_PORT"],
         ];
         return $SMTP;
         

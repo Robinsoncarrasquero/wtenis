@@ -408,8 +408,8 @@ function envphpmailer($to,$subject,$body,$from)
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = $SMTP['SMTP_USERNAME'];                    //SMTP username
         $mail->Password   = $SMTP['SMTP_PASSWORD'];                            //SMTP password
-        $mail->SMTPSecure = $SMTP['SMTP_SECURE'];;            //Enable implicit TLS encryption
-        $mail->Port       = $SMTP['SMTP_PORT'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->SMTPSecure = $SMTP['SMTP_SECURE'];           //Enable implicit TLS encryption
+        $mail->Port       = $SMTP['SMTP_PORT'];                                //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
         $mail->setFrom($from, 'Sistemas ');

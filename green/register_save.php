@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     	
     if ($dataprueba){
         
-        $txt_cedula ="V9999116";
+        $txt_cedula ="V10109X11";
         $txt_nombres="prueba" ;
         $txt_apellidos="PRUEBA";;
         $txt_password="SECRET1234";
@@ -111,16 +111,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             
             //Datos para el correo
             
-            $_SESSION['empresa_id']=$objEmpresa->get_Empresa_id();
-            $_SESSION['email_empresa']=$objEmpresa->getEmail();
-            $_SESSION['email_envio']=$objEmpresa->getEmail_Envio();
-    
+                
             $notificaciones = new Notificaciones();
             //Notificaccion via email
             if ($obj->getEmail() !=NULL){
                 if ($notificaciones->email_notificacion($obj,$objEmpresa,"Pre-Afiliacion")){
                     $error_login=true;
-                    $jsondata= array("success"=>TRUE,"msg"=>"La clave fue re-establecida y enviada al correo ".$record['email'],'HTML'=>"");
+                    $jsondata= array("success"=>TRUE,"msg"=>"La clave fue re-establecida y enviada al correo ".$obj->getEmail(),'HTML'=>"");
                 }else{
                     $mensaje="Error de Conexion. No se pudo enviar el correo con la nueva contraseña, reintente nuevamente!!";
                     $error_login=true;
