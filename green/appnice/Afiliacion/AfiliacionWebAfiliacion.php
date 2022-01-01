@@ -254,18 +254,19 @@ if ($atleta_id>0)
 </div>
 
 <?php
-    $texto =' '
-    . ' Usted puede cambiar su Fichaje a una nueva Asociacion durante esta Afiliacion.'
-    . ' Podrá realizar otro cambio de Fichaje en un lapso de 6 meses en caso que lo haya gestionado'
-    . '  durante esta Afiliacion y deberá solicitarlo ante su Asociacion para que gestione su cambio'
-    . ' ante esta Asociaciones.';
+   
+    $texto=' 
+    Usted puede cambiar su Fichaje a una nueva Asociacion durante esta Afiliacion en caso que asi lo requiera.
+    Transcurrido 6 meses podrá realizar nuevamente otro cambio de Fichaje si asi lo requiere y
+    deberá solicitarlo por escrito ante la Asociacion para que gestione su cambio de Fichaje ante la Federacion';
+    
     echo bsTemplate::panel('<i class="glyphicon glyphicon-warning-sign label label-warning"></i>
     Fichaje',$texto,'alert alert-info','col-lg-6');
 
     if ($objAfiliado->getFormalizacion() > 0) {
         if ($objAfiliado->getPagado() > 0) {
             $texto=' '
-            . 'Su Afiliacion ha sido verificada y confirmada, ahora '
+            . 'Su Afiliacion ha sido verificada y confirmada. Usted '
             . ' est&aacute habilitado para participar en el circuito oficial de Tenis Federado,'
             . ' de acuerdo a su categoria, cumpliendo  y aceptando el reglamento vigente.';
              echo bsTemplate::panel('<i class="glyphicon glyphicon-bookmark label label-success"></i>
