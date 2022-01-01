@@ -146,17 +146,17 @@ fin carrito-->
                   <div id="myerrors" class="my-errors">
 
                   </div>
-
+                  <div class="col-md-12 login-page">
                   <form method="post" class="remember-form" id="remember-form" > 
                         <div id="remember-submit">
-                            <input type="submit" class="alert-info btn-remember-key" value="Recordar la clave"/>
+                            <input type="submit" class=" btn-remember-key " value="Recordar la clave"/>
                           
                         </div>
                         <div id="msg-remember-form" class="alert-remember-form">
 
                         </div>
                   </form>
-                  
+                  </div>
       
                   
               </div>
@@ -279,14 +279,19 @@ fin carrito-->
 $(document).ready(function (){
 
   const btnRememberKey = document.querySelector(".btn-remember-key");
-  btnRememberKey.addEventListener('click',clear_login_msg);
-  const btnLoginSubmit = document.querySelector(".btn-login-submit");
-  btnLoginSubmit.addEventListener('click',clear_remember_msg);
+  btnRememberKey.addEventListener('click',clear_msg);
   
-  const name_login = document.getElementById("name_login");
+  const btnLoginSubmit = document.querySelector(".btn-login-submit");
+  btnLoginSubmit.addEventListener('click',clear_msg);
+  
+  const name_login = document.getElementsByName("name_login");
 
+  //name_login.addEventListener('focus',clear_msg);
   
   $('#login-form').on('submit',function(e){
+    
+    let nameLogin = document.getElementById("name_login");
+    if (nameLogin.value!='')
     {
       var data = $("#login-form").serialize();
       $.ajax({
@@ -305,73 +310,53 @@ $(document).ready(function (){
             }
           }
       })
-    }
+    }else{
+     
+     document.getElementById("name_login").focus();
+     
+   }
     return false;
   })
    
-
   $('#remember-form').on('submit',function(e){
     
+    let nameLogin = document.getElementById("name_login");
+    if (nameLogin.value!='')
     {
-      var data = $("#login-form").serialize();
+      let data = $("#login-form").serialize();
       $.ajax({
           url: "remember_key_submit.php",
           type: "POST",
           data:data,
           success : function( data)
           {
-          
             if (data.success){
               $('#msg-remember-form').html(data.msg);
               $("#msg-remember-form").addClass("alert alert-success");
             }else{
-            
               $("#msg-remember-form").addClass("alert alert-danger");
               $('#msg-remember-form').html(data.msg);
         
             }
           }
       })
+    
+    }else{
+     
+      document.getElementById("name_login").focus();
+      
     }
     return false;
   })
   
-  function clear_remember_msg() {
+  function clear_msg() {
     $("#msg-remember-form").html("");
     $("#msg-remember-form").removeClass("alert alert-success").removeClass('alert alert-danger');
     $("#myerrors").html("");
     $("#myerrors").removeClass("alert alert-success").removeClass('alert alert-danger');
        
   }
-
-  function clear_login_msg() {
-    $("#msg-remember-form").html("");
-    $("#msg-remember-form").removeClass("alert alert-success").removeClass('alert alert-danger');
-    $("#myerrors").html("");
-    $("#myerrors").removeClass("alert alert-success").removeClass('alert alert-danger');
-    
-  }
   
-  function valida_form() {
-    x = name_login.value;
-    if (name_login.value==null){
-      
-       name_login.focus();
-       return false;
-    }  
-    return true;
-    
-  }
-
-function removeClases() {
-  var rojos = document.getElementsByClassName("my-errors");
-  for (var i = 0; i<rojos.length; i++) {
-    rojos[i].classList.remove("alert");
-  }
-  
-}
-  
-
 });
 
 </script>
