@@ -37,32 +37,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $Empresa->Find_entidad($Atleta->getEstado());
 
                 $notificaciones = new Notificaciones();
-                $notificaciones->email_notificacion($Atleta,$Empresa,"RecuperarClave");
-
-            //    email_notificacion("RecuperarClave", $cedula);
-                $mensaje= 'La Clave fue enviada a su correo:'. $record['email'].'<a href="sesion_inicio.php">Presione para Seguir</a>';
-                $error_login=true;
-                //echo "0";
-                $jsondata= array("success"=>TRUE,"msg"=>"La clave fue re-establecida y enviada al correo <spa>".$record['email'].'</span>','HTML'=>"");
+                if ($notificaciones->email_notificacion($Atleta,$Empresa,"RecuperarClave")){
+                    $mensaje= 'La Clave fue enviada a su correo:'. $record['email'].'<a href="sesion_inicio.php">Presione para Seguir</a>';
+                    $error_login=true;
+                    $jsondata= array("success"=>TRUE,"msg"=>"La clave fue re-establecida y enviada al correo ".$record['email'],'HTML'=>"");
+                }else{
+                    $mensaje="Error de Conexion. No se pudo enviar el correo con la nueva contraseña,reintente nuevamente!!";
+                    $error_login=true;
+                    $jsondata= array("success"=>FALSE,"msg"=>"Error de Conexion. No se pudo enviar el correo con la nueva contraseña, reintente nuevamente!!",'HTML'=>"");  
+                }
             }else{
                $mensaje="Error: No se pudo recuperar la contraseña reintente nuevamente!!";
                $error_login=true;
                //echo "1";
-               $jsondata= array("success"=>FALSE,"msg"=>"Error: No se pudo recuperar la contraseña intente nuevamente!!",'HTML'=>"");  
+               $jsondata= array("success"=>FALSE,"msg"=>"Error: Conexion con el servidor fallo y no pudo restaurar la contraseña intente nuevamente!!",'HTML'=>"");  
             }
         }else{
             $mensaje="Error: Usted no poseee un correo registrado !!";
             $error_login=true;
-            /// echo "1";
-            $jsondata= array("success"=>FALSE,"msg"=>"Error: Usted no poseee un correo registrado",'HTML'=>"");            
+            $jsondata= array("success"=>FALSE,"msg"=>"Error: Usted no poseee un correo registrado en esta plataforma!",'HTML'=>"");            
         }
         
         
     }else{
-        $mensaje="Error: Usuario no existe, debe introducir un Usuario Valido!!";
+        $mensaje="Error: Usuario no existe en esta pllataforma, debe introducir un Usuario Valido!!";
         $error_login=true;
-        ///echo "1";
-        $jsondata= array("success"=>FALSE,"msg"=>"Error: Usuario incorrecto, debe introducir un usuario valido",'HTML'=>"");  
+        $jsondata= array("success"=>FALSE,"msg"=>"Error: Usuario incorrecto o invalido, debe introducir un usuario resgitrado en la plataforma",'HTML'=>"");  
         
     }   
 header("Content-type: application/json; charset=utf-8");

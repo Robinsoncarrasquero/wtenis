@@ -372,58 +372,25 @@ public function email_notificacion(Atleta $atleta,Empresa $rsempresa,$tipoNotifi
     $email_empresa='rcarrasquero@gmail.com';
     $email_from ='atenimiranda@gmail.com';
     //Enviamos Correo
-    {
-        $to = $email; 
-        $subject = $asunto;
-        if ($atleta_id == 487) { 
-            $from = "From: mytenis<$email_from>"
-                    . "\r\n" . "BCC:robinson.carrasquero@gmail.com";
-        } else {
-            $from = "From: $nombre_remitente<" . $email_from . ">"
-                    . "\r\n" . "BCC:atenismiranda@gmail.com,$email_empresa";
-        }
-        $from = $email_from;
-        
-        //Enviamos correos via smtp                  
-        $this->email_smtp($to, $subject, $body, $from);
-                   
+    
+    $to = $email; 
+    $subject = $asunto;
+    if ($atleta_id == 487) { 
+        $from = "From: mytenis<$email_from>"
+                . "\r\n" . "BCC:robinson.carrasquero@gmail.com";
+    } else {
+        $from = "From: $nombre_remitente<" . $email_from . ">"
+                . "\r\n" . "BCC:atenismiranda@gmail.com,$email_empresa";
     }
-    return;
-}
-
-//Esta funcion indica si el usuario esta afiliado
-function Control_Afiliacion_Anual($atleta_id,$ano_afiliacion) {
-    //Verificamos pago de afiliacion
-    $sql = "SELECT pagado FROM afiliaciones WHERE  atleta_id=$atleta_id && ano=$ano_afiliacion";
-    $result = Conexion_mysqli::mysqli_query($sql);
-    $rsAfiliados =Conexion_mysqli::mysqli_fetch_array($result);
-    if ($rsAfiliados['pagado']>0){
-        $habilitado= TRUE; //Habilitado para imprimir o enviar correo
-    }else{
-        $habilitado= FALSE; //Habilitado para imprimir o enviar correo
-    }
-    return $habilitado;
-}
-
-//Funcion para sustituir parametros de un campo con los valores en un string
-function html_template($campos, $valores, $strDocumento) {
-    $new_doc = str_replace($campos, $valores, $strDocumento, $contador);
-    return $new_doc;
-}
-
-//Funcion para envio de correo via SMPT
-function email_smtp($to,$subject,$body,$from){
-    $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
-    $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
-    //$cabeceras = 'X-Mailer: PHP/' . phpversion();
+    $from = $email_from;
+    
+    //Enviamos correos via smtp                  
+    //$this->email_smtp($to, $subject, $body, $from);
     if ($to !=''){
-        $this->envphpmailer($to,$subject,$body,$from);
-    // }else{
-    //     mail($to,$subject,$body,$cabeceras.$from);
+        return $this->envphpmailer($to,$subject,$body,$from);
     }
- 
+    return false;
 }
-
 
 function envphpmailer($to,$subject,$body,$from)
 {
@@ -464,9 +431,45 @@ function envphpmailer($to,$subject,$body,$from)
         $mail->send();
         // echo 'Message has been sent';
     } catch (Exception $e) {
-        return  "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        return false;
+        //return  "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-    return;
+    return true;
 }
+
+//Esta funcion indica si el usuario esta afiliado
+function Control_Afiliacion_Anual($atleta_id,$ano_afiliacion) {
+    //Verificamos pago de afiliacion
+    $sql = "SELECT pagado FROM afiliaciones WHERE  atleta_id=$atleta_id && ano=$ano_afiliacion";
+    $result = Conexion_mysqli::mysqli_query($sql);
+    $rsAfiliados =Conexion_mysqli::mysqli_fetch_array($result);
+    if ($rsAfiliados['pagado']>0){
+        $habilitado= TRUE; //Habilitado para imprimir o enviar correo
+    }else{
+        $habilitado= FALSE; //Habilitado para imprimir o enviar correo
+    }
+    return $habilitado;
+}
+
+//Funcion para sustituir parametros de un campo con los valores en un string
+function html_template($campos, $valores, $strDocumento) {
+    $new_doc = str_replace($campos, $valores, $strDocumento, $contador);
+    return $new_doc;
+}
+
+//Funcion para envio de correo via SMPT
+function email_smtp($to,$subject,$body,$from){
+    $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+    $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n"; 
+    //$cabeceras = 'X-Mailer: PHP/' . phpversion();
+    if ($to !=''){
+        return $this->envphpmailer($to,$subject,$body,$from);
+    // }else{
+    //     mail($to,$subject,$body,$cabeceras.$from);
+    }
+    return false;
+ 
+}
+
 
 }

@@ -117,8 +117,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     
             $notificaciones = new Notificaciones();
             //Notificaccion via email
-            if ($obj->getEmail() !=NULL){ // enviamos correo
-                $notificaciones->email_notificacion($obj,$objEmpresa,"Pre-Afiliacion");
+            if ($obj->getEmail() !=NULL){
+                if ($notificaciones->email_notificacion($obj,$objEmpresa,"Pre-Afiliacion")){
+                    $error_login=true;
+                    $jsondata= array("success"=>TRUE,"msg"=>"La clave fue re-establecida y enviada al correo ".$record['email'],'HTML'=>"");
+                }else{
+                    $mensaje="Error de Conexion. No se pudo enviar el correo con la nueva contraseña, reintente nuevamente!!";
+                    $error_login=true;
+                    $jsondata= array("success"=>FALSE,"msg"=>"Error de Conexion. No se pudo enviar el correo con la nueva contraseña, reintente nuevamente!!",'HTML'=>"");  
+               }
             }
 
         }

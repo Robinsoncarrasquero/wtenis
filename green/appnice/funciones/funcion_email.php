@@ -8,9 +8,9 @@ require_once '../sql/ConexionPDO.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-    require_once '../PHPMailer/src/Exception.php';
-    require '../PHPMailer/src/PHPMailer.php';
-    require '../PHPMailer/src/SMTP.php';
+require_once '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
     
 /* 
  * Utilizamos esta funcion para hacer el envion de correo de cualquier moovimiento tales 

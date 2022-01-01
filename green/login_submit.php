@@ -15,7 +15,7 @@ require_once __DIR__.'/appnice/sql/ConexionPDO.php';
 
 date_default_timezone_set('America/La_Paz');
 $error_login = false; 
-$msg='ERROR: El Usuario suministrado es incorrecto o el Password es invalido!</br>Ingrese una clave usuario y clave valida';
+$msg='ERROR: El Usuario es incorrecto o el Password es invalido. Ingrese un usuario y una clave valida !!';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dotenv = Dotenv\Dotenv::createImmutable('../');
