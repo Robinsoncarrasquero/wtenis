@@ -187,11 +187,11 @@ echo '<div class="col-xs-12 col-sm-8">
         echo '<select id="estado" name="txt_asociacion" class="form-control">';
                         // Recorremos todas las lineas del archivo
                 foreach ($rsEntidades as $value) {
-                  if ($estado==$value[estado]){
-                    echo  '<option selected value="'.$value[estado].'">'.ucwords($value[entidad]).'</option>'; 
+                  if ($estado==$value['estado']){
+                    echo  '<option selected value="'.$value['estado'].'">'.ucwords($value['entidad']).'</option>'; 
                   }else{
                     if ($objAfiliado->getFormalizacion()!=1){
-                        echo  '<option value="'.$value[estado].'">'.ucwords($value[entidad]).'</option>'; 
+                        echo  '<option value="'.$value['estado'].'">'.ucwords($value['entidad']).'</option>'; 
                     }
                   }
                 }
@@ -298,13 +298,12 @@ echo '<div class="col-xs-12 col-sm-8">
      <?php
       echo '<div class="notas-left ">';
      echo '<h5 class="alert alert-info">'.Bootstrap_Class::texto("Fichaje:").'<br><br>
-         Usted puede cambiar su Fichaje a una nueva Asociacion durante esta Afiliacion.
-         Podrá realizar otro cambio de Ficha en un lapso de 6 meses en caso que lo haya gestionado
-         durante esta Afiliacion y deberá solicitarlo ante la Asociacion a la que pertenece para que
-         gestione su cambio de Fichaje ante esta Asociaciones.</h5>';
+         Usted puede cambiar su Fichaje a una nueva Asociacion durante esta Afiliacion en caso que asi lo requiera.
+         Transcurrido 6 meses podrá realizar nuevamente otro cambio de Fichaje si asi lo requiere y
+         deberá solicitarlo por escrito ante la Asociacion a la que pertenece para que gestione
+         su cambio de Fichaje ante la Federacion.</h5>';
      
-    
-    
+        
     if ($objAfiliado->getFormalizacion() > 0) {
 
         if ($objAfiliado->getPagado() > 0) {
