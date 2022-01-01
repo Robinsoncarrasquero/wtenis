@@ -28,12 +28,13 @@ header('Content-Type: text/html; charset=utf-8');
 
 
 $torneo_id=(isset($_GET['t'])) ? $_GET['t'] : null;
-
+$vcategoria=" ";
 $objTorneo = new Torneo();
 $objTorneo->Fetch($torneo_id);
 $codigo_torneo=$objTorneo->getCodigo();
 $nombre_torneo=$objTorneo->getNombre();
-$array_categoria= explode(",", $objTorneo->getCategoria());
+$vcategoria = $objTorneo->getCategoria();
+$array_categoria= explode(",",$vcategoria);
 $array_sexo= array("Femenino"=>"F","Masculino"=>"M");
 
 ?>
@@ -55,12 +56,16 @@ $array_sexo= array("Femenino"=>"F","Masculino"=>"M");
                 height: 100px;
             }
             .title-table{
-                background-color:<?php echo $_SESSION['bgcolor_jumbotron'] ?>;
-                color: <?php echo $_SESSION['color_jumbotron'] ?>;
+                /* background-color:<?php echo $_SESSION['bgcolor_jumbotron'] ?>;
+                color: <?php echo $_SESSION['color_jumbotron'] ?>; */
+                color: white;
+                background-color: black;
             }
             .table-head{
-                background-color:<?php echo $_SESSION['bgcolor_jumbotron'] ?>;
-                color: <?php echo $_SESSION['color_jumbotron'] ?>;
+                /* background-color:<?php echo $_SESSION['bgcolor_jumbotron'] ?>;
+                color: <?php echo $_SESSION['color_jumbotron'] ?>; */
+                color: white;
+                background-color: black;
 
             }
         

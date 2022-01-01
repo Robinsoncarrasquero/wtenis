@@ -125,13 +125,17 @@ if ($codigo_torneo!=null)
                 background-position: center;
                 height: 100px;
             }
-            .title-table{
+            .xtitle-table{
                 background-color:<?php echo $_SESSION['bgcolor_jumbotron'] ?>;
                 color: <?php echo $_SESSION['color_jumbotron'] ?>;
+                color: black;
+                background-color: gray;
             }
-            .table-head{
+            .xtable-head{
                 background-color:<?php echo $_SESSION['bgcolor_jumbotron'] ?>;
                 color: <?php echo $_SESSION['color_jumbotron'] ?>;
+                color: gray;
+                background-color: gray;
 
             }
         
