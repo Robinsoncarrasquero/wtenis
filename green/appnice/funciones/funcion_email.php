@@ -267,15 +267,6 @@ function email_inscripcion($tipodeoperacion,$torneoid,$atleta_id,$categoria){
 //de mensaje es distinta.
 function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     
-    
-    $email_empresa= $_SESSION['email_empresa'];
-    $empresa_id=$_SESSION['empresa_id'];
-    if (isset($_SESSION['email_envio'])){
-        $email_from= $_SESSION['email_envio'];
-    }else{
-        $email_from="info@example";
-    }
-    
     //Datos Atleta
     $atleta = new Atleta();
     $atleta->Find_Cedula($cedulax);
@@ -290,18 +281,20 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
     $categoria_natural = categoria_natural(anodeFecha($atleta->getFechaNacimiento()));
     $lugarnacimiento=$atleta->getLugarNacimiento();
     $disciplina=$atleta->getDisciplina();
-
+    
     //Datos Empresa
     $rsempresa = new Empresa();
-    $rsempresa->Find($empresa_id);
-
+    $rsempresa->Fetch($atleta->getEstado());
+    
     if ($rsempresa){
+        $empresa_id= $rsempresa->get_Empresa_id();
         $banco_empresa =$rsempresa->getBanco();
         $cuenta_empresa =$rsempresa->getCuenta();
         $rif_empresa =$rsempresa->getRif();
         $nombre_empresa =$rsempresa->getNombre();
         $email_empresa=$rsempresa->getEmail();
         $telefonos_empresa=$rsempresa->getTelefonos();
+        $email_from= $rsempresa->getEmail_Envio();
     }else{
         $banco_empresa ="desconocido";
         $cuenta_empresa ="desconocida";
@@ -309,60 +302,9 @@ function email_notificacion($tipoNotificacion,$cedulax,$nota=NULL){
         $nombre_pago ="desconocida";
         $email_empresa="desconocido";
         $telefonos_empresa='desconocido';
+        $email_from="info@example.com";
     }
 
-
-    /*
-    //Datos del atleta
-    $sql="SELECT lugarnacimiento,cedula,sexo,fecha_nacimiento,nombres,apellidos,"
-            . "email,contrasena,estado,atleta_id,disciplina "
-            . "FROM atleta "
-            . "WHERE cedula=$cedulax";
-    
-    $result=Conexion_mysqli::mysqli_query($sql);
-    $row = Conexion_mysqli::mysqli_fetch_array($result);
-    $atleta_id=$row['atleta_id'];
-    $nombre_atleta=trim($row["nombres"]);
-    $apellido_atleta=trim($row["apellidos"]);
-    $disciplina=trim($row["disciplina"]);
-    $email=$row["email"];
-    $estado=$row["estado"];
-    $sexo=$row["sexo"];
-    $cedula=$row["cedula"];
-    $fechanacimiento=  fecha_date_dmYYYY($row["fecha_nacimiento"]);
-    $categoria_natural = categoria_natural(anodeFecha($row["fecha_nacimiento"]));
-    $lugarnacimiento=$row["lugarnacimiento"];
-    
-    $notificacion2="fue procesada exitosamente.";
-    $BCC="BCC:atenismiranda@gmail.com";
-    
-    
-
-    //Datos Bancarios
-    $sqlEmp="SELECT entidad,telefonos,cuenta,banco,rif,nombre,email "
-            . " FROM empresa "
-            . " WHERE empresa_id=$empresa_id";
-    
-    $resultemp=Conexion_mysqli::mysqli_query($sqlEmp);
-    $rsempresa =Conexion_mysqli::mysqli_fetch_array($resultemp);
-    if ($rsempresa) {
-        $banco_empresa = $rsempresa['banco'];
-        $cuenta_empresa = $rsempresa['cuenta'];
-        $rif_empresa = $rsempresa['rif'];
-        $nombre_empresa = $rsempresa['nombre'];
-        $email_empresa = $rsempresa['email'];
-        $entidad_asociacion = $rsempresa['entidad'];
-        $estado_asociacion = $rsempresa['estado'];
-        $telefonos_empresa = $rsempresa['telefonos'];
-    } else {
-        $banco_empresa ="desconocida";
-        $cuenta_empresa = "desconocida";
-        $rif_empresa = "desconocido";
-        $email_empresa = "desconocido";
-        $entidad_asociacion = 'desconocido';
-        $telefonos_empresa = 'desconocido';
-    }
-    */
 
     $fileTemplate="Template_Notificacion.html";
     switch ($tipoNotificacion){

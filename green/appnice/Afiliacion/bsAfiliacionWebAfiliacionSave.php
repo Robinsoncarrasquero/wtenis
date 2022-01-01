@@ -14,7 +14,7 @@ if ($_SESSION['niveluser'] != 0) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST'){
-     die('Error fatal No pudo conectarse: ' . mysql_error());
+     die('Error fatal No pudo conectarse: ' . mysqli_error($conn));
 }
 
 
