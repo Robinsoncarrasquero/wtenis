@@ -68,33 +68,14 @@ fin carrito-->
 <!--SECTION MENU -->
 <section class="container box-logo">
  <header>
-   <div class="content-logo col-md-12">
-     <div class="logo"> 
-       <img src="img/logo3.png" alt="" />
-     </div>
-     
-     <div class="bt-menu"><a href="#" class="menu"><span>&equiv;</span> Menu</a></div>
-
-     <div class="box-menu">
-         <nav id="cbp-hrmenu" class="cbp-hrmenu">
-           <ul id="menu">    
-           <li><a class="lnk-menu active" href="index.php">Home</a></li>
-             <li><a class="lnk-menu" href="register.php">Afiliarme</a></li>
-             <li><a class="lnk-menu" href="tournaments.php">Torneos</a></li>
-             <li><a class="lnk-menu" href="players.php">Players</a></li>
-             <li><a class="lnk-menu" href="ranking.php">Ranking</a></li>
-                   </ul>
-         </nav>
-     </div>
-   
- </div>
+   <?php require_once 'menu.php' ?>
 </header>
 </section>
 
 <section class="drawer">
         <div class="col-md-12 size-img back-img-match">
             <div class="effect-cover">
-                <h3 class="txt-advert animated">Tenistas</h3>
+                <h3 class="txt-advert animated">Tenistas del circuito nacional</h3>
                 <p class="txt-advert-sub">Jugadores en el circuito de Tenis</p>
             </div>
         </div>
@@ -103,95 +84,95 @@ fin carrito-->
       <div class="general general-results players">
               
            <div class="top-score-title right-score col-md-9">
-                <h3>Chicos <span>Players</span><span class="point-little">.</span></h3>
+                <h3>Chicos <span>Jugadores</span><span class="point-little">.</span></h3>
                 <p class="txt-right">Los jugadores del circuito oficial de tenis federado, quienes con disciplina, entrenamiento diario, competencia y constancia logran conseguir sus objetivos, 
                   combinandolo con otras actividades para llevar siempre en alto la Bandera en los mas profundo de su corazon.</p>
                 <p class="txt-right txt-dd-second">El Respeto, la disciplina, la constancia, la responsabilidad son los valores primordiales que nuestros atletas 
                   llevan dentro de su espiritu deportivo para ser personas de bien y de progreso para el pais.</p>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                   <p>Nicol Radek</p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                    <p>Rafael Bovi</p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                   <p>Roger Kirt</p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                   <p>Stan Wark</p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                    <p>David Glove</p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                   <p>Milos Rotin</p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                   <p>Gregor Goe </p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                   <p>Tomas Berin</p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                   <p>Andy Morra</p></a>
                 </div>
                 <div class="col-md-3 atp-player">
-                  <a href="single_player.html"><img src="images/player/face.jpg" alt="" />
+                  <a href="#"><img src="images/player/face.jpg" alt="" />
                   <p>Jo-Wilf T. </p></a>
                 </div>
                 <div class="content-wtp-player">
-                    <h3>Chicas <span>Players</span><span class="point-little">.</span></h3>
+                    <h3>Chicas <span>Jugadoras</span><span class="point-little">.</span></h3>
                     <p class="txt-right">Las jugadoras del circuito oficial de tenis federado, quienes con disciplina, entrenamiento diario, competencia y constancia logran conseguir sus objetivos, 
                       combinandolo con otras actividades para llevar siempre en alto la bandera con mucha pasion.</p>
                     <p class="txt-right txt-dd-second">El Respeto, la disciplina, la constancia, la responsabilidad son los valores primordiales que nuestras atletas 
                       llevan dentro de su espiritu deportivo para ser personas de bien y de progreso para el pais.</p>
-                            <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <div class="col-md-3 atp-player">
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                        <p>Serena Peter</p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                       <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                       <a href="#"><img src="images/player/facef.jpg" alt="" />
                        <p>Simon Egger</p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                       <p>Naki Li</p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                       <p>Petra Dorav</p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                        <p>Aga Rader</p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                       <p>Maria Collan</p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                       <p>A. Kerber</p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                       <p>Erika Bou </p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                       <p>Ana Ivan </p></a>
                     </div>
                     <div class="col-md-3 atp-player">
-                      <a href="single_player.html"><img src="images/player/facef.jpg" alt="" />
+                      <a href="#"><img src="images/player/facef.jpg" alt="" />
                       <p>Carla Work</p></a>
                     </div>
             </div>
@@ -320,100 +301,20 @@ fin carrito-->
           </div>
          </div>
         </section>
+       
         <section id="sponsor" class="container">
             <!--SECTION SPONSOR-->
            <div class="client-sport client-sport-nomargin">
                <div class="content-banner">
-                     <!-- <ul class="sponsor second">
-                        <li><img src="img/img_descargadas/sponsor/img1.jpg" alt="273x133" /></li>
-                        <li><img src="img/img_descargadas/sponsor/img2.png" alt="" /></li>
-                        <li><img src="img/img_descargadas/sponsor/img3.png" alt="" /></li>
-                        <li><img src="img/img_descargadas/sponsor/img1.jpg" alt="273x133" /></li>
-                        <li><img src="img/img_descargadas/sponsor/img2.png" alt="" /></li>
-                        <li><img src="img/img_descargadas/sponsor/img3.png" alt="" /></li>
-                    </ul> -->
-                    <ul class="sponsor second">
-                      <li><img src="http://placehold.it/273x133" alt="" /></li>
-                      <li><img src="http://placehold.it/273x133" alt="" /></li>
-                      <li><img src="http://placehold.it/273x133" alt="" /></li>
-                      <li><img src="http://placehold.it/273x133" alt="" /></li>
-                      <li><img src="http://placehold.it/273x133" alt="" /></li>
-                      <li><img src="http://placehold.it/273x133" alt="" /></li>
-                    </ul>
+                   <?php require_once 'sponsor.php'?>
+                  
                 </div>
           </div>
+           
        </section>
-     <!--FOOTER-->   
-    <!--SECTION FOOTER--> 
-    <section id="footer-tag">
-      <div class="container">
-        <div class="col-md-12">
-         <div class="col-md-3">
-            <h3>Sobre Nosotros</h3>
-            <p>Gracias por visitarnos, nuestra mision es fomentar y reglamentar 
-            el tenis de competencia nacional. Crear, Planificar, coordinar y ejecutar el plan anual de
-             torneos oficiales para dar cumplimiento al calendario establecido. Brindar informacion sobre el tenis
-             Federado.
-         </div>
-         <div class="col-md-3 cat-footer">
-           <div class="footer-map"></div>
-           <h3 class='last-cat '>Categorias</h3>
-           <ul class="last-tips">
-            <li><a  href="register.php">Afiliarme</a></li>
-            <li><a  href="tournaments.php">Torneos</a></li>
-            <li><a  href="players.php">Players</a></li>
-            <li><a  href="ranking.php">Ranking</a></li>
-           </ul>
-         </div>
-         <div class="col-md-3">
-            <h3>Noticias Recientes</h3>
-            <ul class="footer-last-news">
-               <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="" /><p>El resto de las series del Grupo Mundial I han celebrado sus sorteos en la jornada del viernes.</p>
-              </li>
-              <li><img src="img/img_descargadas/cdavis/game1.jpg" alt "" /><p>Muñoz-Abreu perdió con Tearney, pero Martínez igualó la serie al vencer en tres sets al 1 neocelandés.
-                  Victorias parciales de China Taipei, Noruega y Portugal.</p></li>
-                  <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="" /><p>Fusce risus metus, placerat in consectetur eu...</p></li>
-            </ul>
-         </div>
-         <div class="col-md-3 footer-newsletters">
-           <h3>Newsletters</h3>
-           <form method="post">     
-               <div class="name">
-                   <label for="name">* Nombre:</label><div class="clear"></div>
-                   <input id="name" name="name" type="text" placeholder=" Nombre " required=""/>
-               </div>
-               <div class="email">
-                   <label for="email">* Email:</label><div class="clear"></div>
-                   <input id="email" name="email" type="text" placeholder="example@domain.com" required=""/>
-               </div>
-               <div id="loader">
-                           <input type="submit" value="Submit"/>
-                   </div>
-           </form>
-         </div>
-         <div class="col-xs-12">
-           <ul class="social">
-                 <li><a href=""><i class="fa fa-facebook"></i></a></li>
-                 <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                 <li><a href=""><i class="fa fa-instagram"></i></a></li>
-                 <li><a href=""><i class="fa fa-youtube"></i></a></li>
-                 <!--
-       <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-                 <li><a href=""><i class="fa fa-digg"></i></a></li> 
-       <li><a href=""><i class="fa fa-rss"></i></a></li>
-                 <li><a href=""><i class="fa fa-tumblr"></i></a></li> 
-       -->
 
-               </ul>
-         </div>
-        </div>
-      </div>
-</section>
-<footer>
-      <div class="col-md-12 content-footer">
-<p>© 2020 mytenis All rights reserved. </p>
- </div>
-</footer>
+   <?php require_once 'footer.php' ?>
+    
 </section>
 <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
@@ -432,6 +333,18 @@ fin carrito-->
                 "use strict";
                 $('.accordion').accordion({ defaultOpen: 'section1' }); //some_id section1 in demo
             });
+            
+            const atpPlayer = document.querySelector(".col-md-3");
+            atpPlayer.addEventListener('click',clear_msg);
+
+            function clear_msg() {
+              
+              //var x = event.currentTarget;  
+              alert("The id of the triggered element: " )
+              
+            }
+            
+            
         });
     </script>   
  <script src="js/custom.js" type="text/javascript"></script>

@@ -478,10 +478,10 @@ class bsTemplate
                 $hours=Torneo::intervalo_fecha($diff,'hours'); 
                 $days = $diff->format('%a');
                 $mins = $diff->format('%I');
-                if ($hours<1){
+                if ($hours<25){
                     $tiempo_resta =['time_titulo'=>'mins','time'=>$hours/3600];
                 }else{
-                    $tiempo_resta =['time_titulo'=>'hrs','time'=>$hours.":".$mins];
+                    $tiempo_resta =['time_titulo'=>'days','time'=>$days];
                 }
 
                 $fecha_unix =Torneo::Fecha_Apertura_Calendario($trecord['fechacierre'],$trecord['tipo']);
@@ -546,7 +546,7 @@ class bsTemplate
                     <li>
                         <a href="../Inscripcion/Inscripcion.php">
                         <div class="task-info">
-                            <div class="desc ">'.$record['numero']."-".$record['grado']."-".$record['categoria']."-".$record['entidad']. ' cerrando en: '.$record['time_time'].$record['time_titulo'].' </div>
+                            <div class="desc ">'.$record['numero']."-".$record['grado']."-".$record['categoria']."-".$record['entidad']. ' cerrando en: '.$record['time_time']." ".$record['time_titulo'].' </div>
                             <!--<div class="percent">'.$record['consumido'].'%</div> -->
                         </div>
                         <div class="'.$progressbar.'">
@@ -661,10 +661,10 @@ class bsTemplate
                 $hours=Torneo::intervalo_fecha($diff,'hours'); 
                 $days = $diff->format('%a');
                 $mins = $diff->format('%I');
-                if ($hours<1){
+                if ($hours<24){
                     $tiempo_resta =['time_titulo'=>'mins','time'=>$hours/3600];
                 }else{
-                    $tiempo_resta =['time_titulo'=>'hrs','time'=>$hours.":".$mins];
+                    $tiempo_resta =['time_titulo'=>'days','time'=>$days];
                 }
                 $objTorneo_Inscritos= new TorneosInscritos();
                 $objTorneo_Inscritos->Find_Atleta($record["torneo_id"],$_SESSION['atleta_id']);

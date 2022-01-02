@@ -14,13 +14,13 @@
         . "INNER JOIN torneo on torneoinscritos.torneo_id=torneo.torneo_id "
         . "WHERE torneoinscritos.pagado=1 && torneoinscritos.torneoinscrito_id=". $torneoinscrito_id ;
     
-    $conexion = mysql_connect($servername, $username, $password);
-    mysql_select_db($dbname,$conexion);
-     mysql_query('SET NAMES "utf8"');
-    $resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
-    $totEmp = mysql_num_rows($resEmp);
+    $conexion = mysqli_connect($servername, $username, $password);
+    mysqli_select_db($conexion,$dbname);
+     mysqli_query($conexion,'SET NAMES "utf8"');
+    $resEmp = mysqli_query($conexion,$queEmp) or die(mysqli_error($conexion));
+    $totEmp = mysqli_num_rows($resEmp);
     
-    while($datatmp = mysql_fetch_assoc($resEmp)) {
+    while($datatmp = mysqli_fetch_assoc($resEmp)) {
         
         
         $pdf =new Cezpdf('a8');
@@ -51,7 +51,7 @@
         
         $txtrif='ATEM:J001897909';
         $txtrecibo = "RECIBO DE PAGO";
-        $txtempresa='ASOCIACION DE TENIS MIRANDA';
+        $txtempresa='ASOCIACION DE TENIS';
         $txtrayado='-----------------------------';
         $pdf->ezSetMargins(0,0,4,1);
         $pdf->ezText($txtrif, 8);
@@ -80,7 +80,7 @@
         $pdf->ezStream();//abrir el pdf de forma automatica
     //    $output = $pdf->ezOutput(1); //Salida de archivo
     //    file_put_contents('pdf/mipdf.pdf', $output); //guardar en el server
-        mysql_close($conexion);
+        mysqli_close($conexion);
         //Unimos todos estos bloques y tenemos listo nuestro script para generar reportes en PDF,
         //pueden ver el ejemplo funcionando en php-mysql.php. 
         //Para finalizar les dejo los archivos del ejemplo para que lo prueben y modifiquen a sus necesidades.
@@ -89,7 +89,7 @@
         //Recibo($datatmp['torneoinscrito_id'],$datatmp['nombres'], $datatmp['apellidos'], $datatmp['cedula'], $datatmp['monto'],$datatmp['iva'],$datatmp['codigo'],$datatmp['fecha_inicio_torneo']);
     }
     
-     mysql_close($conexion);
+     mysqli_close($conexion);
     
     
         

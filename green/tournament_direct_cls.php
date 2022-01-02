@@ -48,11 +48,11 @@ class Torneos_Directos
             $fecha_cierre=$row['fechacierre'];
             $fecha_retiro=$row['fecharetiros'];
             $fecha_inicio=$row['fecha_inicio_torneo'];
-            $ffecha_cierre=date_format(date_create($row['fechacierre']),'d-M H:i');
-            $ffecha_retiro=date_format(date_create($row['fecharetiros']),'d-M H:i');
-            $ffecha_inicio=date_format(date_create($row['fecha_inicio_torneo']),'d-M H:i');
-            $ffecha_fin=date_format(date_create($row['fecha_fin_torneo']),'d-M  H:i');
-            $sfecha_ini=date_format(date_create($row['fecha_inicio_torneo']),'d-M-y');
+            $ffecha_cierre=date_format(date_create($row['fechacierre']),'d-m-y h:i');
+            $ffecha_retiro=date_format(date_create($row['fecharetiros']),'d-m-y h:i');
+            $ffecha_inicio=date_format(date_create($row['fecha_inicio_torneo']),'d-m-y h:i');
+            $ffecha_fin=date_format(date_create($row['fecha_fin_torneo']),'d-M H:i');
+            $sfecha_ini=date_format(date_create($row['fecha_inicio_torneo']),'d-M');
             $sfecha_fin=date_format(date_create($row['fecha_fin_torneo']),'d-M-y');
 
             if ($status_filtro!==$estatus){
@@ -160,42 +160,42 @@ class Torneos_Directos
                 $rsTorneo_fs = Torneo_Archivos::FindDocument($row['torneo_id'], "fs");
                 if($rsTorneo_fs){
                     $fsheet= '<a href="appnice/Torneo/Download_Doc.php?thatid='.
-                            $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('fs')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon glyphicon-blackboard">F. Sheet</a>';
+                            $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('fs')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon glyphicon-blackboard">FS</a>';
                 }else{
-                    $fsheet= '<a  class="inactivo-glyphicon glyphicon glyphicon-blackboard">F. Sheet</a>';
+                    $fsheet= '<a  class="inactivo-glyphicon glyphicon glyphicon-blackboard">FS</a>';
                 }
 
                 $Total_inscritos = TorneosInscritos::Count_Inscritos($row['torneo_id']);
                 
                 if ($Total_inscritos>0){
-                    $listaIn= '<a target="_blank" href="Torneo/bsTorneos_Consulta_Atletas_Inscritos.php?t='
-                    .$hash_codigo.'" class="activo-glyphicon glyphicon glyphicon-align-justify">Lista</a>';
+                    $listaIn= '<a target="_blank" href="appnice/Torneo/bsTorneos_Consulta_Atletas_Inscritos.php?t='
+                    .$hash_codigo.'" class="activo-glyphicon glyphicon glyphicon-align-justify">LI</a>';
                 }else{
-                    $listaIn= '<a  class=" inactivo-glyphicon glyphicon glyphicon-align-justify">Lista</a>';
+                    $listaIn= '<a  class=" inactivo-glyphicon glyphicon glyphicon-align-justify">LI</a>';
                 }
                 
                 $rsTorneo_fs = Torneo_Archivos::FindDocument($row['torneo_id'], "la");
                 if($rsTorneo_fs){
                     $listaAc= '<a href="appnice/Torneo/Download_Doc.php?thatid='.
-                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('la')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-list">Lista Ac.</a>';
+                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('la')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-list">LA</a>';
                 }else{
-                    $listaAc= '<a  class="inactivo-glyphicon glyphicon glyphicon-list">Lista Ac.</a>';
+                    $listaAc= '<a  class="inactivo-glyphicon glyphicon glyphicon-list">LA</a>';
                 } 
                 $rsTorneo_fs = Torneo_Archivos::FindDocument($row['torneo_id'], "ds");
                
                 if($rsTorneo_fs){
                     $draws= '<a href="appnice/Torneo/Download_Doc.php?thatid='.
-                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('ds')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-file">Draw SG.</a>';
+                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('ds')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-file">DS</a>';
                 }else{
-                    $draws = '<a  class="inactivo-glyphicon glyphicon glyphicon-file">Draw SG.</a>';
+                    $draws = '<a  class="inactivo-glyphicon glyphicon glyphicon-file">DS</a>';
                 }
                                
                 $rsTorneo_fs = Torneo_Archivos::FindDocument($row['torneo_id'], "dd");
                 if($rsTorneo_fs){
                     $drawd = '<a href="appnice/Torneo/Download_Doc.php?thatid='.
-                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('dd')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-duplicate">Draw DB.</a>';
+                    $hash_tid.'&thatdoc='.urlencode(Encrypter::encrypt('dd')).'" target="_blank" class="activo-glyphicon glyphicon glyphicon-duplicate">DD</a>';
                 }else{
-                    $drawd = '<a  class="inactivo-glyphicon glyphicon glyphicon-duplicate">Draw DB.  </a>';
+                    $drawd = '<a  class="inactivo-glyphicon glyphicon glyphicon-duplicate">DD</a>';
                 }   
                
                 //Galeria
@@ -235,10 +235,10 @@ class Torneos_Directos
                 
                 $col1='<div class="col-md-1 timg"><img src="images/tennis_p_small.png" alt="" />'.$row['numero']." - ".$strGrado.'  </br>'.$row['categoria'].'</div>';
                 $col2="<div class='col-md-2 t1'><p>$ffecha_inicio</p></div>";
-                $col3='<div class="col-md-3 t2"><p>'.$copa.'</p> </div>';
+                $col3="<div class='col-md-3 t2'><p>$ffecha_cierre</p></div>";
                 $col4='<div class="col-md-2 t3"><p>'.$row['entidad'].'</p></div>';
                 //$col5="<div class='col-md-2 t4'><p>SGL $single <br />DBL $doble</p></div>";
-                $col5="<div class='col-md-2 t4'>$listaAc</br>$fsheet</br>$draws </br>$drawd</div>";
+                $col5="<div class='col-md-2 t4'>$listaIn</br> $listaAc</br>$fsheet</br>$draws </br>$drawd</div>";
                 $col6='<div class="col-md-2 t5"><a '.$href.'>'.$estatus.'</a></div>';
                 $col7='<div class="acc-footer"></div>';
         
@@ -250,8 +250,8 @@ class Torneos_Directos
         $colh=
                 '
                 <div class="col-md-1 acc-title">Cat.</div>
-                <div class="col-md-2 acc-title">Fecha</div>
-                <div class="col-md-3 acc-title">Torneo</div>
+                <div class="col-md-2 acc-title">Inicio</div>
+                <div class="col-md-3 acc-title">Cierre</div>
                 <div class="col-md-2 acc-title">Entidad</div>
                 <div class="col-md-2 acc-title">Reportes</div>
                 <div class="col-md-2 acc-title">Estatus</div>
