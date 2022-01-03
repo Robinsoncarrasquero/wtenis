@@ -200,13 +200,13 @@ fin carrito-->
                  
 
                 <div class="col-md-3 data-player-2">
-                     <p><?php echo date_format(date_create($atleta->getFechaNacimiento()),'M-Y'); ?></p>
+                     <p><?php echo date_format(date_create($atleta->getFechaNacimiento()),'M-Y') ?></p>
                      <p><?php echo mb_substr ($atleta->getLugarNacimiento(),0,14) ?></p>
                      <p><?php echo $atleta->getTalla(); ?></p>
                      <p><?php echo $atleta->getPeso(); ?></p>
                      <p><?php echo $atleta->gethand(); ?></p>
-                     <p><?php echo $atleta->edad() ; ?></p>
-                     <p><?php echo $atleta->getNombreCorto() ?></p>
+                     <p><?php echo date_format(date_create($atleta->getInicio()),'M-Y') ?></p>
+                     <p><?php echo $atleta->getNickName() ?></p>
                     
                   </div>
                   

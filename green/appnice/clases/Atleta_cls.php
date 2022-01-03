@@ -62,7 +62,7 @@ class Atleta   {
         $this->apellidos=NULL;
         $this->sexo="";
         $this->email=NULL;
-        $this->fecha_nacimiento=NULL;
+        $this->fecha_nacimiento="";
         $this->nacionalidad_id=1;
         $this->estado_id=0;
         $this->estado="";
