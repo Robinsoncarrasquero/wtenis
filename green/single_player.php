@@ -171,7 +171,7 @@ fin carrito-->
     <div class="col-md-12 size-img back-img-match">
         <div class="effect-cover">
                 <h3 class="txt-advert animated">Ranking de Tenista</h3>
-                <p class="txt-advert-sub">Informacion del jugador en el circuito.</p>
+                <p class="txt-advert-sub">Informacion de atletas del circuito.</p>
             </div>
     </div>
     
@@ -191,9 +191,9 @@ fin carrito-->
                   <div class="col-md-2 data-player">
                      <p>Fecha Nac:</p>
                      <p>Lugar Nac.:</p>
-                     <p>Height:</p>
-                     <p>Weight:</p>
-                     <p>Plays:</p>
+                     <p>Estatura:</p>
+                     <p>Peso:</p>
+                     <p>Juega:</p>
                      <p>Inicio:</p>
                      <p>Nicknames:</p>
                   </div>
@@ -201,12 +201,12 @@ fin carrito-->
 
                 <div class="col-md-3 data-player-2">
                      <p><?php echo date_format(date_create($atleta->getFechaNacimiento()),'M-Y') ?></p>
-                     <p><?php echo mb_substr ($atleta->getLugarNacimiento(),0,14) ?></p>
+                     <p><?php echo mb_substr ($atleta->getLugarNacimiento(),0,14); ?></p>
                      <p><?php echo $atleta->getTalla(); ?></p>
                      <p><?php echo $atleta->getPeso(); ?></p>
                      <p><?php echo $atleta->gethand(); ?></p>
                      <p><?php echo date_format(date_create($atleta->getInicio()),'M-Y') ?></p>
-                     <p><?php echo $atleta->getNickName() ?></p>
+                     <p><?php echo $atleta->getNickName(); ?></p>
                     
                   </div>
                   
@@ -256,11 +256,18 @@ fin carrito-->
                <div class="col-md-12 atp-single-player skill-content">
                       <div class="ppl-desc">
                         <p class="exp-title-pp">DESCRIPCION</p>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                        standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambled it to make a type specimen book.</p>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                        standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambled it to make a type specimen book.</p>
-                    </div>
+                        <?php if ($atleta->getBiografia()){
+                            echo  '<p>'.$atleta->getBiografia().'</p>';
+                        }else{
+                             echo '
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry 
+                            standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambled it to make a type specimen book.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry 
+                            standard dummy text ever since the 1500s, when an unknown printer took a gallery of type and scrambled it to make a type specimen book.</p>
+                            ';
+                        }     
+                            ?>
+                        </div>
               </div>
            </div><!--Close Top Match-->
 

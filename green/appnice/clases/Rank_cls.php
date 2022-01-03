@@ -330,13 +330,10 @@ class Rank {
         
         }  else {
            $SQL = $conn->prepare('SELECT * FROM ' . self::TABLA . ' WHERE  disciplina=:disciplina && categoria=:categoria && sexo=:sexo && fecha=:fecha ORDER BY fecha DESC');
-        //   $SQL->bindParam(":fecha",$fecha, PDO::PARAM_STR);
            $bindparam_array=array(':sexo'=>$sexo,':categoria'=>$categoria,':disciplina'=>$disciplina,':fecha'=>$fecha);
            
         }
-        // $SQL->bindParam(":sexo",$sexo,PDO::PARAM_STR);
-        // $SQL->bindParam(":categoria",$categoria,PDO::PARAM_STR);
-        // $SQL->bindParam(":disciplina",$disciplina,PDO::PARAM_STR);
+        
         $SQL->execute($bindparam_array);
         $records = $SQL->fetchAll();
         return $records;

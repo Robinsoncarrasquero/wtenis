@@ -657,6 +657,11 @@ class Atleta   {
                  $this->fecha_modificacion=$record['fecha_modificacion'];
                  $this->disciplina=$record['disciplina'];
                  $this->id=$record['atleta_id'];
+                 $this->inicio=$record['inicio'];
+                 $this->hand=$record['hand'];
+                 $this->talla=$record['talla'];
+                 $this->peso=$record['peso'];
+                 $this->nickname=$record['nickname'];
                  $this->mensaje='Record Found successfully ';
                 $this->SQLresultado_exitoso=TRUE;
                  
@@ -779,6 +784,11 @@ class Atleta   {
                  $this->fecha_modificacion=$record['fecha_modificacion'];
                  $this->disciplina=$record['disciplina'];
                  $this->id=$record['atleta_id'];
+                 $this->inicio=$record['inicio'];
+                 $this->hand=$record['hand'];
+                 $this->talla=$record['talla'];
+                 $this->peso=$record['peso'];
+                 $this->nickname=$record['nickname'];
                  $this->mensaje='Record Found successfully ';
                 $this->SQLresultado_exitoso=TRUE;
                  
@@ -818,7 +828,8 @@ class Atleta   {
                   $record['estado'],$record['niveluser'],$record['sesion_id'],$record['bloqueado'],$record['clave_default'],
                   $record['direccion'],$record['telefonos'],$record['cedularep'],$record['nombrerep'],$record['atleta_id'],
                   $record['categoria'],$record['lugarnacimiento'],$record['lugartrabajo'],$record['celular'],
-                  $record['fecha_alta'],$record['fecha_modificacion'],$record['disciplina']);
+                  $record['fecha_alta'],$record['fecha_modificacion'],$record['disciplina'],
+                  $record['talla'],$record['peso'],$record['hand'],$record['inicio'],$record['nickname']);
        }else{
          $SQLresultado_exitoso=FALSE;
        }
