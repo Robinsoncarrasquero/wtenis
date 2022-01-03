@@ -212,7 +212,7 @@ if ($objAtleta->getCelular()==NULL || $objAtleta->getLugarNacimiento()==NULL ||
 
             </div>
     
-                <div class="form-group col-xs-12 col-sm-4">
+            <div class="form-group col-xs-12 col-sm-4">
             <label for="txt_sexo">Sexo</label>
                 <select   name="txt_sexo" class="form-control">
                 <?php
@@ -289,6 +289,39 @@ if ($objAtleta->getCelular()==NULL || $objAtleta->getLugarNacimiento()==NULL ||
                 <input <?php echo $readonly?> type="email" class="form-control" lenght="100" id="txt_email" name="txt_email" value="<?php echo $ObjAtleta->getEmail()?>" >
             </div>
             
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <label for="txt_talla">Estatura</label>
+                <input  type="text" class="form-control" lenght="5" id="txt_talla"  placeholder="1.80" name="txt_talla" value="<?php echo $ObjAtleta->getTalla()?>" >
+            </div>
+            
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <label for="txt_peso">Peso</label>
+                <input  type="number" class="form-control" lenght="3" id="txt_peso"  placeholder="50" name="txt_peso" value="<?php echo $ObjAtleta->getPeso()?>" >
+            </div>
+            
+            <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                <label for="txt_inicio">Fecha Inicio</label>
+                <input   type="date" class="form-control"  placeholder="fecha inicio" id="txt_inicio" name="txt_inicio" value="<?php echo $ObjAtleta->getInicio()?>" >
+            </div>
+            
+            <div class="form-group col-xs-12 col-sm-6 col-md-6">
+            <label for="txt_hand">Jugador</label>
+            <select   name="txt_hand" class="form-control">
+                <?php
+                if ($ObjAtleta->getHand()=='Derecho'){
+                    echo '<option selected value="Derecho">Derecho</option>';
+                    echo '<option value="Zurdo">Zurdo</option>';
+                }else{
+                    echo '<option value="Derecho">Derecho</option>';
+                    echo '<option selected value="Zurdo">Zurdo</option>';
+                }     
+                ?>
+            </select>
+          </div>
+            <div class="form-group col-xs-12 col-sm-6 col-md-6">
+                <label for="txt_nickname">Nick Name</label>
+                <input   type="text" class="form-control" lenght="10" placeholder="NickName" id="txt_nickname" name="txt_nickname" value="<?php echo $ObjAtleta->getNickName()?>" >
+            </div>
             <?php
             
             if ($puedeverclave){

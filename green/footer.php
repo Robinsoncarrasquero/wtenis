@@ -23,11 +23,15 @@
          <div class="col-md-3">
             <h3>Noticias Recientes</h3>
             <ul class="footer-last-news">
-               <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="" /><p>El resto de las series del Grupo Mundial I han celebrado sus sorteos en la jornada del viernes.</p>
+               <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="" />
+               <p>El resto de las series del Grupo Mundial I han celebrado sus sorteos en la jornada del viernes.</p>
               </li>
-              <li><img src="img/img_descargadas/cdavis/game1.jpg" alt "" /><p>Muñoz-Abreu perdió con Tearney, pero Martínez igualó la serie al vencer en tres sets al 1 neocelandés.
-                  Victorias parciales de China Taipei, Noruega y Portugal.</p></li>
-                  <li><img src="img/img_descargadas/cdavis/game1.jpg" alt="" /><p>Fusce risus metus, placerat in consectetur eu...</p></li>
+              <li><img src="img/img_descargadas/cdavis/game1.jpg" alt= "" />
+              <p>Muñoz-Abreu perdió con Tearney, pero Martínez igualó la serie al vencer en tres sets al 1 neocelandés.
+                  Victorias parciales de China Taipei, Noruega y Portugal.
+                </p>
+              </li>
+              
             </ul>
          </div>
          <div class="col-md-3 footer-newsletters">

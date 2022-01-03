@@ -46,6 +46,7 @@ class Atleta   {
     private $peso;
     private $hand;
     private $nickname;
+    private $inicio;
     
     private $id;
     private $dirty;
@@ -84,10 +85,12 @@ class Atleta   {
         $this->dirty=FALSE;
         $this->SQLresultado_exitoso=FALSE;
         $this->categoria=" ";
-        $this->talla="180";
+        $this->talla="1.80";
         $this->peso="50";
-        $this->hand="Derecho ";
+        $this->hand="Derecho";
         $this->nickname=" ";
+        $this->inicio=" ";
+     
     }
     
     public function getID(){
@@ -327,7 +330,7 @@ class Atleta   {
      }
      
      public function setTalla($value) {
-        $this->email=  $value;
+        $this->talla=  $value;
      }
     
      public function getPeso() {
@@ -335,14 +338,14 @@ class Atleta   {
      }
      
      public function setPeso($value) {
-        $this->email=  $value;
+        $this->peso=  $value;
      }
      public function getHand() {
         return $this->hand;
      }
      
      public function setHand($value) {
-        $this->email=  $value;
+        $this->hand=  $value;
      }
 
      public function getNickName() {
@@ -350,8 +353,17 @@ class Atleta   {
      }
      
      public function setNickName($value) {
-        $this->email=  $value;
+        $this->nickname=  $value;
      }
+
+     public function getInicio() {
+        return $this->inicio;
+     }
+     
+     public function setInicio($value) {
+        $this->inicio=  $value;
+     }
+
     public function Categoria_Natural($ano_desde) {
         $fecha_=  date_create($this->fecha_nacimiento);
         $anodeNacimiento=  date_format($fecha_,"Y");
@@ -513,8 +525,8 @@ class Atleta   {
             . 'niveluser =:niveluser,sesion_id =:sesion_id,bloqueado =:bloqueado,clave_default =:clave_default,'
             . 'direccion=:direccion,telefonos=:telefonos,cedularep=:cedularep,nombrerep=:nombrerep,categoria=:categoria,'
             . 'lugarnacimiento=:lugarnacimiento,lugartrabajo=:lugartrabajo,celular=:celular,'
-            . 'fecha_alta=:fecha_alta,fecha_modificacion=:fecha_modificacion,disciplina=:disciplina';
-    
+            . 'fecha_alta=:fecha_alta,fecha_modificacion=:fecha_modificacion,disciplina=:disciplina,'
+            . 'talla=:talla,peso=:peso,hand=:hand,nickname=:nickname,inicio=:inicio';
                           
             $stmt = $conn->prepare('UPDATE ' . self::TABLA . $SQL. ' WHERE atleta_id= :id');
             $stmt->bindParam(':id', $this->id);
@@ -545,7 +557,12 @@ class Atleta   {
             $stmt->bindParam(':fecha_alta', $this->fecha_alta,  PDO::PARAM_STR);
             $stmt->bindParam(':fecha_modificacion', $this->fecha_modificacion,  PDO::PARAM_STR);
             $stmt->bindParam(':disciplina', $this->disciplina);
-
+            $stmt->bindParam(':talla', $this->talla,PDO::PARAM_STR);
+            $stmt->bindParam(':peso', $this->peso,PDO::PARAM_STR);
+            $stmt->bindParam(':hand', $this->hand,PDO::PARAM_STR);
+            $stmt->bindParam(':nickname', $this->nickname,PDO::PARAM_STR);
+            $stmt->bindParam(':inicio', $this->inicio,  PDO::PARAM_STR);
+            
             $stmt->execute();
 
                 //echo "New records created successfully";
@@ -699,6 +716,11 @@ class Atleta   {
                  $this->disciplina=$record['disciplina'];
                  $this->id=$record['atleta_id'];
                  $this->mensaje='Record Found successfully ';
+                 $this->inicio=$record['inicio'];
+                 $this->hand=$record['hand'];
+                 $this->talla=$record['talla'];
+                 $this->peso=$record['peso'];
+                 $this->nickname=$record['nickname'];
                 $this->SQLresultado_exitoso=TRUE;
                  
             

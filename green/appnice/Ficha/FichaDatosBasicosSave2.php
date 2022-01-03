@@ -30,6 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $txt_lugar_nacimiento = $_POST['txt_lugar_nac'];
     $txt_lugar_trabajo = $_POST['txt_lugar_trabajo'];
     $txt_celular = $_POST['txt_celular'];
+    $txt_talla = $_POST['txt_talla'];
+    $txt_peso = $_POST['txt_peso'];
+    $txt_inicio = $_POST['txt_inicio'];
+    $txt_hand = $_POST['txt_hand'];
+    $txt_nickname = $_POST['txt_nickname'];
+
     $msg='La Ficha no fue actualizada, intente nuevamente';
     $ok = false; 
     $obj = new Atleta();
@@ -55,6 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $obj->setCelular($txt_celular);
         $obj->setDisciplina($txt_disciplina);
         $obj->setFechaModificacion(date("Y-m-d H:i:s"));
+        $obj->setTalla($txt_talla);
+        $obj->setPeso($txt_peso);
+        $obj->setInicio($txt_inicio);
+        $obj->setHand($txt_hand);
+        $obj->setNickName($txt_nickname);
+              
         $obj->Update();
         $ok = true; 
         $msg='Ficha actualizada. Hemos enviado un correo de notificacion';

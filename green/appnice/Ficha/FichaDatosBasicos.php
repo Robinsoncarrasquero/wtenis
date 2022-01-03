@@ -131,6 +131,9 @@ if ($indice >= 0) {
                     background-position: center;
                     height: 100px;
             }
+            body{
+                max-height: 50%;
+            }
     </style>
 
     <!-- Bootstrap 3.3.7 y jquery 3.1.1 -->
