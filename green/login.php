@@ -72,12 +72,12 @@ date_default_timezone_set('America/La_Paz');
 fin carrito-->
 </div>
 </section>
+
 <!--SECTION MENU -->
 <section class="container box-logo">
-<header>
+ <header>
    <?php require_once 'menu.php' ?>
 </header>
-</section>
 
     <section class="drawer">
             <div class="col-md-12 size-img back-img">

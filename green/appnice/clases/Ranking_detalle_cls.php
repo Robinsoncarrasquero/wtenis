@@ -203,7 +203,7 @@ class RankingDetalle{
             $SQLresultado_exitoso=FALSE;
             $errorCode= $conn->errorCode();
             $errorInfo=$conn->errorInfo();
-            $mensaje="ERROR No se encontraron registros..".$errorInfo ;
+            $mensaje="ERROR No se encontraron registros..".$errorCode ;
             switch ($errorCode) 
             {
                 case 00000:
@@ -359,6 +359,77 @@ class RankingDetalle{
         $array_data[$codigo] = $puntos;
         
         return;
+    }
+
+    public static function primeros6rk($rsData, RankingDetalleCodigo $RankingDetalleCodigo){
+        
+        $objRankingDetalleCodigo = $RankingDetalleCodigo;
+                        
+        RankingDetalle::array_sort_by($rsData,'puntos',SORT_DESC);
+        $rsArraySingles=[];
+        $rsArrayDobles=[];
+        $rsArrayOtros=[];
+        $mijsonsingle='';$mijsondoble='';$mijsonotros='';
+        $dsingle = []; $ddoble=[];$dotros=[];
+        $arrayexcluyecodigos=array('IN'=>'IN','TT'=>'TT','NN'=>'NN');
+        $arrayincluyecodigos=array('IN'=>'IN','NN'=>'NN');
+        foreach($rsData as $data){
+            $objRankingDetalleCodigo->Fetch($data['codigo']);
+            //Filtra los singles
+            if (!array_key_exists($objRankingDetalleCodigo->getTipo(),$arrayexcluyecodigos) && strrpos($data['codigo'], "S")>0 && count($rsArraySingles)<6){
+                  if (count($rsArraySingles)<>0){
+                    $mijsonsingle .=',"'.$data['codigo'].'":'.$data['puntos'];
+                  }else{
+                    $mijsonsingle ='{"'.$data['codigo'].'":'.$data['puntos'];
+                      
+                  }
+                  array_push($rsArraySingles, [
+                    $data['codigo']   => $data['puntos'],
+                  ]);
+                  $dsingle += [ $data['codigo'] => $data['puntos'] ];
+            }
+            //Filtra los dobles
+            if (!array_key_exists($objRankingDetalleCodigo->getTipo(),$arrayexcluyecodigos) && strrpos($data['codigo'], "D")>0 && count($rsArrayDobles)<6){
+                if (count($rsArrayDobles)<>0){
+                    $mijsondoble .=',"'.$data['codigo'].'":'.$data['puntos'];
+                  }else{
+                    $mijsondoble ='{"'.$data['codigo'].'":'.$data['puntos'];
+                }
+                array_push($rsArrayDobles, [
+                    $data['codigo']   => $data['puntos'],
+                ]);
+                $ddoble += [ $data['codigo'] => $data['puntos'] ];
+            }
+            //Incluye los Obligatorios
+            if (array_key_exists($objRankingDetalleCodigo->getTipo(), $arrayincluyecodigos) ){
+                if (count($rsArrayOtros)<>0){
+                  $mijsonotros .=',"'.$data['codigo'].'":'.$data['puntos'];
+                }else{
+                  $mijsonotros ='{"'.$data['codigo'].'":'.$data['puntos'];
+                    
+                }
+                array_push($rsArrayOtros, [
+                  $data['codigo']   => $data['puntos'],
+                ]);
+                $dotros += [ $data['codigo'] => $data['puntos'] ];
+          }
+        }
+        $mijsonsingle .='}';
+        $mijsondoble .='}';
+        return array_merge($dsingle,$ddoble,$dotros);
+    
+    
+    }
+    //Ordena un Array Segun la columna que se desee
+    public static function array_sort_by(&$arrIni, $col, $order = SORT_ASC)
+    {
+        $arrAux = array();
+        foreach ($arrIni as $key=> $row)
+        {
+            $arrAux[$key] = is_object($row) ? $arrAux[$key] = $row->$col : $row[$col];
+            $arrAux[$key] = strtolower($arrAux[$key]);
+        }
+        array_multisort($arrAux, $order, $arrIni);
     }
     
       

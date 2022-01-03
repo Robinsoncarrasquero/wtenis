@@ -42,6 +42,11 @@ class Atleta   {
     private $fecha_modificacion;
     private $fecha_alta;
     private $disciplina;
+    private $talla;
+    private $peso;
+    private $hand;
+    private $nickname;
+    
     private $id;
     private $dirty;
     public $mensaje;
@@ -79,7 +84,10 @@ class Atleta   {
         $this->dirty=FALSE;
         $this->SQLresultado_exitoso=FALSE;
         $this->categoria=" ";
-        
+        $this->talla="180";
+        $this->peso="50";
+        $this->hand="Derecho ";
+        $this->nickname=" ";
     }
     
     public function getID(){
@@ -313,7 +321,37 @@ class Atleta   {
     public function Operacion_Exitosa() {
        return $this->SQLresultado_exitoso;
     }
+
+    public function getTalla() {
+        return $this->talla;
+     }
+     
+     public function setTalla($value) {
+        $this->email=  $value;
+     }
     
+     public function getPeso() {
+        return $this->peso;
+     }
+     
+     public function setPeso($value) {
+        $this->email=  $value;
+     }
+     public function getHand() {
+        return $this->hand;
+     }
+     
+     public function setHand($value) {
+        $this->email=  $value;
+     }
+
+     public function getNickName() {
+        return $this->nickname;
+     }
+     
+     public function setNickName($value) {
+        $this->email=  $value;
+     }
     public function Categoria_Natural($ano_desde) {
         $fecha_=  date_create($this->fecha_nacimiento);
         $anodeNacimiento=  date_format($fecha_,"Y");
