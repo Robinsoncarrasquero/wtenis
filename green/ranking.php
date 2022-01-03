@@ -86,9 +86,9 @@ fin carrito-->
  <header>
    <?php require_once 'menu.php' ?>
 </header>
-
 </section>
-   <section class="drawer">
+
+<section class="drawer">
     <div class="col-md-12 size-img back-img">
         <div class="effect-cover">
             <h3 class="txt-advert animated">Tenis Ranking</h3>

@@ -88,6 +88,7 @@ $rsEntidades = Empresa::Entidades();
 fin carrito-->
 </div>
 </section>
+
 <!--SECTION MENU -->
 <section class="container box-logo">
  <header>
