@@ -50,15 +50,13 @@ else
 if (isset($_POST['delete']))
 {
     
-   if($_POST['cancelar']=="Cancelar")
+   if(isset($_POST['cancelar']) && $_POST['cancelar']=="Cancelar")
     {
         header('Location: atletaRead.php');
         exit;
     }
     $atleta_id=  htmlspecialchars($_POST['atleta_id']);
-//    echo '<pre>';
-//    var_dump($atleta_id);
-//    echo '</pre>';
+
     if (!is_numeric($atleta_id))
         header ("location: atletaRead.php");
     else 
@@ -82,7 +80,7 @@ if (isset($_POST['delete']))
 }
 ?>
 
-<html
+<html>
     
     <head>
     <meta http-equiv="Context-type" content="text/html; charset=UTF-8"/>
@@ -95,12 +93,12 @@ if (isset($_POST['delete']))
    
     <div class="frminscripcion">   
    
-       
-       
+            
         
         <form method="POST" action="<?PHP echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
             <h1>MODIFICAR DATOS DE ATLETA</h1>   
             <fieldset>
+       
             <label for="codigo">CEDULA:</label>
             <input type="text" name="cedula" maxlength="20" placeholder="123..." required value="<?php echo $cedula;?>">
                           
@@ -143,6 +141,7 @@ if (isset($_POST['delete']))
                       
             <input type="hidden" name="delete">
             <input type="hidden" name="atleta_id" value="<?php echo $atleta_id?>">
+            
             <?php 
                 if(isset($mensaje)){
                     echo '<input disabled type="hidden" value="Eliminar" formnovalidate="formnovalidate">';

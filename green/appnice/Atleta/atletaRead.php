@@ -99,7 +99,7 @@ else
 <div class="container-fluid">
     
 <h1>Atleta</h1>
-<form method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>">
+<form method="POST">
 <label>Buscar: </label>
 <input type="text" name="search" placeholder="Buscar" value="<?php echo $search ?>">
 <input type="submit" value="Search"> <br><br>
@@ -121,9 +121,6 @@ else
         if ( $_SESSION['niveluser']>9){
            echo "<th>Eliminar</th> <th>Modificar</th> <th>Crear</th>";
         }
-       
-        
-        
         ?>
        
     </tr>
@@ -167,7 +164,7 @@ else
        
         if ( $_SESSION['niveluser']>9){
             echo "<td><a href='atletaDelete.php?atleta_id=".$row['atleta_id']. "' </a>Eliminar</td>";
-            echo "<td><a href='atletaUpdate.php?atleta_id=".$row['atleta_id']. "' </a>Modificar</td>";
+            //echo "<td><a href='atletaUpdate.php?atleta_id=".$row['atleta_id']. "' </a>Modificar</td>";
             echo "<td><a href='atletaCreate.php '</a>Crear</td>";
         }
         echo "</tr>";

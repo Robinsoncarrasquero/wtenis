@@ -49,7 +49,7 @@ if (isset($_POST['create']))
             $objeto->select="*";
             $objeto->from="atleta";
             $objeto->condition="cedula='$cedula'";
-            $objeto->email_notification("Registro");
+            //$objeto->email_notification("Registro");
             $mensaje .=" <a href='atletaRead.php'>Presiones para continuar</a>";
     }else{
         $mensaje .=" <a href='atletaRead.php'>Presiones para Abandonar</a>";
@@ -63,7 +63,7 @@ if (isset($_POST['create']))
 
 ?>
 
-<html
+<html>
     
     <head>
     <meta http-equiv="Context-type" content="text/html; charset=UTF-8"/>
@@ -82,18 +82,18 @@ if (isset($_POST['create']))
             <h1>CREAR DATOS DE ATLETA</h1>   
             <fieldset>
                 <label for="codigo">CEDULA:</label>
-                <input type="text" name="cedula" maxlength="20" placeholder="123..." required>
+                <input type="text" name="cedula" maxlength="20" placeholder="cedula" required>
                                
                 <label for="nombre">NOMBRES:</label>
-                <input type="text" name="nombres" maxlength="50" placeholder="NICOLAS" required> 
+                <input type="text" name="nombres" maxlength="50" placeholder="nombres" required> 
                 <br> <br>
 
                 <label for="nombre">APELLIDOS:</label>
-                <input type="text" name="apellidos" maxlength="50" placeholder="PEREIRA" required> 
+                <input type="text" name="apellidos" maxlength="50" placeholder="apellidos" required> 
                 <br> <br>
 
                 <label for="estado">ESTADO:</label>
-                <input type="text" name="estado" required value="MIR">
+                <input type="text" name="estado" required value="LAR" placeholder="LAR">
                 <br> <br><br>
                 <label for="sexo">SEXO</label>
                 <select name="sexo">
@@ -105,7 +105,7 @@ if (isset($_POST['create']))
                 <input type="date" name="fecha_nacimiento" required value="<?php echo date("Y-m-d");?>">
                 <br>
                 <label for="email">EMAIL:</label>
-                <input type="email" name="email" maxlength="50" placeholder="example@gmail.com" required> 
+                <input type="email" name="email" maxlength="50" placeholder="email" required> 
                 <br> <br>
             </fieldset>
 
