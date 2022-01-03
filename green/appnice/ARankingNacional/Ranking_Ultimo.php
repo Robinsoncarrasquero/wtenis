@@ -97,8 +97,7 @@ foreach ($records as $row){
     [
         $bandera
     ];
-    // $Ranking = new Ranking();
-    // $rsRanking=$Ranking->Find_Ranking_By_Fecha($row['atleta_id'],$rank_id);
+    
     
     $hash= $row['ranking_id'];
     $bandera=$banderas[rand(0,count($banderas)-1)];
@@ -108,22 +107,11 @@ foreach ($records as $row){
         $linea .= "<td class='score-position'>".$row['rkregional'].".</td>";
         $linea .= "<td class='score-position'>".$row['rkestadal'].".</td>";
         $linea .= "<td><a href='single_player.php?ranking=$hash'>".$ObjAtleta->getNombreCorto().'</a></td>';
-//        $linea .= "<td><a href='#' wha".$row['ranking_id']."'>".$ObjAtleta->getNombreCorto().'</a></td>';
-        //$pt='<a href="#"  data-toggle="modal" data-target="#myModal" data-id="'.$row['atleta_id'].'" data-whatever="'.$hash.'">'. $ObjAtleta->getNombreCorto().'</a>';
-        //$linea .= '<td >'.$pt.'</td>';                             
         $linea .= "<td><img src='images/flags/$bandera.png' alt='' /></td>";
-        $pt='<a href="#"  data-toggle="modal" data-target="#myModal" data-id="'.$row['atleta_id'].'" data-whatever="'.$hash.'">'. $row['puntos'].'</a>';
-                             
-        $linea .= '<td>'.$pt.'</td>';
+        $linea .= "<td><a href='single_player.php?ranking=$hash'>". $row['puntos'].'</a></td>';
     $linea .= '</tr>';
-    
-    // $linea .= '<td >'. $row['rknacional'].'</td>';
-    // $linea .= '<td >'. $row['rkregional'].'</td>';
-    // $linea .= '<td >'. $row['rkestadal'].'</td>';
                     
 }
-
-
 
 $linea_out=$tabla. $linea ;
 if ($nr>0){

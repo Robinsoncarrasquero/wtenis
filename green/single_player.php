@@ -160,7 +160,7 @@ fin carrito-->
 </div>
 </section>
 
-<<!--SECTION MENU -->
+<!--SECTION MENU -->
 <section class="container box-logo">
  <header>
    <?php require_once 'menu.php' ?>
