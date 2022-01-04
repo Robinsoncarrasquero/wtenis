@@ -98,8 +98,7 @@ foreach ($records as $row){
         $bandera
     ];
     
-    
-    $hash= $row['ranking_id'];
+    $hash= Encrypter::encrypt($row['ranking_id']);
     $bandera=$banderas[rand(0,count($banderas)-1)];
 
     $linea .= '<tr>';  

@@ -13,52 +13,15 @@ class Encrypter {
 	public static function encrypt ($input) {
 	
 		// 	$output = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5(Encrypter::$Key), $input, MCRYPT_MODE_CBC, md5(md5(Encrypter::$Key))));
-		return $input;
+		
+		return base64_encode($input);
 	}
 
 	public static function decrypt ($input) {
               
 		//$output = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5(Encrypter::$Key), base64_decode($input), MCRYPT_MODE_CBC, md5(md5(Encrypter::$Key))), "\0");
-		return $input;
+		
+		return base64_decode($input);
 	}
 
-	// public static function decrypt ($input) {
-	
-	// 	  $output = openssl_decrypt($input,'MD5','cabuy',0);
-
-	// 	return $output;
-	// }
-
-	// public static function encrypt ($input) {
-        
-	// 	$output = openssl_encrypt($input,'MD5','cabuy',0);
-		  
-	// 	return $output;
-	// }
-
-
-        
-               
-       
-
 }
-
-//$texto = "Son unos corruptos";
-//
-//// Encriptamos el texto
-//$texto_encriptado = Encrypter::encrypt($texto);
-//
-//// Desencriptamos el texto
-//$texto_original = Encrypter::decrypt($texto_encriptado);
-//
-//if ($texto == $texto_original) {
-//    echo 'Encriptación / Desencriptación realizada corre';
-//    echo 'texto original '.$texto_original;
-//    echo 'texto encriptado '.$texto_encriptado;
-    
-//}
-
-
-
-
-

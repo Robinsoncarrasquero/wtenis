@@ -3,10 +3,18 @@
     require_once 'appnice/clases/Ranking_cls.php';
     require_once 'appnice/clases/Ranking_detalle_cls.php';
     require_once 'appnice/clases/Ranking_detalle_codigo_cls.php';
-    
+    require_once 'appnice/clases/Encriptar_cls.php';
     require_once 'appnice/sql/ConexionPDO.php';
 
-    $ranking_id= htmlspecialchars($_GET['ranking']);
+    $parametro= isset($_GET['ranking']) ? $_GET['ranking'] : false;
+
+    
+    if(!$parametro){
+        echo 'ERROOR DATA NO ES VALIDA';
+        exit;
+    }
+    
+    $ranking_id= Encrypter::decrypt($_GET['ranking']);
 
     $ranking = new Ranking();
     $ranking->Fetch($ranking_id);
