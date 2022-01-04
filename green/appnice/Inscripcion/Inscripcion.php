@@ -57,13 +57,13 @@ $atleta_id=$_SESSION['atleta_id'];
 
 $thead = [];
 $thead +=["."=>"glyphicon glyphicon-time"];
-$thead +=["Ent"=>"glyphicon glyphicon-map-marker"];
-$thead +=["Gra"=>"glyphicon glyphicon-cog"];
-$thead +=["Cat"=>"glyphicon glyphicon-signal"];
-$thead +=["Mod"=>"glyphicon glyphicon-road"];
-$thead +=["Acc"=>"glyphicon glyphicon-flash"];
+$thead +=[" "=>"glyphicon glyphicon-map-marker"];
+$thead +=["Grado"=>"glyphicon glyphicon-cog"];
+$thead +=["Categoria"=>"glyphicon glyphicon-signal"];
+$thead +=["Modalidad"=>"glyphicon glyphicon-road"];
+$thead +=["Accion"=>"glyphicon glyphicon-flash"];
 $thead +=["Fecha"=>"glyphicon glyphicon-calendar"];
-$thead +=["LI"=>"glyphicon glyphicon-list-alt"];
+$thead +=["Lista"=>"glyphicon glyphicon-list-alt"];
 $table_head= bsTemplate::table_head("Inscripcion",$thead);
 
 $table_footer='
@@ -75,7 +75,7 @@ $table_footer='
 
 ?>
     <div class="col-md-8">
-    <form  method="post" action="InscripcionChange.php"  >
+    <form  method="post"  action="InscripcionChange.php" >
         <div id="error">
                 <!-- error will be showen here ! -->
         </div>
@@ -410,12 +410,12 @@ echo "</div>";
 $('#register-form').on('submit',function(e){
     var ok=confirm("Esta Seguro de Modificar Los Datos");
     var data = $("#register-form").serialize();
-    //var frmdata = $("#register-form :input").serializeArray();
+    var data = $("#register-form :input").serializeArray();
     //var data = JSON.stringify(frmdata);
 
     $.ajax({
     type : 'POST',
-    url  : 'bsInscripcionChange.php',
+    url  : 'InscripcionChange2.php',
     data : {data:data},
     beforeSend: function()
     {	
@@ -424,15 +424,19 @@ $('#register-form').on('submit',function(e){
     },
     success :  function(data)
         {						
-            if(data.Success==false){
-                $("#error").fadeIn(1000, function(){
-                    $("#error").html('<div class="alert alert-danger">'
-                    +'<span class="glyphicon glyphicon-circle"></span>'+data.Mensaje+'</div>');
-                });
+            if(!data.success){
+                // $("#error").fadeIn(1000, function(){
+                //     $("#error").html('<div class="alert alert-danger">'
+                //     +'<span class="glyphicon glyphicon-circle"></span>'+data.msg+'</div>');
+                // });
+            
+                swal('Exito !',data.msg,'success');
+    
             }else{
+                swal('Error !',data.msg,'warning');
                 $("#error").fadeIn(1000, function(){
                     $("#error").html('<div class="alert alert-success"><span class="glyphicon glyphicon-thumbs-up">'
-                    +'</span> &nbsp;'+data.Mensaje+'</div>');
+                    +'</span> &nbsp;'+data.msg+'</div>');
                     $("#btn-submit").html('<span class="glyphicon glyphicon-ok"></span> &nbsp; Guardar');
                 });
                 dJSON= data.Retirados;
@@ -440,7 +444,8 @@ $('#register-form').on('submit',function(e){
                     $("#"+dJSON[i].retiro).prop("disabled","disabled");
                 	//document.write("<br>"+i+" - "+miJSON[i].retiro);
         		});
-                    
+                
+     
             }
         }
     });

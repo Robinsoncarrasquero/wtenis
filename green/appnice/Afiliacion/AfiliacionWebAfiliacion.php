@@ -298,30 +298,33 @@ $(document).ready(function(){
 $( "input[type=checkbox]" ).on( "click", function(e){  
     var estado= $("#estado").val();
     var nomestado= $("#estado").val();
-    var aceptar;
-    if ($( "input[type=checkbox]").is(':checked'))
-    {
-       aceptar= confirm("Esta de Seguro de Solicitar su Afiliacion en la asociacion seleccionada :"+nomestado);
+    var aceptar=true;
+    // if ($( "input[type=checkbox]").is(':checked'))
+    // {
+    //    aceptar= confirm("Esta de Seguro de Solicitar su Afiliacion en la asociacion seleccionada :"+nomestado);
     
-    }else{
-       aceptar= confirm("Esta de Seguro de Anular su solicitud de Afiliacion en la asociacion seleccionada :"+nomestado);
+    // }else{
+    //    aceptar= confirm("Esta de Seguro de Anular su solicitud de Afiliacion en la asociacion seleccionada :"+nomestado);
     
-    }
+    // }
     
+        
     var Id = $(this).attr( "id" );
     var url="bsAfiliacionWebAfiliacionSave.php";
     //Obtenemos  checkbox
            
-   var chkOperacion = $("#"+Id).is(':checked') ? 1: 0;  
+    var chkOperacion = $("#"+Id).is(':checked') ? 1: 0; 
    if (Id.substr(0,3)!=='btn' && aceptar){
-       
+        
        $.post(url,
        { id:Id,chkOperacion:chkOperacion,estado:estado}, 
        function(data){
             if (data.Success){
                 $("#federacion").html(data.data);
+                swal("¡Bien!", "Solicitud procesada :)", "success");
             }else{
                  $("#federacion").html("nada");
+                 swal("¡Error !", "Solicitud no fue procesada :)", "warning");
             }
         });
     }   

@@ -383,11 +383,13 @@ $(document).ready(function (){
                 {						
                     if(data.Success===false){
                 
-                        $("#results").addClass("alert alert-danger").html(data.Mensaje);
+                        //$("#results").addClass("alert alert-danger").html(data.Mensaje);
                         
                         $("#btn-submit").html('Guardar');
                         
+                        swal("¡Error !", "Datos no fueron modificacdos", "warning")
 
+                        
                     }else{
                         
                         $("#results").addClass("alert alert-success").html(data.Mensaje);
@@ -395,17 +397,24 @@ $(document).ready(function (){
                         $("#btn-submit").addClass("glyphicon glyphicon-ok");
      
                      //   setTimeout('$(".form-signin").fadeOut(500, function(){ $(".signin-form").load("FichaDatosBasicosSuccess.php"); }); ',2000);
-                    
+                     
+                     swal("¡Bien..!", "Datos Modificacdos", "success");
+
                     }
                     
                 }
+               
+    
         });
         return false;
     });
+
+
     
 });
 
 </script>
  
+
 </body>
 </html>

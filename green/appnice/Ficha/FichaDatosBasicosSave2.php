@@ -114,7 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     
         $obj = NULL;
     }
-
+     
+    
     if (!$ok){
         $jsondata = array("Success" => false, "Mensaje"=>$msg);   
     } else {    

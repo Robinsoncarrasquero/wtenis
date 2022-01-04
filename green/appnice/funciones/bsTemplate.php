@@ -59,6 +59,25 @@ class bsTemplate
                 Author: BootstrapMade
                 Author URL: https://bootstrapmade.com
                 ======================================================= -->
+
+
+                <!-- Bootstrap SWEETALERT-->
+                <!-- <link href="../../sweetalert/css/bootstrap.min.css" rel="stylesheet"> -->
+                <!-- Custom CSS -->
+                <link href="../../sweetalert/css/main.css" rel="stylesheet">
+                <!-- Scroll Menu -->
+                <link href="../../sweetalert/css/sweetalert.css" rel="stylesheet">
+
+                <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
+                <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+                <!-- Include all compiled plugins (below), or include individual files as needed -->
+                <!-- <script src="../../sweetalert/js/bootstrap.min.js"></script> -->
+
+                <!-- Custom functions file -->
+                <script src="../../sweetalert/js/functions.js"></script>
+                <!-- Sweet Alert Script -->
+                <script src="../../sweetalert/js/sweetalert.min.js"></script>
+
             </head>
 
             <body  >
@@ -115,7 +134,7 @@ class bsTemplate
  
     //El contenido principal
     public static function main_content($titulo_menu,$array_breadcrum) {
-
+    
     $html= 
     '     
      <section class="wrapper">

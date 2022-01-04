@@ -33,6 +33,25 @@ date_default_timezone_set('America/La_Paz');
     <link href="css/style_dir.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="image/png" href="img/favicon.ico" />
     <link href="css/responsive.css" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap SWEETALERT-->
+      <!-- <link href="../../sweetalert/css/bootstrap.min.css" rel="stylesheet"> -->
+      <!-- Custom CSS -->
+      <link href="sweetalert/css/main.css" rel="stylesheet">
+      <!-- Scroll Menu -->
+      <link href="sweetalert/css/sweetalert.css" rel="stylesheet">
+      <!-- Bootstrap SWEETALERT-->
+      <!-- <link href="../../sweetalert/css/bootstrap.min.css" rel="stylesheet"> -->
+      <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <!-- <script src="../../sweetalert/js/bootstrap.min.js"></script> -->
+
+      <!-- Custom functions file -->
+      <script src="../../sweetalert/js/functions.js"></script>
+      <!-- Sweet Alert Script -->
+      <script src="../../sweetalert/js/sweetalert.min.js"></script>
+        
 </head>
 <body>
 <section class="content-top-login">
@@ -207,11 +226,13 @@ $(document).ready(function (){
             
               $("#myerrors").addClass("alert alert-danger");
               $('#myerrors').html(data.msg);
+              swal('Error','Debe especificar un usuario y clave valida','warning');
         
             }
           }
       })
     }else{
+      swal('Error','Debe especificar un usuario y clave valida','warning');
      
      document.getElementById("name_login").focus();
      
@@ -238,11 +259,19 @@ $(document).ready(function (){
               msgRememberForm.style.backgroundColor="black";
               msgRememberForm.style.color="white";
               msgRememberForm.classList.add('alert','alert-success');
+              swal({
+                title: "Un correo con la clave fue enviado a su cuenta de correo",
+                text: "Se cerrará en 5 segundos.",
+                timer: 5000,
+                showConfirmButton: false
+              });
             }else{
               msgRememberForm.textContent=data.msg;
               msgRememberForm.style.backgroundColor="red";
               msgRememberForm.style.color="white";
               msgRememberForm.classList.add('alert','alert-danger');
+             
+              swal("Error ", "Debe indicar una cuenta de usuario valida", "warning");
             }
         
             
@@ -274,5 +303,8 @@ $(document).ready(function (){
 });
 
 </script>
+
+                
+
 </body>
 </html>

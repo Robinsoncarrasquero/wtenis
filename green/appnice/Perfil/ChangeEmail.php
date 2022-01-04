@@ -112,6 +112,7 @@ $('document').ready(function()
                         +'<span class="glyphicon glyphicon-info-sign"></span>'+data.Mensaje+'</div>');
                     
                         $("#btn-submit").html('<span></span> &nbsp; Aceptar');
+                        swal("¡ Error !", "Cambio de correo no fue procesado :)", "warning");
                     });
                 }else{
                     $("#error").fadeIn(1000, function(){
@@ -124,6 +125,7 @@ $('document').ready(function()
                         $("#email").prop('value',"");
                         $("#cemail").prop('value',"");
                     // $("#btn-close").prop('href', 'bsPanel.php');
+                    swal("¡Bien!", "Cambio de correo fue procesado :)", "success");
                     });
                 }
             }

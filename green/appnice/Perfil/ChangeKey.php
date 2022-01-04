@@ -98,6 +98,7 @@ $('document').ready(function(){
                     
                         $("#btn-submit").html('<span></span> &nbsp; Aceptar');
                     });
+                    swal("¡ Error !", "Cambio de clave no fue procesada :)", "warning");
                 }else{
                     $("#error").fadeIn(1000, function(){
                         $("#error").html('<div class="alert alert-success"><span class="glyphicon glyphicon-thumbs-up">'
@@ -107,6 +108,7 @@ $('document').ready(function(){
                         $("#password").prop('value',"");
                         $("#cpassword").prop('value',"");
                     // $("#btn-close").prop('href', 'bsPanel.php');
+                    swal("¡Bien!", "Cambio de clave fue efectuada. Un correo fue enviado :)", "success");
                     });
                 }
             }

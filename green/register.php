@@ -47,8 +47,25 @@ $rsEntidades = Empresa::Entidades();
       #register-form fieldset:not(:first-of-type) {
       display: none;
     }
-</style>
+    </style>
 
+<!-- Bootstrap SWEETALERT-->
+      <!-- <link href="../../sweetalert/css/bootstrap.min.css" rel="stylesheet"> -->
+      <!-- Custom CSS -->
+      <link href="sweetalert/css/main.css" rel="stylesheet">
+      <!-- Scroll Menu -->
+      <link href="sweetalert/css/sweetalert.css" rel="stylesheet">
+      <!-- Bootstrap SWEETALERT-->
+      <!-- <link href="../../sweetalert/css/bootstrap.min.css" rel="stylesheet"> -->
+      <!-- jQuery (necessary for Bootstrap JavaScript plugins) -->
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <!-- <script src="../../sweetalert/js/bootstrap.min.js"></script> -->
+
+      <!-- Custom functions file -->
+      <script src="../../sweetalert/js/functions.js"></script>
+      <!-- Sweet Alert Script -->
+      <script src="../../sweetalert/js/sweetalert.min.js"></script>
 </head>
 <body>
 <section class="content-top-login">
@@ -280,6 +297,7 @@ fin carrito-->
 <script src="js/custom.js" type="text/javascript"></script> 
 <script>
 $(document).ready(function(){
+  
   var form_count = 1, previous_form, next_form, total_forms;
   total_forms = $("fieldset").length;
   $(".next-form").click(function(){
@@ -415,14 +433,23 @@ function ValidateEmail (valor){
       success : function(data){
         if (data.Success){
       //    $('#results').removeClass('alert alert-danger hide').addClass('alert alert-success').html(data.msg);
+         
+          swal({
+              title: "Registrado con exito. Será redirigido al Login para continuar con el proceso afiliativo",
+              text: "Esta pantalla se cerrará en 5 segundos.",
+              timer: 5000,
+              showConfirmButton: false
+          });
+
           $('#mensaje').removeClass('alert alert-danger').addClass('alert alert-success').html(data.msg);
-          setTimeout(go_link, 2000);
+          setTimeout(go_link, 1000);
 
         }else{
       //    $('#results').removeClass('alert alert-success hide').addClass('alert alert-danger').html(data.msg);
           $('#mensaje').removeClass('alert alert-success').addClass('alert alert-danger').html(data.msg);
+          swal('Error','Registrado no fue realizado con exito','warning');
         }   
-        
+
         
       }
 
