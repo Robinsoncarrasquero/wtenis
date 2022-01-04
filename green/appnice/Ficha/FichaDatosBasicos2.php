@@ -305,21 +305,21 @@ if ($objAtleta->getCelular()==NULL || $objAtleta->getLugarNacimiento()==NULL ||
             </div>
             
             <div class="form-group col-xs-12 col-sm-6 col-md-6">
-            <label for="txt_hand">Jugador</label>
+            <label for="txt_hand">Juega</label>
             <select   name="txt_hand" class="form-control">
                 <?php
-                if ($ObjAtleta->getHand()=='Derecho'){
-                    echo '<option selected value="Derecho">Derecho</option>';
-                    echo '<option value="Zurdo">Zurdo</option>';
+                if ($ObjAtleta->getHand()=='Derecha'){
+                    echo '<option selected value="Derecha">Derecha</option>';
+                    echo '<option value="Izquierda">Izquierda</option>';
                 }else{
-                    echo '<option value="Derecho">Derecho</option>';
-                    echo '<option selected value="Zurdo">Zurdo</option>';
+                    echo '<option value="Derecha">Derecha</option>';
+                    echo '<option selected value="Izquierda">Izquierda</option>';
                 }     
                 ?>
             </select>
           </div>
             <div class="form-group col-xs-12 col-sm-6 col-md-6">
-                <label for="txt_nickname">Nick Name</label>
+                <label for="txt_nickname">NickName</label>
                 <input   type="text" class="form-control" lenght="10" placeholder="NickName" id="txt_nickname" name="txt_nickname" value="<?php echo $ObjAtleta->getNickName()?>" >
             </div>
             <?php
@@ -333,8 +333,6 @@ if ($objAtleta->getCelular()==NULL || $objAtleta->getLugarNacimiento()==NULL ||
             
             ?>
 
-                
-                
             
             <div class="form-group col-xs-6 <?php echo $hidden_btn_guardar ?>  ">
                 <button  type="submit" class="btn btn-primary" name="btn-save" id="btn-submit">

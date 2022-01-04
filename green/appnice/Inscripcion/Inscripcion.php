@@ -312,7 +312,7 @@ foreach ($rsTorneos as $filator)
         //segun lo definido anteriormente.
         $rsmodalidades = NULL;
         $rsmodalidades =  Modalidad::ReadByCategoria($array_Categoria[0]);
-        echo '<td class =" " data-toggle="tooltip" data-placement="auto" title="Ctrl + Click">';
+        echo '<td data-toggle="tooltip" data-placement="auto" title="Ctrl + Click">';
         //echo '<select id="Modalidad' . $filator['torneo_id']. '" multiple name="M' . $filator['torneo_id'] . '[]" >';
         echo '<select id="Modalidad' . $torneo_id . '" multiple name="M' . $torneo_id . '[]" >';
 
@@ -321,7 +321,7 @@ foreach ($rsTorneos as $filator)
             if (in_array($value['modalidad'], $array_modalidad, true)) {
                 $select = " selected ";
             }
-            echo '<option class="miselect"  ' . $select . 'value="' . $value['modalidad'] . '">' . $value['descripcion'] . '</option>';
+            echo '<option class="miselect"  ' . $select . 'value="' . $value['modalidad'] . '">' . $value['descripcion'] . '</option> ';
         }
 
         echo '</select>';
@@ -331,10 +331,10 @@ foreach ($rsTorneos as $filator)
         echo '<td>';
         if ($flaginscrito) {
             echo "<p class='glyphicon glyphicon-trash'><input class='apuntar' 
-            id=\"$torneo_id\" data-id=\"$dato\"type=\"checkbox\"  name=\"chkeliminar[]\" value=\"$dato\" $chkdesinscribe ></p> ";
+            id=\"$torneo_id\" data-id=\"$dato\" type=\"checkbox\"  name=\"chkeliminar[]\" value=\"$dato\" $chkdesinscribe ></p> ";
         } else {
             echo "<p class='glyphicon glyphicon-pencil'><input class='apuntar'
-             id=\"$torneo_id\" data-id=\"$dato\"type=\"checkbox\"  name=\"chkinscribir[]\" value=\"$dato\" $chk $chkinscribe></p>";
+             id=\"$torneo_id\" data-id=\"$dato\" type=\"checkbox\"  name=\"chkinscribir[]\" value=\"$dato\" $chk $chkinscribe></p>";
         }
         echo '</td>';
 
@@ -406,6 +406,22 @@ echo "</div>";
 <?php echo bsTemplate::footer();?>
 
 <script>
+ 
+    const chkEliminar = document.querySelector('.apuntar');
+
+    chkEliminar.addEventListener('click',chkApuntar);
+
+
+    function chkApuntar(){
+        swal({
+        title: "Presiona guardar cuando hayas seleccionado todas tus opciones",
+        text: "Inscribir o Borrar en un solo paso",
+        timer: 3000,
+        showConfirmButton: false
+        });
+    }
+ 
+
 
 $('#register-form').on('submit',function(e){
     var ok=confirm("Esta Seguro de Modificar Los Datos");

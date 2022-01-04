@@ -6,7 +6,8 @@ require_once __DIR__.'/appnice/clases/Funciones_cls.php';
 require_once __DIR__.'/appnice/clases/Encriptar_cls.php';
 require_once __DIR__.'/appnice/clases/Ranking_cls.php';
 require_once __DIR__.'/appnice/clases/Paginacion_cls.php';
- 
+require_once __DIR__.'/appnice/clases/Categoria_cls.php';
+                                         
 
 ?>
 
@@ -92,12 +93,12 @@ fin carrito-->
     <div class="col-md-12 size-img back-img">
         <div class="effect-cover">
             <h3 class="txt-advert animated">Tenis Ranking</h3>
-            <p class="txt-advert-sub">Los tenistas y las tenistas se destacan cada dia</p>
+            <p class="txt-advert-sub">Los tenistas y las tenistas se destacan</p>
         </div>
     </div>
     
     <section id="summary" class="container secondary-page">
-      <div class="general general-results">
+        <div class="general general-results">
            <div id="Result" class="top-score-title right-score total-reslts col-md-9">
                 <h3>Ranking <span>Nacional</span><span class="point-little">.</span></h3>
                 <div class="cat-con-desc">
@@ -113,14 +114,15 @@ fin carrito-->
                                 <li class="active"><a id='SexoM' href="#tab1111">CHICOS</a></li>
                                 <li ><a id='SexoF' href="#tab2222">CHICAS</a></li>
                                 <!-- <li ><a id='SexoN' href="#tab3333">DBL</a></li> -->
-                                <li>Cat<a>
-                                   <select  id="cmbcategoria"> 
-                                        <option value="12">12</option>
-                                        <option value="14">14</option>
-                                        <option value="16">16</option>
-                                        <option value="18">18</option>
-                                        <option value="PV">PV</option>
-                                        <option value="PN">PN</option>
+                                <li><a >
+                                   <select  id="cmbcategoria">  
+                                       <?php 
+                                        $categoria = Categoria::ReadAll();
+                                        foreach ($categoria as $key => $categoria) {
+                                            $cat=$categoria["categoria"];
+                                            echo "<option value='$cat'>$cat</option>";
+                                        }
+                                        ?>
                                     </select>
                                 </a>
                                </li>
@@ -130,29 +132,7 @@ fin carrito-->
                             <div class="tab-content">
                                 <div id="tab1111" class="tab active">
                                 <table class="tab-score">
-                                  <!-- <tr class="top-scrore-table"><td class="score-position">POS.</td><td>Jugadores</td><td>NAT.</td><td>POINTS</td></tr>
-      -->
-                                  <!-- <tr><td class="score-position">1.</td><td><a href="single_player.html">Rodak Noraky </a></td><td><img src="images/flags/serbia.png" alt="" /></td><td>12770</td></tr>
-                                  <tr><td class="score-position">2.</td><td><a href="single_player.html">David Doe<span class="newrecord">New Record</span></a></td><td><img src="images/flags/argentina.png" alt="" /></td><td>10670</td></tr>
-                                  <tr><td class="score-position">3.</td><td><a href="single_player.html">Richar Stay</a></td><td><img src="images/flags/uk.png" alt="" /></td><td>7490</td></tr>
-                                  <tr><td class="score-position">4.</td><td><a href="single_player.html">Mirek Roy</a></td><td><img src="images/flags/brazil.png" alt="" /></td><td>5985</td></tr>
-                                  <tr><td class="score-position">5.</td><td><a href="single_player.html">Rober Perrer</a></td><td><img src="images/flags/japan.png" alt="" /></td><td>4765</td></tr>
-                                  <tr><td class="score-position">6.</td><td><a href="single_player.html">Milos Vigo</a></td><td><img src="images/flags/canada.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">7.</td><td><a href="single_player.html">Tomas Teddy<span class="fastball">Fast Ball</span></a></td><td><img src="images/flags/czech.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">8.</td><td><a href="single_player.html">Grigor Fred</a></td><td><img src="images/flags/bulgaria.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">9.</td><td><a href="single_player.html">Andy Murray</a></td><td><img src="images/flags/spain.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">10.</td><td><a href="single_player.html">Jfried Tsonga</a></td><td><img src="images/flags/france.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">11.</td><td><a href="single_player.html">Kei Milosh</a></td><td><img src="images/flags/japan.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">12.</td><td><a href="single_player.html">Ernests Gulbis</a></td><td><img src="images/flags/argentina.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">13.</td><td><a href="single_player.html">Martin Gotro</a></td><td><img src="images/flags/argentina.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">14.</td><td><a href="single_player.html">Riard Paquet</a></td><td><img src="images/flags/france.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">15.</td><td><a href="single_player.html">John Isner</a></td><td><img src="images/flags/serbia.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">16.</td><td><a href="single_player.html">Marin Cilic</a></td><td><img src="images/flags/italy.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">17.</td><td><a href="single_player.html">Fabio Bigot</a></td><td><img src="images/flags/canada.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">18.</td><td><a href="single_player.html">Tommy Rotmans</a></td><td><img src="images/flags/brazil.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">19.</td><td><a href="single_player.html">Paolo Bautista</a></td><td><img src="images/flags/italy.png" alt="" /></td><td>4225</td></tr>
-                                  <tr><td class="score-position">20.</td><td><a href="single_player.html">Kevin Anderfig</a></td><td><img src="images/flags/germany.png" alt="" /></td><td>4225</td></tr> -->
-                                  <div class="top-score-title col-md-12 right-title">
+                                    <div class="top-score-title col-md-12 right-title">
                                     <h3 id="results"></h3>
                                    
                                   </div>                    
@@ -168,28 +148,12 @@ fin carrito-->
                         </div>
                     </div>
            </div><!--Close Top Match-->
+           
            <div class="col-md-3 right-column">
             <div class="top-score-title col-md-12 right-title">
-                  <h3>Noticias Recientes</h3>
-                  <!-- <div class="right-content">
-                      <p class="news-title-right">Serie 6-7 Marzo 2020</p>
-                      <p class="txt-right">
-                        Portugal peleará en los play-offs del Grupo Mundial I en marzo 2020 contra Nueva Zelanda. En el primer choque, 1960, los americanos ganaron a los kiwis.
-                      </p>
-                      <a href="#single_news.html" class="ca-more"><i class="fa fa-angle-double-right"></i>more...</a>
-                  </div>
-                  <div class="right-content">
-                      <p class="news-title-right">Portugal Salva Un Punto Ante Nueva Zelanda</p>
-                      <p class="txt-right">Muñoz-Abreu perdió con Tearney, pero Martínez igualó la serie al vencer en tres sets al 1 neocelandés. Victorias parciales de China Taipei, Noruega y Portugal.
-                      </p>
-                      <a href="#single_news.html" class="ca-more"><i class="fa fa-angle-double-right"></i>more...</a>
-                  </div>
-                  <div class="right-content">
-                      <p class="news-title-right">Ultima Serie 14-15 Septiembre 2019</p>
-                      <p class="txt-right">Portugal cayó 4-0 ante Ecuador en Florida, Estados Unidos, gracias a Emilio Gómez, Roberto Quiroz, los doblistas Gonzalo Escobar y Diego Hidalgo, y el debutante Antonio Cayetano March, que desarmaron al equipo liderado por Jordi Muñoz y Luis David Martínez. Fue el encuentro número 12 de las naciones.
-                      </p>
-                      <a href="#single_news.html" class="ca-more"><i class="fa fa-angle-double-right"></i>more...</a>
-                  </div> -->
+           
+                 <?php require_once 'noticias_derecho_lateral.php'; ?>
+                  
             </div>
 
           <div class="top-score-title col-md-12">

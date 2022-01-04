@@ -87,7 +87,7 @@ class Atleta   {
         $this->categoria=" ";
         $this->talla="1.80";
         $this->peso="50";
-        $this->hand="Derecho";
+        $this->hand="Derecha";
         $this->nickname=" ";
         $this->inicio=" ";
      
