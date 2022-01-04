@@ -257,7 +257,7 @@ class Afiliacion {
         }
         catch(PDOException $e)
         {
-            echo "Error: " . $e->getMessage();
+            //echo "Error: " . $e->getMessage();
             $this->mensaje="Error Create: " . $e->getMessage();
             $this->SQLresultado_exitoso=FALSE;
         }
@@ -303,7 +303,7 @@ class Afiliacion {
         }
         catch(PDOException $e)
         {
-            echo "Error: " . $e->getMessage();
+            //echo "Error: " . $e->getMessage();
             $this->mensaje="Error Update: " . $e->getMessage();
             $this->SQLresultado_exitoso=FALSE;
         }
