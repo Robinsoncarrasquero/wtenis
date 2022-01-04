@@ -57,13 +57,13 @@ $atleta_id=$_SESSION['atleta_id'];
 
 $thead = [];
 $thead +=["."=>"glyphicon glyphicon-time"];
-$thead +=[" "=>"glyphicon glyphicon-map-marker"];
-$thead +=["Grado"=>"glyphicon glyphicon-cog"];
-$thead +=["Categoria"=>"glyphicon glyphicon-signal"];
-$thead +=["Modalidad"=>"glyphicon glyphicon-road"];
-$thead +=["Accion"=>"glyphicon glyphicon-flash"];
-$thead +=["Fecha"=>"glyphicon glyphicon-calendar"];
-$thead +=["Lista"=>"glyphicon glyphicon-list-alt"];
+$thead +=["Ent"=>"glyphicon glyphicon-map-marker"];
+$thead +=["Gra"=>"glyphicon glyphicon-cog"];
+$thead +=["Cat"=>"glyphicon glyphicon-signal"];
+$thead +=["Mod"=>"glyphicon glyphicon-road"];
+$thead +=["Opc"=>"glyphicon glyphicon-flash"];
+$thead +=["Fch"=>"glyphicon glyphicon-calendar"];
+$thead +=["Rep"=>"glyphicon glyphicon-list-alt"];
 $table_head= bsTemplate::table_head("Inscripcion",$thead);
 
 $table_footer='
