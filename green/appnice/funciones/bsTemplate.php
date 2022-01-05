@@ -77,7 +77,35 @@ class bsTemplate
                 <script src="../../sweetalert/js/functions.js"></script>
                 <!-- Sweet Alert Script -->
                 <script src="../../sweetalert/js/sweetalert.min.js"></script>
-
+                
+                <style type="text/css">
+                
+                
+                @media (min-width:600px)  { 
+                /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
+                body, table{
+                    width: 60%;
+                }
+                @media (min-width:801px)  { 
+                /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+                body,table{
+                    width: 80%;
+                }
+                @media (min-width:1025px) { 
+                /* big landscape tablets, laptops, and desktops */ 
+                body,table{
+                    width: 90%;
+                }
+                @media (min-width:1281px) { 
+                /* hi-res laptops and desktops */ 
+                body{
+                    //padding-right: 1em;
+                    width: 100%;
+                
+                }
+            </style> 
+          
+                
             </head>
 
             <body  >
@@ -139,7 +167,7 @@ class bsTemplate
     '     
      <section class="wrapper">
          <div class="row">
-           <div class="col-xs-12">
+           <div class="col-md-12">
              <h3 class="page-header"><i class="fa fa-table"></i> '.$titulo_menu.'</h3>
              <ol class="breadcrumb">
                <li><i class="fa fa-home"></i><a href="../MisTorneos/MisTorneos.php">Home</a></li>';

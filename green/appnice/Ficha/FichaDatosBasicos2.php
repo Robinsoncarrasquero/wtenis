@@ -385,7 +385,7 @@ $(document).ready(function (){
                         
                         $("#btn-submit").html('Guardar');
                         
-                        swal("¡Error !", "Datos no fueron modificacdos", "warning")
+                        swal("¡ Error !", "Datos no fueron modificados", "warning")
 
                         
                     }else{
@@ -396,7 +396,7 @@ $(document).ready(function (){
      
                      //   setTimeout('$(".form-signin").fadeOut(500, function(){ $(".signin-form").load("FichaDatosBasicosSuccess.php"); }); ',2000);
                      
-                     swal("¡Bien..!", "Datos Modificacdos", "success");
+                     swal("¡ Bien.. !", "Datos Modificados con exito", "success");
 
                     }
                     
