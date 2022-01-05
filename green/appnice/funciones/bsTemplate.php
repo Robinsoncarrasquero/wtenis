@@ -84,7 +84,7 @@ class bsTemplate
                 @media (min-width:600px)  { 
                 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ 
                 body, table{
-                    width: 60%;
+                    width: 70%;
                 }
                 @media (min-width:801px)  { 
                 /* tablet, landscape iPad, lo-res laptops ands desktops */ 
